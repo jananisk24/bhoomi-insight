@@ -2,9 +2,13 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
+from pathlib import Path
 
 import crud
 import models
+import joblib
+import pandas as pd
+from predict import predict_project
 from database import engine, Base, get_db
 from schemas import (
     ProjectCreate, ProjectResponse,
@@ -17,6 +21,8 @@ from schemas import (
 from auth import create_token, verify_token
 
 app = FastAPI(title="Bhoomi Insight API")
+MODEL_PATH = Path(__file__).parent / "models" / "model.pkl"
+model = joblib.load(MODEL_PATH)
 
 Base.metadata.create_all(bind=engine)
 
@@ -105,7 +111,6 @@ def get_project(
 
 
 # ========================= PREDICTIONS =========================
-
 @app.post("/predict")
 def predict(
     prediction: PredictionCreate,
@@ -113,38 +118,49 @@ def predict(
     current_user: str = Depends(get_current_user),
 ):
     project = crud.get_project(db, prediction.project_id)
+
     if project is None:
         raise HTTPException(status_code=404, detail="Project not found")
+    project_data = {
+    "Project_Type": project.project_type,
+    "State": project.state,
+    "District": project.district,
+    "Land_Area_Hectares": project.land_required,
+    "Affected_Families": project.affected_families,
+    "Compensation_Status": project.compensation_status,
+    "Approval_Days_Pending": project.approval_days_pending,
+    "Legal_Dispute": project.legal_dispute,
+    "Possession_Status": project.possession_status,
+    "Rehabilitation_Progress": project.rehabilitation_progress,
+    "Stakeholder_Score": project.stakeholder_score,
+    "District_Historical_Delay": project.district_historical_delay,
+}
 
-    # TODO(Member 2): replace with a real call into the trained model,
-    # e.g. delay_probability, risk_level, factors = model.predict(project)
-    delay_probability = 0.0
-    risk_level = "Pending"
+    result = predict_project(model, project_data)
 
-    new_prediction = crud.create_prediction(db, project.id, delay_probability, risk_level)
+    delay_probability = result["delay_probability"]
+    risk_level = result["risk_category"]
+
+    new_prediction = crud.create_prediction(
+        db,
+        project.id,
+        delay_probability,
+        risk_level
+    )
 
     return {
         "message": "Prediction saved successfully",
         "prediction_id": new_prediction.id,
         "project_id": project.id,
         "project_name": project.project_name,
-        "delay_probability": delay_probability,
-        "risk_level": risk_level,
-        "status": "Waiting for Member 2 ML model",
+        "delayed": result["delayed"],
+        "delay_probability": result["delay_probability"],
+        "risk_score": result["risk_score"],
+        "risk_level": result["risk_category"],
+        "stage_risk": result["stage_risk"],
+        "highest_risk_stage": result["highest_risk_stage"],
+        "status": "M2 ML model connected",
     }
-
-
-@app.get("/predictions/{project_id}", response_model=list[PredictionResponse])
-def get_prediction_history(
-    project_id: int,
-    db: Session = Depends(get_db),
-    current_user: str = Depends(get_current_user),
-):
-    project = crud.get_project(db, project_id)
-    if project is None:
-        raise HTTPException(status_code=404, detail="Project not found")
-    return crud.get_predictions_for_project(db, project_id)
-
 
 # ========================= SIMULATE (WHAT-IF) =========================
 
@@ -217,3 +233,17 @@ def get_analytics(
     current_user: str = Depends(get_current_user),
 ):
     return crud.get_analytics(db)
+
+
+@app.get("/predictions/{project_id}", response_model=list[PredictionResponse])
+def get_prediction_history(
+    project_id: int,
+    db: Session = Depends(get_db),
+    current_user: str = Depends(get_current_user),
+):
+    project = crud.get_project(db, project_id)
+
+    if project is None:
+        raise HTTPException(status_code=404, detail="Project not found")
+
+    return crud.get_predictions_for_project(db, project_id)

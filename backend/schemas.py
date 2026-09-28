@@ -13,6 +13,14 @@ class ProjectCreate(BaseModel):
     land_required: float = Field(gt=0)
     affected_families: int = Field(gt=0)
     estimated_cost: float = Field(gt=0)
+    project_type: str = "Highway"
+    compensation_status: str = "In Progress"
+    approval_days_pending: int = 0
+    legal_dispute: str = "No"
+    possession_status: str = "Not Taken"
+    rehabilitation_progress: float = 0
+    stakeholder_score: float = 5
+    district_historical_delay: float = 0
 
 
 class ProjectResponse(BaseModel):
@@ -28,6 +36,14 @@ class ProjectResponse(BaseModel):
     land_required: float
     affected_families: int
     estimated_cost: float
+    project_type: str
+    compensation_status: str
+    approval_days_pending: int
+    legal_dispute: str
+    possession_status: str
+    rehabilitation_progress: float
+    stakeholder_score: float
+    district_historical_delay: float
     status: str
     created_at: datetime
 

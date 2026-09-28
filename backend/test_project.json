@@ -1,0 +1,14 @@
+{
+    "Project_Type": "Highway",
+    "State": "Tamil Nadu",
+    "District": "Chennai",
+    "Land_Area_Hectares": 250,
+    "Affected_Families": 500,
+    "Compensation_Status": "In Progress",
+    "Approval_Days_Pending": 150,
+    "Legal_Dispute": "Yes",
+    "Possession_Status": "Partial",
+    "Rehabilitation_Progress": 30,
+    "Stakeholder_Score": 2,
+    "District_Historical_Delay": 70
+}

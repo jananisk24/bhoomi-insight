@@ -1,0 +1,6 @@
+{
+  "name": "Land Acquisition Delay Prediction System",
+  "description": "Predictive analytics system for early detection and mitigation of land acquisition delays for infrastructure and development projects.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

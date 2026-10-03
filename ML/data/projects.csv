@@ -1,0 +1,2001 @@
+Project_Type,State,District,Land_Area_Hectares,Affected_Families,Compensation_Status,Approval_Days_Pending,Legal_Dispute,Possession_Status,Rehabilitation_Progress,Stakeholder_Score,District_Historical_Delay,Delayed,Delay_Stage
+Irrigation,Karnataka,Salem,337.17,1079,Paid,114,No,Not Taken,49,3,2,No,Possession
+Power,Andhra Pradesh,Bengaluru,398.85,1099,Not Started,282,No,Not Taken,23,2,27,Yes,Approval
+Highway,Kerala,Coimbatore,127.11,484,In Progress,36,Yes,Partial,1,3,42,Yes,Legal
+Irrigation,Andhra Pradesh,Bengaluru,313.37,1588,Paid,301,No,Partial,98,2,96,Yes,Approval
+Irrigation,Andhra Pradesh,Salem,286.94,1047,In Progress,112,No,Not Taken,91,5,45,Yes,Compensation
+Power,Karnataka,Tirunelveli,416.83,1802,Not Started,34,No,Not Taken,82,5,0,Yes,Compensation
+Highway,Andhra Pradesh,Kochi,453.28,88,Paid,131,No,Partial,32,4,37,Yes,Approval
+Highway,Karnataka,Madurai,8.55,1183,In Progress,335,Yes,Full,20,2,90,Yes,Legal
+Irrigation,Tamil Nadu,Kochi,337.82,569,Paid,335,No,Not Taken,73,2,34,Yes,Approval
+Railway,Tamil Nadu,Kochi,28.29,623,Not Started,227,Yes,Not Taken,52,4,73,Yes,Legal
+Irrigation,Karnataka,Tirunelveli,275.56,361,Paid,146,Yes,Not Taken,45,4,75,Yes,Legal
+Irrigation,Tamil Nadu,Bengaluru,145.6,820,Not Started,121,No,Partial,44,5,73,Yes,Approval
+Irrigation,Kerala,Madurai,155.12,651,In Progress,80,Yes,Not Taken,8,5,53,Yes,Legal
+Irrigation,Andhra Pradesh,Chennai,178.1,447,Not Started,172,Yes,Not Taken,5,2,97,Yes,Legal
+Power,Kerala,Trichy,311.59,1097,In Progress,153,Yes,Not Taken,50,5,23,Yes,Legal
+Highway,Andhra Pradesh,Tirunelveli,168.69,527,In Progress,149,No,Not Taken,34,5,27,Yes,Approval
+Power,Tamil Nadu,Salem,367.02,147,Not Started,57,No,Not Taken,81,2,21,No,Compensation
+Power,Kerala,Chennai,203.75,196,In Progress,62,No,Full,52,4,15,No,Compensation
+Power,Tamil Nadu,Trichy,36.51,1415,Paid,155,No,Full,18,2,12,No,Approval
+Irrigation,Andhra Pradesh,Salem,392.42,382,In Progress,355,Yes,Not Taken,68,1,99,Yes,Legal
+Railway,Karnataka,Kochi,144.66,585,Not Started,321,No,Not Taken,24,2,99,Yes,Approval
+Highway,Karnataka,Coimbatore,217.8,539,Paid,167,No,Not Taken,10,1,61,Yes,Approval
+Railway,Kerala,Salem,343.51,1721,Paid,165,No,Not Taken,73,2,42,Yes,Approval
+Power,Tamil Nadu,Madurai,167.9,1321,In Progress,84,Yes,Partial,16,1,86,Yes,Legal
+Power,Tamil Nadu,Madurai,30.65,1037,In Progress,136,Yes,Partial,35,1,77,Yes,Legal
+Railway,Kerala,Coimbatore,188.53,1299,Not Started,188,No,Partial,89,2,31,Yes,Approval
+Railway,Karnataka,Chennai,472.36,1415,Paid,1,No,Full,94,5,66,No,Planning
+Railway,Andhra Pradesh,Trichy,321.76,97,Not Started,105,No,Not Taken,95,3,90,Yes,Compensation
+Power,Kerala,Salem,336.56,1994,In Progress,363,No,Partial,20,5,82,Yes,Approval
+Power,Andhra Pradesh,Madurai,317.06,533,Paid,71,Yes,Not Taken,17,1,85,Yes,Legal
+Highway,Karnataka,Chennai,101.5,1182,Not Started,125,No,Not Taken,59,2,56,Yes,Approval
+Highway,Tamil Nadu,Coimbatore,210.62,409,Not Started,169,No,Full,17,2,64,Yes,Approval
+Power,Karnataka,Bengaluru,376.09,844,Not Started,204,Yes,Full,0,2,68,Yes,Legal
+Railway,Kerala,Tirunelveli,52.93,1177,Not Started,312,Yes,Partial,13,2,48,Yes,Legal
+Railway,Tamil Nadu,Bengaluru,140.73,893,Not Started,336,Yes,Partial,7,3,32,Yes,Legal
+Highway,Kerala,Bengaluru,139.97,1295,Paid,194,Yes,Full,65,4,18,No,Legal
+Power,Kerala,Madurai,217.43,426,Not Started,157,No,Full,50,1,35,No,Approval
+Highway,Karnataka,Kochi,490.23,1868,Paid,140,No,Not Taken,78,3,69,Yes,Approval
+Highway,Kerala,Kochi,36.08,1646,Not Started,274,No,Not Taken,59,5,14,Yes,Approval
+Irrigation,Karnataka,Coimbatore,260.55,476,In Progress,6,No,Partial,33,4,99,Yes,Compensation
+Irrigation,Tamil Nadu,Salem,91.73,897,In Progress,53,No,Partial,35,4,96,Yes,Compensation
+Irrigation,Karnataka,Kochi,485.41,551,Not Started,103,No,Full,61,2,23,Yes,Compensation
+Railway,Tamil Nadu,Bengaluru,58.87,635,In Progress,341,Yes,Partial,0,3,26,Yes,Legal
+Power,Karnataka,Kochi,203.29,1554,Paid,337,No,Not Taken,84,5,48,No,Approval
+Power,Andhra Pradesh,Bengaluru,369.6,1531,Not Started,60,No,Full,41,2,74,Yes,Compensation
+Power,Andhra Pradesh,Trichy,353.02,1042,Paid,86,Yes,Not Taken,0,2,22,Yes,Legal
+Power,Kerala,Madurai,212.81,782,Not Started,257,No,Full,95,1,32,Yes,Approval
+Irrigation,Karnataka,Madurai,174.9,1680,In Progress,177,No,Full,83,4,40,No,Approval
+Railway,Karnataka,Salem,200.31,1834,Paid,241,No,Not Taken,53,5,55,Yes,Approval
+Railway,Tamil Nadu,Kochi,133.98,368,In Progress,202,Yes,Partial,46,4,28,No,Legal
+Irrigation,Kerala,Kochi,104.65,123,In Progress,30,No,Partial,99,3,30,No,Compensation
+Railway,Karnataka,Tirunelveli,242.81,1266,Not Started,288,No,Partial,38,1,64,Yes,Approval
+Irrigation,Kerala,Chennai,136.1,550,Paid,79,Yes,Partial,29,2,97,Yes,Legal
+Power,Andhra Pradesh,Trichy,145.51,1197,In Progress,10,Yes,Not Taken,6,1,17,Yes,Legal
+Irrigation,Karnataka,Madurai,329.24,526,Not Started,253,No,Full,21,2,81,Yes,Approval
+Power,Karnataka,Trichy,484.35,638,Not Started,286,Yes,Not Taken,49,1,5,Yes,Legal
+Power,Kerala,Madurai,302.81,1941,Not Started,175,No,Partial,44,2,51,Yes,Approval
+Highway,Karnataka,Trichy,40.8,1685,In Progress,125,No,Partial,73,4,39,Yes,Approval
+Irrigation,Kerala,Coimbatore,40.1,967,Not Started,46,Yes,Not Taken,71,4,64,No,Legal
+Highway,Karnataka,Bengaluru,475.83,962,Paid,205,Yes,Full,90,4,41,Yes,Legal
+Irrigation,Tamil Nadu,Madurai,150.4,1763,Paid,106,No,Not Taken,9,4,93,No,Rehabilitation
+Irrigation,Kerala,Trichy,48.3,887,In Progress,274,Yes,Not Taken,13,1,67,Yes,Legal
+Highway,Karnataka,Kochi,300.52,1797,Paid,336,Yes,Not Taken,45,2,31,Yes,Legal
+Highway,Andhra Pradesh,Chennai,312.77,784,Not Started,122,No,Full,74,4,9,Yes,Approval
+Irrigation,Karnataka,Coimbatore,325.13,875,In Progress,133,No,Not Taken,5,1,68,Yes,Approval
+Railway,Andhra Pradesh,Coimbatore,135.53,520,Not Started,106,No,Not Taken,20,2,8,No,Compensation
+Power,Andhra Pradesh,Chennai,10.02,942,In Progress,304,Yes,Partial,61,1,68,Yes,Legal
+Highway,Tamil Nadu,Trichy,482.6,1425,In Progress,328,No,Not Taken,96,4,60,Yes,Approval
+Power,Kerala,Kochi,127.32,870,Not Started,49,No,Partial,18,3,10,Yes,Compensation
+Railway,Karnataka,Salem,338.82,110,Paid,336,No,Partial,87,1,98,Yes,Approval
+Railway,Tamil Nadu,Chennai,354.05,1113,Paid,94,No,Partial,81,4,90,No,Possession
+Railway,Karnataka,Trichy,305.98,218,In Progress,267,Yes,Full,98,5,67,Yes,Legal
+Highway,Andhra Pradesh,Chennai,158.17,1149,Not Started,22,No,Partial,61,2,73,Yes,Compensation
+Railway,Kerala,Chennai,137.37,1160,Not Started,53,No,Not Taken,100,4,96,Yes,Compensation
+Highway,Karnataka,Madurai,299.84,854,In Progress,253,No,Not Taken,82,5,7,Yes,Approval
+Railway,Karnataka,Trichy,433.38,201,Paid,234,No,Partial,52,1,48,No,Approval
+Power,Andhra Pradesh,Salem,473.5,23,Not Started,58,No,Partial,23,1,23,No,Compensation
+Power,Karnataka,Bengaluru,55.19,646,Paid,163,Yes,Not Taken,55,5,32,Yes,Legal
+Irrigation,Karnataka,Madurai,79.53,1040,Paid,258,No,Partial,61,5,18,Yes,Approval
+Power,Andhra Pradesh,Chennai,472.51,1109,In Progress,313,Yes,Full,33,2,1,Yes,Legal
+Irrigation,Tamil Nadu,Bengaluru,368.93,334,In Progress,215,No,Partial,21,1,54,Yes,Approval
+Power,Andhra Pradesh,Tirunelveli,441.79,870,Paid,182,No,Full,67,5,10,Yes,Approval
+Highway,Tamil Nadu,Bengaluru,103.31,778,Not Started,56,No,Full,56,3,98,Yes,Compensation
+Power,Kerala,Chennai,294.82,396,Not Started,144,Yes,Full,9,3,16,Yes,Legal
+Irrigation,Tamil Nadu,Chennai,351.32,641,In Progress,89,No,Partial,65,5,41,No,Compensation
+Irrigation,Tamil Nadu,Kochi,340.86,311,Paid,310,No,Full,7,2,60,No,Approval
+Railway,Kerala,Trichy,205.56,1295,Not Started,44,No,Full,96,1,2,Yes,Compensation
+Highway,Tamil Nadu,Trichy,10.16,1475,Not Started,256,Yes,Partial,37,3,85,Yes,Legal
+Power,Andhra Pradesh,Madurai,292.51,1469,In Progress,20,No,Full,61,5,34,Yes,Compensation
+Railway,Tamil Nadu,Salem,128.42,899,Paid,20,Yes,Partial,27,5,84,Yes,Legal
+Power,Kerala,Madurai,226.5,656,Not Started,51,Yes,Not Taken,9,4,88,No,Legal
+Power,Andhra Pradesh,Coimbatore,478.9,845,In Progress,337,Yes,Full,44,5,65,Yes,Legal
+Railway,Kerala,Chennai,201.02,1030,Not Started,170,Yes,Partial,64,2,0,No,Legal
+Railway,Kerala,Bengaluru,420.3,524,Not Started,66,No,Not Taken,97,3,6,No,Compensation
+Railway,Karnataka,Tirunelveli,96.3,1790,Not Started,112,No,Full,66,4,19,No,Compensation
+Railway,Karnataka,Chennai,337.05,1679,In Progress,299,No,Full,8,3,42,Yes,Approval
+Railway,Kerala,Chennai,488.56,640,Paid,159,Yes,Partial,4,3,5,Yes,Legal
+Power,Kerala,Madurai,53.19,1337,In Progress,265,No,Not Taken,9,2,54,Yes,Approval
+Railway,Kerala,Tirunelveli,6.64,744,Paid,319,No,Partial,11,5,99,Yes,Approval
+Highway,Karnataka,Tirunelveli,218.21,1550,Not Started,231,Yes,Full,81,2,20,Yes,Legal
+Irrigation,Karnataka,Tirunelveli,48.58,473,Paid,324,No,Full,57,5,50,No,Approval
+Railway,Tamil Nadu,Madurai,374.82,216,Not Started,67,No,Full,20,4,45,Yes,Compensation
+Railway,Tamil Nadu,Chennai,457.49,1140,Not Started,27,No,Full,20,2,34,Yes,Compensation
+Power,Kerala,Madurai,218.43,1036,In Progress,115,No,Not Taken,64,2,99,No,Compensation
+Railway,Andhra Pradesh,Trichy,131.21,808,Not Started,50,No,Not Taken,2,1,7,Yes,Compensation
+Railway,Andhra Pradesh,Trichy,218.62,481,In Progress,180,Yes,Partial,68,2,67,Yes,Legal
+Railway,Karnataka,Madurai,362.42,878,Paid,259,No,Partial,88,1,15,No,Approval
+Power,Karnataka,Tirunelveli,7.0,464,Paid,78,Yes,Partial,63,5,66,Yes,Legal
+Railway,Karnataka,Kochi,295.75,257,Not Started,272,No,Full,48,5,70,Yes,Approval
+Irrigation,Kerala,Chennai,307.61,1554,In Progress,107,No,Partial,71,5,63,Yes,Compensation
+Power,Andhra Pradesh,Madurai,319.75,756,Not Started,73,No,Not Taken,16,1,1,Yes,Compensation
+Irrigation,Tamil Nadu,Madurai,122.91,1466,In Progress,174,No,Partial,72,5,0,No,Approval
+Power,Kerala,Madurai,357.74,1782,In Progress,183,No,Partial,31,3,57,Yes,Approval
+Railway,Tamil Nadu,Kochi,47.97,985,In Progress,22,Yes,Not Taken,69,2,0,No,Legal
+Irrigation,Tamil Nadu,Kochi,101.64,858,Paid,273,No,Not Taken,20,1,6,Yes,Approval
+Power,Kerala,Coimbatore,439.04,1689,In Progress,128,No,Full,6,5,87,Yes,Approval
+Highway,Tamil Nadu,Trichy,370.01,240,Paid,290,No,Not Taken,6,3,68,No,Approval
+Railway,Andhra Pradesh,Bengaluru,9.34,1334,In Progress,319,No,Not Taken,26,2,84,Yes,Approval
+Power,Tamil Nadu,Tirunelveli,126.07,482,Paid,185,Yes,Partial,7,2,91,Yes,Legal
+Highway,Andhra Pradesh,Salem,109.17,683,Paid,58,Yes,Not Taken,72,5,17,Yes,Legal
+Power,Andhra Pradesh,Kochi,137.23,1048,Paid,0,No,Full,27,3,87,No,Rehabilitation
+Highway,Andhra Pradesh,Bengaluru,125.66,220,Not Started,130,No,Partial,78,1,31,Yes,Approval
+Railway,Karnataka,Kochi,33.61,859,In Progress,66,Yes,Full,65,5,44,No,Legal
+Irrigation,Tamil Nadu,Tirunelveli,230.82,139,Not Started,292,No,Not Taken,70,2,32,Yes,Approval
+Highway,Kerala,Salem,367.03,909,In Progress,284,No,Full,46,2,73,No,Approval
+Power,Kerala,Coimbatore,304.35,1157,In Progress,88,Yes,Full,81,2,72,Yes,Legal
+Railway,Tamil Nadu,Madurai,337.25,414,Not Started,99,No,Not Taken,85,5,48,No,Compensation
+Highway,Karnataka,Coimbatore,42.87,1450,Paid,188,No,Not Taken,9,4,32,Yes,Approval
+Power,Karnataka,Kochi,475.87,1322,In Progress,345,No,Partial,32,4,96,Yes,Approval
+Power,Andhra Pradesh,Coimbatore,419.65,1274,Paid,240,No,Partial,6,4,70,Yes,Approval
+Power,Tamil Nadu,Bengaluru,403.03,1729,Not Started,269,No,Partial,2,3,67,Yes,Approval
+Highway,Tamil Nadu,Chennai,411.93,1584,Paid,218,No,Not Taken,13,5,27,Yes,Approval
+Highway,Kerala,Kochi,466.52,90,In Progress,175,Yes,Full,43,2,86,Yes,Legal
+Highway,Tamil Nadu,Kochi,273.27,560,In Progress,340,Yes,Full,45,3,52,Yes,Legal
+Irrigation,Karnataka,Bengaluru,102.14,1870,In Progress,232,No,Partial,60,4,95,Yes,Approval
+Highway,Tamil Nadu,Trichy,309.35,1403,Not Started,150,No,Partial,35,1,43,Yes,Approval
+Highway,Kerala,Salem,372.08,1474,In Progress,276,Yes,Not Taken,12,3,79,Yes,Legal
+Highway,Andhra Pradesh,Madurai,369.61,382,Not Started,228,No,Full,15,3,54,Yes,Approval
+Irrigation,Kerala,Bengaluru,261.92,1418,Paid,170,Yes,Partial,79,5,9,Yes,Legal
+Highway,Kerala,Salem,36.56,1685,In Progress,222,No,Not Taken,4,3,13,Yes,Approval
+Power,Andhra Pradesh,Tirunelveli,187.13,1079,In Progress,212,Yes,Partial,88,5,35,No,Legal
+Highway,Kerala,Salem,460.58,246,In Progress,281,No,Not Taken,37,1,33,Yes,Approval
+Power,Kerala,Tirunelveli,293.26,1322,Paid,40,No,Full,49,2,87,Yes,Planning
+Power,Tamil Nadu,Bengaluru,270.32,924,In Progress,121,Yes,Not Taken,37,2,17,Yes,Legal
+Power,Tamil Nadu,Kochi,136.25,1591,Not Started,226,No,Partial,55,4,15,Yes,Approval
+Irrigation,Andhra Pradesh,Kochi,185.8,270,Paid,293,No,Partial,62,4,36,No,Approval
+Irrigation,Tamil Nadu,Trichy,447.93,1148,Paid,87,No,Full,47,1,40,Yes,Planning
+Irrigation,Tamil Nadu,Bengaluru,334.07,716,Paid,266,Yes,Full,89,2,24,Yes,Legal
+Highway,Kerala,Tirunelveli,394.23,1945,Paid,28,No,Partial,58,4,7,No,Possession
+Power,Karnataka,Salem,228.54,1276,Paid,246,Yes,Partial,76,3,87,Yes,Legal
+Irrigation,Tamil Nadu,Salem,316.05,74,Not Started,315,No,Partial,43,5,83,Yes,Approval
+Irrigation,Karnataka,Tirunelveli,126.07,1881,Paid,243,No,Full,89,4,93,Yes,Approval
+Highway,Tamil Nadu,Coimbatore,353.47,61,In Progress,60,No,Partial,54,1,83,Yes,Compensation
+Irrigation,Tamil Nadu,Trichy,215.23,1410,Paid,146,No,Full,54,2,17,No,Approval
+Highway,Andhra Pradesh,Chennai,222.67,43,Paid,173,Yes,Partial,0,1,67,Yes,Legal
+Railway,Andhra Pradesh,Kochi,325.54,805,Paid,277,Yes,Not Taken,7,5,47,No,Legal
+Irrigation,Andhra Pradesh,Madurai,468.3,1471,Paid,333,No,Not Taken,3,5,99,No,Approval
+Railway,Karnataka,Salem,34.34,1046,Paid,141,Yes,Partial,84,1,69,Yes,Legal
+Highway,Kerala,Madurai,412.81,1980,Not Started,43,Yes,Not Taken,85,4,66,Yes,Legal
+Power,Tamil Nadu,Chennai,147.96,736,Not Started,143,No,Full,52,4,17,Yes,Approval
+Irrigation,Tamil Nadu,Bengaluru,223.35,829,Paid,352,Yes,Not Taken,57,2,17,Yes,Legal
+Highway,Tamil Nadu,Madurai,13.4,760,Not Started,332,No,Not Taken,36,2,55,Yes,Approval
+Power,Karnataka,Chennai,152.27,356,In Progress,54,Yes,Full,48,3,22,No,Legal
+Power,Andhra Pradesh,Kochi,252.56,2000,Paid,306,No,Not Taken,66,3,34,Yes,Approval
+Railway,Kerala,Tirunelveli,30.45,1844,In Progress,357,No,Not Taken,18,2,5,No,Approval
+Highway,Karnataka,Coimbatore,246.82,1326,In Progress,160,No,Partial,0,3,25,Yes,Approval
+Power,Andhra Pradesh,Kochi,463.74,287,Paid,284,Yes,Full,28,1,84,Yes,Legal
+Irrigation,Karnataka,Salem,54.93,1614,In Progress,324,No,Full,86,4,60,No,Approval
+Irrigation,Kerala,Chennai,382.81,114,In Progress,197,No,Partial,32,3,87,Yes,Approval
+Railway,Andhra Pradesh,Madurai,206.31,1021,In Progress,158,No,Partial,51,3,14,Yes,Approval
+Power,Karnataka,Salem,328.45,1208,Paid,79,No,Not Taken,40,1,90,Yes,Possession
+Highway,Kerala,Coimbatore,131.97,1966,Paid,30,No,Not Taken,22,5,31,Yes,Rehabilitation
+Irrigation,Tamil Nadu,Tirunelveli,81.85,548,In Progress,111,Yes,Not Taken,4,2,11,Yes,Legal
+Power,Kerala,Bengaluru,82.33,1774,Paid,45,No,Partial,70,1,4,No,Possession
+Power,Tamil Nadu,Salem,37.57,1822,Paid,352,No,Full,56,5,63,Yes,Approval
+Railway,Karnataka,Bengaluru,94.86,29,In Progress,204,No,Not Taken,5,1,70,No,Approval
+Irrigation,Andhra Pradesh,Chennai,332.95,847,Paid,51,Yes,Partial,48,4,85,Yes,Legal
+Irrigation,Andhra Pradesh,Coimbatore,441.14,795,Not Started,137,No,Full,21,1,26,Yes,Approval
+Highway,Karnataka,Madurai,407.53,742,Paid,73,No,Partial,76,1,78,Yes,Possession
+Irrigation,Andhra Pradesh,Coimbatore,343.35,61,Not Started,40,Yes,Not Taken,75,4,44,Yes,Legal
+Highway,Andhra Pradesh,Coimbatore,57.44,184,In Progress,76,Yes,Partial,3,2,34,Yes,Legal
+Irrigation,Tamil Nadu,Trichy,146.37,236,Paid,186,Yes,Partial,71,5,25,No,Legal
+Railway,Karnataka,Coimbatore,156.63,1922,In Progress,51,No,Partial,63,3,22,Yes,Compensation
+Irrigation,Kerala,Coimbatore,126.85,347,In Progress,86,Yes,Partial,36,2,12,Yes,Legal
+Highway,Tamil Nadu,Kochi,258.72,481,In Progress,108,No,Full,30,1,89,Yes,Compensation
+Highway,Karnataka,Salem,268.94,1827,In Progress,224,No,Not Taken,36,3,2,Yes,Approval
+Railway,Tamil Nadu,Madurai,180.05,580,In Progress,247,No,Full,44,4,28,No,Approval
+Irrigation,Kerala,Kochi,178.51,459,Paid,68,No,Partial,89,2,65,No,Possession
+Irrigation,Kerala,Kochi,414.71,1260,Not Started,119,Yes,Partial,7,5,63,Yes,Legal
+Railway,Karnataka,Salem,395.17,293,Paid,66,No,Not Taken,39,2,27,Yes,Rehabilitation
+Irrigation,Kerala,Salem,155.63,1241,Paid,60,No,Not Taken,96,2,86,Yes,Possession
+Irrigation,Tamil Nadu,Chennai,457.11,262,Paid,326,Yes,Full,92,3,35,Yes,Legal
+Highway,Kerala,Salem,476.53,534,Paid,190,Yes,Full,4,4,5,Yes,Legal
+Irrigation,Tamil Nadu,Trichy,165.05,691,Not Started,188,No,Not Taken,27,4,10,No,Approval
+Irrigation,Tamil Nadu,Trichy,178.83,933,Paid,150,No,Full,80,2,37,No,Approval
+Railway,Kerala,Kochi,254.05,233,In Progress,285,No,Partial,86,4,33,No,Approval
+Railway,Karnataka,Bengaluru,470.71,1254,Paid,95,Yes,Partial,8,3,80,Yes,Legal
+Power,Andhra Pradesh,Chennai,438.47,600,Paid,311,No,Not Taken,1,3,66,Yes,Approval
+Highway,Kerala,Bengaluru,53.53,1831,Not Started,308,Yes,Full,62,5,45,Yes,Legal
+Irrigation,Tamil Nadu,Bengaluru,197.88,439,Not Started,262,No,Partial,95,4,97,Yes,Approval
+Irrigation,Tamil Nadu,Kochi,277.8,886,In Progress,96,No,Not Taken,50,5,85,Yes,Compensation
+Power,Kerala,Tirunelveli,252.81,1025,Paid,112,No,Full,30,1,28,Yes,Rehabilitation
+Irrigation,Karnataka,Kochi,98.95,1786,Paid,124,Yes,Partial,6,3,59,No,Legal
+Highway,Karnataka,Madurai,429.76,406,Paid,131,No,Full,29,2,53,No,Approval
+Power,Tamil Nadu,Madurai,339.28,626,In Progress,120,Yes,Full,57,3,92,Yes,Legal
+Highway,Tamil Nadu,Salem,419.36,1794,Not Started,196,No,Full,2,1,68,Yes,Approval
+Power,Karnataka,Salem,429.74,92,In Progress,293,No,Not Taken,50,2,73,Yes,Approval
+Power,Andhra Pradesh,Tirunelveli,374.81,588,Paid,121,Yes,Partial,55,4,73,Yes,Legal
+Railway,Kerala,Salem,221.01,1921,Not Started,281,No,Not Taken,72,4,8,Yes,Approval
+Highway,Tamil Nadu,Madurai,306.25,1570,Not Started,259,No,Partial,9,3,84,Yes,Approval
+Irrigation,Tamil Nadu,Bengaluru,82.28,1712,In Progress,38,No,Partial,60,2,76,Yes,Compensation
+Irrigation,Karnataka,Kochi,337.64,313,Not Started,53,No,Not Taken,49,2,9,No,Compensation
+Highway,Kerala,Coimbatore,91.68,910,Not Started,160,No,Not Taken,46,5,74,Yes,Approval
+Irrigation,Karnataka,Trichy,347.74,347,Paid,288,No,Partial,89,1,67,No,Approval
+Irrigation,Kerala,Coimbatore,116.73,440,Paid,199,Yes,Partial,0,4,57,No,Legal
+Highway,Kerala,Coimbatore,60.98,181,Not Started,275,No,Partial,93,3,94,No,Approval
+Power,Kerala,Madurai,84.73,143,Not Started,15,No,Full,56,2,51,Yes,Compensation
+Highway,Tamil Nadu,Coimbatore,3.49,198,In Progress,172,No,Partial,37,4,33,No,Approval
+Power,Andhra Pradesh,Kochi,360.07,1214,In Progress,247,No,Not Taken,61,3,34,Yes,Approval
+Irrigation,Karnataka,Tirunelveli,366.87,1246,Not Started,217,No,Not Taken,78,4,32,Yes,Approval
+Irrigation,Andhra Pradesh,Chennai,258.68,1192,Paid,86,Yes,Not Taken,88,3,71,Yes,Legal
+Irrigation,Karnataka,Salem,82.78,1189,Not Started,81,Yes,Partial,69,4,31,Yes,Legal
+Railway,Kerala,Chennai,44.07,947,Not Started,61,No,Partial,81,5,54,No,Compensation
+Power,Tamil Nadu,Bengaluru,12.02,529,Paid,286,No,Full,64,1,96,Yes,Approval
+Railway,Andhra Pradesh,Kochi,84.96,1836,Paid,41,No,Full,61,4,7,No,Planning
+Railway,Tamil Nadu,Kochi,445.7,1629,In Progress,11,No,Not Taken,55,1,45,Yes,Compensation
+Highway,Karnataka,Trichy,122.66,1864,In Progress,320,Yes,Full,66,4,13,Yes,Legal
+Railway,Tamil Nadu,Kochi,178.75,1070,In Progress,233,No,Full,16,2,97,Yes,Approval
+Highway,Tamil Nadu,Salem,54.91,919,In Progress,328,No,Not Taken,7,5,7,Yes,Approval
+Highway,Andhra Pradesh,Kochi,113.12,214,Paid,130,No,Partial,59,5,70,No,Approval
+Railway,Kerala,Coimbatore,260.81,745,Not Started,114,No,Full,39,1,76,Yes,Compensation
+Power,Tamil Nadu,Trichy,304.86,866,In Progress,217,No,Partial,80,2,53,Yes,Approval
+Power,Kerala,Salem,124.56,1303,In Progress,136,No,Not Taken,88,3,20,No,Approval
+Power,Karnataka,Tirunelveli,31.22,958,Paid,105,No,Not Taken,61,5,95,Yes,Possession
+Power,Tamil Nadu,Tirunelveli,197.04,1307,Paid,178,No,Full,40,2,74,No,Approval
+Power,Andhra Pradesh,Tirunelveli,119.02,1279,Not Started,15,No,Not Taken,11,2,13,Yes,Compensation
+Railway,Karnataka,Tirunelveli,111.73,1338,Not Started,241,No,Not Taken,92,1,74,Yes,Approval
+Railway,Karnataka,Coimbatore,480.03,1748,Paid,333,No,Not Taken,88,2,1,Yes,Approval
+Irrigation,Andhra Pradesh,Kochi,309.11,837,In Progress,225,No,Full,99,2,97,Yes,Approval
+Power,Tamil Nadu,Chennai,279.55,144,In Progress,241,No,Full,53,3,60,No,Approval
+Railway,Tamil Nadu,Salem,209.35,796,In Progress,140,No,Full,88,1,16,No,Approval
+Irrigation,Karnataka,Coimbatore,215.9,550,Not Started,198,Yes,Not Taken,92,1,77,Yes,Legal
+Power,Tamil Nadu,Tirunelveli,271.6,1849,In Progress,111,No,Partial,10,2,88,Yes,Compensation
+Highway,Kerala,Bengaluru,348.97,1021,In Progress,126,No,Not Taken,59,3,47,No,Approval
+Irrigation,Andhra Pradesh,Kochi,351.82,1932,Paid,20,No,Full,67,4,90,No,Planning
+Railway,Kerala,Chennai,87.92,1558,In Progress,146,No,Partial,77,5,7,No,Approval
+Highway,Tamil Nadu,Bengaluru,251.31,61,Paid,88,Yes,Partial,45,1,55,Yes,Legal
+Highway,Karnataka,Trichy,207.45,116,In Progress,302,Yes,Full,37,3,16,Yes,Legal
+Highway,Andhra Pradesh,Bengaluru,435.59,9,Not Started,202,Yes,Partial,60,3,68,Yes,Legal
+Irrigation,Tamil Nadu,Trichy,316.63,1438,In Progress,84,No,Partial,16,2,11,Yes,Compensation
+Railway,Tamil Nadu,Trichy,267.42,1442,In Progress,166,No,Full,65,5,37,Yes,Approval
+Highway,Karnataka,Tirunelveli,59.91,1210,Paid,71,No,Partial,71,1,17,No,Possession
+Power,Karnataka,Trichy,303.8,1041,Paid,297,No,Partial,35,4,25,No,Approval
+Highway,Kerala,Madurai,60.81,1367,Paid,8,No,Full,73,2,94,No,Planning
+Highway,Andhra Pradesh,Salem,170.26,1825,In Progress,280,Yes,Partial,6,1,36,Yes,Legal
+Irrigation,Andhra Pradesh,Salem,73.56,1287,In Progress,257,Yes,Partial,99,1,69,Yes,Legal
+Irrigation,Karnataka,Tirunelveli,346.81,94,Not Started,274,No,Partial,15,3,40,Yes,Approval
+Railway,Kerala,Madurai,105.11,620,In Progress,237,No,Partial,13,5,78,Yes,Approval
+Power,Andhra Pradesh,Bengaluru,197.45,895,Not Started,19,No,Full,79,4,41,No,Compensation
+Irrigation,Karnataka,Coimbatore,448.1,702,Paid,232,No,Not Taken,24,5,89,No,Approval
+Highway,Tamil Nadu,Bengaluru,104.15,1278,Paid,220,No,Not Taken,3,3,75,Yes,Approval
+Railway,Andhra Pradesh,Kochi,255.13,1283,Paid,325,Yes,Partial,28,4,40,Yes,Legal
+Highway,Kerala,Coimbatore,211.09,1616,Not Started,16,No,Full,55,4,46,No,Compensation
+Highway,Kerala,Trichy,11.52,902,In Progress,88,No,Full,5,2,13,No,Compensation
+Irrigation,Kerala,Chennai,396.9,975,Paid,195,No,Partial,0,4,0,Yes,Approval
+Railway,Tamil Nadu,Coimbatore,36.85,1136,In Progress,349,Yes,Not Taken,38,1,16,Yes,Legal
+Power,Andhra Pradesh,Chennai,238.44,672,In Progress,83,No,Partial,0,5,96,No,Compensation
+Power,Andhra Pradesh,Salem,281.44,598,Paid,86,No,Full,62,5,54,No,Planning
+Irrigation,Tamil Nadu,Chennai,315.14,593,Not Started,306,Yes,Full,56,2,92,No,Legal
+Irrigation,Andhra Pradesh,Salem,345.09,489,In Progress,337,No,Not Taken,66,4,52,Yes,Approval
+Railway,Tamil Nadu,Madurai,128.5,986,Paid,153,Yes,Full,64,3,30,No,Legal
+Power,Tamil Nadu,Madurai,7.46,976,In Progress,227,No,Full,64,1,61,Yes,Approval
+Power,Tamil Nadu,Tirunelveli,362.41,1286,In Progress,263,No,Full,20,2,7,Yes,Approval
+Power,Kerala,Tirunelveli,268.99,643,In Progress,222,No,Not Taken,29,4,29,Yes,Approval
+Highway,Andhra Pradesh,Trichy,418.47,1001,In Progress,120,No,Full,95,3,76,No,Compensation
+Power,Tamil Nadu,Coimbatore,411.14,1931,In Progress,172,Yes,Partial,32,4,79,Yes,Legal
+Highway,Andhra Pradesh,Trichy,422.05,286,Not Started,3,Yes,Not Taken,47,2,65,Yes,Legal
+Railway,Kerala,Salem,243.83,990,Not Started,341,Yes,Partial,21,3,44,Yes,Legal
+Highway,Tamil Nadu,Trichy,168.48,1116,Paid,127,Yes,Partial,93,3,17,No,Legal
+Railway,Karnataka,Chennai,396.3,1232,Not Started,109,No,Not Taken,53,3,98,No,Compensation
+Power,Kerala,Salem,227.02,20,Not Started,354,Yes,Partial,3,3,44,Yes,Legal
+Power,Karnataka,Tirunelveli,93.76,1179,Not Started,36,No,Not Taken,86,4,18,No,Compensation
+Railway,Andhra Pradesh,Madurai,427.85,940,In Progress,70,No,Partial,54,3,76,Yes,Compensation
+Irrigation,Andhra Pradesh,Tirunelveli,441.57,258,In Progress,288,No,Not Taken,43,4,67,Yes,Approval
+Railway,Kerala,Coimbatore,234.49,1216,Paid,30,No,Full,88,3,82,No,Planning
+Irrigation,Andhra Pradesh,Salem,40.16,333,Paid,267,No,Full,11,3,49,No,Approval
+Highway,Karnataka,Salem,195.44,548,Paid,10,No,Partial,80,2,24,No,Possession
+Highway,Tamil Nadu,Chennai,402.26,787,In Progress,343,Yes,Full,78,4,37,Yes,Legal
+Highway,Tamil Nadu,Coimbatore,451.13,1001,Not Started,327,No,Not Taken,73,4,94,Yes,Approval
+Power,Tamil Nadu,Madurai,103.73,1425,Not Started,31,No,Partial,98,5,35,No,Compensation
+Highway,Kerala,Bengaluru,35.82,1545,In Progress,56,No,Full,51,2,67,No,Compensation
+Irrigation,Andhra Pradesh,Salem,438.98,1487,Paid,165,No,Full,92,4,55,No,Approval
+Highway,Karnataka,Salem,196.23,1358,Paid,187,No,Partial,75,2,38,No,Approval
+Railway,Andhra Pradesh,Chennai,272.03,1848,Paid,341,No,Full,64,2,62,Yes,Approval
+Railway,Andhra Pradesh,Trichy,484.11,849,In Progress,18,No,Full,64,2,6,No,Compensation
+Power,Andhra Pradesh,Kochi,35.62,1197,Paid,115,No,Partial,9,1,57,No,Rehabilitation
+Railway,Tamil Nadu,Madurai,325.04,1721,Paid,183,No,Full,17,4,79,No,Approval
+Irrigation,Karnataka,Tirunelveli,39.37,370,In Progress,269,No,Full,46,2,58,No,Approval
+Highway,Karnataka,Coimbatore,189.3,1206,Not Started,32,Yes,Full,65,1,47,Yes,Legal
+Power,Andhra Pradesh,Salem,402.4,659,In Progress,9,No,Full,48,1,4,Yes,Compensation
+Highway,Tamil Nadu,Salem,218.15,1390,In Progress,79,No,Partial,71,3,86,No,Compensation
+Highway,Tamil Nadu,Tirunelveli,498.6,764,In Progress,191,Yes,Not Taken,21,3,35,Yes,Legal
+Irrigation,Karnataka,Madurai,280.63,643,In Progress,319,No,Not Taken,85,4,95,Yes,Approval
+Railway,Tamil Nadu,Kochi,162.28,1803,Not Started,189,No,Full,25,3,87,Yes,Approval
+Railway,Tamil Nadu,Trichy,112.01,1068,Paid,67,No,Full,89,4,24,No,Planning
+Highway,Tamil Nadu,Salem,176.88,928,In Progress,347,Yes,Not Taken,8,1,44,Yes,Legal
+Power,Kerala,Kochi,187.84,420,Not Started,124,No,Full,20,1,91,Yes,Approval
+Railway,Andhra Pradesh,Madurai,36.69,1383,Paid,335,No,Not Taken,94,4,18,Yes,Approval
+Power,Karnataka,Tirunelveli,186.36,259,Paid,58,No,Partial,62,3,6,No,Possession
+Railway,Karnataka,Chennai,233.46,1171,Paid,96,No,Partial,5,3,57,No,Rehabilitation
+Power,Kerala,Trichy,362.06,1780,In Progress,274,No,Partial,13,4,80,Yes,Approval
+Irrigation,Andhra Pradesh,Coimbatore,329.22,1768,In Progress,148,Yes,Partial,32,5,65,Yes,Legal
+Power,Karnataka,Salem,355.11,1881,Paid,277,No,Partial,70,3,79,Yes,Approval
+Irrigation,Tamil Nadu,Madurai,6.66,714,Paid,264,Yes,Partial,23,2,38,Yes,Legal
+Irrigation,Karnataka,Chennai,110.79,581,Paid,8,No,Not Taken,72,3,17,No,Possession
+Power,Tamil Nadu,Coimbatore,331.69,904,Paid,282,No,Full,74,5,0,Yes,Approval
+Irrigation,Kerala,Bengaluru,243.28,15,Paid,272,No,Not Taken,86,1,62,No,Approval
+Highway,Tamil Nadu,Madurai,5.14,1648,Paid,300,Yes,Partial,50,1,2,Yes,Legal
+Irrigation,Karnataka,Madurai,402.74,30,Not Started,7,No,Full,1,1,20,Yes,Compensation
+Railway,Karnataka,Coimbatore,386.97,961,Paid,207,Yes,Full,14,3,29,Yes,Legal
+Power,Karnataka,Chennai,275.34,425,In Progress,124,No,Partial,34,1,10,Yes,Approval
+Highway,Kerala,Bengaluru,35.57,1691,In Progress,122,No,Partial,35,5,21,Yes,Approval
+Power,Kerala,Kochi,383.84,1249,In Progress,32,No,Partial,91,5,56,Yes,Compensation
+Railway,Andhra Pradesh,Kochi,292.9,1881,Paid,0,No,Partial,38,3,88,No,Rehabilitation
+Railway,Karnataka,Tirunelveli,391.53,500,In Progress,203,Yes,Partial,3,2,2,Yes,Legal
+Railway,Tamil Nadu,Chennai,376.49,1265,Not Started,5,No,Partial,63,3,29,Yes,Compensation
+Irrigation,Kerala,Trichy,401.99,241,Paid,296,No,Full,73,1,87,No,Approval
+Irrigation,Karnataka,Salem,260.21,1013,In Progress,4,No,Partial,5,3,44,Yes,Compensation
+Power,Karnataka,Coimbatore,72.31,223,Not Started,79,No,Partial,56,5,35,No,Compensation
+Power,Kerala,Tirunelveli,336.4,1515,Not Started,273,No,Full,29,3,86,Yes,Approval
+Highway,Andhra Pradesh,Bengaluru,311.19,1964,In Progress,176,No,Not Taken,98,3,71,Yes,Approval
+Highway,Kerala,Coimbatore,371.77,465,Not Started,337,No,Partial,73,2,63,Yes,Approval
+Power,Kerala,Coimbatore,87.02,667,In Progress,320,No,Full,95,5,53,No,Approval
+Irrigation,Tamil Nadu,Chennai,99.5,639,Not Started,338,No,Full,66,4,67,Yes,Approval
+Railway,Tamil Nadu,Salem,445.48,1172,Paid,135,No,Not Taken,89,4,49,Yes,Approval
+Power,Andhra Pradesh,Trichy,375.61,994,Paid,24,Yes,Partial,14,5,30,Yes,Legal
+Highway,Karnataka,Kochi,454.34,193,Paid,324,No,Partial,16,4,28,Yes,Approval
+Irrigation,Kerala,Madurai,379.96,259,Paid,182,Yes,Partial,90,1,58,No,Legal
+Power,Andhra Pradesh,Madurai,299.58,72,Paid,167,Yes,Full,17,4,35,Yes,Legal
+Power,Tamil Nadu,Coimbatore,327.93,620,In Progress,337,No,Partial,18,1,76,Yes,Approval
+Irrigation,Kerala,Kochi,444.84,340,Paid,177,No,Partial,75,5,72,Yes,Approval
+Power,Karnataka,Kochi,290.46,675,Paid,94,Yes,Partial,87,4,84,Yes,Legal
+Irrigation,Tamil Nadu,Salem,317.11,825,Paid,32,No,Partial,68,4,66,No,Possession
+Railway,Tamil Nadu,Bengaluru,80.35,878,Paid,110,No,Not Taken,23,1,88,No,Rehabilitation
+Irrigation,Tamil Nadu,Bengaluru,238.28,1437,Not Started,145,No,Not Taken,90,1,88,Yes,Approval
+Irrigation,Andhra Pradesh,Tirunelveli,358.91,304,Paid,230,No,Not Taken,47,3,75,Yes,Approval
+Irrigation,Karnataka,Chennai,137.29,1936,Paid,271,No,Partial,29,2,92,Yes,Approval
+Power,Kerala,Salem,103.12,1630,In Progress,335,No,Partial,14,4,10,No,Approval
+Power,Andhra Pradesh,Salem,158.63,361,Not Started,37,Yes,Full,46,2,10,No,Legal
+Irrigation,Andhra Pradesh,Chennai,122.65,260,In Progress,134,Yes,Full,43,2,25,Yes,Legal
+Power,Andhra Pradesh,Kochi,109.42,1012,Paid,333,Yes,Full,97,4,52,Yes,Legal
+Highway,Tamil Nadu,Bengaluru,213.86,357,In Progress,234,No,Partial,26,1,13,Yes,Approval
+Highway,Karnataka,Bengaluru,454.15,1760,In Progress,318,No,Not Taken,83,3,63,Yes,Approval
+Power,Andhra Pradesh,Kochi,254.76,1549,Paid,344,No,Not Taken,63,5,79,Yes,Approval
+Power,Kerala,Bengaluru,95.99,528,Not Started,159,No,Not Taken,40,4,9,No,Approval
+Irrigation,Karnataka,Coimbatore,40.79,1865,Not Started,37,No,Partial,95,4,30,No,Compensation
+Railway,Kerala,Salem,348.84,954,In Progress,149,Yes,Not Taken,67,5,94,Yes,Legal
+Power,Karnataka,Madurai,192.94,760,Paid,307,No,Full,4,2,35,No,Approval
+Highway,Kerala,Chennai,411.36,1722,In Progress,28,No,Full,52,3,9,No,Compensation
+Irrigation,Tamil Nadu,Bengaluru,330.61,288,In Progress,143,Yes,Not Taken,7,2,25,Yes,Legal
+Power,Andhra Pradesh,Tirunelveli,398.63,1340,In Progress,75,Yes,Full,21,5,19,Yes,Legal
+Highway,Kerala,Bengaluru,137.79,103,Paid,144,No,Not Taken,6,5,43,Yes,Approval
+Highway,Karnataka,Bengaluru,346.95,201,Paid,228,No,Not Taken,21,3,61,Yes,Approval
+Railway,Andhra Pradesh,Trichy,133.87,486,Not Started,63,No,Full,45,5,72,No,Compensation
+Irrigation,Andhra Pradesh,Coimbatore,469.69,882,Paid,346,No,Full,29,5,78,Yes,Approval
+Irrigation,Karnataka,Chennai,319.1,1254,In Progress,344,No,Full,100,3,8,Yes,Approval
+Railway,Kerala,Trichy,163.94,1873,In Progress,268,Yes,Full,15,4,70,Yes,Legal
+Railway,Tamil Nadu,Trichy,136.58,619,Not Started,327,No,Not Taken,78,2,89,Yes,Approval
+Irrigation,Tamil Nadu,Tirunelveli,97.49,622,Paid,183,No,Full,4,4,23,Yes,Approval
+Irrigation,Kerala,Salem,348.08,1393,In Progress,260,No,Full,66,4,11,No,Approval
+Power,Andhra Pradesh,Tirunelveli,111.31,372,Not Started,267,No,Partial,22,2,59,No,Approval
+Power,Andhra Pradesh,Salem,298.66,574,Not Started,168,No,Full,60,4,83,Yes,Approval
+Railway,Andhra Pradesh,Salem,134.16,594,In Progress,258,No,Full,73,3,77,No,Approval
+Power,Andhra Pradesh,Chennai,331.83,1103,In Progress,226,No,Not Taken,4,2,85,Yes,Approval
+Highway,Kerala,Bengaluru,407.93,1070,Paid,32,No,Not Taken,22,1,15,No,Rehabilitation
+Power,Andhra Pradesh,Chennai,389.57,426,Not Started,213,No,Partial,78,4,28,Yes,Approval
+Power,Karnataka,Coimbatore,381.02,840,In Progress,49,Yes,Full,81,5,31,Yes,Legal
+Highway,Andhra Pradesh,Salem,95.89,1209,Not Started,209,No,Full,24,2,82,Yes,Approval
+Railway,Tamil Nadu,Trichy,46.47,549,Paid,28,No,Full,7,1,34,No,Rehabilitation
+Highway,Andhra Pradesh,Bengaluru,350.23,75,In Progress,38,No,Full,94,5,42,No,Compensation
+Power,Kerala,Madurai,185.75,1596,Paid,346,Yes,Full,20,1,95,Yes,Legal
+Railway,Tamil Nadu,Coimbatore,217.59,1133,Not Started,99,No,Full,1,4,52,Yes,Compensation
+Power,Kerala,Chennai,18.0,1228,Paid,172,No,Partial,21,5,19,No,Approval
+Highway,Kerala,Tirunelveli,131.64,1129,Paid,16,No,Full,71,4,83,Yes,Planning
+Highway,Tamil Nadu,Coimbatore,19.25,772,Not Started,55,No,Full,86,5,7,No,Compensation
+Power,Kerala,Coimbatore,439.89,311,Paid,225,No,Full,95,2,98,Yes,Approval
+Irrigation,Kerala,Bengaluru,123.59,1614,Not Started,45,No,Partial,71,3,41,No,Compensation
+Irrigation,Andhra Pradesh,Coimbatore,279.78,1711,In Progress,66,No,Full,67,3,76,No,Compensation
+Highway,Karnataka,Coimbatore,21.89,381,Not Started,196,No,Partial,63,1,69,No,Approval
+Highway,Kerala,Madurai,334.26,659,Not Started,141,Yes,Not Taken,93,5,15,Yes,Legal
+Irrigation,Kerala,Kochi,163.21,682,In Progress,322,Yes,Full,18,4,68,Yes,Legal
+Irrigation,Kerala,Tirunelveli,449.21,403,Not Started,22,No,Partial,86,2,52,Yes,Compensation
+Power,Andhra Pradesh,Tirunelveli,444.34,1801,In Progress,93,No,Not Taken,81,2,44,Yes,Compensation
+Power,Karnataka,Tirunelveli,164.33,225,In Progress,241,No,Partial,52,2,50,Yes,Approval
+Irrigation,Tamil Nadu,Salem,450.73,1623,Not Started,236,Yes,Partial,92,3,97,Yes,Legal
+Power,Andhra Pradesh,Trichy,498.09,186,Paid,53,No,Not Taken,86,4,5,Yes,Possession
+Power,Andhra Pradesh,Kochi,413.14,311,Paid,137,No,Full,96,2,32,No,Approval
+Railway,Karnataka,Tirunelveli,422.82,526,In Progress,332,Yes,Full,51,2,78,Yes,Legal
+Power,Karnataka,Coimbatore,126.38,1424,Paid,271,No,Partial,46,1,14,Yes,Approval
+Highway,Andhra Pradesh,Coimbatore,289.41,1018,Paid,40,No,Not Taken,81,5,13,No,Possession
+Power,Tamil Nadu,Tirunelveli,35.96,8,Not Started,97,No,Full,53,5,38,No,Compensation
+Power,Andhra Pradesh,Bengaluru,49.72,867,In Progress,182,No,Partial,43,5,62,Yes,Approval
+Irrigation,Karnataka,Tirunelveli,499.45,1942,In Progress,127,No,Not Taken,96,1,4,Yes,Approval
+Highway,Tamil Nadu,Coimbatore,165.0,852,Not Started,228,Yes,Partial,6,3,89,Yes,Legal
+Power,Karnataka,Salem,374.72,808,Paid,316,No,Not Taken,91,1,80,Yes,Approval
+Power,Tamil Nadu,Chennai,403.82,1309,In Progress,85,Yes,Full,0,2,51,Yes,Legal
+Railway,Kerala,Chennai,429.37,219,Paid,255,No,Full,62,4,15,No,Approval
+Power,Karnataka,Kochi,498.82,976,In Progress,208,Yes,Partial,97,2,98,Yes,Legal
+Power,Karnataka,Kochi,122.64,1638,In Progress,214,No,Full,38,2,37,Yes,Approval
+Railway,Andhra Pradesh,Tirunelveli,22.57,1448,In Progress,99,No,Full,18,4,52,No,Compensation
+Irrigation,Karnataka,Madurai,207.07,105,In Progress,48,Yes,Not Taken,30,5,86,No,Legal
+Power,Karnataka,Tirunelveli,67.22,967,Paid,200,No,Full,76,1,76,Yes,Approval
+Railway,Kerala,Bengaluru,13.66,1549,Paid,257,Yes,Not Taken,23,3,96,Yes,Legal
+Highway,Karnataka,Tirunelveli,181.81,577,Paid,177,No,Not Taken,68,2,92,Yes,Approval
+Irrigation,Kerala,Kochi,392.41,1337,Paid,244,No,Partial,86,2,52,No,Approval
+Highway,Kerala,Chennai,284.17,662,Not Started,122,Yes,Not Taken,82,3,45,Yes,Legal
+Highway,Kerala,Coimbatore,158.11,943,In Progress,341,Yes,Full,64,1,97,Yes,Legal
+Railway,Kerala,Tirunelveli,328.04,1959,In Progress,170,No,Not Taken,32,2,97,Yes,Approval
+Power,Tamil Nadu,Coimbatore,117.93,1538,In Progress,332,Yes,Not Taken,58,3,90,Yes,Legal
+Railway,Andhra Pradesh,Coimbatore,9.65,1091,Not Started,135,No,Partial,32,2,14,Yes,Approval
+Railway,Tamil Nadu,Madurai,382.77,1661,Paid,58,No,Full,31,5,58,No,Rehabilitation
+Railway,Karnataka,Coimbatore,312.81,230,In Progress,192,No,Full,58,5,49,Yes,Approval
+Railway,Tamil Nadu,Chennai,381.75,109,Paid,267,No,Full,91,2,8,No,Approval
+Irrigation,Tamil Nadu,Salem,21.87,776,Paid,259,No,Not Taken,100,2,25,Yes,Approval
+Power,Karnataka,Salem,418.97,1889,Not Started,94,No,Full,40,5,2,No,Compensation
+Highway,Karnataka,Trichy,310.71,1453,Not Started,124,Yes,Full,11,2,99,Yes,Legal
+Highway,Karnataka,Bengaluru,282.79,1283,Paid,40,Yes,Not Taken,72,1,46,Yes,Legal
+Power,Tamil Nadu,Tirunelveli,313.25,433,In Progress,253,Yes,Partial,10,1,4,Yes,Legal
+Highway,Tamil Nadu,Bengaluru,432.56,438,In Progress,6,Yes,Partial,96,4,61,Yes,Legal
+Power,Karnataka,Chennai,294.5,1235,Not Started,215,Yes,Not Taken,18,1,83,Yes,Legal
+Highway,Andhra Pradesh,Coimbatore,291.52,1056,Not Started,68,No,Partial,53,2,83,No,Compensation
+Railway,Andhra Pradesh,Salem,495.36,686,Not Started,68,No,Partial,56,2,4,No,Compensation
+Highway,Kerala,Bengaluru,378.97,1364,Not Started,80,No,Partial,41,3,9,Yes,Compensation
+Power,Karnataka,Chennai,222.54,592,Not Started,29,Yes,Full,97,1,79,Yes,Legal
+Power,Kerala,Salem,354.43,1656,Not Started,72,No,Partial,70,5,62,Yes,Compensation
+Power,Andhra Pradesh,Coimbatore,196.14,1097,Not Started,261,No,Full,30,5,24,Yes,Approval
+Power,Kerala,Bengaluru,116.37,870,In Progress,88,No,Partial,51,4,43,No,Compensation
+Power,Karnataka,Salem,299.43,750,Not Started,207,No,Full,1,3,24,No,Approval
+Irrigation,Karnataka,Tirunelveli,464.27,1541,Not Started,212,No,Not Taken,82,5,29,Yes,Approval
+Irrigation,Karnataka,Kochi,464.75,1195,In Progress,321,No,Not Taken,37,4,13,Yes,Approval
+Highway,Tamil Nadu,Tirunelveli,172.6,868,In Progress,265,No,Partial,31,1,85,Yes,Approval
+Power,Kerala,Trichy,265.02,1758,Paid,292,Yes,Full,9,3,42,Yes,Legal
+Highway,Andhra Pradesh,Trichy,107.79,1813,Not Started,206,No,Not Taken,7,3,27,Yes,Approval
+Power,Andhra Pradesh,Salem,497.83,372,Not Started,332,No,Not Taken,89,2,93,Yes,Approval
+Power,Andhra Pradesh,Kochi,490.61,255,Not Started,76,Yes,Not Taken,93,1,18,Yes,Legal
+Irrigation,Tamil Nadu,Chennai,325.63,863,Not Started,287,No,Not Taken,74,3,41,No,Approval
+Irrigation,Tamil Nadu,Tirunelveli,402.7,860,Paid,46,No,Partial,19,4,19,Yes,Rehabilitation
+Railway,Karnataka,Chennai,358.26,1959,In Progress,109,No,Full,19,5,98,Yes,Compensation
+Irrigation,Andhra Pradesh,Kochi,297.6,1714,In Progress,199,Yes,Not Taken,8,1,85,Yes,Legal
+Railway,Tamil Nadu,Chennai,29.04,1198,Not Started,209,No,Partial,71,1,78,Yes,Approval
+Railway,Karnataka,Kochi,228.75,1786,Not Started,153,No,Not Taken,14,3,10,No,Approval
+Railway,Andhra Pradesh,Salem,338.21,1963,Not Started,9,No,Not Taken,97,3,53,Yes,Compensation
+Railway,Kerala,Chennai,339.57,1118,Paid,352,Yes,Not Taken,87,3,97,Yes,Legal
+Railway,Karnataka,Tirunelveli,188.13,565,Paid,156,No,Not Taken,96,4,23,No,Approval
+Highway,Tamil Nadu,Coimbatore,470.99,1474,In Progress,260,No,Partial,62,2,69,Yes,Approval
+Irrigation,Tamil Nadu,Trichy,85.76,298,Not Started,76,No,Full,90,3,16,No,Compensation
+Railway,Karnataka,Coimbatore,251.43,923,Not Started,256,Yes,Partial,20,2,27,Yes,Legal
+Power,Karnataka,Chennai,346.21,1178,Not Started,130,No,Partial,4,2,49,Yes,Approval
+Irrigation,Tamil Nadu,Coimbatore,349.33,1160,Not Started,66,No,Partial,34,1,94,Yes,Compensation
+Irrigation,Kerala,Tirunelveli,325.2,437,Paid,227,Yes,Not Taken,84,5,99,Yes,Legal
+Railway,Andhra Pradesh,Tirunelveli,139.46,63,In Progress,162,No,Full,67,5,54,No,Approval
+Highway,Kerala,Chennai,80.21,973,In Progress,14,No,Not Taken,47,4,72,Yes,Compensation
+Railway,Karnataka,Salem,318.88,840,Paid,231,No,Partial,79,4,9,No,Approval
+Highway,Kerala,Coimbatore,300.65,203,Not Started,194,No,Not Taken,94,5,20,Yes,Approval
+Power,Tamil Nadu,Salem,91.73,219,In Progress,348,Yes,Full,89,5,57,Yes,Legal
+Irrigation,Karnataka,Salem,353.31,902,In Progress,29,No,Full,61,1,33,Yes,Compensation
+Power,Andhra Pradesh,Kochi,228.95,1589,Paid,358,No,Not Taken,34,1,94,Yes,Approval
+Highway,Tamil Nadu,Madurai,334.71,476,Not Started,337,No,Partial,69,5,92,Yes,Approval
+Highway,Tamil Nadu,Chennai,419.09,1772,In Progress,330,No,Not Taken,96,3,42,No,Approval
+Power,Andhra Pradesh,Trichy,86.94,251,Not Started,315,Yes,Partial,20,3,10,Yes,Legal
+Highway,Andhra Pradesh,Tirunelveli,12.02,386,In Progress,295,No,Full,79,1,32,Yes,Approval
+Power,Kerala,Tirunelveli,390.1,995,Paid,329,No,Not Taken,38,2,57,No,Approval
+Irrigation,Karnataka,Chennai,305.82,1267,Not Started,219,No,Full,33,5,45,Yes,Approval
+Power,Andhra Pradesh,Kochi,350.57,931,Paid,146,No,Partial,14,4,60,Yes,Approval
+Irrigation,Andhra Pradesh,Bengaluru,419.48,1395,In Progress,258,No,Partial,5,3,61,Yes,Approval
+Power,Karnataka,Bengaluru,401.9,1196,Paid,291,Yes,Not Taken,65,2,0,Yes,Legal
+Highway,Andhra Pradesh,Bengaluru,480.56,564,Paid,298,Yes,Not Taken,87,3,20,Yes,Legal
+Power,Andhra Pradesh,Kochi,269.13,1079,Paid,142,Yes,Not Taken,55,2,61,Yes,Legal
+Highway,Kerala,Trichy,245.53,1839,In Progress,234,No,Full,48,5,63,Yes,Approval
+Power,Tamil Nadu,Tirunelveli,202.44,1638,Not Started,114,Yes,Partial,91,5,86,Yes,Legal
+Power,Tamil Nadu,Chennai,78.96,1979,Paid,364,Yes,Partial,0,5,72,Yes,Legal
+Railway,Tamil Nadu,Kochi,287.37,1756,Not Started,89,No,Full,64,1,55,Yes,Compensation
+Highway,Tamil Nadu,Tirunelveli,140.31,693,In Progress,207,Yes,Not Taken,27,2,0,Yes,Legal
+Railway,Andhra Pradesh,Salem,460.85,384,Not Started,163,No,Not Taken,99,4,20,Yes,Approval
+Highway,Karnataka,Coimbatore,292.64,478,Paid,83,No,Full,19,4,21,No,Rehabilitation
+Railway,Karnataka,Coimbatore,297.44,1108,Paid,76,Yes,Partial,47,5,53,No,Legal
+Irrigation,Kerala,Kochi,179.08,701,Paid,160,No,Partial,71,4,3,No,Approval
+Power,Kerala,Tirunelveli,28.36,1395,Paid,4,Yes,Partial,64,3,64,Yes,Legal
+Highway,Andhra Pradesh,Madurai,18.29,1489,Paid,77,No,Partial,89,2,50,No,Possession
+Highway,Karnataka,Trichy,213.11,915,Paid,90,No,Full,50,2,73,Yes,Planning
+Power,Karnataka,Bengaluru,44.57,1567,In Progress,86,Yes,Partial,42,2,62,Yes,Legal
+Highway,Tamil Nadu,Trichy,304.41,1480,In Progress,269,Yes,Full,48,3,14,Yes,Legal
+Highway,Andhra Pradesh,Trichy,440.78,1492,In Progress,103,No,Not Taken,24,1,35,Yes,Compensation
+Railway,Andhra Pradesh,Kochi,441.75,964,Not Started,338,Yes,Full,73,3,28,Yes,Legal
+Highway,Tamil Nadu,Salem,330.38,482,Not Started,174,Yes,Partial,75,2,51,Yes,Legal
+Irrigation,Andhra Pradesh,Trichy,107.59,1008,In Progress,53,No,Not Taken,40,2,45,No,Compensation
+Irrigation,Andhra Pradesh,Coimbatore,431.84,930,Not Started,210,No,Full,70,2,68,Yes,Approval
+Power,Kerala,Salem,443.33,1448,Not Started,94,No,Full,63,4,28,Yes,Compensation
+Highway,Karnataka,Chennai,100.34,711,Paid,222,No,Full,60,1,46,Yes,Approval
+Power,Andhra Pradesh,Trichy,369.37,1242,Paid,8,No,Not Taken,11,3,90,No,Rehabilitation
+Irrigation,Kerala,Trichy,145.04,1397,Not Started,52,Yes,Full,80,2,24,Yes,Legal
+Highway,Karnataka,Chennai,401.81,858,Not Started,76,No,Partial,68,5,79,No,Compensation
+Highway,Tamil Nadu,Trichy,498.63,1142,In Progress,205,No,Not Taken,13,1,15,Yes,Approval
+Power,Kerala,Chennai,17.44,1021,Not Started,315,No,Not Taken,33,5,99,Yes,Approval
+Irrigation,Kerala,Salem,448.94,758,Paid,301,No,Full,47,1,88,Yes,Approval
+Highway,Karnataka,Coimbatore,312.26,507,Not Started,309,Yes,Partial,60,2,40,Yes,Legal
+Power,Tamil Nadu,Chennai,486.76,1664,In Progress,329,Yes,Not Taken,80,1,64,Yes,Legal
+Irrigation,Kerala,Madurai,233.84,821,Paid,111,No,Full,34,1,68,Yes,Rehabilitation
+Power,Andhra Pradesh,Kochi,424.08,592,Paid,350,No,Partial,64,2,19,Yes,Approval
+Railway,Andhra Pradesh,Kochi,33.54,1339,Paid,164,No,Full,58,5,68,Yes,Approval
+Highway,Andhra Pradesh,Chennai,169.3,1497,Paid,278,Yes,Full,35,5,35,Yes,Legal
+Railway,Tamil Nadu,Kochi,35.84,1852,Not Started,26,No,Not Taken,78,4,92,Yes,Compensation
+Irrigation,Kerala,Trichy,487.73,712,In Progress,69,No,Not Taken,18,5,97,Yes,Compensation
+Railway,Andhra Pradesh,Bengaluru,408.94,1891,Not Started,217,No,Full,41,5,57,Yes,Approval
+Railway,Tamil Nadu,Bengaluru,426.64,1072,Not Started,364,No,Not Taken,68,1,47,Yes,Approval
+Irrigation,Andhra Pradesh,Kochi,469.14,1443,Paid,188,No,Not Taken,18,4,81,Yes,Approval
+Power,Karnataka,Salem,44.84,1726,In Progress,332,Yes,Partial,38,2,1,Yes,Legal
+Railway,Kerala,Tirunelveli,194.33,1883,Paid,305,No,Partial,68,2,79,Yes,Approval
+Power,Kerala,Salem,37.84,1274,Not Started,123,No,Full,51,3,28,No,Approval
+Railway,Tamil Nadu,Tirunelveli,107.37,1977,Not Started,18,Yes,Full,11,4,96,Yes,Legal
+Power,Tamil Nadu,Bengaluru,116.61,1112,Paid,256,Yes,Full,82,1,15,Yes,Legal
+Irrigation,Kerala,Bengaluru,235.88,211,Not Started,295,No,Full,46,3,34,No,Approval
+Railway,Andhra Pradesh,Chennai,136.11,155,Not Started,21,No,Partial,75,3,61,No,Compensation
+Irrigation,Andhra Pradesh,Coimbatore,52.74,672,Paid,39,No,Not Taken,35,2,80,Yes,Rehabilitation
+Railway,Karnataka,Madurai,85.83,532,Not Started,37,Yes,Partial,62,5,3,Yes,Legal
+Irrigation,Andhra Pradesh,Salem,75.77,169,In Progress,47,No,Full,75,1,67,No,Compensation
+Irrigation,Tamil Nadu,Trichy,486.61,921,Paid,182,No,Full,81,4,50,No,Approval
+Railway,Tamil Nadu,Tirunelveli,380.25,1173,In Progress,74,No,Partial,50,3,88,Yes,Compensation
+Railway,Andhra Pradesh,Kochi,483.96,1014,Not Started,208,No,Partial,42,1,32,Yes,Approval
+Railway,Tamil Nadu,Trichy,221.27,41,Not Started,182,No,Full,33,2,77,No,Approval
+Highway,Kerala,Coimbatore,140.99,337,Paid,106,No,Not Taken,96,3,23,No,Possession
+Power,Kerala,Tirunelveli,399.65,407,Not Started,187,No,Full,48,3,74,Yes,Approval
+Highway,Andhra Pradesh,Salem,164.81,418,Paid,263,No,Partial,17,2,24,No,Approval
+Highway,Kerala,Chennai,151.44,49,Paid,85,No,Full,60,2,27,No,Planning
+Irrigation,Kerala,Trichy,118.17,1430,Paid,323,No,Full,56,2,6,Yes,Approval
+Railway,Karnataka,Coimbatore,67.02,210,Paid,330,No,Not Taken,92,1,35,No,Approval
+Power,Karnataka,Salem,130.09,66,Paid,136,No,Full,4,1,9,Yes,Approval
+Irrigation,Kerala,Bengaluru,179.27,424,In Progress,345,No,Full,88,1,35,Yes,Approval
+Highway,Andhra Pradesh,Bengaluru,337.81,872,Paid,335,No,Full,23,5,94,Yes,Approval
+Railway,Karnataka,Salem,33.63,1496,In Progress,94,No,Partial,92,3,82,Yes,Compensation
+Irrigation,Tamil Nadu,Salem,107.23,824,Not Started,325,No,Partial,63,1,17,Yes,Approval
+Railway,Tamil Nadu,Salem,404.99,23,Paid,244,No,Not Taken,58,5,5,Yes,Approval
+Irrigation,Tamil Nadu,Tirunelveli,75.59,369,Not Started,89,No,Full,37,3,91,Yes,Compensation
+Railway,Andhra Pradesh,Salem,172.97,1328,Paid,58,Yes,Partial,32,1,6,Yes,Legal
+Highway,Kerala,Trichy,432.67,1035,In Progress,27,No,Not Taken,9,2,11,Yes,Compensation
+Power,Tamil Nadu,Coimbatore,79.58,1789,In Progress,71,Yes,Full,36,4,40,No,Legal
+Highway,Andhra Pradesh,Tirunelveli,43.66,432,In Progress,269,Yes,Not Taken,96,1,62,Yes,Legal
+Power,Karnataka,Salem,243.56,1145,Not Started,23,No,Not Taken,86,4,97,No,Compensation
+Railway,Kerala,Madurai,152.95,584,Paid,111,Yes,Not Taken,10,1,24,Yes,Legal
+Irrigation,Karnataka,Kochi,282.8,1535,Not Started,299,No,Not Taken,23,2,80,Yes,Approval
+Highway,Andhra Pradesh,Madurai,402.39,550,In Progress,55,Yes,Not Taken,87,4,52,Yes,Legal
+Power,Tamil Nadu,Coimbatore,70.73,1734,Not Started,222,Yes,Not Taken,70,5,32,Yes,Legal
+Highway,Tamil Nadu,Bengaluru,291.4,329,In Progress,119,No,Not Taken,20,2,86,Yes,Compensation
+Power,Andhra Pradesh,Chennai,253.99,59,In Progress,178,No,Full,19,4,72,Yes,Approval
+Highway,Tamil Nadu,Chennai,74.18,782,In Progress,287,No,Full,9,4,5,Yes,Approval
+Power,Kerala,Kochi,312.94,996,Paid,280,No,Not Taken,88,2,61,Yes,Approval
+Power,Andhra Pradesh,Bengaluru,138.64,46,Paid,188,Yes,Full,46,2,65,Yes,Legal
+Railway,Karnataka,Tirunelveli,245.2,1325,In Progress,65,No,Not Taken,99,2,8,Yes,Compensation
+Power,Andhra Pradesh,Tirunelveli,43.43,235,Not Started,297,No,Full,46,3,66,Yes,Approval
+Railway,Kerala,Tirunelveli,231.14,457,Not Started,248,No,Partial,14,5,15,Yes,Approval
+Power,Kerala,Chennai,154.97,1918,Paid,75,No,Not Taken,43,1,88,Yes,Possession
+Irrigation,Andhra Pradesh,Madurai,411.63,398,In Progress,136,No,Partial,61,4,87,Yes,Approval
+Irrigation,Andhra Pradesh,Chennai,30.85,1550,Not Started,163,No,Not Taken,5,1,92,Yes,Approval
+Irrigation,Tamil Nadu,Trichy,210.76,1386,In Progress,232,No,Not Taken,100,2,54,No,Approval
+Power,Kerala,Salem,230.57,1472,Not Started,254,No,Partial,65,5,39,No,Approval
+Railway,Andhra Pradesh,Tirunelveli,363.19,1156,Paid,293,No,Partial,75,5,25,No,Approval
+Railway,Andhra Pradesh,Madurai,288.21,695,In Progress,169,Yes,Partial,3,3,37,Yes,Legal
+Power,Kerala,Coimbatore,334.44,1433,In Progress,316,No,Not Taken,22,2,34,Yes,Approval
+Irrigation,Andhra Pradesh,Kochi,389.08,396,Not Started,173,No,Partial,12,4,86,Yes,Approval
+Irrigation,Tamil Nadu,Coimbatore,431.45,1221,Not Started,344,No,Partial,80,3,67,No,Approval
+Railway,Kerala,Salem,158.65,608,Not Started,17,No,Full,30,2,58,Yes,Compensation
+Irrigation,Tamil Nadu,Madurai,270.17,885,In Progress,69,Yes,Full,15,3,13,Yes,Legal
+Highway,Tamil Nadu,Chennai,420.45,1771,Paid,337,No,Partial,40,1,46,Yes,Approval
+Railway,Tamil Nadu,Chennai,494.75,1106,Paid,115,No,Partial,89,2,70,Yes,Possession
+Irrigation,Tamil Nadu,Trichy,445.04,89,Not Started,79,Yes,Partial,91,4,71,Yes,Legal
+Railway,Kerala,Trichy,187.3,1058,Paid,14,No,Partial,0,4,41,No,Rehabilitation
+Highway,Tamil Nadu,Chennai,99.6,1753,Not Started,175,No,Full,11,2,50,No,Approval
+Railway,Tamil Nadu,Coimbatore,245.97,53,Paid,268,No,Not Taken,100,3,18,No,Approval
+Railway,Andhra Pradesh,Kochi,371.47,1805,In Progress,118,No,Partial,55,5,65,Yes,Compensation
+Railway,Kerala,Tirunelveli,247.55,1173,Not Started,298,No,Partial,49,2,46,Yes,Approval
+Railway,Kerala,Coimbatore,242.88,73,Paid,187,Yes,Full,19,4,64,No,Legal
+Highway,Karnataka,Kochi,419.52,1086,In Progress,56,No,Partial,65,1,41,Yes,Compensation
+Power,Kerala,Trichy,182.3,701,Paid,198,No,Partial,35,4,37,Yes,Approval
+Railway,Kerala,Salem,430.25,1602,In Progress,16,Yes,Full,78,5,12,Yes,Legal
+Railway,Karnataka,Kochi,204.89,483,In Progress,287,No,Partial,37,4,43,No,Approval
+Irrigation,Kerala,Chennai,165.8,824,Paid,54,No,Partial,21,5,23,No,Rehabilitation
+Railway,Kerala,Trichy,228.36,1473,Paid,268,No,Full,60,2,95,Yes,Approval
+Irrigation,Kerala,Trichy,381.82,1324,In Progress,302,No,Not Taken,49,4,29,Yes,Approval
+Power,Kerala,Tirunelveli,65.19,1706,In Progress,86,No,Partial,95,3,69,Yes,Compensation
+Highway,Karnataka,Chennai,100.22,1199,In Progress,317,No,Partial,58,3,37,No,Approval
+Highway,Kerala,Tirunelveli,475.84,1603,Not Started,28,No,Not Taken,19,4,96,Yes,Compensation
+Power,Kerala,Chennai,89.81,151,In Progress,21,Yes,Full,35,4,22,Yes,Legal
+Highway,Karnataka,Tirunelveli,284.94,1512,Not Started,320,No,Not Taken,96,1,73,Yes,Approval
+Power,Andhra Pradesh,Kochi,290.71,1334,In Progress,284,No,Partial,14,4,56,Yes,Approval
+Power,Tamil Nadu,Coimbatore,246.09,1701,Not Started,47,No,Not Taken,61,1,78,Yes,Compensation
+Power,Andhra Pradesh,Salem,323.26,1681,In Progress,4,No,Full,2,1,22,Yes,Compensation
+Highway,Karnataka,Salem,116.84,1874,In Progress,249,No,Partial,92,1,35,No,Approval
+Irrigation,Tamil Nadu,Chennai,277.45,1020,In Progress,162,No,Full,90,1,56,No,Approval
+Power,Karnataka,Madurai,187.66,613,Paid,201,Yes,Full,4,2,0,Yes,Legal
+Railway,Karnataka,Bengaluru,331.68,450,Paid,100,No,Not Taken,55,3,71,No,Possession
+Highway,Kerala,Trichy,72.76,225,In Progress,70,Yes,Not Taken,30,1,2,Yes,Legal
+Power,Tamil Nadu,Trichy,286.51,1583,Not Started,162,No,Full,85,3,13,Yes,Approval
+Power,Kerala,Chennai,94.67,1973,Not Started,172,No,Full,34,1,80,Yes,Approval
+Railway,Tamil Nadu,Kochi,141.12,1832,In Progress,140,No,Partial,70,3,33,Yes,Approval
+Irrigation,Karnataka,Tirunelveli,111.31,1406,Paid,137,Yes,Full,69,4,69,Yes,Legal
+Irrigation,Karnataka,Madurai,93.46,1648,Not Started,65,No,Full,25,4,68,Yes,Compensation
+Irrigation,Andhra Pradesh,Coimbatore,413.29,1294,Paid,197,Yes,Not Taken,0,3,50,Yes,Legal
+Power,Tamil Nadu,Tirunelveli,144.64,99,Not Started,327,Yes,Full,82,1,28,Yes,Legal
+Power,Kerala,Tirunelveli,463.74,266,In Progress,227,No,Full,6,2,98,Yes,Approval
+Power,Andhra Pradesh,Chennai,485.04,1853,Paid,280,No,Not Taken,35,3,81,Yes,Approval
+Highway,Andhra Pradesh,Chennai,286.7,901,Not Started,171,Yes,Partial,75,5,47,Yes,Legal
+Railway,Andhra Pradesh,Kochi,73.64,1099,In Progress,315,Yes,Not Taken,83,2,93,Yes,Legal
+Power,Kerala,Trichy,188.84,1982,In Progress,39,No,Not Taken,86,5,78,No,Compensation
+Railway,Andhra Pradesh,Chennai,399.37,223,In Progress,6,No,Full,24,3,78,No,Compensation
+Railway,Kerala,Chennai,185.28,1561,Paid,173,Yes,Full,93,1,15,No,Legal
+Irrigation,Andhra Pradesh,Chennai,45.79,96,Paid,150,No,Partial,58,5,56,No,Approval
+Highway,Kerala,Kochi,279.5,131,In Progress,210,No,Full,60,3,96,Yes,Approval
+Power,Karnataka,Trichy,422.95,84,Paid,301,No,Partial,28,2,9,No,Approval
+Irrigation,Karnataka,Coimbatore,398.47,1852,Not Started,85,No,Partial,94,1,18,Yes,Compensation
+Irrigation,Karnataka,Coimbatore,89.62,1266,In Progress,252,Yes,Partial,17,5,100,Yes,Legal
+Power,Karnataka,Bengaluru,337.2,987,In Progress,20,No,Partial,40,3,66,No,Compensation
+Railway,Karnataka,Bengaluru,112.2,1400,Paid,256,No,Full,18,1,35,Yes,Approval
+Irrigation,Andhra Pradesh,Chennai,111.06,920,In Progress,32,No,Not Taken,3,1,3,No,Compensation
+Railway,Andhra Pradesh,Bengaluru,437.35,490,Not Started,259,No,Not Taken,64,4,74,Yes,Approval
+Highway,Andhra Pradesh,Trichy,126.71,698,Paid,233,No,Full,40,1,32,No,Approval
+Railway,Kerala,Kochi,133.47,29,Paid,2,Yes,Full,14,3,27,Yes,Legal
+Highway,Kerala,Coimbatore,2.83,160,In Progress,346,Yes,Partial,53,2,95,Yes,Legal
+Railway,Kerala,Tirunelveli,435.66,1545,In Progress,307,Yes,Full,63,4,79,Yes,Legal
+Irrigation,Kerala,Coimbatore,396.82,636,In Progress,226,No,Not Taken,71,3,8,Yes,Approval
+Irrigation,Karnataka,Coimbatore,314.6,1817,Paid,283,No,Full,14,3,74,Yes,Approval
+Highway,Karnataka,Trichy,375.76,1558,In Progress,69,No,Full,78,3,5,No,Compensation
+Power,Karnataka,Bengaluru,78.14,1971,Not Started,312,Yes,Partial,49,5,48,Yes,Legal
+Highway,Tamil Nadu,Tirunelveli,230.52,1738,In Progress,363,No,Partial,21,5,90,Yes,Approval
+Highway,Andhra Pradesh,Trichy,177.23,1085,In Progress,253,No,Partial,17,2,75,Yes,Approval
+Railway,Kerala,Chennai,49.15,1633,Paid,143,No,Partial,79,3,21,Yes,Approval
+Railway,Kerala,Kochi,244.35,23,In Progress,23,No,Not Taken,1,5,47,Yes,Compensation
+Highway,Karnataka,Salem,460.57,1412,Paid,233,Yes,Full,35,5,100,Yes,Legal
+Irrigation,Kerala,Coimbatore,22.43,1893,In Progress,332,No,Full,19,5,20,No,Approval
+Railway,Kerala,Salem,147.5,1221,Not Started,174,No,Partial,15,2,32,Yes,Approval
+Power,Andhra Pradesh,Kochi,105.75,241,Not Started,331,Yes,Not Taken,66,2,80,Yes,Legal
+Railway,Karnataka,Kochi,120.98,1415,Paid,324,No,Not Taken,29,3,55,Yes,Approval
+Railway,Andhra Pradesh,Trichy,454.45,1454,Paid,356,Yes,Full,54,4,28,Yes,Legal
+Power,Tamil Nadu,Trichy,235.36,281,In Progress,158,No,Partial,65,3,52,No,Approval
+Highway,Tamil Nadu,Trichy,234.48,1255,In Progress,347,No,Full,98,5,39,Yes,Approval
+Power,Tamil Nadu,Salem,380.89,749,Not Started,347,Yes,Full,25,5,73,Yes,Legal
+Highway,Karnataka,Trichy,79.36,556,In Progress,285,No,Not Taken,56,1,17,Yes,Approval
+Highway,Kerala,Kochi,244.91,1351,Not Started,17,No,Not Taken,68,3,46,No,Compensation
+Highway,Karnataka,Chennai,216.42,1181,Paid,43,Yes,Full,1,5,12,Yes,Legal
+Power,Karnataka,Trichy,299.46,643,In Progress,154,No,Partial,55,5,26,No,Approval
+Highway,Kerala,Madurai,499.78,241,Paid,354,Yes,Partial,83,4,61,Yes,Legal
+Irrigation,Andhra Pradesh,Bengaluru,385.3,1002,In Progress,230,No,Full,61,1,73,Yes,Approval
+Power,Tamil Nadu,Salem,200.44,59,Not Started,315,Yes,Full,33,3,95,Yes,Legal
+Irrigation,Andhra Pradesh,Madurai,414.21,1464,Paid,224,Yes,Partial,97,2,44,Yes,Legal
+Highway,Tamil Nadu,Trichy,87.43,688,Paid,216,Yes,Partial,55,3,2,Yes,Legal
+Railway,Karnataka,Kochi,17.66,113,In Progress,55,Yes,Partial,54,3,21,No,Legal
+Highway,Tamil Nadu,Chennai,104.21,1894,Paid,30,No,Full,19,4,26,No,Rehabilitation
+Irrigation,Karnataka,Coimbatore,171.85,1212,Not Started,356,Yes,Not Taken,49,3,54,Yes,Legal
+Irrigation,Andhra Pradesh,Tirunelveli,256.51,1979,Paid,58,No,Partial,24,4,66,Yes,Rehabilitation
+Power,Karnataka,Bengaluru,308.53,1396,Paid,352,Yes,Partial,83,4,32,Yes,Legal
+Railway,Andhra Pradesh,Tirunelveli,455.53,1226,In Progress,234,Yes,Partial,24,5,1,Yes,Legal
+Power,Kerala,Trichy,256.15,1399,Paid,106,No,Full,52,2,74,No,Planning
+Irrigation,Kerala,Bengaluru,251.88,377,In Progress,190,No,Not Taken,13,4,45,Yes,Approval
+Highway,Kerala,Bengaluru,27.5,977,In Progress,17,No,Not Taken,59,1,73,Yes,Compensation
+Railway,Karnataka,Chennai,19.87,1525,Paid,225,No,Partial,42,1,32,No,Approval
+Highway,Kerala,Bengaluru,276.7,1627,Not Started,166,Yes,Full,61,2,57,Yes,Legal
+Highway,Tamil Nadu,Salem,220.49,205,In Progress,70,No,Not Taken,75,4,6,No,Compensation
+Railway,Andhra Pradesh,Madurai,419.99,853,Paid,361,Yes,Full,68,2,14,Yes,Legal
+Power,Andhra Pradesh,Madurai,82.44,513,In Progress,53,Yes,Not Taken,62,5,25,No,Legal
+Highway,Tamil Nadu,Madurai,14.92,1350,Not Started,244,No,Partial,1,1,10,Yes,Approval
+Irrigation,Karnataka,Salem,225.9,279,Not Started,349,No,Full,53,3,37,No,Approval
+Highway,Karnataka,Tirunelveli,120.65,215,In Progress,75,No,Partial,15,1,26,No,Compensation
+Railway,Andhra Pradesh,Chennai,27.18,508,Not Started,34,Yes,Not Taken,54,4,6,Yes,Legal
+Railway,Kerala,Bengaluru,362.99,1931,Paid,266,No,Not Taken,93,2,0,Yes,Approval
+Railway,Karnataka,Salem,58.02,1146,Paid,316,No,Partial,42,1,73,Yes,Approval
+Power,Karnataka,Madurai,305.14,707,In Progress,299,No,Not Taken,60,3,20,Yes,Approval
+Highway,Tamil Nadu,Trichy,142.32,1582,Not Started,120,Yes,Partial,37,3,78,Yes,Legal
+Power,Tamil Nadu,Coimbatore,88.81,46,Paid,323,Yes,Partial,44,2,29,Yes,Legal
+Power,Kerala,Bengaluru,191.43,319,Paid,24,No,Partial,50,2,93,Yes,Possession
+Railway,Karnataka,Salem,401.22,792,Paid,159,No,Not Taken,41,1,7,Yes,Approval
+Railway,Karnataka,Kochi,197.57,333,In Progress,83,No,Full,23,4,87,No,Compensation
+Power,Tamil Nadu,Salem,376.01,1045,In Progress,113,No,Partial,29,5,82,Yes,Compensation
+Highway,Karnataka,Chennai,64.93,287,Paid,222,Yes,Full,36,3,2,Yes,Legal
+Irrigation,Andhra Pradesh,Chennai,386.95,947,Paid,165,No,Not Taken,52,2,54,No,Approval
+Power,Tamil Nadu,Salem,120.37,262,Not Started,190,No,Not Taken,62,5,14,Yes,Approval
+Highway,Kerala,Madurai,339.5,579,Not Started,174,Yes,Full,10,5,35,No,Legal
+Railway,Tamil Nadu,Coimbatore,283.98,578,Not Started,0,Yes,Partial,77,5,5,Yes,Legal
+Railway,Karnataka,Bengaluru,464.75,616,In Progress,228,No,Not Taken,22,4,41,Yes,Approval
+Highway,Kerala,Chennai,195.19,1047,Paid,85,No,Partial,79,2,49,No,Possession
+Irrigation,Tamil Nadu,Bengaluru,35.42,1557,In Progress,61,No,Partial,49,3,17,No,Compensation
+Railway,Andhra Pradesh,Madurai,12.03,841,Paid,319,Yes,Full,84,2,82,Yes,Legal
+Railway,Andhra Pradesh,Bengaluru,413.86,427,Not Started,205,No,Not Taken,54,1,49,No,Approval
+Railway,Tamil Nadu,Trichy,263.56,1494,Not Started,104,Yes,Full,54,3,29,No,Legal
+Highway,Andhra Pradesh,Chennai,388.18,1401,Not Started,317,No,Not Taken,3,2,76,Yes,Approval
+Power,Andhra Pradesh,Madurai,119.13,762,Not Started,290,No,Full,96,3,38,Yes,Approval
+Railway,Andhra Pradesh,Madurai,174.18,767,Paid,249,Yes,Not Taken,53,1,11,Yes,Legal
+Power,Kerala,Coimbatore,17.48,1995,Not Started,12,Yes,Not Taken,60,3,97,Yes,Legal
+Irrigation,Andhra Pradesh,Coimbatore,480.84,1109,Paid,162,No,Not Taken,77,5,58,Yes,Approval
+Railway,Andhra Pradesh,Trichy,334.76,1579,Paid,42,No,Partial,82,4,75,Yes,Possession
+Railway,Andhra Pradesh,Madurai,466.77,1576,In Progress,110,Yes,Partial,4,1,43,Yes,Legal
+Irrigation,Kerala,Tirunelveli,134.58,428,Not Started,204,No,Full,99,3,87,Yes,Approval
+Railway,Tamil Nadu,Madurai,306.7,433,Not Started,255,No,Full,94,1,3,Yes,Approval
+Power,Karnataka,Coimbatore,340.05,1416,In Progress,306,Yes,Not Taken,17,5,35,Yes,Legal
+Highway,Andhra Pradesh,Tirunelveli,160.48,1949,Paid,143,No,Not Taken,43,4,47,Yes,Approval
+Power,Tamil Nadu,Chennai,424.43,1737,Not Started,145,No,Partial,30,1,13,Yes,Approval
+Highway,Andhra Pradesh,Chennai,473.71,1698,Paid,300,No,Partial,93,5,80,No,Approval
+Highway,Kerala,Bengaluru,442.72,208,In Progress,163,No,Partial,20,5,48,Yes,Approval
+Power,Tamil Nadu,Salem,370.19,200,Paid,168,Yes,Full,46,5,66,Yes,Legal
+Power,Kerala,Coimbatore,140.54,732,Not Started,297,No,Partial,29,3,86,Yes,Approval
+Power,Andhra Pradesh,Salem,142.6,289,Paid,232,No,Full,54,2,76,Yes,Approval
+Power,Andhra Pradesh,Tirunelveli,481.77,1997,Paid,270,No,Partial,67,1,8,No,Approval
+Irrigation,Kerala,Coimbatore,7.62,200,Not Started,59,No,Partial,68,2,20,No,Compensation
+Railway,Karnataka,Trichy,358.73,311,Not Started,295,Yes,Not Taken,40,5,71,Yes,Legal
+Highway,Kerala,Madurai,353.86,1692,Paid,234,No,Full,44,2,80,Yes,Approval
+Power,Andhra Pradesh,Trichy,312.29,18,Paid,164,No,Partial,73,5,15,No,Approval
+Power,Kerala,Tirunelveli,495.08,1865,In Progress,193,Yes,Not Taken,90,5,15,Yes,Legal
+Power,Karnataka,Coimbatore,157.66,1174,Not Started,233,No,Full,79,4,27,Yes,Approval
+Irrigation,Kerala,Kochi,171.64,1966,Paid,182,No,Full,29,4,50,No,Approval
+Power,Karnataka,Tirunelveli,41.77,1085,Not Started,332,No,Partial,76,2,55,Yes,Approval
+Power,Karnataka,Kochi,222.79,727,In Progress,231,Yes,Full,99,1,79,Yes,Legal
+Power,Kerala,Madurai,132.37,784,Paid,360,Yes,Not Taken,84,2,56,Yes,Legal
+Railway,Kerala,Chennai,173.33,1238,Paid,106,No,Not Taken,44,1,51,No,Possession
+Irrigation,Tamil Nadu,Chennai,417.7,533,Paid,222,No,Full,44,2,45,No,Approval
+Power,Andhra Pradesh,Tirunelveli,467.9,802,Not Started,79,No,Not Taken,78,3,77,Yes,Compensation
+Highway,Karnataka,Salem,94.9,348,In Progress,233,No,Full,83,3,37,No,Approval
+Highway,Tamil Nadu,Coimbatore,187.82,1743,Not Started,183,Yes,Not Taken,83,1,83,Yes,Legal
+Highway,Kerala,Coimbatore,464.49,1639,Paid,184,No,Full,44,4,47,No,Approval
+Irrigation,Andhra Pradesh,Chennai,33.25,1307,In Progress,133,No,Full,54,1,40,Yes,Approval
+Irrigation,Tamil Nadu,Bengaluru,48.45,213,Paid,219,No,Full,58,2,97,Yes,Approval
+Highway,Karnataka,Trichy,83.49,645,Paid,287,Yes,Not Taken,4,5,58,Yes,Legal
+Power,Tamil Nadu,Bengaluru,298.62,1363,Not Started,363,Yes,Full,31,3,92,Yes,Legal
+Irrigation,Karnataka,Madurai,77.36,1316,Paid,201,No,Full,5,5,66,Yes,Approval
+Highway,Kerala,Trichy,484.12,256,In Progress,145,Yes,Partial,93,3,73,Yes,Legal
+Highway,Andhra Pradesh,Trichy,224.74,1293,Paid,323,Yes,Partial,25,2,83,Yes,Legal
+Power,Andhra Pradesh,Tirunelveli,252.01,275,Paid,126,Yes,Full,36,3,65,Yes,Legal
+Railway,Andhra Pradesh,Chennai,125.21,1952,Not Started,134,No,Partial,12,1,26,Yes,Approval
+Irrigation,Kerala,Bengaluru,236.8,924,In Progress,113,No,Full,92,5,31,No,Compensation
+Power,Karnataka,Bengaluru,331.8,1728,Not Started,263,No,Partial,68,5,55,No,Approval
+Highway,Kerala,Chennai,376.21,423,Paid,63,Yes,Not Taken,24,2,9,Yes,Legal
+Highway,Andhra Pradesh,Bengaluru,377.55,1754,Not Started,134,No,Not Taken,12,5,39,Yes,Approval
+Power,Kerala,Kochi,290.0,799,Not Started,40,Yes,Full,87,2,16,Yes,Legal
+Irrigation,Kerala,Chennai,452.42,1239,Not Started,295,No,Full,94,4,57,No,Approval
+Railway,Kerala,Tirunelveli,409.16,1393,Not Started,2,No,Not Taken,19,1,96,Yes,Compensation
+Railway,Karnataka,Salem,379.13,1104,Paid,193,No,Not Taken,71,3,5,No,Approval
+Highway,Tamil Nadu,Trichy,30.16,1688,Paid,109,Yes,Partial,59,3,38,Yes,Legal
+Irrigation,Tamil Nadu,Tirunelveli,5.92,1349,In Progress,220,Yes,Full,72,3,17,Yes,Legal
+Railway,Kerala,Coimbatore,108.19,729,Not Started,3,No,Not Taken,20,4,72,Yes,Compensation
+Irrigation,Tamil Nadu,Madurai,332.6,437,Not Started,243,No,Not Taken,60,1,71,Yes,Approval
+Irrigation,Tamil Nadu,Salem,207.07,113,In Progress,165,Yes,Full,83,5,88,No,Legal
+Highway,Kerala,Coimbatore,202.7,645,Not Started,25,No,Partial,78,5,94,No,Compensation
+Railway,Kerala,Trichy,442.58,1550,In Progress,16,No,Partial,25,1,41,Yes,Compensation
+Power,Andhra Pradesh,Bengaluru,448.04,1075,Paid,215,No,Partial,53,1,3,No,Approval
+Highway,Tamil Nadu,Chennai,454.81,383,In Progress,91,No,Partial,41,3,19,No,Compensation
+Railway,Karnataka,Trichy,158.65,1855,Not Started,30,Yes,Not Taken,10,5,27,Yes,Legal
+Railway,Kerala,Tirunelveli,346.3,1124,In Progress,204,Yes,Full,36,1,39,Yes,Legal
+Railway,Andhra Pradesh,Madurai,137.64,962,Paid,206,Yes,Full,10,5,64,Yes,Legal
+Railway,Karnataka,Tirunelveli,97.33,107,Not Started,106,No,Not Taken,26,1,43,Yes,Compensation
+Railway,Tamil Nadu,Salem,94.35,896,Paid,145,Yes,Not Taken,93,2,22,Yes,Legal
+Irrigation,Andhra Pradesh,Salem,172.7,858,Paid,100,No,Not Taken,82,3,56,No,Possession
+Highway,Kerala,Madurai,216.4,1174,In Progress,317,Yes,Full,33,1,46,Yes,Legal
+Irrigation,Karnataka,Kochi,415.9,1908,Paid,240,No,Full,37,4,12,Yes,Approval
+Power,Kerala,Coimbatore,62.15,1970,Not Started,246,No,Full,60,1,15,No,Approval
+Railway,Tamil Nadu,Coimbatore,368.13,1956,Paid,162,Yes,Partial,86,2,89,Yes,Legal
+Highway,Karnataka,Salem,266.9,1055,Paid,172,Yes,Not Taken,52,4,54,Yes,Legal
+Railway,Tamil Nadu,Salem,145.75,1760,In Progress,34,No,Not Taken,64,4,94,Yes,Compensation
+Highway,Tamil Nadu,Bengaluru,247.68,534,Paid,283,Yes,Not Taken,2,1,64,Yes,Legal
+Irrigation,Andhra Pradesh,Chennai,151.72,683,In Progress,358,Yes,Full,66,2,80,Yes,Legal
+Highway,Kerala,Bengaluru,299.05,1973,In Progress,357,Yes,Not Taken,27,4,15,Yes,Legal
+Power,Karnataka,Bengaluru,218.34,993,Not Started,20,No,Not Taken,13,3,36,Yes,Compensation
+Power,Tamil Nadu,Kochi,84.29,1110,Not Started,307,No,Partial,51,3,51,Yes,Approval
+Highway,Tamil Nadu,Coimbatore,60.5,432,Not Started,162,No,Full,29,5,9,No,Approval
+Highway,Karnataka,Kochi,274.48,1612,Not Started,96,Yes,Not Taken,57,5,37,Yes,Legal
+Highway,Tamil Nadu,Kochi,451.45,826,In Progress,306,No,Full,53,2,43,No,Approval
+Highway,Andhra Pradesh,Madurai,173.62,1507,Paid,338,No,Full,68,4,94,Yes,Approval
+Power,Andhra Pradesh,Coimbatore,367.17,1794,Not Started,54,No,Full,14,3,73,Yes,Compensation
+Railway,Andhra Pradesh,Chennai,330.18,1190,Not Started,332,Yes,Partial,37,3,53,Yes,Legal
+Highway,Andhra Pradesh,Tirunelveli,465.95,1867,Not Started,126,No,Full,77,2,97,Yes,Approval
+Highway,Tamil Nadu,Salem,410.94,936,Paid,192,No,Full,13,4,50,No,Approval
+Power,Karnataka,Salem,284.39,1430,Not Started,242,No,Full,56,2,51,Yes,Approval
+Power,Karnataka,Chennai,329.37,1536,Paid,348,Yes,Not Taken,58,1,69,Yes,Legal
+Irrigation,Karnataka,Kochi,449.45,1066,In Progress,87,Yes,Partial,7,3,91,Yes,Legal
+Highway,Karnataka,Bengaluru,201.26,1983,In Progress,335,Yes,Not Taken,71,2,91,Yes,Legal
+Irrigation,Kerala,Madurai,165.08,515,In Progress,214,Yes,Partial,18,2,58,Yes,Legal
+Power,Karnataka,Kochi,7.88,397,Paid,91,No,Partial,31,1,12,No,Rehabilitation
+Power,Kerala,Salem,413.71,717,Not Started,302,No,Full,94,5,40,Yes,Approval
+Railway,Kerala,Trichy,400.99,498,Not Started,234,No,Full,28,3,11,Yes,Approval
+Highway,Andhra Pradesh,Bengaluru,54.47,1228,Not Started,183,Yes,Not Taken,40,2,49,Yes,Legal
+Irrigation,Kerala,Salem,289.49,1283,Not Started,37,Yes,Partial,74,3,56,Yes,Legal
+Power,Tamil Nadu,Trichy,233.33,1207,Not Started,138,Yes,Full,44,5,49,No,Legal
+Power,Kerala,Kochi,61.56,551,Paid,194,Yes,Full,12,2,56,No,Legal
+Irrigation,Andhra Pradesh,Chennai,490.33,598,In Progress,14,No,Full,26,1,53,Yes,Compensation
+Railway,Kerala,Chennai,109.31,393,Not Started,256,Yes,Full,18,3,65,Yes,Legal
+Power,Tamil Nadu,Bengaluru,35.95,1426,In Progress,134,Yes,Not Taken,25,1,7,Yes,Legal
+Highway,Tamil Nadu,Salem,298.44,1760,Paid,0,No,Not Taken,52,5,62,Yes,Possession
+Power,Tamil Nadu,Coimbatore,370.09,162,Paid,48,No,Full,50,5,8,No,Planning
+Highway,Andhra Pradesh,Trichy,18.64,1032,Not Started,95,No,Full,36,3,59,No,Compensation
+Irrigation,Andhra Pradesh,Madurai,330.21,171,Paid,200,No,Full,8,5,62,No,Approval
+Highway,Karnataka,Salem,267.32,1496,In Progress,25,Yes,Full,91,4,71,No,Legal
+Irrigation,Andhra Pradesh,Madurai,53.87,964,Not Started,342,No,Full,95,3,2,No,Approval
+Highway,Tamil Nadu,Salem,88.33,413,Not Started,234,No,Partial,51,4,72,No,Approval
+Irrigation,Tamil Nadu,Coimbatore,285.07,1440,In Progress,348,No,Partial,53,5,12,Yes,Approval
+Highway,Andhra Pradesh,Coimbatore,149.94,1232,Not Started,243,No,Partial,2,3,8,No,Approval
+Railway,Kerala,Bengaluru,469.31,198,Not Started,357,Yes,Partial,95,4,94,Yes,Legal
+Highway,Andhra Pradesh,Bengaluru,409.82,239,In Progress,326,No,Full,68,5,88,Yes,Approval
+Highway,Andhra Pradesh,Coimbatore,491.82,722,Not Started,350,Yes,Partial,7,2,51,Yes,Legal
+Railway,Tamil Nadu,Tirunelveli,131.69,1178,Not Started,50,No,Partial,13,2,61,Yes,Compensation
+Power,Karnataka,Coimbatore,484.94,1187,In Progress,80,No,Not Taken,2,1,7,Yes,Compensation
+Power,Tamil Nadu,Chennai,217.04,1307,Paid,35,No,Partial,23,2,94,Yes,Rehabilitation
+Highway,Karnataka,Chennai,175.39,820,In Progress,66,No,Partial,12,4,44,No,Compensation
+Railway,Tamil Nadu,Tirunelveli,27.55,408,Not Started,128,No,Full,42,2,52,No,Approval
+Highway,Andhra Pradesh,Kochi,28.75,897,In Progress,154,Yes,Partial,28,3,62,Yes,Legal
+Irrigation,Tamil Nadu,Trichy,346.78,682,Not Started,244,No,Partial,71,3,94,Yes,Approval
+Irrigation,Tamil Nadu,Kochi,230.32,1339,Not Started,110,No,Full,50,3,80,No,Compensation
+Highway,Tamil Nadu,Madurai,115.19,72,In Progress,167,Yes,Partial,41,2,56,Yes,Legal
+Power,Andhra Pradesh,Kochi,307.95,1491,Not Started,141,No,Full,30,2,53,Yes,Approval
+Power,Andhra Pradesh,Salem,128.3,92,Paid,355,No,Partial,62,1,18,Yes,Approval
+Highway,Andhra Pradesh,Kochi,289.87,221,Not Started,196,No,Not Taken,25,5,66,No,Approval
+Highway,Andhra Pradesh,Salem,181.21,5,In Progress,108,No,Not Taken,17,1,45,No,Compensation
+Irrigation,Karnataka,Tirunelveli,412.22,1163,Paid,78,No,Partial,81,4,93,Yes,Possession
+Power,Karnataka,Chennai,410.8,1725,Paid,160,Yes,Not Taken,56,3,9,Yes,Legal
+Highway,Kerala,Bengaluru,239.98,1379,Not Started,18,Yes,Full,6,2,92,Yes,Legal
+Irrigation,Andhra Pradesh,Salem,177.03,144,In Progress,126,No,Partial,47,5,17,No,Approval
+Power,Karnataka,Chennai,182.87,622,Not Started,204,No,Full,79,5,11,Yes,Approval
+Railway,Tamil Nadu,Trichy,403.34,137,Not Started,28,No,Not Taken,59,2,48,No,Compensation
+Irrigation,Andhra Pradesh,Madurai,165.77,1648,In Progress,206,Yes,Full,32,1,22,Yes,Legal
+Power,Kerala,Trichy,106.51,182,In Progress,279,Yes,Not Taken,2,5,61,Yes,Legal
+Power,Kerala,Tirunelveli,44.63,814,Not Started,150,Yes,Not Taken,3,1,10,Yes,Legal
+Irrigation,Kerala,Kochi,234.68,1386,Paid,239,No,Not Taken,99,2,72,Yes,Approval
+Railway,Tamil Nadu,Kochi,242.36,384,Not Started,265,No,Full,3,1,55,Yes,Approval
+Irrigation,Karnataka,Coimbatore,420.85,912,Paid,181,No,Not Taken,41,3,87,Yes,Approval
+Power,Tamil Nadu,Coimbatore,112.57,1899,Not Started,104,Yes,Partial,8,2,88,Yes,Legal
+Highway,Andhra Pradesh,Coimbatore,192.04,662,In Progress,235,Yes,Not Taken,50,2,54,Yes,Legal
+Highway,Kerala,Trichy,404.68,454,Paid,172,No,Partial,16,5,24,Yes,Approval
+Irrigation,Tamil Nadu,Salem,412.25,590,In Progress,157,Yes,Partial,16,5,8,Yes,Legal
+Power,Tamil Nadu,Madurai,193.84,467,In Progress,171,No,Partial,96,5,11,No,Approval
+Highway,Karnataka,Coimbatore,230.91,994,In Progress,310,No,Partial,19,3,10,Yes,Approval
+Power,Karnataka,Tirunelveli,153.38,1136,In Progress,156,No,Full,13,3,37,Yes,Approval
+Irrigation,Kerala,Tirunelveli,466.45,126,In Progress,257,No,Partial,21,4,27,Yes,Approval
+Highway,Tamil Nadu,Coimbatore,61.53,21,Not Started,163,No,Not Taken,51,2,7,Yes,Approval
+Power,Tamil Nadu,Kochi,467.04,1224,Paid,146,Yes,Partial,26,5,73,Yes,Legal
+Highway,Karnataka,Coimbatore,342.72,331,Not Started,153,No,Not Taken,42,2,88,Yes,Approval
+Irrigation,Tamil Nadu,Madurai,266.96,322,Not Started,37,No,Full,2,1,46,Yes,Compensation
+Power,Tamil Nadu,Coimbatore,18.75,813,Not Started,130,Yes,Partial,87,3,35,Yes,Legal
+Highway,Tamil Nadu,Madurai,239.11,1507,In Progress,357,No,Not Taken,93,4,49,No,Approval
+Irrigation,Karnataka,Tirunelveli,205.35,1280,Not Started,254,Yes,Full,7,1,8,Yes,Legal
+Highway,Kerala,Coimbatore,82.71,507,Paid,207,Yes,Full,85,2,59,No,Legal
+Highway,Andhra Pradesh,Trichy,329.06,123,Not Started,94,Yes,Not Taken,88,3,71,No,Legal
+Railway,Kerala,Bengaluru,485.65,1702,In Progress,347,No,Partial,9,5,66,No,Approval
+Railway,Andhra Pradesh,Trichy,282.19,714,Paid,326,No,Full,28,1,52,Yes,Approval
+Irrigation,Tamil Nadu,Tirunelveli,358.09,1526,Paid,170,No,Not Taken,39,3,81,Yes,Approval
+Railway,Kerala,Madurai,36.55,1514,Paid,249,Yes,Partial,64,2,98,Yes,Legal
+Irrigation,Andhra Pradesh,Trichy,210.29,49,Paid,189,No,Full,20,2,16,Yes,Approval
+Railway,Karnataka,Madurai,60.39,318,Not Started,198,No,Not Taken,23,1,99,Yes,Approval
+Highway,Karnataka,Trichy,307.37,1207,In Progress,220,No,Full,72,1,52,No,Approval
+Irrigation,Kerala,Trichy,469.39,1922,Paid,23,Yes,Full,59,1,27,No,Legal
+Irrigation,Kerala,Madurai,331.73,422,Paid,243,Yes,Not Taken,25,4,62,Yes,Legal
+Highway,Tamil Nadu,Salem,40.71,560,In Progress,323,Yes,Full,8,5,14,Yes,Legal
+Irrigation,Kerala,Trichy,178.95,1811,Not Started,127,No,Not Taken,19,3,18,Yes,Approval
+Irrigation,Tamil Nadu,Coimbatore,276.46,1106,Paid,92,No,Partial,55,2,85,Yes,Possession
+Railway,Tamil Nadu,Bengaluru,203.1,330,Not Started,299,No,Not Taken,98,2,69,Yes,Approval
+Irrigation,Karnataka,Tirunelveli,417.24,1718,Not Started,132,No,Partial,35,5,46,Yes,Approval
+Power,Karnataka,Salem,407.8,1385,Not Started,54,No,Full,35,1,70,Yes,Compensation
+Highway,Andhra Pradesh,Madurai,306.89,1444,Not Started,157,No,Not Taken,72,1,47,Yes,Approval
+Railway,Karnataka,Salem,188.3,1991,Paid,28,No,Not Taken,21,2,72,Yes,Rehabilitation
+Railway,Karnataka,Chennai,129.53,519,Paid,210,Yes,Not Taken,0,5,19,Yes,Legal
+Power,Kerala,Chennai,55.17,218,Not Started,153,Yes,Not Taken,68,2,36,Yes,Legal
+Highway,Karnataka,Trichy,179.06,1882,Not Started,292,No,Partial,72,1,74,Yes,Approval
+Highway,Andhra Pradesh,Trichy,208.05,78,In Progress,221,No,Partial,36,3,1,Yes,Approval
+Railway,Kerala,Coimbatore,338.72,1591,In Progress,114,Yes,Full,82,1,63,Yes,Legal
+Irrigation,Andhra Pradesh,Bengaluru,329.93,1607,In Progress,157,No,Full,71,3,85,Yes,Approval
+Railway,Karnataka,Tirunelveli,37.38,513,Paid,258,No,Full,95,4,35,Yes,Approval
+Highway,Andhra Pradesh,Salem,199.14,336,In Progress,250,No,Full,12,5,4,No,Approval
+Power,Kerala,Chennai,92.93,1121,Paid,121,No,Not Taken,83,4,63,Yes,Approval
+Railway,Tamil Nadu,Trichy,80.51,692,Paid,298,No,Partial,99,1,6,Yes,Approval
+Highway,Andhra Pradesh,Kochi,414.08,661,Paid,262,No,Partial,42,5,69,Yes,Approval
+Railway,Andhra Pradesh,Kochi,23.35,1547,Paid,48,Yes,Partial,36,1,21,Yes,Legal
+Irrigation,Kerala,Tirunelveli,211.04,1297,In Progress,328,No,Partial,93,5,73,Yes,Approval
+Railway,Kerala,Salem,86.18,1404,Not Started,296,No,Full,73,5,45,No,Approval
+Railway,Andhra Pradesh,Trichy,439.97,1862,Not Started,361,No,Not Taken,94,1,39,Yes,Approval
+Highway,Karnataka,Trichy,279.63,1032,Not Started,76,No,Partial,24,1,60,Yes,Compensation
+Highway,Andhra Pradesh,Chennai,117.61,1166,In Progress,126,Yes,Not Taken,92,5,45,Yes,Legal
+Highway,Kerala,Chennai,252.46,1259,Not Started,196,No,Not Taken,87,5,83,Yes,Approval
+Railway,Tamil Nadu,Trichy,366.41,604,In Progress,220,Yes,Not Taken,20,1,27,Yes,Legal
+Irrigation,Tamil Nadu,Madurai,479.16,1557,In Progress,90,No,Not Taken,40,1,86,Yes,Compensation
+Power,Karnataka,Trichy,112.17,1080,In Progress,7,No,Partial,72,2,34,Yes,Compensation
+Power,Andhra Pradesh,Tirunelveli,443.38,1674,Not Started,31,No,Partial,41,2,0,No,Compensation
+Highway,Tamil Nadu,Trichy,467.32,1751,Not Started,319,No,Partial,41,2,28,Yes,Approval
+Highway,Andhra Pradesh,Coimbatore,458.42,329,Not Started,268,No,Full,1,4,8,Yes,Approval
+Railway,Kerala,Bengaluru,318.62,996,Paid,190,Yes,Partial,67,5,8,No,Legal
+Power,Tamil Nadu,Coimbatore,315.84,1998,In Progress,348,No,Full,7,3,21,Yes,Approval
+Highway,Karnataka,Coimbatore,203.1,1933,Paid,162,Yes,Full,95,4,62,Yes,Legal
+Irrigation,Kerala,Madurai,376.82,1759,In Progress,60,No,Full,60,5,65,Yes,Compensation
+Irrigation,Karnataka,Madurai,266.82,721,Not Started,263,Yes,Partial,13,3,79,Yes,Legal
+Highway,Kerala,Kochi,339.53,727,In Progress,284,No,Partial,76,2,57,Yes,Approval
+Highway,Tamil Nadu,Trichy,215.66,281,In Progress,94,No,Partial,20,3,69,Yes,Compensation
+Power,Karnataka,Coimbatore,366.42,540,Paid,40,No,Full,23,1,54,Yes,Rehabilitation
+Power,Karnataka,Madurai,412.67,1514,In Progress,148,No,Full,49,1,12,No,Approval
+Railway,Kerala,Chennai,75.35,1544,Not Started,203,No,Not Taken,81,5,96,No,Approval
+Power,Karnataka,Trichy,416.88,156,In Progress,266,No,Full,44,4,18,Yes,Approval
+Irrigation,Kerala,Tirunelveli,271.3,959,In Progress,1,No,Full,63,2,78,Yes,Compensation
+Irrigation,Kerala,Bengaluru,422.72,1511,In Progress,177,No,Partial,63,5,32,No,Approval
+Highway,Kerala,Salem,217.07,263,Paid,193,No,Not Taken,25,2,73,No,Approval
+Power,Kerala,Trichy,191.07,328,In Progress,335,No,Not Taken,31,1,64,Yes,Approval
+Railway,Tamil Nadu,Salem,457.74,1021,In Progress,195,No,Not Taken,56,4,59,Yes,Approval
+Irrigation,Kerala,Coimbatore,127.46,873,Paid,342,No,Partial,52,4,11,No,Approval
+Irrigation,Andhra Pradesh,Bengaluru,422.5,1196,Paid,248,No,Not Taken,32,1,42,Yes,Approval
+Railway,Karnataka,Salem,243.3,692,Paid,211,No,Not Taken,51,3,92,No,Approval
+Railway,Andhra Pradesh,Coimbatore,258.26,314,Paid,152,Yes,Partial,94,4,16,Yes,Legal
+Irrigation,Tamil Nadu,Chennai,155.96,807,Not Started,157,No,Not Taken,17,3,67,Yes,Approval
+Irrigation,Andhra Pradesh,Salem,287.59,1507,Not Started,361,No,Full,34,2,28,Yes,Approval
+Railway,Karnataka,Bengaluru,164.29,1084,In Progress,138,No,Full,11,4,54,Yes,Approval
+Irrigation,Andhra Pradesh,Kochi,22.04,624,Not Started,220,No,Full,50,1,6,Yes,Approval
+Highway,Tamil Nadu,Trichy,137.82,477,In Progress,272,Yes,Full,88,3,43,Yes,Legal
+Highway,Kerala,Coimbatore,5.67,1324,Not Started,153,Yes,Full,94,2,76,Yes,Legal
+Railway,Andhra Pradesh,Trichy,489.23,465,Paid,248,No,Full,9,2,4,Yes,Approval
+Power,Tamil Nadu,Bengaluru,482.96,1352,Paid,278,No,Full,51,4,59,No,Approval
+Railway,Tamil Nadu,Madurai,199.09,818,Not Started,303,No,Full,33,4,5,Yes,Approval
+Railway,Karnataka,Coimbatore,364.86,850,Not Started,275,No,Full,66,5,97,Yes,Approval
+Power,Karnataka,Salem,174.54,1169,In Progress,1,No,Partial,38,5,6,Yes,Compensation
+Power,Andhra Pradesh,Coimbatore,336.37,671,In Progress,87,No,Partial,7,4,45,Yes,Compensation
+Power,Kerala,Trichy,403.2,266,In Progress,286,No,Full,95,5,56,No,Approval
+Highway,Tamil Nadu,Chennai,473.51,1813,Paid,129,No,Partial,28,1,53,Yes,Approval
+Irrigation,Andhra Pradesh,Coimbatore,201.61,1448,Paid,77,No,Partial,21,1,91,No,Rehabilitation
+Highway,Tamil Nadu,Salem,392.19,1772,Paid,259,Yes,Full,83,5,45,No,Legal
+Irrigation,Tamil Nadu,Madurai,134.8,1269,Paid,240,No,Full,69,4,9,No,Approval
+Highway,Kerala,Kochi,495.19,359,In Progress,140,No,Partial,60,1,3,Yes,Approval
+Irrigation,Kerala,Tirunelveli,15.32,1877,Paid,227,No,Full,42,2,66,No,Approval
+Highway,Andhra Pradesh,Chennai,302.76,774,Paid,162,No,Full,48,4,24,No,Approval
+Power,Kerala,Kochi,330.6,1789,Paid,235,No,Full,28,3,86,No,Approval
+Railway,Kerala,Madurai,344.8,1617,Paid,127,Yes,Full,80,3,90,Yes,Legal
+Highway,Andhra Pradesh,Coimbatore,62.39,184,Not Started,199,No,Partial,30,4,77,Yes,Approval
+Irrigation,Kerala,Trichy,469.42,70,In Progress,30,Yes,Not Taken,52,5,60,Yes,Legal
+Power,Karnataka,Bengaluru,92.64,824,In Progress,137,No,Partial,33,1,37,Yes,Approval
+Highway,Tamil Nadu,Trichy,312.32,1376,Paid,20,No,Not Taken,37,1,31,Yes,Rehabilitation
+Highway,Tamil Nadu,Kochi,113.28,175,Not Started,233,No,Not Taken,56,4,22,Yes,Approval
+Power,Tamil Nadu,Salem,155.34,478,In Progress,201,Yes,Not Taken,100,2,36,Yes,Legal
+Highway,Tamil Nadu,Trichy,274.36,538,In Progress,278,Yes,Partial,3,5,2,Yes,Legal
+Railway,Andhra Pradesh,Chennai,210.05,1395,Paid,130,Yes,Partial,1,2,98,Yes,Legal
+Highway,Tamil Nadu,Trichy,82.21,1135,Paid,147,Yes,Partial,11,4,12,Yes,Legal
+Railway,Tamil Nadu,Salem,87.54,443,In Progress,28,No,Partial,34,4,33,No,Compensation
+Railway,Tamil Nadu,Tirunelveli,210.53,839,In Progress,360,No,Partial,69,2,87,Yes,Approval
+Power,Tamil Nadu,Coimbatore,379.25,231,Not Started,307,No,Not Taken,71,3,64,Yes,Approval
+Highway,Karnataka,Bengaluru,449.24,1472,In Progress,161,Yes,Partial,20,4,75,Yes,Legal
+Power,Tamil Nadu,Kochi,44.35,446,In Progress,356,No,Not Taken,60,5,7,Yes,Approval
+Highway,Karnataka,Coimbatore,198.07,400,Paid,339,No,Partial,34,2,82,Yes,Approval
+Highway,Andhra Pradesh,Trichy,52.37,732,In Progress,60,Yes,Partial,47,3,8,No,Legal
+Irrigation,Kerala,Madurai,10.75,1609,Paid,124,No,Full,14,2,27,Yes,Approval
+Highway,Tamil Nadu,Coimbatore,331.71,88,In Progress,70,Yes,Not Taken,70,3,77,Yes,Legal
+Power,Kerala,Tirunelveli,302.22,1643,In Progress,325,Yes,Partial,14,3,90,Yes,Legal
+Railway,Kerala,Trichy,83.6,1579,In Progress,363,No,Partial,5,5,17,Yes,Approval
+Highway,Andhra Pradesh,Bengaluru,118.82,1041,Not Started,242,No,Partial,80,4,41,Yes,Approval
+Irrigation,Kerala,Salem,14.29,1837,Paid,248,No,Full,67,3,40,No,Approval
+Power,Karnataka,Tirunelveli,417.89,1853,Not Started,220,No,Not Taken,21,4,69,Yes,Approval
+Highway,Kerala,Trichy,487.41,697,In Progress,20,No,Partial,31,5,32,Yes,Compensation
+Power,Kerala,Tirunelveli,69.89,497,Not Started,81,No,Partial,21,4,100,No,Compensation
+Irrigation,Kerala,Coimbatore,117.66,1296,Paid,343,No,Partial,26,1,88,Yes,Approval
+Irrigation,Tamil Nadu,Bengaluru,434.53,1553,In Progress,9,No,Full,14,3,76,Yes,Compensation
+Power,Tamil Nadu,Salem,463.42,1148,Not Started,11,Yes,Partial,43,5,53,Yes,Legal
+Highway,Karnataka,Trichy,211.26,974,Not Started,262,Yes,Not Taken,85,2,86,Yes,Legal
+Railway,Karnataka,Chennai,27.68,357,Paid,144,No,Not Taken,91,5,35,No,Approval
+Irrigation,Tamil Nadu,Kochi,22.1,1085,Not Started,191,No,Not Taken,8,3,96,Yes,Approval
+Highway,Karnataka,Salem,288.04,44,Paid,249,Yes,Not Taken,33,5,84,Yes,Legal
+Highway,Tamil Nadu,Chennai,197.97,1914,In Progress,113,No,Partial,99,2,97,Yes,Compensation
+Railway,Andhra Pradesh,Tirunelveli,16.75,1364,In Progress,25,Yes,Full,72,1,55,Yes,Legal
+Irrigation,Kerala,Madurai,292.67,644,Not Started,270,No,Full,14,3,99,Yes,Approval
+Irrigation,Kerala,Salem,8.12,177,In Progress,32,Yes,Full,61,3,16,No,Legal
+Highway,Karnataka,Tirunelveli,394.22,1575,In Progress,61,No,Partial,44,5,9,No,Compensation
+Highway,Tamil Nadu,Chennai,154.95,263,Not Started,228,No,Full,83,4,86,Yes,Approval
+Railway,Tamil Nadu,Coimbatore,22.53,1916,In Progress,302,Yes,Not Taken,71,4,43,Yes,Legal
+Railway,Karnataka,Coimbatore,295.21,521,Not Started,94,No,Partial,57,2,1,Yes,Compensation
+Irrigation,Tamil Nadu,Madurai,200.35,734,Paid,34,No,Full,91,1,98,Yes,Planning
+Power,Andhra Pradesh,Kochi,486.97,527,Paid,192,Yes,Not Taken,18,1,13,Yes,Legal
+Irrigation,Kerala,Salem,273.24,1922,Paid,75,Yes,Not Taken,15,5,40,Yes,Legal
+Highway,Karnataka,Salem,139.43,843,Not Started,248,No,Partial,74,5,1,Yes,Approval
+Irrigation,Karnataka,Salem,355.45,121,Not Started,82,No,Partial,7,4,18,Yes,Compensation
+Power,Tamil Nadu,Kochi,137.57,188,In Progress,24,No,Full,32,1,79,Yes,Compensation
+Railway,Karnataka,Tirunelveli,452.36,1934,In Progress,56,Yes,Full,73,1,88,Yes,Legal
+Power,Andhra Pradesh,Bengaluru,188.92,1902,In Progress,31,No,Full,17,1,0,Yes,Compensation
+Power,Tamil Nadu,Bengaluru,276.06,1144,In Progress,318,Yes,Partial,34,2,1,Yes,Legal
+Power,Tamil Nadu,Madurai,27.66,166,In Progress,11,No,Full,42,2,26,No,Compensation
+Railway,Tamil Nadu,Salem,214.5,1607,Not Started,318,No,Full,49,5,1,No,Approval
+Power,Tamil Nadu,Tirunelveli,416.6,1740,Not Started,332,No,Not Taken,2,4,93,Yes,Approval
+Power,Andhra Pradesh,Coimbatore,403.31,547,Paid,91,No,Not Taken,90,3,50,Yes,Possession
+Power,Tamil Nadu,Chennai,114.1,1615,Paid,0,No,Not Taken,58,4,9,No,Possession
+Highway,Karnataka,Tirunelveli,114.97,1265,Paid,325,No,Full,27,2,18,No,Approval
+Power,Andhra Pradesh,Kochi,409.11,843,Paid,135,No,Partial,45,2,79,Yes,Approval
+Railway,Kerala,Bengaluru,465.37,1094,Not Started,195,No,Not Taken,63,5,12,Yes,Approval
+Power,Kerala,Bengaluru,49.94,1098,Not Started,132,No,Partial,69,3,47,Yes,Approval
+Power,Karnataka,Coimbatore,226.4,1837,Not Started,85,No,Full,46,1,55,Yes,Compensation
+Railway,Karnataka,Coimbatore,170.38,451,In Progress,294,No,Full,13,3,71,No,Approval
+Power,Andhra Pradesh,Kochi,435.67,420,In Progress,278,No,Not Taken,6,3,55,Yes,Approval
+Railway,Kerala,Chennai,44.05,536,Paid,323,No,Partial,73,3,49,No,Approval
+Power,Kerala,Coimbatore,107.54,445,In Progress,179,No,Not Taken,78,5,94,Yes,Approval
+Railway,Kerala,Madurai,376.85,742,Not Started,3,No,Full,30,2,44,Yes,Compensation
+Power,Kerala,Chennai,28.02,1974,Paid,125,No,Partial,92,1,88,Yes,Approval
+Power,Kerala,Coimbatore,247.54,468,Paid,174,No,Not Taken,80,3,58,No,Approval
+Highway,Tamil Nadu,Trichy,222.45,1949,In Progress,250,No,Full,50,1,38,Yes,Approval
+Highway,Karnataka,Tirunelveli,168.86,400,Paid,20,No,Not Taken,28,3,20,No,Rehabilitation
+Power,Tamil Nadu,Coimbatore,198.8,715,In Progress,104,No,Partial,14,2,54,No,Compensation
+Power,Kerala,Madurai,266.15,1579,In Progress,65,No,Partial,89,1,56,No,Compensation
+Irrigation,Andhra Pradesh,Salem,82.78,1685,Paid,262,No,Partial,75,4,40,No,Approval
+Railway,Andhra Pradesh,Coimbatore,287.07,1585,In Progress,48,No,Partial,24,2,92,Yes,Compensation
+Irrigation,Kerala,Bengaluru,403.2,399,In Progress,15,No,Partial,60,1,69,Yes,Compensation
+Highway,Kerala,Bengaluru,380.68,330,In Progress,144,Yes,Not Taken,40,3,81,Yes,Legal
+Highway,Andhra Pradesh,Bengaluru,79.07,1921,In Progress,339,Yes,Not Taken,68,3,48,Yes,Legal
+Highway,Tamil Nadu,Salem,76.75,1947,Paid,249,Yes,Not Taken,3,2,43,Yes,Legal
+Highway,Tamil Nadu,Bengaluru,135.92,1119,Not Started,342,No,Not Taken,56,2,34,No,Approval
+Power,Kerala,Trichy,182.13,754,Not Started,353,No,Full,30,3,90,Yes,Approval
+Highway,Tamil Nadu,Coimbatore,205.71,1098,In Progress,74,Yes,Full,2,1,4,Yes,Legal
+Power,Andhra Pradesh,Kochi,340.65,1194,In Progress,289,No,Not Taken,66,4,70,Yes,Approval
+Power,Tamil Nadu,Bengaluru,30.7,646,In Progress,281,No,Full,89,5,73,No,Approval
+Highway,Kerala,Chennai,19.75,218,Not Started,65,No,Full,49,2,73,No,Compensation
+Highway,Andhra Pradesh,Kochi,197.48,1880,In Progress,124,No,Partial,16,3,50,Yes,Approval
+Railway,Tamil Nadu,Salem,349.34,1629,Paid,318,No,Not Taken,59,1,56,No,Approval
+Irrigation,Karnataka,Trichy,98.73,1363,Paid,86,Yes,Full,73,2,57,No,Legal
+Highway,Andhra Pradesh,Chennai,321.65,1792,Paid,40,No,Full,65,1,91,Yes,Planning
+Railway,Andhra Pradesh,Chennai,131.76,373,Not Started,185,Yes,Not Taken,87,2,35,No,Legal
+Railway,Karnataka,Chennai,443.33,1889,In Progress,353,No,Partial,74,3,9,Yes,Approval
+Irrigation,Karnataka,Chennai,448.11,1612,In Progress,334,No,Not Taken,23,1,49,Yes,Approval
+Power,Andhra Pradesh,Kochi,150.4,1705,In Progress,265,Yes,Partial,98,3,98,Yes,Legal
+Highway,Karnataka,Kochi,116.92,53,Not Started,270,Yes,Full,86,1,98,Yes,Legal
+Irrigation,Kerala,Coimbatore,207.12,1080,Not Started,41,No,Partial,31,2,36,Yes,Compensation
+Highway,Kerala,Bengaluru,122.16,1317,Not Started,92,No,Partial,86,5,19,Yes,Compensation
+Railway,Kerala,Tirunelveli,337.01,1818,Not Started,184,No,Not Taken,97,5,12,No,Approval
+Railway,Andhra Pradesh,Coimbatore,413.47,1654,Paid,214,Yes,Full,18,4,74,Yes,Legal
+Power,Karnataka,Coimbatore,337.36,1267,Not Started,16,Yes,Not Taken,65,4,18,Yes,Legal
+Railway,Karnataka,Trichy,412.61,137,Not Started,264,No,Not Taken,59,3,91,Yes,Approval
+Railway,Tamil Nadu,Trichy,200.0,1003,Not Started,113,Yes,Full,65,1,55,Yes,Legal
+Irrigation,Tamil Nadu,Bengaluru,80.27,790,In Progress,291,No,Not Taken,14,4,44,Yes,Approval
+Highway,Karnataka,Tirunelveli,369.63,1194,In Progress,291,Yes,Not Taken,84,2,59,Yes,Legal
+Highway,Karnataka,Trichy,181.84,1402,In Progress,47,No,Partial,34,5,67,Yes,Compensation
+Irrigation,Karnataka,Bengaluru,336.46,377,Paid,306,Yes,Not Taken,68,1,56,Yes,Legal
+Power,Andhra Pradesh,Bengaluru,137.15,1833,Paid,96,Yes,Full,26,5,53,No,Legal
+Highway,Karnataka,Kochi,42.91,1506,Not Started,94,No,Not Taken,87,1,36,No,Compensation
+Railway,Tamil Nadu,Madurai,496.31,1783,In Progress,325,No,Partial,6,4,82,Yes,Approval
+Highway,Andhra Pradesh,Kochi,80.21,483,Paid,73,Yes,Not Taken,5,4,36,Yes,Legal
+Railway,Karnataka,Tirunelveli,494.24,836,In Progress,335,Yes,Not Taken,32,3,13,Yes,Legal
+Power,Tamil Nadu,Trichy,488.7,654,Paid,67,Yes,Not Taken,57,1,94,Yes,Legal
+Irrigation,Andhra Pradesh,Tirunelveli,397.42,1619,Paid,245,No,Partial,48,2,91,Yes,Approval
+Highway,Karnataka,Coimbatore,330.56,686,Not Started,76,No,Full,16,4,99,Yes,Compensation
+Irrigation,Karnataka,Coimbatore,289.96,1663,Not Started,207,Yes,Full,41,3,43,Yes,Legal
+Highway,Karnataka,Tirunelveli,433.39,692,Paid,253,No,Partial,93,4,82,Yes,Approval
+Railway,Andhra Pradesh,Madurai,146.5,1328,Not Started,220,No,Partial,71,5,41,Yes,Approval
+Irrigation,Tamil Nadu,Madurai,235.17,86,Paid,261,No,Not Taken,39,4,0,No,Approval
+Highway,Tamil Nadu,Kochi,310.65,91,Paid,330,No,Full,45,1,22,No,Approval
+Railway,Kerala,Tirunelveli,207.07,229,In Progress,343,No,Partial,70,3,63,Yes,Approval
+Irrigation,Karnataka,Trichy,215.17,20,Not Started,258,Yes,Full,69,1,27,Yes,Legal
+Irrigation,Kerala,Kochi,166.82,826,Not Started,307,Yes,Not Taken,67,2,3,Yes,Legal
+Highway,Kerala,Salem,283.21,1386,Not Started,73,No,Partial,0,2,40,Yes,Compensation
+Highway,Tamil Nadu,Madurai,425.66,167,In Progress,124,No,Full,78,4,59,No,Approval
+Highway,Andhra Pradesh,Chennai,102.76,1638,In Progress,187,No,Full,94,3,17,Yes,Approval
+Railway,Andhra Pradesh,Kochi,467.38,1696,In Progress,253,No,Not Taken,88,3,62,Yes,Approval
+Highway,Tamil Nadu,Coimbatore,345.32,518,Not Started,320,No,Partial,96,3,60,Yes,Approval
+Irrigation,Andhra Pradesh,Kochi,412.08,354,Not Started,307,No,Full,51,3,48,Yes,Approval
+Irrigation,Kerala,Tirunelveli,279.2,1937,Not Started,234,Yes,Not Taken,34,4,46,Yes,Legal
+Highway,Karnataka,Chennai,390.31,685,In Progress,249,No,Full,68,1,38,Yes,Approval
+Highway,Tamil Nadu,Tirunelveli,10.56,1492,In Progress,331,Yes,Not Taken,4,4,88,Yes,Legal
+Power,Karnataka,Bengaluru,409.64,1855,Paid,344,Yes,Full,99,1,81,Yes,Legal
+Irrigation,Andhra Pradesh,Coimbatore,22.47,1865,In Progress,71,No,Full,16,5,5,No,Compensation
+Railway,Karnataka,Coimbatore,445.23,1403,Paid,234,Yes,Not Taken,52,5,82,Yes,Legal
+Power,Andhra Pradesh,Madurai,496.0,1120,Not Started,323,Yes,Partial,51,1,52,Yes,Legal
+Highway,Andhra Pradesh,Kochi,148.8,185,In Progress,155,Yes,Not Taken,13,4,75,Yes,Legal
+Highway,Kerala,Madurai,107.13,747,Not Started,114,No,Partial,28,2,24,No,Compensation
+Irrigation,Andhra Pradesh,Chennai,383.27,1329,Not Started,312,No,Full,7,4,98,Yes,Approval
+Highway,Kerala,Kochi,128.38,664,Not Started,227,Yes,Full,97,2,64,Yes,Legal
+Railway,Kerala,Bengaluru,433.12,1820,Not Started,321,No,Not Taken,0,4,4,Yes,Approval
+Irrigation,Kerala,Tirunelveli,53.66,1217,In Progress,345,Yes,Not Taken,28,3,64,Yes,Legal
+Highway,Tamil Nadu,Bengaluru,65.16,1887,Not Started,244,No,Partial,35,3,7,Yes,Approval
+Irrigation,Tamil Nadu,Coimbatore,489.63,1890,Paid,305,No,Partial,50,5,38,No,Approval
+Highway,Andhra Pradesh,Chennai,337.73,1342,In Progress,13,No,Partial,36,5,42,No,Compensation
+Highway,Kerala,Salem,423.83,497,Not Started,15,No,Not Taken,92,1,81,Yes,Compensation
+Highway,Tamil Nadu,Chennai,163.85,927,In Progress,41,No,Full,68,2,72,No,Compensation
+Railway,Kerala,Trichy,339.05,1950,Paid,109,No,Not Taken,52,3,4,No,Possession
+Railway,Karnataka,Chennai,298.14,132,Not Started,277,No,Full,95,4,3,No,Approval
+Irrigation,Karnataka,Bengaluru,302.57,1547,Paid,323,No,Not Taken,51,1,92,No,Approval
+Highway,Karnataka,Trichy,342.06,1454,Not Started,18,No,Not Taken,87,4,0,Yes,Compensation
+Highway,Andhra Pradesh,Trichy,288.74,1587,Paid,65,No,Partial,82,3,93,Yes,Possession
+Railway,Kerala,Kochi,215.96,569,Not Started,166,Yes,Full,11,3,55,Yes,Legal
+Highway,Karnataka,Kochi,139.77,1215,In Progress,72,Yes,Not Taken,51,3,44,No,Legal
+Railway,Tamil Nadu,Trichy,384.87,554,Not Started,309,No,Not Taken,0,3,64,Yes,Approval
+Highway,Karnataka,Salem,115.07,457,In Progress,111,No,Full,6,4,2,Yes,Compensation
+Irrigation,Karnataka,Kochi,346.95,475,Not Started,273,No,Not Taken,16,1,21,Yes,Approval
+Highway,Karnataka,Chennai,118.58,992,Not Started,84,Yes,Full,97,3,71,Yes,Legal
+Highway,Andhra Pradesh,Bengaluru,313.6,742,Paid,138,Yes,Partial,42,5,55,Yes,Legal
+Power,Tamil Nadu,Chennai,374.17,1593,Paid,38,No,Partial,70,1,17,Yes,Possession
+Railway,Kerala,Salem,111.31,1939,Paid,104,No,Full,16,5,24,Yes,Rehabilitation
+Highway,Tamil Nadu,Coimbatore,32.32,228,Not Started,323,Yes,Partial,58,4,47,Yes,Legal
+Highway,Kerala,Madurai,67.66,158,Not Started,280,No,Full,2,3,83,Yes,Approval
+Power,Andhra Pradesh,Bengaluru,303.98,564,Not Started,122,No,Not Taken,28,1,30,Yes,Approval
+Power,Andhra Pradesh,Kochi,425.1,355,In Progress,217,No,Not Taken,21,3,29,Yes,Approval
+Railway,Andhra Pradesh,Bengaluru,24.89,1175,In Progress,60,No,Full,37,3,79,Yes,Compensation
+Power,Andhra Pradesh,Chennai,367.74,1933,Not Started,99,No,Not Taken,53,1,65,Yes,Compensation
+Irrigation,Kerala,Madurai,172.31,1604,Paid,306,No,Partial,92,3,80,No,Approval
+Power,Karnataka,Tirunelveli,240.57,353,Paid,353,No,Not Taken,49,3,9,No,Approval
+Irrigation,Kerala,Tirunelveli,464.61,186,Paid,203,Yes,Not Taken,68,2,70,Yes,Legal
+Railway,Tamil Nadu,Kochi,167.66,641,Not Started,257,No,Full,29,2,58,No,Approval
+Railway,Andhra Pradesh,Salem,234.01,1022,Paid,4,Yes,Partial,22,1,50,Yes,Legal
+Railway,Andhra Pradesh,Tirunelveli,9.31,183,Not Started,196,Yes,Not Taken,84,1,8,Yes,Legal
+Railway,Tamil Nadu,Bengaluru,43.1,1067,In Progress,179,No,Not Taken,89,3,53,Yes,Approval
+Railway,Kerala,Tirunelveli,131.15,776,Paid,341,No,Full,46,5,61,No,Approval
+Irrigation,Karnataka,Coimbatore,16.36,898,In Progress,132,No,Full,20,1,80,Yes,Approval
+Irrigation,Karnataka,Coimbatore,316.61,1031,Paid,323,No,Partial,19,3,8,No,Approval
+Railway,Tamil Nadu,Kochi,214.63,1020,Not Started,252,No,Not Taken,22,5,8,Yes,Approval
+Power,Karnataka,Coimbatore,275.2,68,Not Started,264,No,Full,67,2,100,Yes,Approval
+Highway,Kerala,Tirunelveli,89.39,33,Not Started,92,No,Full,20,1,23,No,Compensation
+Railway,Kerala,Salem,149.73,376,Not Started,149,No,Full,20,3,38,No,Approval
+Power,Tamil Nadu,Trichy,332.75,1551,Paid,137,Yes,Partial,0,2,74,Yes,Legal
+Highway,Kerala,Trichy,482.74,101,In Progress,207,No,Full,14,4,7,Yes,Approval
+Railway,Andhra Pradesh,Kochi,27.58,1898,Not Started,124,No,Partial,16,2,24,Yes,Approval
+Railway,Tamil Nadu,Madurai,445.47,1470,Paid,233,No,Partial,50,3,65,Yes,Approval
+Irrigation,Kerala,Trichy,289.5,1231,In Progress,60,No,Not Taken,62,5,9,No,Compensation
+Highway,Tamil Nadu,Trichy,283.05,1439,Not Started,306,No,Not Taken,13,4,23,Yes,Approval
+Highway,Karnataka,Coimbatore,251.39,997,In Progress,265,No,Partial,58,4,79,Yes,Approval
+Power,Kerala,Coimbatore,37.02,25,Not Started,133,No,Not Taken,82,4,82,Yes,Approval
+Irrigation,Andhra Pradesh,Tirunelveli,47.21,1579,In Progress,317,No,Not Taken,49,1,58,No,Approval
+Irrigation,Kerala,Kochi,301.45,739,In Progress,112,Yes,Full,33,3,30,Yes,Legal
+Irrigation,Tamil Nadu,Madurai,172.13,1130,Not Started,190,Yes,Not Taken,5,4,10,Yes,Legal
+Irrigation,Tamil Nadu,Kochi,458.84,1074,Paid,186,No,Partial,48,2,5,No,Approval
+Highway,Kerala,Chennai,204.78,70,In Progress,318,Yes,Not Taken,5,5,69,Yes,Legal
+Highway,Andhra Pradesh,Bengaluru,73.78,607,Not Started,88,No,Full,68,3,31,No,Compensation
+Railway,Andhra Pradesh,Madurai,358.07,1192,In Progress,186,No,Partial,6,2,38,Yes,Approval
+Railway,Andhra Pradesh,Madurai,148.44,1999,In Progress,306,Yes,Not Taken,96,1,47,Yes,Legal
+Irrigation,Tamil Nadu,Salem,263.92,1139,Paid,131,Yes,Partial,76,4,12,Yes,Legal
+Irrigation,Kerala,Kochi,349.67,342,In Progress,359,No,Not Taken,50,2,58,Yes,Approval
+Irrigation,Karnataka,Tirunelveli,450.38,127,In Progress,122,No,Full,0,3,66,No,Approval
+Railway,Tamil Nadu,Salem,396.62,1733,Not Started,47,No,Not Taken,12,2,55,Yes,Compensation
+Power,Andhra Pradesh,Madurai,338.99,451,Not Started,287,No,Partial,42,1,40,No,Approval
+Power,Kerala,Madurai,340.62,615,Paid,178,No,Partial,26,5,55,Yes,Approval
+Railway,Andhra Pradesh,Madurai,473.1,1319,In Progress,179,No,Partial,70,4,34,No,Approval
+Railway,Karnataka,Trichy,149.67,675,In Progress,98,No,Not Taken,2,3,37,Yes,Compensation
+Railway,Andhra Pradesh,Kochi,3.05,1440,In Progress,329,No,Not Taken,57,4,80,Yes,Approval
+Railway,Andhra Pradesh,Bengaluru,137.8,619,Paid,33,Yes,Not Taken,88,4,66,Yes,Legal
+Railway,Karnataka,Bengaluru,110.9,901,In Progress,69,No,Full,96,4,33,No,Compensation
+Railway,Kerala,Salem,331.76,285,Not Started,170,No,Full,16,2,75,Yes,Approval
+Irrigation,Tamil Nadu,Madurai,317.77,1071,Paid,365,Yes,Full,44,2,87,Yes,Legal
+Irrigation,Kerala,Bengaluru,297.75,1514,Not Started,271,Yes,Partial,77,5,69,Yes,Legal
+Irrigation,Karnataka,Coimbatore,10.58,600,Not Started,58,No,Partial,100,1,10,Yes,Compensation
+Irrigation,Andhra Pradesh,Kochi,365.07,1991,Paid,180,Yes,Partial,57,3,26,No,Legal
+Railway,Kerala,Bengaluru,163.46,707,Not Started,18,Yes,Partial,55,2,47,No,Legal
+Power,Tamil Nadu,Tirunelveli,333.37,1079,In Progress,225,No,Partial,53,4,23,No,Approval
+Highway,Karnataka,Kochi,279.4,1926,Paid,94,No,Not Taken,86,1,17,No,Possession
+Railway,Kerala,Tirunelveli,173.01,214,Not Started,296,No,Partial,87,3,26,No,Approval
+Highway,Tamil Nadu,Bengaluru,69.45,130,In Progress,80,No,Not Taken,28,3,53,Yes,Compensation
+Power,Karnataka,Coimbatore,49.47,496,In Progress,174,No,Full,53,3,54,No,Approval
+Irrigation,Tamil Nadu,Tirunelveli,416.18,1537,Not Started,221,No,Full,26,3,20,Yes,Approval
+Power,Karnataka,Trichy,459.4,964,In Progress,102,Yes,Full,44,5,58,No,Legal
+Railway,Andhra Pradesh,Bengaluru,325.77,974,Paid,53,No,Full,86,3,33,No,Planning
+Irrigation,Kerala,Trichy,53.96,585,Not Started,182,No,Full,30,1,96,Yes,Approval
+Railway,Tamil Nadu,Bengaluru,202.51,781,In Progress,350,No,Partial,35,2,57,Yes,Approval
+Irrigation,Karnataka,Chennai,365.15,262,In Progress,317,No,Partial,80,1,47,No,Approval
+Highway,Tamil Nadu,Chennai,390.46,1958,Not Started,354,No,Partial,60,4,53,Yes,Approval
+Highway,Tamil Nadu,Chennai,61.31,1216,Not Started,348,No,Full,36,5,17,Yes,Approval
+Highway,Kerala,Tirunelveli,2.52,234,Not Started,320,No,Full,66,5,2,No,Approval
+Power,Andhra Pradesh,Trichy,356.79,193,Not Started,67,No,Not Taken,35,4,23,Yes,Compensation
+Railway,Tamil Nadu,Trichy,179.91,1443,Paid,27,No,Partial,4,1,0,No,Rehabilitation
+Power,Karnataka,Trichy,129.1,14,Not Started,273,No,Full,45,1,5,Yes,Approval
+Highway,Karnataka,Coimbatore,8.92,1142,Paid,281,No,Full,78,4,18,No,Approval
+Railway,Andhra Pradesh,Trichy,271.3,1104,Paid,359,No,Full,51,3,85,Yes,Approval
+Highway,Karnataka,Coimbatore,425.95,680,Not Started,310,Yes,Not Taken,48,3,42,Yes,Legal
+Power,Andhra Pradesh,Chennai,478.92,506,Paid,118,Yes,Full,5,2,7,Yes,Legal
+Power,Karnataka,Chennai,283.96,89,Not Started,133,No,Not Taken,9,1,68,Yes,Approval
+Power,Kerala,Tirunelveli,258.44,53,Not Started,128,No,Not Taken,95,1,51,Yes,Approval
+Highway,Tamil Nadu,Bengaluru,44.82,1523,In Progress,7,Yes,Partial,22,4,72,Yes,Legal
+Railway,Kerala,Chennai,275.56,842,Not Started,50,Yes,Full,16,4,46,Yes,Legal
+Railway,Tamil Nadu,Bengaluru,191.54,1012,In Progress,340,No,Not Taken,83,3,84,Yes,Approval
+Highway,Tamil Nadu,Bengaluru,304.55,693,Paid,280,No,Full,43,1,27,No,Approval
+Railway,Tamil Nadu,Kochi,195.89,391,In Progress,174,No,Partial,40,1,45,No,Approval
+Highway,Kerala,Tirunelveli,122.05,974,Paid,182,No,Partial,14,5,3,Yes,Approval
+Railway,Tamil Nadu,Madurai,49.75,1417,Not Started,191,No,Not Taken,43,2,87,No,Approval
+Irrigation,Kerala,Madurai,159.17,1010,Paid,248,Yes,Partial,57,2,7,Yes,Legal
+Irrigation,Andhra Pradesh,Salem,50.58,222,Paid,234,No,Partial,85,3,60,No,Approval
+Power,Karnataka,Kochi,90.51,1729,Not Started,82,No,Partial,49,1,16,Yes,Compensation
+Irrigation,Karnataka,Tirunelveli,493.7,1009,Paid,92,Yes,Full,51,5,33,Yes,Legal
+Irrigation,Tamil Nadu,Salem,223.44,1374,Not Started,311,No,Full,69,1,19,Yes,Approval
+Irrigation,Kerala,Salem,267.11,1258,In Progress,267,No,Not Taken,67,4,79,Yes,Approval
+Highway,Karnataka,Kochi,437.13,259,Not Started,119,No,Not Taken,62,3,73,Yes,Compensation
+Irrigation,Kerala,Madurai,497.8,240,Not Started,70,No,Partial,57,2,33,Yes,Compensation
+Irrigation,Kerala,Tirunelveli,292.4,1054,Paid,16,No,Partial,22,1,42,Yes,Rehabilitation
+Power,Tamil Nadu,Madurai,406.71,1612,In Progress,252,No,Not Taken,43,3,9,Yes,Approval
+Irrigation,Karnataka,Salem,165.15,1289,Not Started,121,No,Partial,82,2,93,Yes,Approval
+Irrigation,Tamil Nadu,Tirunelveli,154.61,1794,In Progress,9,No,Not Taken,94,1,29,No,Compensation
+Railway,Tamil Nadu,Salem,202.85,275,In Progress,286,No,Full,43,5,24,Yes,Approval
+Power,Karnataka,Trichy,337.07,127,Paid,315,No,Partial,51,3,56,Yes,Approval
+Power,Karnataka,Kochi,341.89,660,Not Started,325,No,Partial,66,1,62,Yes,Approval
+Power,Andhra Pradesh,Bengaluru,159.33,1285,Paid,272,No,Partial,27,2,70,Yes,Approval
+Power,Andhra Pradesh,Tirunelveli,68.77,1684,Not Started,305,Yes,Full,66,2,46,Yes,Legal
+Power,Kerala,Tirunelveli,317.12,1449,In Progress,292,No,Full,77,5,83,Yes,Approval
+Power,Karnataka,Bengaluru,66.34,263,Not Started,209,No,Partial,17,3,80,Yes,Approval
+Highway,Andhra Pradesh,Salem,290.3,952,Not Started,217,Yes,Not Taken,26,3,2,Yes,Legal
+Irrigation,Kerala,Trichy,347.48,51,In Progress,240,Yes,Full,50,1,45,Yes,Legal
+Power,Kerala,Coimbatore,351.05,867,In Progress,199,No,Partial,59,2,35,Yes,Approval
+Irrigation,Kerala,Bengaluru,377.35,529,Not Started,215,Yes,Partial,73,2,25,Yes,Legal
+Irrigation,Andhra Pradesh,Kochi,436.75,892,Paid,204,Yes,Full,48,5,9,Yes,Legal
+Highway,Karnataka,Madurai,251.23,212,Not Started,215,No,Not Taken,14,5,33,Yes,Approval
+Power,Tamil Nadu,Salem,365.8,1339,In Progress,79,Yes,Partial,82,3,77,Yes,Legal
+Railway,Kerala,Bengaluru,310.54,751,Paid,266,No,Not Taken,72,2,7,Yes,Approval
+Highway,Andhra Pradesh,Bengaluru,95.35,153,In Progress,34,No,Not Taken,67,1,54,No,Compensation
+Railway,Andhra Pradesh,Tirunelveli,15.28,1862,In Progress,288,No,Full,14,4,90,Yes,Approval
+Irrigation,Tamil Nadu,Madurai,144.06,442,Paid,17,No,Partial,50,1,9,No,Possession
+Irrigation,Tamil Nadu,Madurai,222.91,159,In Progress,164,No,Partial,47,5,56,No,Approval
+Highway,Andhra Pradesh,Kochi,309.51,1706,In Progress,12,No,Not Taken,71,1,78,Yes,Compensation
+Highway,Karnataka,Madurai,425.35,1118,In Progress,201,No,Full,0,2,100,Yes,Approval
+Railway,Tamil Nadu,Bengaluru,100.13,1726,In Progress,228,No,Full,6,3,85,Yes,Approval
+Power,Andhra Pradesh,Coimbatore,64.96,1858,In Progress,345,No,Full,52,4,44,Yes,Approval
+Railway,Tamil Nadu,Chennai,481.83,362,In Progress,365,No,Not Taken,30,3,49,Yes,Approval
+Highway,Karnataka,Salem,56.25,1202,In Progress,0,No,Not Taken,17,4,63,Yes,Compensation
+Railway,Kerala,Chennai,240.55,1245,In Progress,318,No,Partial,11,4,94,Yes,Approval
+Highway,Tamil Nadu,Bengaluru,293.82,1935,In Progress,216,No,Full,47,2,1,No,Approval
+Railway,Karnataka,Chennai,271.83,460,Not Started,33,No,Not Taken,29,2,44,Yes,Compensation
+Highway,Andhra Pradesh,Bengaluru,45.3,780,Not Started,358,No,Full,96,5,94,No,Approval
+Highway,Tamil Nadu,Chennai,30.87,1637,In Progress,265,No,Not Taken,6,5,61,Yes,Approval
+Highway,Tamil Nadu,Madurai,54.98,633,Not Started,127,Yes,Partial,91,4,13,Yes,Legal
+Power,Andhra Pradesh,Trichy,293.83,1227,Paid,211,No,Full,2,5,73,Yes,Approval
+Railway,Kerala,Madurai,273.31,836,Not Started,262,No,Not Taken,62,2,93,Yes,Approval
+Railway,Andhra Pradesh,Madurai,118.79,490,In Progress,311,No,Full,5,5,99,No,Approval
+Railway,Tamil Nadu,Kochi,319.79,537,In Progress,79,Yes,Not Taken,94,4,14,Yes,Legal
+Highway,Andhra Pradesh,Tirunelveli,410.48,204,Not Started,164,No,Not Taken,14,3,13,Yes,Approval
+Railway,Karnataka,Tirunelveli,23.19,375,In Progress,251,No,Not Taken,70,1,30,Yes,Approval
+Railway,Andhra Pradesh,Chennai,250.32,1018,Paid,11,No,Full,42,5,28,No,Planning
+Highway,Tamil Nadu,Bengaluru,345.43,1987,Paid,303,No,Not Taken,93,2,26,Yes,Approval
+Irrigation,Andhra Pradesh,Kochi,128.03,857,In Progress,211,No,Partial,90,3,84,Yes,Approval
+Highway,Kerala,Madurai,155.62,1476,Paid,281,No,Full,80,2,8,No,Approval
+Railway,Andhra Pradesh,Kochi,307.78,252,Paid,111,No,Partial,17,5,19,No,Rehabilitation
+Highway,Kerala,Chennai,449.22,792,Not Started,210,No,Partial,21,4,98,Yes,Approval
+Irrigation,Karnataka,Tirunelveli,405.44,268,Paid,238,No,Full,60,1,57,Yes,Approval
+Highway,Kerala,Trichy,292.61,1086,Not Started,267,No,Not Taken,60,1,78,Yes,Approval
+Railway,Andhra Pradesh,Salem,365.79,1330,In Progress,297,No,Partial,52,3,87,Yes,Approval
+Irrigation,Tamil Nadu,Chennai,184.0,35,Not Started,316,Yes,Full,25,1,48,Yes,Legal
+Power,Kerala,Kochi,321.38,1526,In Progress,57,No,Not Taken,90,4,56,No,Compensation
+Railway,Karnataka,Trichy,234.43,1277,In Progress,33,No,Full,39,2,15,Yes,Compensation
+Irrigation,Kerala,Salem,96.99,609,In Progress,262,No,Full,87,4,99,No,Approval
+Irrigation,Kerala,Coimbatore,351.61,1805,In Progress,364,No,Full,7,3,74,Yes,Approval
+Power,Kerala,Chennai,279.34,1299,In Progress,34,No,Not Taken,20,3,7,Yes,Compensation
+Highway,Karnataka,Chennai,180.91,1634,Not Started,270,Yes,Partial,92,1,66,Yes,Legal
+Highway,Andhra Pradesh,Coimbatore,455.89,1694,In Progress,226,No,Partial,42,4,18,Yes,Approval
+Railway,Kerala,Coimbatore,12.91,1422,Paid,24,No,Full,20,2,66,Yes,Rehabilitation
+Power,Kerala,Chennai,159.6,1825,Paid,233,No,Full,2,4,35,Yes,Approval
+Highway,Tamil Nadu,Coimbatore,30.8,506,In Progress,58,Yes,Not Taken,30,2,88,Yes,Legal
+Power,Karnataka,Madurai,383.85,1620,Paid,250,No,Full,26,2,59,No,Approval
+Highway,Kerala,Salem,351.8,1832,Not Started,334,No,Full,26,4,35,No,Approval
+Irrigation,Karnataka,Salem,167.35,1112,Not Started,85,No,Full,72,5,10,No,Compensation
+Highway,Kerala,Salem,338.64,1393,In Progress,250,No,Partial,56,4,50,Yes,Approval
+Power,Andhra Pradesh,Madurai,199.48,890,In Progress,179,No,Full,96,2,79,Yes,Approval
+Irrigation,Andhra Pradesh,Bengaluru,378.74,553,In Progress,206,Yes,Partial,32,3,54,Yes,Legal
+Irrigation,Kerala,Coimbatore,228.46,1370,Paid,343,No,Not Taken,89,3,53,Yes,Approval
+Irrigation,Andhra Pradesh,Trichy,207.61,843,Paid,148,No,Not Taken,91,1,16,Yes,Approval
+Power,Kerala,Coimbatore,467.53,1435,Not Started,70,Yes,Partial,43,3,61,Yes,Legal
+Railway,Andhra Pradesh,Chennai,127.31,1453,Paid,120,No,Partial,42,5,41,No,Possession
+Railway,Tamil Nadu,Tirunelveli,62.42,1772,Not Started,252,No,Partial,30,2,23,Yes,Approval
+Railway,Tamil Nadu,Kochi,293.31,1121,Paid,92,Yes,Partial,64,4,16,No,Legal
+Power,Tamil Nadu,Kochi,484.74,852,Not Started,255,No,Full,83,4,47,Yes,Approval
+Irrigation,Karnataka,Salem,190.48,618,In Progress,253,No,Partial,75,5,83,No,Approval
+Railway,Karnataka,Coimbatore,33.36,416,Paid,351,No,Partial,16,3,85,Yes,Approval
+Power,Tamil Nadu,Trichy,171.3,436,Not Started,287,No,Partial,14,2,69,Yes,Approval
+Railway,Karnataka,Chennai,254.2,682,Paid,308,No,Full,33,3,6,No,Approval
+Highway,Andhra Pradesh,Madurai,83.06,163,In Progress,58,No,Full,79,1,13,No,Compensation
+Railway,Kerala,Bengaluru,329.91,18,Not Started,68,Yes,Full,3,3,10,Yes,Legal
+Railway,Kerala,Madurai,498.88,377,Paid,85,No,Not Taken,71,1,11,Yes,Possession
+Irrigation,Kerala,Trichy,227.24,229,Paid,273,No,Full,97,4,4,No,Approval
+Power,Tamil Nadu,Chennai,178.98,1533,In Progress,226,No,Partial,88,2,4,Yes,Approval
+Irrigation,Karnataka,Salem,201.85,1101,In Progress,80,No,Full,78,1,19,No,Compensation
+Irrigation,Andhra Pradesh,Coimbatore,59.79,1277,Not Started,113,Yes,Full,27,3,53,Yes,Legal
+Irrigation,Andhra Pradesh,Chennai,441.93,515,Paid,183,No,Partial,72,3,54,Yes,Approval
+Irrigation,Tamil Nadu,Kochi,208.88,607,Paid,279,No,Full,1,4,57,No,Approval
+Irrigation,Andhra Pradesh,Bengaluru,195.17,220,In Progress,321,No,Not Taken,16,5,78,Yes,Approval
+Railway,Andhra Pradesh,Madurai,330.7,1630,In Progress,317,No,Full,57,5,89,No,Approval
+Irrigation,Andhra Pradesh,Bengaluru,222.41,1569,Not Started,53,No,Not Taken,73,3,96,Yes,Compensation
+Irrigation,Andhra Pradesh,Bengaluru,325.0,1975,Paid,196,No,Not Taken,8,5,29,No,Approval
+Power,Karnataka,Trichy,33.07,1845,Paid,292,No,Not Taken,30,2,23,Yes,Approval
+Highway,Andhra Pradesh,Trichy,407.33,1967,Not Started,292,No,Partial,65,5,86,Yes,Approval
+Railway,Kerala,Coimbatore,470.4,992,Not Started,290,No,Full,87,2,72,Yes,Approval
+Railway,Tamil Nadu,Trichy,325.26,1248,In Progress,179,Yes,Not Taken,61,3,2,Yes,Legal
+Railway,Karnataka,Trichy,477.4,844,In Progress,221,Yes,Not Taken,18,3,99,Yes,Legal
+Irrigation,Andhra Pradesh,Chennai,77.84,731,Not Started,273,No,Full,80,3,47,Yes,Approval
+Irrigation,Karnataka,Kochi,240.01,1249,Not Started,243,Yes,Partial,73,4,70,Yes,Legal
+Irrigation,Andhra Pradesh,Salem,301.9,1417,Paid,153,No,Partial,54,5,21,Yes,Approval
+Power,Kerala,Coimbatore,291.91,558,Not Started,303,Yes,Not Taken,27,1,13,Yes,Legal
+Highway,Tamil Nadu,Chennai,202.23,1675,Not Started,272,Yes,Partial,91,1,47,Yes,Legal
+Irrigation,Andhra Pradesh,Salem,170.7,1070,Paid,134,No,Full,49,3,28,No,Approval
+Highway,Andhra Pradesh,Bengaluru,65.59,680,Not Started,312,No,Partial,64,5,49,Yes,Approval
+Power,Andhra Pradesh,Chennai,197.39,877,In Progress,7,No,Full,2,2,79,Yes,Compensation
+Railway,Andhra Pradesh,Tirunelveli,83.42,287,In Progress,127,No,Not Taken,78,1,97,No,Approval
+Irrigation,Tamil Nadu,Chennai,367.85,1086,Paid,55,No,Full,51,3,9,Yes,Planning
+Highway,Tamil Nadu,Trichy,106.39,1842,Not Started,125,Yes,Not Taken,9,1,70,Yes,Legal
+Highway,Kerala,Salem,31.64,838,In Progress,158,No,Full,20,1,88,Yes,Approval
+Irrigation,Tamil Nadu,Coimbatore,277.3,541,In Progress,58,No,Full,36,1,26,No,Compensation
+Railway,Andhra Pradesh,Coimbatore,298.63,1101,In Progress,57,No,Partial,14,3,78,Yes,Compensation
+Railway,Kerala,Salem,436.28,1913,In Progress,139,No,Full,86,3,95,Yes,Approval
+Railway,Kerala,Trichy,289.55,927,Not Started,175,No,Not Taken,77,4,27,Yes,Approval
+Power,Kerala,Madurai,174.38,1157,Not Started,107,Yes,Full,78,4,8,Yes,Legal
+Highway,Andhra Pradesh,Chennai,402.0,1627,Not Started,210,Yes,Not Taken,73,4,70,Yes,Legal
+Highway,Karnataka,Trichy,271.29,846,Not Started,73,No,Not Taken,8,1,79,Yes,Compensation
+Highway,Andhra Pradesh,Tirunelveli,41.94,1454,In Progress,166,No,Full,43,5,25,No,Approval
+Power,Tamil Nadu,Kochi,284.01,952,Paid,356,Yes,Partial,38,3,98,Yes,Legal
+Highway,Tamil Nadu,Bengaluru,454.24,669,Paid,303,No,Full,4,4,80,Yes,Approval
+Power,Andhra Pradesh,Salem,199.67,1722,In Progress,232,Yes,Full,24,5,86,Yes,Legal
+Railway,Andhra Pradesh,Kochi,149.92,1153,In Progress,326,No,Partial,55,4,7,Yes,Approval
+Irrigation,Kerala,Chennai,73.88,71,Paid,181,No,Not Taken,89,4,1,Yes,Approval
+Highway,Andhra Pradesh,Coimbatore,77.84,10,Paid,121,No,Full,63,5,94,Yes,Approval
+Highway,Kerala,Bengaluru,217.8,641,In Progress,333,No,Partial,71,4,56,No,Approval
+Railway,Tamil Nadu,Kochi,298.85,318,In Progress,202,No,Partial,85,1,51,Yes,Approval
+Irrigation,Kerala,Madurai,42.61,1354,Not Started,28,No,Not Taken,51,1,57,No,Compensation
+Power,Andhra Pradesh,Kochi,469.94,569,Not Started,201,Yes,Partial,88,1,95,Yes,Legal
+Irrigation,Tamil Nadu,Tirunelveli,378.18,1606,Paid,92,No,Not Taken,75,2,92,Yes,Possession
+Railway,Karnataka,Coimbatore,294.35,830,In Progress,328,Yes,Full,8,4,2,Yes,Legal
+Railway,Kerala,Salem,414.65,510,Paid,355,No,Partial,9,2,7,Yes,Approval
+Irrigation,Tamil Nadu,Chennai,42.39,1110,Not Started,175,No,Full,9,3,58,Yes,Approval
+Power,Kerala,Salem,239.73,1627,Not Started,329,No,Partial,72,5,1,No,Approval
+Power,Tamil Nadu,Bengaluru,315.97,1030,Paid,210,No,Partial,61,3,94,Yes,Approval
+Highway,Tamil Nadu,Chennai,414.75,208,Not Started,183,Yes,Full,89,2,61,Yes,Legal
+Power,Kerala,Trichy,392.28,666,In Progress,94,No,Partial,98,1,48,No,Compensation
+Irrigation,Karnataka,Madurai,140.34,809,Paid,272,No,Full,90,4,100,Yes,Approval
+Railway,Tamil Nadu,Trichy,470.59,408,In Progress,136,No,Full,59,4,19,No,Approval
+Highway,Tamil Nadu,Trichy,64.36,1131,In Progress,236,Yes,Not Taken,94,1,28,Yes,Legal
+Highway,Tamil Nadu,Salem,437.88,540,Not Started,352,No,Full,18,4,16,Yes,Approval
+Railway,Karnataka,Bengaluru,485.54,1396,In Progress,264,No,Not Taken,37,5,73,Yes,Approval
+Power,Karnataka,Madurai,90.63,1240,Paid,134,No,Full,5,5,21,Yes,Approval
+Railway,Andhra Pradesh,Kochi,361.73,581,In Progress,143,No,Partial,14,5,5,Yes,Approval
+Power,Kerala,Chennai,22.54,1989,In Progress,18,No,Full,92,3,61,No,Compensation
+Railway,Karnataka,Chennai,204.2,1237,In Progress,230,Yes,Partial,46,1,97,Yes,Legal
+Irrigation,Kerala,Tirunelveli,259.35,767,In Progress,133,Yes,Not Taken,44,5,30,Yes,Legal
+Power,Andhra Pradesh,Coimbatore,291.37,1925,In Progress,113,No,Partial,4,2,61,No,Compensation
+Irrigation,Kerala,Tirunelveli,468.13,121,Not Started,138,Yes,Full,77,5,11,Yes,Legal
+Highway,Karnataka,Kochi,336.94,632,Paid,124,No,Partial,52,3,11,Yes,Approval
+Railway,Kerala,Tirunelveli,241.94,753,Not Started,203,No,Not Taken,65,2,62,Yes,Approval
+Highway,Karnataka,Chennai,405.31,1506,Paid,60,No,Partial,61,1,15,Yes,Possession
+Highway,Kerala,Salem,475.39,109,Paid,249,Yes,Partial,22,1,24,Yes,Legal
+Highway,Karnataka,Trichy,13.48,499,Paid,297,No,Full,43,5,21,No,Approval
+Highway,Karnataka,Bengaluru,491.3,1799,Paid,12,Yes,Full,51,2,90,Yes,Legal
+Railway,Kerala,Trichy,45.35,50,Paid,254,No,Partial,45,2,87,Yes,Approval
+Highway,Andhra Pradesh,Trichy,407.66,827,In Progress,84,No,Not Taken,18,5,75,Yes,Compensation
+Railway,Tamil Nadu,Madurai,141.97,1359,Not Started,19,No,Partial,87,5,17,No,Compensation
+Railway,Andhra Pradesh,Chennai,68.26,1244,Not Started,49,No,Not Taken,83,4,44,No,Compensation
+Irrigation,Kerala,Kochi,221.33,986,In Progress,163,Yes,Not Taken,46,4,79,Yes,Legal
+Power,Andhra Pradesh,Kochi,322.87,964,Paid,91,No,Not Taken,90,5,67,No,Possession
+Power,Karnataka,Bengaluru,192.02,1520,Not Started,87,Yes,Partial,51,3,11,Yes,Legal
+Railway,Tamil Nadu,Salem,29.65,1841,In Progress,68,Yes,Not Taken,23,4,48,No,Legal
+Irrigation,Kerala,Madurai,300.73,1950,In Progress,36,No,Partial,16,5,32,Yes,Compensation
+Railway,Kerala,Coimbatore,451.45,849,Not Started,252,No,Not Taken,88,2,85,Yes,Approval
+Railway,Kerala,Salem,193.15,453,Not Started,251,No,Not Taken,45,4,62,Yes,Approval
+Railway,Tamil Nadu,Tirunelveli,110.13,540,Paid,139,No,Partial,63,3,17,No,Approval
+Irrigation,Karnataka,Salem,222.68,515,Paid,354,No,Full,94,1,53,No,Approval
+Power,Kerala,Salem,26.56,1486,Not Started,167,No,Full,27,2,96,Yes,Approval
+Irrigation,Andhra Pradesh,Trichy,410.69,1575,Paid,53,No,Partial,49,3,26,No,Possession
+Highway,Kerala,Salem,413.6,1564,In Progress,177,Yes,Partial,63,3,82,Yes,Legal
+Irrigation,Kerala,Kochi,295.03,544,Paid,296,No,Full,27,3,77,Yes,Approval
+Irrigation,Kerala,Tirunelveli,178.17,1512,Paid,300,Yes,Full,85,2,24,Yes,Legal
+Irrigation,Kerala,Tirunelveli,400.39,20,In Progress,358,No,Full,55,3,33,No,Approval
+Irrigation,Karnataka,Chennai,278.46,1599,Paid,105,No,Partial,58,1,87,Yes,Possession
+Power,Andhra Pradesh,Salem,413.4,247,In Progress,136,No,Not Taken,4,4,59,Yes,Approval
+Highway,Karnataka,Trichy,316.65,1978,Paid,189,No,Partial,53,2,53,No,Approval
+Power,Andhra Pradesh,Salem,392.74,1235,Not Started,127,Yes,Full,43,3,86,Yes,Legal
+Power,Kerala,Coimbatore,300.29,916,Paid,341,No,Not Taken,41,5,4,Yes,Approval
+Irrigation,Tamil Nadu,Coimbatore,208.54,1299,Not Started,46,No,Partial,71,4,35,No,Compensation
+Railway,Karnataka,Trichy,479.08,765,Not Started,4,No,Full,91,2,53,No,Compensation
+Railway,Tamil Nadu,Chennai,271.7,1807,Not Started,256,No,Partial,56,5,87,Yes,Approval
+Power,Karnataka,Chennai,303.53,709,Not Started,299,No,Not Taken,46,5,35,No,Approval
+Power,Kerala,Tirunelveli,112.19,1875,Not Started,149,No,Full,75,3,68,Yes,Approval
+Irrigation,Karnataka,Tirunelveli,313.76,1758,In Progress,293,No,Partial,24,2,38,Yes,Approval
+Power,Kerala,Madurai,286.87,119,In Progress,242,Yes,Not Taken,43,3,69,Yes,Legal
+Irrigation,Karnataka,Trichy,94.46,1608,In Progress,274,Yes,Not Taken,14,1,99,Yes,Legal
+Railway,Kerala,Salem,32.14,1327,Not Started,207,No,Partial,50,5,3,Yes,Approval
+Railway,Kerala,Bengaluru,303.17,1865,Paid,114,Yes,Not Taken,52,1,73,Yes,Legal
+Highway,Andhra Pradesh,Trichy,382.44,1511,In Progress,194,No,Full,33,3,64,Yes,Approval
+Railway,Kerala,Madurai,262.89,401,Paid,342,No,Not Taken,76,4,84,No,Approval
+Power,Andhra Pradesh,Tirunelveli,115.32,398,Paid,169,No,Partial,7,5,39,No,Approval
+Railway,Kerala,Trichy,334.09,1103,Not Started,81,No,Full,76,4,36,No,Compensation
+Irrigation,Tamil Nadu,Trichy,42.35,982,Not Started,153,Yes,Not Taken,99,2,66,Yes,Legal
+Railway,Kerala,Tirunelveli,222.31,1510,Not Started,140,No,Not Taken,69,5,30,Yes,Approval
+Highway,Tamil Nadu,Kochi,83.77,1131,In Progress,313,No,Full,95,1,90,Yes,Approval
+Railway,Tamil Nadu,Madurai,94.27,301,Not Started,145,No,Full,20,4,80,No,Approval
+Irrigation,Kerala,Tirunelveli,103.14,1006,In Progress,322,Yes,Not Taken,6,2,86,Yes,Legal
+Irrigation,Tamil Nadu,Chennai,194.89,182,In Progress,121,No,Full,89,5,76,Yes,Approval
+Power,Andhra Pradesh,Salem,27.95,1243,In Progress,251,Yes,Partial,78,2,46,Yes,Legal
+Railway,Karnataka,Tirunelveli,200.4,971,In Progress,342,No,Not Taken,55,1,26,Yes,Approval
+Irrigation,Kerala,Madurai,257.07,319,Not Started,310,Yes,Partial,48,5,50,Yes,Legal
+Highway,Tamil Nadu,Coimbatore,242.94,1067,In Progress,88,No,Not Taken,41,2,19,Yes,Compensation
+Power,Kerala,Chennai,192.94,263,Not Started,57,No,Partial,22,3,12,No,Compensation
+Highway,Andhra Pradesh,Coimbatore,419.98,1744,Not Started,62,Yes,Partial,51,5,62,No,Legal
+Railway,Kerala,Bengaluru,74.8,11,In Progress,346,Yes,Full,78,5,43,No,Legal
+Railway,Kerala,Tirunelveli,254.08,53,Not Started,307,No,Not Taken,52,5,23,No,Approval
+Railway,Tamil Nadu,Chennai,33.37,1566,Paid,279,Yes,Full,15,5,2,Yes,Legal
+Power,Andhra Pradesh,Salem,37.9,165,Not Started,71,No,Full,95,3,9,No,Compensation
+Irrigation,Karnataka,Tirunelveli,288.0,1897,Not Started,8,No,Not Taken,36,1,64,Yes,Compensation
+Power,Karnataka,Salem,284.09,180,In Progress,365,No,Partial,17,3,48,Yes,Approval
+Highway,Tamil Nadu,Kochi,439.32,1619,In Progress,93,No,Not Taken,19,3,57,No,Compensation
+Power,Kerala,Trichy,280.04,1030,Not Started,338,Yes,Not Taken,45,2,76,Yes,Legal
+Highway,Tamil Nadu,Coimbatore,480.0,1005,In Progress,335,No,Not Taken,1,4,77,Yes,Approval
+Power,Tamil Nadu,Chennai,26.73,1923,Paid,151,Yes,Full,86,4,96,Yes,Legal
+Irrigation,Tamil Nadu,Salem,51.26,459,Paid,355,No,Not Taken,93,2,1,No,Approval
+Highway,Kerala,Madurai,24.42,1956,In Progress,39,No,Not Taken,62,3,65,Yes,Compensation
+Railway,Andhra Pradesh,Salem,94.68,1672,Not Started,358,No,Not Taken,2,2,30,Yes,Approval
+Railway,Tamil Nadu,Madurai,271.78,280,Paid,61,Yes,Partial,45,5,67,Yes,Legal
+Power,Kerala,Tirunelveli,323.67,502,Paid,253,No,Partial,48,2,97,No,Approval
+Railway,Andhra Pradesh,Chennai,25.18,1657,Not Started,68,No,Partial,0,2,82,No,Compensation
+Highway,Tamil Nadu,Salem,473.12,680,In Progress,244,No,Partial,21,5,36,No,Approval
+Railway,Karnataka,Bengaluru,421.48,1828,Paid,364,No,Full,92,4,72,Yes,Approval
+Irrigation,Andhra Pradesh,Salem,150.06,1056,Not Started,169,No,Full,13,5,23,No,Approval
+Irrigation,Tamil Nadu,Kochi,40.9,1361,Not Started,177,Yes,Not Taken,91,1,76,Yes,Legal
+Power,Andhra Pradesh,Bengaluru,87.02,1029,Paid,188,No,Full,84,2,43,No,Approval
+Highway,Andhra Pradesh,Chennai,65.65,1216,In Progress,259,No,Partial,44,2,93,Yes,Approval
+Irrigation,Andhra Pradesh,Kochi,63.83,60,Paid,71,No,Not Taken,95,4,82,No,Possession
+Irrigation,Andhra Pradesh,Salem,260.48,551,Not Started,16,No,Not Taken,5,3,40,No,Compensation
+Highway,Andhra Pradesh,Madurai,124.81,1140,Paid,340,Yes,Partial,64,5,73,No,Legal
+Railway,Andhra Pradesh,Salem,180.67,1826,In Progress,56,No,Partial,20,3,50,No,Compensation
+Railway,Tamil Nadu,Coimbatore,494.78,1338,Not Started,217,No,Partial,3,1,41,Yes,Approval
+Power,Karnataka,Tirunelveli,342.95,40,In Progress,106,Yes,Full,2,5,77,Yes,Legal
+Railway,Kerala,Trichy,474.62,443,Paid,303,No,Not Taken,29,1,39,Yes,Approval
+Highway,Andhra Pradesh,Madurai,73.42,1757,Paid,172,No,Partial,30,1,47,Yes,Approval
+Irrigation,Kerala,Coimbatore,192.61,1620,In Progress,218,No,Not Taken,33,1,83,Yes,Approval
+Railway,Tamil Nadu,Bengaluru,278.48,1854,Paid,246,No,Not Taken,82,5,3,Yes,Approval
+Power,Andhra Pradesh,Tirunelveli,40.69,599,In Progress,217,No,Full,19,5,59,Yes,Approval
+Railway,Karnataka,Chennai,4.58,1605,Paid,30,Yes,Not Taken,86,4,38,No,Legal
+Highway,Kerala,Madurai,336.04,1353,In Progress,46,No,Partial,53,2,4,Yes,Compensation
+Power,Andhra Pradesh,Trichy,321.81,1668,In Progress,133,No,Partial,24,3,95,Yes,Approval
+Railway,Tamil Nadu,Tirunelveli,206.87,311,Not Started,107,No,Not Taken,14,3,5,No,Compensation
+Power,Karnataka,Bengaluru,246.1,1562,Not Started,71,No,Not Taken,37,1,13,Yes,Compensation
+Highway,Kerala,Kochi,209.18,1756,In Progress,326,No,Full,22,5,69,No,Approval
+Irrigation,Kerala,Kochi,14.44,623,Paid,107,Yes,Partial,51,5,77,Yes,Legal
+Highway,Andhra Pradesh,Trichy,169.35,1137,Paid,308,Yes,Partial,65,1,11,Yes,Legal
+Highway,Karnataka,Chennai,90.6,1400,Paid,271,No,Not Taken,56,2,61,Yes,Approval
+Highway,Karnataka,Chennai,51.47,361,In Progress,170,No,Not Taken,56,3,26,Yes,Approval
+Highway,Karnataka,Bengaluru,478.47,185,In Progress,115,No,Not Taken,78,4,53,No,Compensation
+Irrigation,Karnataka,Madurai,300.68,1384,In Progress,328,No,Partial,51,2,89,Yes,Approval
+Irrigation,Tamil Nadu,Bengaluru,365.01,1704,In Progress,73,No,Not Taken,34,5,11,Yes,Compensation
+Power,Karnataka,Salem,159.39,72,Not Started,255,No,Full,73,1,7,No,Approval
+Railway,Kerala,Chennai,198.09,296,In Progress,80,No,Full,13,3,73,Yes,Compensation
+Irrigation,Kerala,Tirunelveli,120.37,696,Paid,267,No,Not Taken,90,1,15,No,Approval
+Irrigation,Tamil Nadu,Salem,50.74,185,Not Started,127,No,Full,13,5,51,Yes,Approval
+Railway,Kerala,Kochi,91.57,1494,Paid,325,No,Full,98,1,25,No,Approval
+Irrigation,Kerala,Kochi,399.26,438,In Progress,234,Yes,Full,32,3,7,Yes,Legal
+Highway,Karnataka,Coimbatore,339.58,1492,Not Started,40,No,Full,51,1,44,Yes,Compensation
+Highway,Kerala,Trichy,274.6,1709,In Progress,180,No,Full,0,3,92,Yes,Approval
+Railway,Tamil Nadu,Salem,238.86,918,Not Started,156,Yes,Partial,33,1,83,Yes,Legal
+Power,Karnataka,Trichy,461.41,1562,Paid,58,Yes,Not Taken,18,1,80,Yes,Legal
+Power,Andhra Pradesh,Bengaluru,38.69,70,In Progress,344,Yes,Full,23,3,18,Yes,Legal
+Railway,Karnataka,Salem,142.1,1049,In Progress,248,No,Not Taken,3,1,16,Yes,Approval
+Railway,Tamil Nadu,Bengaluru,176.59,1640,Not Started,191,Yes,Full,35,2,64,Yes,Legal
+Highway,Karnataka,Coimbatore,391.76,388,Not Started,23,Yes,Partial,76,4,28,No,Legal
+Power,Karnataka,Chennai,496.28,1840,In Progress,79,No,Partial,57,2,13,No,Compensation
+Irrigation,Tamil Nadu,Kochi,122.23,1643,Not Started,133,No,Full,31,4,16,Yes,Approval
+Highway,Karnataka,Coimbatore,437.47,1587,In Progress,212,Yes,Full,8,2,12,Yes,Legal
+Railway,Tamil Nadu,Kochi,415.73,43,Not Started,347,No,Full,79,4,92,Yes,Approval
+Power,Tamil Nadu,Chennai,114.27,1313,Paid,165,No,Partial,66,1,97,Yes,Approval
+Irrigation,Andhra Pradesh,Bengaluru,201.17,826,Not Started,347,No,Partial,19,3,90,Yes,Approval
+Irrigation,Kerala,Chennai,206.31,606,Paid,336,No,Not Taken,73,3,62,No,Approval
+Highway,Kerala,Kochi,489.16,1625,Not Started,70,Yes,Partial,61,5,32,No,Legal
+Power,Karnataka,Kochi,92.49,789,Not Started,213,No,Full,57,4,28,No,Approval
+Power,Karnataka,Trichy,400.08,1364,In Progress,64,No,Not Taken,21,5,36,No,Compensation
+Railway,Andhra Pradesh,Tirunelveli,168.76,1216,Not Started,220,Yes,Partial,66,5,82,Yes,Legal
+Power,Andhra Pradesh,Coimbatore,366.11,675,Not Started,307,No,Partial,74,4,45,Yes,Approval
+Power,Andhra Pradesh,Salem,211.46,1271,Paid,285,No,Full,88,3,23,No,Approval
+Highway,Tamil Nadu,Kochi,290.23,1101,Not Started,184,No,Not Taken,47,4,13,Yes,Approval
+Power,Andhra Pradesh,Coimbatore,416.72,483,In Progress,206,No,Partial,7,1,100,Yes,Approval
+Irrigation,Andhra Pradesh,Trichy,402.57,565,Paid,98,No,Partial,72,5,4,No,Possession
+Highway,Karnataka,Chennai,433.55,105,In Progress,241,No,Full,14,5,52,Yes,Approval
+Highway,Andhra Pradesh,Trichy,32.16,518,In Progress,157,No,Not Taken,31,4,87,Yes,Approval
+Railway,Tamil Nadu,Madurai,346.8,1784,In Progress,97,No,Not Taken,52,5,97,No,Compensation
+Power,Tamil Nadu,Madurai,72.14,180,In Progress,41,No,Not Taken,66,3,94,No,Compensation
+Railway,Karnataka,Salem,209.37,242,Paid,138,No,Not Taken,3,5,29,No,Approval
+Irrigation,Andhra Pradesh,Trichy,275.42,914,Not Started,282,No,Full,29,4,59,Yes,Approval
+Highway,Andhra Pradesh,Bengaluru,202.86,1087,In Progress,226,No,Partial,12,3,72,No,Approval
+Highway,Tamil Nadu,Salem,261.01,1893,Paid,71,No,Partial,20,3,90,Yes,Rehabilitation
+Highway,Andhra Pradesh,Bengaluru,498.27,1127,In Progress,242,No,Not Taken,40,5,27,Yes,Approval
+Irrigation,Andhra Pradesh,Salem,69.77,1982,Not Started,17,No,Not Taken,18,4,25,No,Compensation
+Irrigation,Andhra Pradesh,Madurai,338.54,875,Paid,76,Yes,Not Taken,47,5,17,Yes,Legal
+Railway,Kerala,Salem,199.51,1982,Paid,44,No,Partial,85,1,35,No,Possession
+Railway,Karnataka,Madurai,68.67,499,Not Started,342,Yes,Partial,62,1,7,Yes,Legal
+Railway,Kerala,Kochi,81.47,951,Paid,139,Yes,Not Taken,19,3,17,Yes,Legal
+Power,Karnataka,Chennai,474.76,1542,Not Started,176,Yes,Full,63,5,83,No,Legal
+Highway,Tamil Nadu,Bengaluru,440.1,759,Paid,221,No,Partial,36,1,57,Yes,Approval
+Highway,Andhra Pradesh,Trichy,453.75,1325,Paid,91,No,Partial,30,2,31,No,Rehabilitation
+Railway,Karnataka,Kochi,495.79,215,Not Started,21,No,Not Taken,73,1,92,Yes,Compensation
+Highway,Kerala,Kochi,106.14,1151,Not Started,171,No,Full,17,5,48,Yes,Approval
+Railway,Andhra Pradesh,Salem,179.33,1257,Paid,91,No,Not Taken,19,5,47,Yes,Rehabilitation
+Power,Tamil Nadu,Madurai,335.44,1622,Paid,191,No,Not Taken,81,1,81,Yes,Approval
+Power,Karnataka,Coimbatore,243.19,1684,Not Started,76,No,Full,10,5,70,Yes,Compensation
+Irrigation,Karnataka,Bengaluru,210.65,1416,Not Started,280,No,Full,85,5,64,Yes,Approval
+Power,Karnataka,Kochi,180.51,144,Paid,363,No,Full,43,2,91,Yes,Approval
+Railway,Andhra Pradesh,Salem,297.91,545,Paid,178,No,Partial,81,3,32,Yes,Approval
+Power,Kerala,Tirunelveli,288.86,1419,Paid,237,No,Not Taken,63,5,49,No,Approval
+Irrigation,Kerala,Chennai,82.83,274,Not Started,134,No,Partial,33,4,3,Yes,Approval
+Highway,Karnataka,Chennai,237.19,1787,Paid,364,No,Full,86,3,83,Yes,Approval
+Railway,Tamil Nadu,Coimbatore,277.85,1040,In Progress,279,Yes,Partial,64,3,35,Yes,Legal
+Highway,Tamil Nadu,Madurai,286.22,1895,Not Started,18,No,Full,54,4,94,No,Compensation
+Irrigation,Kerala,Salem,107.03,1417,Paid,82,No,Full,73,1,27,No,Planning
+Irrigation,Tamil Nadu,Bengaluru,371.78,1365,Not Started,227,Yes,Not Taken,0,2,2,Yes,Legal
+Irrigation,Kerala,Madurai,15.04,510,In Progress,264,No,Not Taken,37,5,5,Yes,Approval
+Highway,Karnataka,Chennai,179.03,1134,Not Started,111,Yes,Not Taken,8,1,44,Yes,Legal
+Highway,Kerala,Madurai,390.66,36,Paid,250,No,Partial,94,4,22,Yes,Approval
+Highway,Kerala,Chennai,283.04,1102,In Progress,163,No,Not Taken,70,2,6,No,Approval
+Highway,Karnataka,Madurai,132.43,1199,In Progress,357,No,Full,16,2,60,No,Approval
+Irrigation,Tamil Nadu,Coimbatore,348.24,1877,Paid,167,No,Not Taken,98,2,99,Yes,Approval
+Irrigation,Kerala,Trichy,284.78,1097,Paid,220,Yes,Partial,100,4,64,Yes,Legal
+Railway,Kerala,Coimbatore,398.63,817,Paid,303,No,Not Taken,51,1,5,No,Approval
+Railway,Karnataka,Coimbatore,368.18,366,Not Started,190,Yes,Not Taken,17,5,23,Yes,Legal
+Highway,Tamil Nadu,Trichy,306.03,1677,Not Started,324,No,Not Taken,62,2,36,Yes,Approval
+Power,Kerala,Trichy,245.37,1461,Not Started,169,No,Partial,32,2,44,Yes,Approval
+Power,Karnataka,Kochi,68.76,933,Paid,44,No,Full,3,1,50,No,Rehabilitation
+Irrigation,Kerala,Kochi,132.51,104,Paid,13,No,Full,86,2,99,No,Planning
+Irrigation,Andhra Pradesh,Salem,211.0,1686,Not Started,230,No,Full,74,2,87,Yes,Approval
+Irrigation,Karnataka,Bengaluru,300.65,13,In Progress,156,No,Not Taken,51,4,44,No,Approval
+Railway,Tamil Nadu,Bengaluru,258.07,1602,Not Started,133,No,Not Taken,8,3,62,Yes,Approval
+Railway,Tamil Nadu,Salem,145.87,701,In Progress,36,Yes,Partial,63,1,28,No,Legal
+Irrigation,Tamil Nadu,Coimbatore,5.72,1057,Paid,52,No,Full,29,1,100,No,Rehabilitation
+Irrigation,Tamil Nadu,Coimbatore,249.38,1921,Paid,17,Yes,Not Taken,7,1,95,Yes,Legal
+Irrigation,Kerala,Chennai,144.6,1142,Not Started,37,Yes,Not Taken,4,4,24,Yes,Legal
+Power,Kerala,Chennai,367.97,466,Not Started,186,Yes,Not Taken,75,4,9,Yes,Legal
+Railway,Tamil Nadu,Bengaluru,14.41,925,Paid,195,No,Partial,62,5,34,Yes,Approval
+Power,Tamil Nadu,Salem,293.45,1171,Not Started,242,No,Full,0,4,54,Yes,Approval
+Power,Tamil Nadu,Tirunelveli,470.88,394,Paid,299,No,Partial,14,1,24,No,Approval
+Irrigation,Kerala,Kochi,89.27,636,Paid,302,No,Full,88,5,90,No,Approval
+Irrigation,Tamil Nadu,Tirunelveli,237.15,686,In Progress,34,Yes,Full,81,3,44,Yes,Legal
+Highway,Tamil Nadu,Salem,47.98,161,Not Started,214,No,Not Taken,37,2,95,No,Approval
+Highway,Andhra Pradesh,Chennai,313.78,339,Paid,218,No,Not Taken,41,2,11,No,Approval
+Power,Andhra Pradesh,Bengaluru,276.39,1889,Not Started,315,Yes,Not Taken,45,5,3,Yes,Legal
+Railway,Tamil Nadu,Bengaluru,205.16,264,In Progress,89,No,Not Taken,52,3,89,No,Compensation
+Irrigation,Karnataka,Chennai,261.89,86,In Progress,307,No,Not Taken,25,2,66,Yes,Approval
+Irrigation,Tamil Nadu,Tirunelveli,448.55,758,Not Started,251,No,Full,60,5,16,No,Approval
+Power,Andhra Pradesh,Madurai,100.16,1469,Not Started,7,No,Not Taken,66,4,72,No,Compensation
+Highway,Karnataka,Madurai,13.73,1973,Paid,255,No,Not Taken,53,1,92,Yes,Approval
+Railway,Karnataka,Chennai,431.18,1200,In Progress,362,No,Partial,21,3,64,Yes,Approval
+Highway,Tamil Nadu,Madurai,289.62,1259,In Progress,207,Yes,Partial,25,2,81,Yes,Legal
+Highway,Andhra Pradesh,Trichy,445.6,724,In Progress,130,No,Full,82,1,52,No,Approval
+Highway,Andhra Pradesh,Salem,299.48,79,Not Started,223,Yes,Full,59,5,83,No,Legal
+Highway,Karnataka,Salem,405.56,1298,Paid,196,No,Partial,38,2,56,No,Approval
+Irrigation,Tamil Nadu,Chennai,216.26,1927,Not Started,141,No,Partial,35,1,97,Yes,Approval
+Irrigation,Kerala,Coimbatore,375.56,630,Not Started,251,No,Not Taken,20,4,27,Yes,Approval
+Highway,Kerala,Kochi,456.74,66,Not Started,95,No,Not Taken,40,3,98,Yes,Compensation
+Railway,Andhra Pradesh,Tirunelveli,287.13,878,Paid,25,No,Full,47,5,15,No,Planning
+Power,Kerala,Chennai,92.44,324,Not Started,110,No,Partial,25,2,20,Yes,Compensation
+Railway,Andhra Pradesh,Madurai,136.23,106,In Progress,122,No,Full,62,4,76,No,Approval
+Railway,Andhra Pradesh,Tirunelveli,101.33,1457,In Progress,185,No,Not Taken,76,3,98,No,Approval
+Railway,Andhra Pradesh,Coimbatore,125.31,878,In Progress,167,No,Full,35,3,41,Yes,Approval
+Highway,Kerala,Madurai,154.94,1750,Paid,50,Yes,Full,23,4,53,Yes,Legal
+Irrigation,Andhra Pradesh,Bengaluru,278.68,958,Not Started,4,No,Full,89,2,31,No,Compensation
+Railway,Karnataka,Kochi,295.03,259,Paid,76,No,Not Taken,20,3,37,No,Rehabilitation
+Highway,Tamil Nadu,Trichy,214.68,1560,Not Started,159,Yes,Full,17,5,69,Yes,Legal
+Railway,Tamil Nadu,Madurai,308.67,574,In Progress,207,No,Not Taken,14,1,37,Yes,Approval
+Railway,Andhra Pradesh,Trichy,43.08,116,Not Started,256,No,Partial,78,5,53,Yes,Approval
+Highway,Tamil Nadu,Tirunelveli,46.17,989,Not Started,204,No,Full,5,3,59,Yes,Approval
+Irrigation,Kerala,Trichy,87.99,1341,Not Started,254,No,Full,42,1,76,Yes,Approval
+Irrigation,Kerala,Tirunelveli,260.24,1002,Paid,10,No,Not Taken,30,4,76,Yes,Rehabilitation
+Power,Tamil Nadu,Tirunelveli,108.96,465,Not Started,7,No,Full,27,1,46,Yes,Compensation
+Highway,Kerala,Tirunelveli,143.43,712,Not Started,31,No,Not Taken,7,1,11,Yes,Compensation
+Power,Tamil Nadu,Tirunelveli,201.66,891,Not Started,27,Yes,Full,28,1,52,Yes,Legal
+Power,Tamil Nadu,Tirunelveli,406.4,1490,Paid,205,Yes,Partial,20,3,32,Yes,Legal
+Power,Tamil Nadu,Madurai,9.4,1893,Paid,227,No,Partial,80,2,27,Yes,Approval
+Irrigation,Andhra Pradesh,Tirunelveli,325.57,1120,Paid,127,No,Partial,87,3,2,Yes,Approval
+Highway,Tamil Nadu,Madurai,335.27,1080,Not Started,254,Yes,Full,57,2,81,Yes,Legal
+Power,Andhra Pradesh,Tirunelveli,399.83,1833,In Progress,211,No,Full,59,4,25,No,Approval
+Highway,Tamil Nadu,Trichy,466.54,524,In Progress,238,Yes,Partial,49,4,53,Yes,Legal
+Highway,Tamil Nadu,Bengaluru,12.52,816,In Progress,206,No,Partial,99,4,39,Yes,Approval
+Irrigation,Tamil Nadu,Tirunelveli,79.01,1126,Not Started,317,Yes,Not Taken,30,4,65,Yes,Legal
+Power,Kerala,Coimbatore,443.37,240,In Progress,282,Yes,Not Taken,46,4,67,Yes,Legal
+Power,Andhra Pradesh,Tirunelveli,230.61,1929,In Progress,244,Yes,Partial,33,5,91,Yes,Legal
+Highway,Andhra Pradesh,Tirunelveli,283.38,1402,In Progress,44,No,Partial,1,3,91,No,Compensation
+Railway,Tamil Nadu,Trichy,332.36,1609,Not Started,104,No,Full,66,2,88,Yes,Compensation
+Irrigation,Tamil Nadu,Kochi,340.34,931,In Progress,347,Yes,Partial,93,4,89,Yes,Legal
+Irrigation,Kerala,Salem,466.04,561,In Progress,280,No,Not Taken,71,5,46,No,Approval
+Irrigation,Kerala,Trichy,498.48,653,Not Started,233,Yes,Not Taken,51,5,1,Yes,Legal
+Irrigation,Kerala,Coimbatore,360.78,238,Paid,188,No,Not Taken,6,5,41,No,Approval
+Power,Andhra Pradesh,Salem,145.39,1060,In Progress,43,No,Not Taken,75,3,33,Yes,Compensation
+Power,Andhra Pradesh,Chennai,440.18,1317,Paid,224,No,Not Taken,18,4,93,Yes,Approval
+Railway,Andhra Pradesh,Chennai,26.99,1666,In Progress,141,No,Not Taken,89,5,20,No,Approval
+Irrigation,Tamil Nadu,Kochi,117.46,583,Not Started,135,Yes,Partial,91,5,100,Yes,Legal
+Irrigation,Andhra Pradesh,Coimbatore,448.95,546,Paid,175,No,Not Taken,14,4,43,No,Approval
+Highway,Karnataka,Trichy,129.96,118,Paid,141,No,Not Taken,77,3,86,No,Approval
+Power,Karnataka,Madurai,112.27,208,Paid,79,No,Not Taken,47,5,96,No,Possession
+Irrigation,Kerala,Coimbatore,71.22,1057,Paid,81,Yes,Not Taken,13,2,1,Yes,Legal
+Railway,Andhra Pradesh,Bengaluru,429.91,647,In Progress,134,No,Partial,2,1,90,Yes,Approval
+Railway,Karnataka,Salem,251.28,478,In Progress,206,No,Full,49,1,58,No,Approval
+Power,Kerala,Salem,338.26,701,Paid,343,No,Full,92,1,85,No,Approval
+Railway,Andhra Pradesh,Tirunelveli,121.44,257,In Progress,176,Yes,Full,53,3,97,Yes,Legal
+Railway,Tamil Nadu,Chennai,379.63,1826,Paid,242,No,Full,5,5,15,No,Approval
+Power,Karnataka,Kochi,380.6,909,Paid,54,No,Not Taken,48,1,19,No,Possession
+Irrigation,Tamil Nadu,Salem,158.02,1950,Not Started,140,No,Full,22,1,25,No,Approval
+Irrigation,Andhra Pradesh,Coimbatore,206.81,390,Paid,55,Yes,Full,91,4,15,Yes,Legal
+Railway,Karnataka,Salem,106.82,66,In Progress,14,No,Partial,77,5,69,Yes,Compensation
+Railway,Andhra Pradesh,Kochi,488.34,519,Paid,184,No,Partial,77,5,22,Yes,Approval
+Irrigation,Tamil Nadu,Kochi,323.69,434,Not Started,313,No,Partial,19,4,41,Yes,Approval
+Power,Karnataka,Kochi,467.44,584,In Progress,87,Yes,Not Taken,76,5,36,No,Legal
+Railway,Tamil Nadu,Coimbatore,153.43,1565,Not Started,96,Yes,Not Taken,90,2,71,Yes,Legal
+Highway,Andhra Pradesh,Madurai,391.49,1719,Not Started,143,No,Not Taken,59,3,5,No,Approval
+Power,Andhra Pradesh,Tirunelveli,383.51,1169,Paid,7,No,Partial,98,4,36,Yes,Possession
+Railway,Tamil Nadu,Chennai,346.6,747,Not Started,214,No,Full,44,1,21,Yes,Approval
+Railway,Karnataka,Salem,482.91,1328,Not Started,172,Yes,Partial,60,5,5,Yes,Legal
+Highway,Tamil Nadu,Coimbatore,198.29,679,In Progress,222,No,Not Taken,55,2,31,Yes,Approval
+Highway,Andhra Pradesh,Trichy,67.53,315,Not Started,39,No,Partial,1,2,16,Yes,Compensation
+Irrigation,Tamil Nadu,Chennai,336.68,475,Paid,181,No,Full,44,3,37,Yes,Approval
+Power,Andhra Pradesh,Madurai,365.33,1421,Paid,269,No,Not Taken,39,2,16,Yes,Approval
+Power,Tamil Nadu,Coimbatore,288.59,1670,Paid,186,No,Full,23,5,36,Yes,Approval
+Irrigation,Karnataka,Bengaluru,105.39,1473,Not Started,244,No,Full,28,5,22,Yes,Approval
+Power,Karnataka,Bengaluru,253.47,1786,In Progress,308,No,Not Taken,66,2,48,Yes,Approval
+Power,Tamil Nadu,Tirunelveli,157.81,813,Paid,230,Yes,Full,67,5,60,Yes,Legal
+Power,Tamil Nadu,Tirunelveli,215.16,176,Not Started,154,Yes,Partial,65,5,48,Yes,Legal
+Power,Karnataka,Madurai,323.5,580,Paid,174,No,Full,83,1,60,Yes,Approval
+Power,Andhra Pradesh,Madurai,373.24,35,Paid,335,No,Full,53,4,76,No,Approval
+Highway,Karnataka,Tirunelveli,118.03,51,In Progress,114,Yes,Full,52,5,31,No,Legal
+Power,Andhra Pradesh,Salem,204.15,134,Paid,310,Yes,Partial,78,5,85,Yes,Legal
+Highway,Tamil Nadu,Salem,136.41,356,In Progress,299,No,Full,48,3,62,No,Approval
+Power,Tamil Nadu,Coimbatore,101.32,982,Not Started,17,No,Full,31,4,6,No,Compensation
+Irrigation,Andhra Pradesh,Trichy,392.24,1873,Paid,271,No,Partial,60,4,21,Yes,Approval
+Railway,Tamil Nadu,Coimbatore,454.85,1650,Not Started,11,No,Not Taken,41,4,84,No,Compensation
+Highway,Andhra Pradesh,Trichy,186.69,1609,Not Started,300,No,Not Taken,0,2,5,Yes,Approval
+Power,Kerala,Madurai,376.26,62,Not Started,191,No,Not Taken,62,1,60,Yes,Approval
+Irrigation,Karnataka,Chennai,448.76,1134,Paid,231,Yes,Full,34,1,13,Yes,Legal
+Railway,Kerala,Coimbatore,423.45,816,In Progress,92,No,Not Taken,50,3,15,No,Compensation
+Highway,Andhra Pradesh,Coimbatore,93.45,1358,Paid,217,No,Partial,70,4,2,No,Approval
+Railway,Karnataka,Trichy,478.26,772,Not Started,277,Yes,Full,44,4,8,Yes,Legal
+Irrigation,Andhra Pradesh,Kochi,189.9,1852,In Progress,352,No,Full,76,5,46,No,Approval
+Highway,Karnataka,Madurai,171.27,687,Not Started,302,No,Full,64,2,84,Yes,Approval
+Railway,Karnataka,Madurai,33.56,1411,In Progress,28,No,Not Taken,13,2,93,Yes,Compensation
+Power,Karnataka,Bengaluru,244.37,1190,Paid,300,No,Not Taken,92,3,93,Yes,Approval
+Highway,Karnataka,Kochi,56.73,1001,In Progress,76,No,Not Taken,2,1,41,No,Compensation
+Railway,Andhra Pradesh,Trichy,126.15,290,Paid,8,No,Full,23,4,41,No,Rehabilitation
+Irrigation,Karnataka,Madurai,160.18,1099,Not Started,23,No,Partial,64,3,95,Yes,Compensation
+Irrigation,Karnataka,Kochi,404.89,1795,In Progress,14,Yes,Full,47,2,22,Yes,Legal
+Highway,Kerala,Tirunelveli,438.06,1482,Not Started,163,No,Partial,9,2,2,Yes,Approval
+Railway,Tamil Nadu,Kochi,152.98,890,In Progress,12,No,Full,12,2,0,No,Compensation
+Highway,Tamil Nadu,Salem,429.7,1595,Paid,346,Yes,Partial,99,4,66,Yes,Legal
+Highway,Kerala,Bengaluru,428.97,1863,In Progress,171,Yes,Full,72,4,100,Yes,Legal
+Railway,Kerala,Tirunelveli,382.91,401,In Progress,356,No,Full,13,4,70,Yes,Approval
+Railway,Andhra Pradesh,Chennai,75.48,1543,Paid,326,No,Partial,99,5,2,No,Approval
+Power,Andhra Pradesh,Coimbatore,345.94,30,Paid,199,Yes,Partial,9,1,99,Yes,Legal
+Railway,Andhra Pradesh,Bengaluru,472.65,317,Paid,75,Yes,Partial,39,2,48,Yes,Legal
+Irrigation,Kerala,Chennai,342.06,130,In Progress,163,No,Partial,22,2,66,Yes,Approval
+Highway,Kerala,Coimbatore,167.48,1436,Not Started,60,Yes,Partial,98,5,54,Yes,Legal
+Highway,Karnataka,Salem,251.54,1593,In Progress,244,No,Partial,54,2,3,No,Approval
+Irrigation,Andhra Pradesh,Kochi,323.75,1226,In Progress,154,No,Partial,62,2,30,Yes,Approval
+Railway,Andhra Pradesh,Madurai,256.51,815,Not Started,256,No,Partial,70,4,65,Yes,Approval
+Irrigation,Andhra Pradesh,Tirunelveli,62.18,192,Paid,243,No,Full,41,4,77,No,Approval
+Irrigation,Tamil Nadu,Trichy,157.75,702,In Progress,161,Yes,Partial,98,1,100,Yes,Legal
+Power,Karnataka,Tirunelveli,401.69,1845,Not Started,67,No,Partial,65,2,63,Yes,Compensation
+Irrigation,Andhra Pradesh,Salem,431.06,814,Paid,343,Yes,Full,78,3,30,Yes,Legal
+Highway,Andhra Pradesh,Chennai,70.81,720,Paid,276,No,Full,72,2,62,Yes,Approval
+Irrigation,Andhra Pradesh,Trichy,476.31,1512,In Progress,160,No,Not Taken,46,2,65,Yes,Approval
+Highway,Tamil Nadu,Madurai,166.09,454,Paid,258,Yes,Not Taken,80,1,30,Yes,Legal
+Highway,Tamil Nadu,Salem,332.0,527,Paid,306,No,Partial,51,3,46,No,Approval
+Highway,Kerala,Trichy,376.53,1899,Not Started,334,No,Partial,17,2,21,Yes,Approval
+Railway,Karnataka,Salem,406.44,1382,Not Started,94,No,Not Taken,78,3,73,Yes,Compensation
+Power,Kerala,Kochi,473.01,990,Paid,245,No,Not Taken,17,4,93,Yes,Approval
+Highway,Karnataka,Salem,158.18,662,Not Started,220,No,Partial,23,4,96,Yes,Approval
+Highway,Tamil Nadu,Madurai,429.61,601,Paid,122,No,Not Taken,22,3,82,Yes,Approval
+Railway,Andhra Pradesh,Bengaluru,68.01,104,In Progress,186,No,Partial,11,2,45,Yes,Approval
+Highway,Kerala,Coimbatore,353.26,620,Not Started,261,No,Full,22,3,88,No,Approval
+Irrigation,Andhra Pradesh,Trichy,371.63,952,Paid,272,No,Full,20,3,57,Yes,Approval
+Irrigation,Kerala,Kochi,339.67,1586,Paid,59,Yes,Not Taken,63,4,60,Yes,Legal
+Power,Tamil Nadu,Madurai,128.03,560,Not Started,124,No,Full,89,3,45,No,Approval
+Highway,Tamil Nadu,Salem,436.84,282,Not Started,336,No,Full,71,5,0,Yes,Approval
+Railway,Tamil Nadu,Kochi,86.51,1721,In Progress,340,No,Full,93,5,95,Yes,Approval
+Irrigation,Kerala,Madurai,29.18,1727,Paid,50,No,Full,33,4,24,No,Rehabilitation
+Railway,Karnataka,Bengaluru,359.44,1654,In Progress,177,No,Partial,1,2,60,Yes,Approval
+Railway,Kerala,Kochi,239.05,495,In Progress,138,No,Partial,68,2,80,Yes,Approval
+Irrigation,Karnataka,Kochi,424.93,259,In Progress,326,No,Not Taken,30,4,13,Yes,Approval
+Railway,Kerala,Coimbatore,193.24,385,Not Started,169,Yes,Full,96,2,44,Yes,Legal
+Irrigation,Kerala,Tirunelveli,86.22,896,In Progress,38,Yes,Full,67,1,76,Yes,Legal
+Railway,Tamil Nadu,Trichy,418.63,546,Not Started,68,No,Full,69,5,38,No,Compensation
+Irrigation,Andhra Pradesh,Coimbatore,275.58,1292,Not Started,235,No,Not Taken,86,1,65,Yes,Approval
+Highway,Andhra Pradesh,Chennai,96.62,1638,In Progress,47,No,Partial,18,1,31,No,Compensation
+Power,Karnataka,Trichy,360.89,829,In Progress,56,Yes,Full,71,1,95,Yes,Legal
+Irrigation,Andhra Pradesh,Coimbatore,256.78,883,Paid,276,Yes,Partial,12,4,57,Yes,Legal
+Irrigation,Kerala,Salem,303.15,1357,In Progress,337,Yes,Not Taken,64,1,55,Yes,Legal
+Power,Kerala,Trichy,231.8,1143,Paid,98,No,Partial,5,3,5,No,Rehabilitation
+Irrigation,Tamil Nadu,Trichy,414.78,1304,In Progress,14,No,Full,70,2,88,Yes,Compensation
+Irrigation,Tamil Nadu,Madurai,415.21,1516,In Progress,324,Yes,Partial,26,4,66,Yes,Legal
+Railway,Andhra Pradesh,Salem,355.42,285,In Progress,178,No,Partial,78,3,81,No,Approval
+Power,Karnataka,Chennai,54.94,1303,In Progress,331,No,Not Taken,51,3,49,Yes,Approval
+Highway,Andhra Pradesh,Tirunelveli,419.83,777,Paid,61,Yes,Not Taken,97,5,37,Yes,Legal
+Irrigation,Andhra Pradesh,Kochi,336.33,847,Paid,118,No,Not Taken,86,5,2,No,Possession
+Power,Andhra Pradesh,Bengaluru,349.27,723,In Progress,36,No,Not Taken,47,3,4,Yes,Compensation
+Railway,Andhra Pradesh,Coimbatore,183.08,1924,In Progress,133,Yes,Partial,87,5,23,No,Legal
+Highway,Kerala,Madurai,439.94,332,Paid,25,Yes,Partial,78,2,53,Yes,Legal
+Power,Karnataka,Coimbatore,363.37,215,Not Started,7,No,Not Taken,98,2,33,Yes,Compensation
+Highway,Kerala,Chennai,58.51,731,Not Started,3,No,Not Taken,67,5,38,Yes,Compensation
+Highway,Karnataka,Kochi,205.37,927,Not Started,20,No,Full,43,1,87,No,Compensation
+Highway,Tamil Nadu,Chennai,443.47,556,Paid,148,No,Full,100,3,99,No,Approval
+Irrigation,Andhra Pradesh,Trichy,25.98,30,Paid,24,Yes,Not Taken,16,2,91,Yes,Legal
+Irrigation,Kerala,Bengaluru,480.8,31,Not Started,142,No,Partial,94,5,47,No,Approval
+Railway,Karnataka,Chennai,340.38,706,Not Started,244,No,Not Taken,37,5,48,Yes,Approval
+Railway,Tamil Nadu,Coimbatore,316.61,1111,In Progress,42,No,Partial,9,2,33,Yes,Compensation
+Power,Tamil Nadu,Salem,137.1,1924,Paid,292,No,Partial,53,2,79,No,Approval
+Railway,Andhra Pradesh,Salem,126.27,1974,Paid,184,No,Full,90,1,99,Yes,Approval
+Highway,Karnataka,Trichy,471.17,686,Not Started,41,No,Not Taken,5,5,6,Yes,Compensation
+Highway,Kerala,Tirunelveli,150.89,417,Not Started,91,No,Not Taken,5,5,17,Yes,Compensation
+Irrigation,Andhra Pradesh,Coimbatore,388.31,171,Paid,316,No,Partial,51,4,69,No,Approval
+Highway,Kerala,Coimbatore,198.08,1728,In Progress,323,Yes,Not Taken,14,1,91,Yes,Legal
+Power,Tamil Nadu,Chennai,71.78,173,Not Started,52,No,Full,67,2,33,Yes,Compensation
+Highway,Kerala,Bengaluru,7.83,1829,Paid,83,No,Full,56,2,50,No,Planning
+Highway,Kerala,Coimbatore,273.27,233,Paid,33,No,Not Taken,55,3,92,Yes,Possession
+Power,Andhra Pradesh,Madurai,487.95,1637,In Progress,75,No,Not Taken,6,2,67,Yes,Compensation
+Railway,Kerala,Tirunelveli,186.15,371,In Progress,352,Yes,Full,50,5,13,Yes,Legal
+Railway,Andhra Pradesh,Chennai,180.2,532,Not Started,196,Yes,Not Taken,57,2,68,Yes,Legal
+Power,Tamil Nadu,Madurai,173.69,795,Not Started,285,Yes,Partial,63,5,88,Yes,Legal
+Irrigation,Andhra Pradesh,Trichy,261.47,1675,Not Started,87,No,Not Taken,25,5,7,Yes,Compensation
+Highway,Andhra Pradesh,Salem,221.73,1566,Paid,234,No,Partial,57,1,14,Yes,Approval
+Power,Karnataka,Trichy,440.26,1892,Not Started,231,Yes,Not Taken,30,2,82,Yes,Legal
+Highway,Kerala,Salem,254.0,528,Paid,6,Yes,Not Taken,65,1,58,Yes,Legal
+Irrigation,Tamil Nadu,Trichy,255.11,1100,Not Started,291,No,Full,91,5,10,Yes,Approval
+Highway,Andhra Pradesh,Coimbatore,71.34,1673,In Progress,37,Yes,Partial,12,2,19,Yes,Legal
+Power,Tamil Nadu,Madurai,491.41,110,In Progress,51,No,Full,17,2,54,No,Compensation
+Highway,Karnataka,Salem,126.86,736,Paid,142,No,Not Taken,93,1,35,No,Approval
+Railway,Kerala,Chennai,39.0,1913,In Progress,220,Yes,Full,74,1,81,Yes,Legal
+Irrigation,Andhra Pradesh,Madurai,332.42,969,Paid,239,Yes,Not Taken,12,5,13,Yes,Legal
+Irrigation,Kerala,Chennai,298.69,1717,Paid,142,Yes,Not Taken,23,5,57,Yes,Legal
+Irrigation,Karnataka,Madurai,209.03,1310,In Progress,348,No,Not Taken,56,2,37,Yes,Approval
+Power,Karnataka,Madurai,212.54,137,Paid,362,Yes,Partial,28,2,88,Yes,Legal
+Irrigation,Tamil Nadu,Trichy,393.07,538,In Progress,48,No,Partial,55,4,79,No,Compensation
+Railway,Andhra Pradesh,Salem,99.87,979,Not Started,276,No,Partial,53,4,81,Yes,Approval
+Power,Tamil Nadu,Salem,410.58,273,Not Started,270,Yes,Full,4,3,0,Yes,Legal
+Railway,Karnataka,Bengaluru,325.25,1440,In Progress,13,Yes,Not Taken,34,5,64,Yes,Legal
+Highway,Kerala,Madurai,210.94,677,In Progress,297,No,Full,18,3,0,No,Approval
+Highway,Tamil Nadu,Coimbatore,230.37,1647,In Progress,14,No,Full,54,3,84,No,Compensation
+Highway,Tamil Nadu,Coimbatore,130.18,795,In Progress,233,No,Not Taken,76,1,59,Yes,Approval
+Highway,Kerala,Chennai,376.68,1893,Not Started,62,Yes,Full,68,1,24,Yes,Legal
+Railway,Tamil Nadu,Chennai,257.66,1775,Paid,195,Yes,Not Taken,43,4,90,Yes,Legal
+Power,Kerala,Trichy,162.13,22,Paid,26,Yes,Not Taken,77,3,9,No,Legal
+Power,Andhra Pradesh,Madurai,299.03,1782,Not Started,92,No,Not Taken,37,4,49,Yes,Compensation
+Irrigation,Kerala,Chennai,497.88,121,Paid,104,No,Not Taken,61,5,11,No,Possession
+Railway,Andhra Pradesh,Chennai,219.04,802,Not Started,308,No,Full,21,2,91,Yes,Approval
+Highway,Kerala,Tirunelveli,460.54,1822,Paid,51,No,Full,72,1,31,No,Planning
+Railway,Karnataka,Madurai,174.15,1172,In Progress,318,Yes,Full,39,5,32,Yes,Legal
+Irrigation,Karnataka,Kochi,29.73,1745,In Progress,180,No,Partial,25,5,71,Yes,Approval
+Irrigation,Andhra Pradesh,Trichy,104.11,555,In Progress,56,No,Full,4,1,25,Yes,Compensation
+Railway,Andhra Pradesh,Chennai,210.8,933,Not Started,119,No,Full,92,1,41,Yes,Compensation
+Railway,Karnataka,Trichy,111.77,1694,Not Started,307,No,Partial,53,3,49,Yes,Approval
+Railway,Andhra Pradesh,Salem,2.61,1716,Paid,362,No,Not Taken,85,4,60,Yes,Approval
+Power,Kerala,Trichy,457.71,1989,Paid,42,No,Not Taken,48,5,40,Yes,Possession
+Highway,Kerala,Kochi,422.33,757,Paid,134,No,Not Taken,2,3,56,Yes,Approval
+Railway,Karnataka,Coimbatore,371.79,426,Not Started,259,Yes,Partial,91,3,1,Yes,Legal
+Railway,Tamil Nadu,Kochi,85.99,1926,Paid,196,No,Full,37,5,98,No,Approval
+Railway,Kerala,Coimbatore,62.38,1397,In Progress,132,Yes,Full,13,5,97,Yes,Legal
+Irrigation,Andhra Pradesh,Trichy,36.13,650,Paid,254,No,Full,46,2,69,No,Approval
+Irrigation,Tamil Nadu,Coimbatore,362.7,562,In Progress,219,Yes,Full,13,4,30,Yes,Legal
+Power,Tamil Nadu,Salem,464.58,54,Not Started,335,No,Partial,74,5,22,Yes,Approval
+Highway,Kerala,Madurai,216.69,682,In Progress,40,No,Full,72,1,75,Yes,Compensation
+Power,Kerala,Coimbatore,61.77,110,In Progress,254,No,Not Taken,37,2,53,No,Approval
+Highway,Tamil Nadu,Coimbatore,257.42,1244,In Progress,1,Yes,Partial,63,4,27,Yes,Legal
+Irrigation,Tamil Nadu,Trichy,176.04,662,Not Started,194,Yes,Partial,43,1,78,Yes,Legal
+Irrigation,Karnataka,Salem,188.98,1951,Not Started,241,No,Not Taken,69,1,18,Yes,Approval
+Irrigation,Andhra Pradesh,Bengaluru,311.61,1453,Not Started,148,No,Not Taken,64,4,75,Yes,Approval
+Power,Karnataka,Bengaluru,360.06,1100,Not Started,197,No,Full,24,2,47,Yes,Approval
+Railway,Kerala,Bengaluru,57.53,992,Paid,298,No,Not Taken,15,1,1,Yes,Approval
+Railway,Karnataka,Bengaluru,20.21,846,Not Started,244,No,Partial,14,3,10,Yes,Approval
+Irrigation,Karnataka,Madurai,497.18,1813,In Progress,337,No,Partial,97,4,43,Yes,Approval
+Railway,Karnataka,Kochi,118.28,1787,Not Started,107,No,Partial,80,4,100,Yes,Compensation
+Railway,Karnataka,Trichy,29.28,450,Paid,211,No,Full,2,5,58,Yes,Approval
+Power,Andhra Pradesh,Trichy,96.96,1953,Paid,155,No,Full,66,2,58,No,Approval
+Highway,Andhra Pradesh,Tirunelveli,21.88,1214,Paid,25,Yes,Not Taken,36,3,37,Yes,Legal
+Irrigation,Tamil Nadu,Salem,197.43,74,In Progress,81,Yes,Full,80,3,24,No,Legal
+Irrigation,Kerala,Bengaluru,401.69,154,Not Started,82,No,Full,54,5,20,Yes,Compensation
+Power,Karnataka,Madurai,172.27,1274,Not Started,130,Yes,Partial,37,1,41,Yes,Legal
+Power,Tamil Nadu,Salem,223.48,778,Not Started,328,No,Partial,62,1,35,Yes,Approval
+Railway,Tamil Nadu,Bengaluru,338.6,1566,In Progress,99,No,Not Taken,0,3,8,Yes,Compensation
+Irrigation,Tamil Nadu,Madurai,255.67,1963,In Progress,255,No,Partial,70,2,11,Yes,Approval
+Highway,Andhra Pradesh,Salem,431.07,1680,Paid,48,No,Full,89,1,9,Yes,Planning
+Power,Karnataka,Trichy,433.35,1127,Paid,62,Yes,Not Taken,18,4,58,No,Legal
+Highway,Karnataka,Trichy,7.43,1938,Not Started,310,Yes,Not Taken,51,5,4,Yes,Legal
+Highway,Kerala,Kochi,389.58,1306,In Progress,289,No,Partial,29,2,32,Yes,Approval
+Irrigation,Karnataka,Chennai,231.71,1591,In Progress,104,Yes,Partial,54,1,68,Yes,Legal
+Irrigation,Karnataka,Kochi,494.45,1691,Not Started,104,No,Partial,13,3,79,Yes,Compensation
+Power,Tamil Nadu,Coimbatore,242.91,948,Not Started,324,No,Not Taken,12,5,62,Yes,Approval
+Irrigation,Kerala,Kochi,493.48,459,Paid,14,No,Partial,83,1,100,No,Possession
+Irrigation,Karnataka,Bengaluru,377.9,1132,Paid,174,No,Full,89,3,100,Yes,Approval
+Irrigation,Andhra Pradesh,Tirunelveli,126.18,950,Paid,258,No,Not Taken,26,1,28,No,Approval
+Highway,Karnataka,Salem,270.35,605,Not Started,210,No,Partial,88,5,17,Yes,Approval
+Power,Tamil Nadu,Tirunelveli,496.09,657,Not Started,258,Yes,Full,8,4,92,Yes,Legal
+Railway,Andhra Pradesh,Chennai,429.12,729,Paid,101,No,Full,40,4,5,No,Planning
+Highway,Tamil Nadu,Coimbatore,50.94,237,Paid,259,No,Partial,47,3,52,No,Approval
+Irrigation,Karnataka,Salem,353.92,1422,In Progress,343,No,Full,11,4,81,Yes,Approval
+Highway,Andhra Pradesh,Madurai,174.43,1529,In Progress,158,Yes,Not Taken,9,5,31,Yes,Legal
+Irrigation,Kerala,Bengaluru,5.97,1723,Paid,44,Yes,Not Taken,5,3,41,Yes,Legal
+Irrigation,Kerala,Coimbatore,203.23,255,Paid,300,No,Full,33,1,46,Yes,Approval
+Highway,Andhra Pradesh,Trichy,119.29,1549,In Progress,250,No,Not Taken,51,2,30,Yes,Approval
+Power,Andhra Pradesh,Chennai,409.89,83,Paid,330,No,Partial,40,1,61,Yes,Approval
+Irrigation,Tamil Nadu,Coimbatore,170.32,1080,In Progress,164,No,Full,82,5,55,Yes,Approval
+Power,Andhra Pradesh,Bengaluru,414.19,902,In Progress,192,No,Not Taken,5,3,10,Yes,Approval
+Railway,Tamil Nadu,Kochi,2.8,925,In Progress,8,Yes,Partial,1,1,25,Yes,Legal
+Irrigation,Karnataka,Coimbatore,155.64,785,Not Started,64,No,Partial,14,3,91,No,Compensation
+Power,Tamil Nadu,Kochi,122.48,230,Not Started,281,No,Not Taken,16,4,26,No,Approval
+Power,Andhra Pradesh,Bengaluru,118.7,1079,Paid,180,No,Full,15,2,82,Yes,Approval
+Railway,Andhra Pradesh,Trichy,36.42,1214,In Progress,281,No,Partial,27,5,56,No,Approval
+Power,Karnataka,Salem,95.59,1062,Not Started,278,No,Partial,84,1,26,Yes,Approval
+Power,Andhra Pradesh,Madurai,278.89,807,Paid,29,No,Partial,71,2,58,Yes,Possession
+Railway,Andhra Pradesh,Trichy,147.45,746,Paid,265,Yes,Partial,9,5,61,Yes,Legal
+Irrigation,Kerala,Kochi,210.15,135,Paid,327,No,Full,9,5,19,No,Approval
+Power,Kerala,Kochi,189.99,1027,Paid,216,No,Not Taken,9,4,2,Yes,Approval
+Power,Karnataka,Madurai,438.26,636,Paid,319,No,Not Taken,72,3,15,No,Approval
+Power,Tamil Nadu,Salem,452.89,1471,In Progress,104,No,Not Taken,27,3,43,No,Compensation
+Highway,Kerala,Coimbatore,247.75,842,Paid,183,Yes,Partial,23,2,92,Yes,Legal
+Railway,Tamil Nadu,Madurai,166.75,763,In Progress,329,Yes,Full,18,4,78,Yes,Legal
+Highway,Andhra Pradesh,Chennai,55.63,1460,Not Started,147,No,Not Taken,96,5,29,Yes,Approval
+Railway,Kerala,Chennai,476.82,708,Paid,104,No,Full,67,4,39,Yes,Planning
+Irrigation,Karnataka,Bengaluru,32.46,501,Not Started,46,No,Not Taken,55,4,64,Yes,Compensation
+Irrigation,Karnataka,Trichy,150.58,1431,In Progress,86,No,Partial,66,2,28,No,Compensation
+Power,Karnataka,Kochi,150.79,327,In Progress,308,No,Not Taken,41,3,29,Yes,Approval
+Railway,Kerala,Salem,161.9,1238,Not Started,128,Yes,Partial,11,4,31,Yes,Legal
+Irrigation,Tamil Nadu,Bengaluru,84.23,619,Paid,257,No,Partial,17,4,9,Yes,Approval
+Railway,Andhra Pradesh,Trichy,392.12,333,Paid,313,No,Not Taken,22,4,90,Yes,Approval
+Irrigation,Tamil Nadu,Trichy,63.44,1400,Not Started,146,No,Full,83,1,50,Yes,Approval
+Highway,Tamil Nadu,Bengaluru,318.37,1488,Not Started,71,Yes,Partial,5,4,7,Yes,Legal
+Irrigation,Andhra Pradesh,Tirunelveli,64.11,137,Not Started,139,No,Full,52,4,50,No,Approval
+Highway,Andhra Pradesh,Trichy,37.59,839,Paid,26,Yes,Not Taken,97,5,35,No,Legal
+Irrigation,Kerala,Tirunelveli,454.94,655,Paid,28,No,Partial,41,1,54,Yes,Possession
+Power,Kerala,Chennai,97.09,125,Paid,270,No,Full,65,4,34,Yes,Approval
+Highway,Kerala,Chennai,411.07,610,Not Started,173,Yes,Partial,29,4,35,Yes,Legal
+Irrigation,Kerala,Trichy,273.45,1480,Paid,252,No,Not Taken,8,2,55,Yes,Approval
+Power,Kerala,Chennai,41.23,969,In Progress,59,No,Partial,90,2,35,No,Compensation
+Highway,Andhra Pradesh,Salem,477.84,133,Not Started,106,Yes,Not Taken,41,1,88,Yes,Legal
+Power,Tamil Nadu,Tirunelveli,125.36,1119,Paid,219,Yes,Full,33,5,83,Yes,Legal
+Railway,Kerala,Tirunelveli,430.17,1632,Not Started,258,No,Partial,39,1,60,Yes,Approval
+Railway,Kerala,Trichy,86.48,1603,In Progress,145,No,Full,87,1,61,No,Approval
+Highway,Tamil Nadu,Chennai,427.34,33,In Progress,51,No,Not Taken,16,2,80,Yes,Compensation
+Irrigation,Kerala,Madurai,9.08,726,Not Started,59,No,Not Taken,28,2,86,Yes,Compensation
+Highway,Tamil Nadu,Kochi,257.11,1552,Not Started,33,No,Full,99,5,24,No,Compensation
+Power,Tamil Nadu,Bengaluru,385.3,337,In Progress,95,No,Full,49,4,63,No,Compensation
+Irrigation,Andhra Pradesh,Bengaluru,467.56,1325,Not Started,88,No,Not Taken,75,5,59,Yes,Compensation
+Railway,Karnataka,Tirunelveli,454.83,1158,In Progress,315,Yes,Full,94,4,56,Yes,Legal
+Irrigation,Andhra Pradesh,Trichy,410.26,1321,In Progress,230,No,Not Taken,48,3,94,Yes,Approval
+Railway,Karnataka,Trichy,444.38,1201,Paid,274,No,Full,72,2,69,Yes,Approval
+Irrigation,Karnataka,Salem,101.61,1748,Not Started,245,Yes,Not Taken,60,3,98,Yes,Legal
+Irrigation,Karnataka,Coimbatore,143.88,948,Not Started,110,Yes,Not Taken,82,3,51,Yes,Legal
+Irrigation,Kerala,Kochi,146.26,1052,Paid,233,Yes,Partial,45,2,55,Yes,Legal
+Power,Andhra Pradesh,Coimbatore,190.08,1127,In Progress,277,No,Not Taken,45,3,62,Yes,Approval
+Power,Karnataka,Tirunelveli,198.18,1434,Not Started,165,No,Not Taken,16,1,67,Yes,Approval
+Highway,Tamil Nadu,Bengaluru,273.42,360,Paid,127,No,Partial,65,4,19,No,Approval
+Highway,Kerala,Salem,82.04,143,Paid,236,Yes,Partial,4,5,53,No,Legal
+Railway,Andhra Pradesh,Salem,346.4,1531,Not Started,290,Yes,Full,53,2,0,Yes,Legal
+Power,Karnataka,Salem,85.86,1854,Paid,106,No,Full,15,1,89,Yes,Rehabilitation
+Railway,Tamil Nadu,Tirunelveli,156.88,1202,In Progress,127,No,Not Taken,80,5,97,Yes,Approval
+Highway,Andhra Pradesh,Coimbatore,252.91,33,Paid,194,Yes,Full,90,5,9,Yes,Legal
+Railway,Andhra Pradesh,Bengaluru,398.73,935,In Progress,338,No,Full,6,5,22,Yes,Approval
+Highway,Kerala,Salem,370.39,500,In Progress,142,No,Not Taken,7,3,50,Yes,Approval
+Power,Andhra Pradesh,Bengaluru,323.65,1018,Not Started,110,Yes,Partial,71,3,23,Yes,Legal
+Irrigation,Kerala,Chennai,80.0,659,Paid,89,No,Partial,86,3,12,No,Possession
+Power,Karnataka,Trichy,274.66,832,In Progress,250,Yes,Not Taken,95,3,28,Yes,Legal
+Railway,Kerala,Trichy,46.0,355,In Progress,279,No,Not Taken,81,1,57,Yes,Approval
+Railway,Tamil Nadu,Bengaluru,190.24,558,Paid,332,No,Not Taken,37,3,90,Yes,Approval
+Power,Kerala,Madurai,208.22,303,In Progress,223,No,Not Taken,53,2,94,Yes,Approval
+Power,Tamil Nadu,Madurai,22.31,1748,Paid,100,No,Not Taken,75,5,42,No,Possession
+Highway,Kerala,Tirunelveli,138.81,1870,Not Started,131,No,Not Taken,14,1,9,Yes,Approval
+Railway,Andhra Pradesh,Tirunelveli,477.94,1973,In Progress,12,No,Full,91,3,30,No,Compensation
+Railway,Karnataka,Trichy,476.93,1220,In Progress,97,Yes,Full,49,5,73,Yes,Legal
+Power,Tamil Nadu,Chennai,177.78,1700,Paid,119,No,Full,55,1,87,Yes,Planning
+Irrigation,Kerala,Kochi,23.94,68,Paid,292,Yes,Partial,94,5,96,Yes,Legal
+Railway,Kerala,Coimbatore,91.6,759,Paid,303,No,Not Taken,8,1,13,Yes,Approval
+Irrigation,Kerala,Coimbatore,197.63,774,Paid,198,Yes,Not Taken,7,4,98,Yes,Legal
+Power,Andhra Pradesh,Tirunelveli,474.02,1692,In Progress,0,No,Full,18,1,33,Yes,Compensation
+Power,Andhra Pradesh,Chennai,72.75,1243,Not Started,59,Yes,Partial,50,3,16,Yes,Legal
+Highway,Tamil Nadu,Tirunelveli,382.35,838,Not Started,249,No,Full,71,5,20,No,Approval
+Railway,Tamil Nadu,Kochi,56.57,170,Not Started,139,No,Not Taken,97,5,95,No,Approval
+Irrigation,Andhra Pradesh,Coimbatore,490.68,1571,Not Started,148,No,Not Taken,56,5,66,Yes,Approval
+Highway,Tamil Nadu,Bengaluru,192.35,1911,Paid,43,No,Full,67,2,57,No,Planning
+Railway,Karnataka,Tirunelveli,388.18,1260,In Progress,185,No,Full,30,2,78,Yes,Approval
+Highway,Karnataka,Salem,172.94,1822,In Progress,107,No,Not Taken,2,3,7,No,Compensation
+Power,Andhra Pradesh,Bengaluru,314.77,1569,In Progress,43,Yes,Full,98,4,95,Yes,Legal
+Railway,Tamil Nadu,Kochi,98.03,1223,Paid,77,No,Not Taken,82,2,37,Yes,Possession
+Highway,Kerala,Kochi,75.15,510,In Progress,225,No,Full,42,1,25,No,Approval
+Highway,Karnataka,Tirunelveli,469.19,1362,Paid,161,No,Partial,28,3,63,Yes,Approval
+Irrigation,Andhra Pradesh,Trichy,459.03,1796,In Progress,280,Yes,Not Taken,9,4,29,Yes,Legal
+Highway,Tamil Nadu,Tirunelveli,444.02,797,Not Started,252,No,Partial,11,1,8,Yes,Approval
+Railway,Andhra Pradesh,Trichy,313.65,1332,Paid,131,No,Full,45,5,31,No,Approval
+Railway,Kerala,Kochi,404.61,837,In Progress,143,No,Partial,29,2,10,Yes,Approval
+Irrigation,Karnataka,Chennai,36.85,1465,Not Started,265,No,Full,93,1,85,Yes,Approval
+Railway,Andhra Pradesh,Kochi,169.06,1351,Not Started,108,Yes,Partial,81,4,33,No,Legal
+Power,Andhra Pradesh,Coimbatore,158.57,1530,Not Started,193,No,Partial,87,3,17,No,Approval
+Railway,Andhra Pradesh,Bengaluru,318.73,862,Paid,34,No,Partial,31,1,18,No,Rehabilitation
+Railway,Kerala,Bengaluru,179.59,1942,Paid,274,No,Not Taken,72,3,53,No,Approval
+Highway,Andhra Pradesh,Madurai,76.38,1421,In Progress,186,Yes,Partial,46,5,81,Yes,Legal
+Highway,Kerala,Madurai,299.24,810,Not Started,242,Yes,Full,87,4,36,Yes,Legal
+Railway,Kerala,Kochi,407.66,1627,In Progress,263,No,Full,62,4,81,Yes,Approval
+Irrigation,Kerala,Coimbatore,192.61,1177,In Progress,9,Yes,Not Taken,25,2,11,Yes,Legal
+Highway,Karnataka,Madurai,68.3,765,Not Started,165,No,Not Taken,2,4,3,Yes,Approval
+Irrigation,Karnataka,Bengaluru,100.35,837,In Progress,28,No,Full,22,1,42,No,Compensation
+Railway,Andhra Pradesh,Tirunelveli,120.65,1433,Paid,270,No,Partial,74,1,26,Yes,Approval
+Railway,Andhra Pradesh,Chennai,151.7,287,In Progress,86,Yes,Full,73,1,50,No,Legal
+Power,Karnataka,Chennai,322.29,1390,Not Started,22,No,Not Taken,49,5,4,Yes,Compensation
+Highway,Tamil Nadu,Coimbatore,301.47,383,Paid,209,No,Not Taken,35,4,5,No,Approval
+Railway,Karnataka,Kochi,348.8,202,Paid,45,No,Full,12,4,76,Yes,Rehabilitation
+Power,Kerala,Madurai,182.84,1019,In Progress,27,No,Partial,28,1,86,Yes,Compensation
+Highway,Karnataka,Tirunelveli,412.44,1028,In Progress,25,No,Partial,37,2,55,No,Compensation
+Railway,Kerala,Chennai,104.03,560,Paid,265,No,Not Taken,76,2,88,Yes,Approval
+Railway,Andhra Pradesh,Chennai,235.85,360,In Progress,174,No,Full,89,4,67,No,Approval
+Highway,Tamil Nadu,Salem,400.97,1568,Not Started,3,No,Full,83,4,95,Yes,Compensation
+Highway,Andhra Pradesh,Kochi,92.13,1457,In Progress,310,No,Not Taken,4,3,43,Yes,Approval
+Highway,Kerala,Salem,57.16,1045,In Progress,321,No,Full,19,4,14,Yes,Approval
+Railway,Kerala,Bengaluru,442.13,643,Paid,66,No,Not Taken,77,1,89,No,Possession
+Railway,Kerala,Chennai,173.11,383,In Progress,134,Yes,Partial,13,5,41,Yes,Legal
+Power,Tamil Nadu,Coimbatore,342.73,684,In Progress,54,No,Partial,7,4,10,Yes,Compensation
+Irrigation,Karnataka,Trichy,15.11,510,In Progress,30,No,Full,47,4,72,Yes,Compensation
+Highway,Andhra Pradesh,Trichy,345.8,1784,Not Started,73,Yes,Partial,12,1,10,Yes,Legal
+Railway,Andhra Pradesh,Tirunelveli,159.76,903,In Progress,18,No,Partial,23,3,65,Yes,Compensation
+Railway,Karnataka,Chennai,30.23,80,Not Started,155,Yes,Not Taken,78,4,26,Yes,Legal
+Highway,Andhra Pradesh,Chennai,305.88,235,Not Started,336,No,Not Taken,64,2,57,Yes,Approval
+Irrigation,Tamil Nadu,Bengaluru,122.3,1744,Not Started,155,No,Full,85,2,89,Yes,Approval
+Highway,Andhra Pradesh,Chennai,194.94,966,Not Started,146,No,Not Taken,33,2,71,Yes,Approval
+Irrigation,Kerala,Coimbatore,42.59,1276,Paid,86,No,Full,50,5,20,No,Planning
+Railway,Karnataka,Salem,75.71,306,Not Started,19,No,Full,2,5,20,No,Compensation
+Irrigation,Tamil Nadu,Chennai,150.74,730,In Progress,268,No,Not Taken,89,4,71,Yes,Approval
+Power,Karnataka,Chennai,47.16,219,Not Started,332,No,Partial,77,4,0,No,Approval
+Railway,Tamil Nadu,Bengaluru,455.64,1186,In Progress,42,No,Partial,57,4,57,Yes,Compensation
+Power,Kerala,Kochi,5.51,73,Not Started,305,No,Partial,71,5,12,Yes,Approval
+Highway,Karnataka,Madurai,243.22,397,Paid,27,No,Partial,54,4,72,No,Possession
+Highway,Andhra Pradesh,Kochi,63.82,1113,Not Started,259,Yes,Full,79,1,91,Yes,Legal
+Highway,Tamil Nadu,Bengaluru,155.57,271,Not Started,21,No,Partial,41,3,5,No,Compensation
+Irrigation,Karnataka,Kochi,463.21,1097,Paid,100,Yes,Full,20,2,86,Yes,Legal
+Railway,Andhra Pradesh,Bengaluru,82.94,615,Not Started,38,No,Not Taken,9,2,99,Yes,Compensation
+Highway,Karnataka,Coimbatore,483.0,1375,In Progress,289,No,Not Taken,56,1,57,Yes,Approval
+Highway,Karnataka,Tirunelveli,104.88,1013,Not Started,352,No,Full,24,4,16,No,Approval
+Railway,Karnataka,Chennai,371.43,966,Not Started,299,No,Partial,55,5,72,No,Approval
+Highway,Tamil Nadu,Bengaluru,274.47,732,Not Started,169,No,Full,37,4,11,No,Approval
+Power,Andhra Pradesh,Bengaluru,442.53,1955,Paid,295,No,Partial,85,4,85,Yes,Approval
+Railway,Kerala,Madurai,278.11,677,Not Started,352,No,Partial,60,2,51,Yes,Approval
+Railway,Tamil Nadu,Bengaluru,268.44,427,Not Started,129,No,Full,46,2,75,Yes,Approval
+Railway,Tamil Nadu,Trichy,99.74,1634,In Progress,155,Yes,Full,53,5,69,Yes,Legal
+Power,Tamil Nadu,Tirunelveli,85.2,1202,Not Started,73,Yes,Partial,45,2,72,Yes,Legal
+Railway,Kerala,Chennai,458.45,1705,Not Started,341,No,Full,67,4,51,No,Approval
+Power,Andhra Pradesh,Chennai,165.6,119,Not Started,89,No,Partial,3,1,36,No,Compensation
+Railway,Andhra Pradesh,Madurai,187.61,224,Not Started,66,Yes,Full,93,5,2,No,Legal
+Irrigation,Andhra Pradesh,Coimbatore,380.51,1984,In Progress,235,No,Not Taken,65,1,97,Yes,Approval
+Highway,Karnataka,Chennai,171.06,35,In Progress,199,Yes,Partial,92,4,7,Yes,Legal
+Irrigation,Karnataka,Trichy,476.15,1551,Paid,331,Yes,Not Taken,42,5,9,No,Legal
+Highway,Karnataka,Chennai,369.62,1371,Not Started,226,No,Full,61,1,46,Yes,Approval
+Power,Kerala,Trichy,299.72,1405,Paid,347,No,Not Taken,99,5,40,Yes,Approval
+Irrigation,Karnataka,Tirunelveli,440.75,1158,Paid,232,No,Full,84,4,63,Yes,Approval
+Railway,Kerala,Tirunelveli,27.18,621,Not Started,265,No,Partial,84,5,41,Yes,Approval
+Highway,Andhra Pradesh,Salem,130.39,543,In Progress,85,No,Full,84,4,42,Yes,Compensation
+Highway,Karnataka,Salem,233.86,743,In Progress,101,No,Full,3,5,8,Yes,Compensation
+Irrigation,Karnataka,Trichy,115.42,1030,Not Started,213,Yes,Partial,64,5,13,Yes,Legal
+Power,Tamil Nadu,Coimbatore,372.59,875,Not Started,107,No,Full,61,2,100,Yes,Compensation
+Irrigation,Kerala,Chennai,459.81,105,In Progress,164,Yes,Partial,89,4,90,Yes,Legal
+Power,Andhra Pradesh,Bengaluru,213.33,1561,Not Started,90,No,Full,1,3,95,No,Compensation
+Power,Tamil Nadu,Chennai,172.71,1086,Not Started,191,Yes,Partial,8,5,3,Yes,Legal
+Highway,Tamil Nadu,Salem,480.87,1417,Not Started,334,No,Not Taken,56,1,1,No,Approval
+Irrigation,Andhra Pradesh,Kochi,223.81,696,In Progress,85,Yes,Full,44,2,96,Yes,Legal
+Irrigation,Tamil Nadu,Bengaluru,245.8,945,Paid,221,No,Full,17,2,84,No,Approval
+Power,Kerala,Trichy,177.45,345,Paid,362,No,Full,47,5,0,Yes,Approval
+Irrigation,Kerala,Bengaluru,455.0,865,Not Started,100,No,Partial,41,3,74,Yes,Compensation
+Railway,Karnataka,Kochi,285.56,1048,In Progress,225,Yes,Full,40,2,64,Yes,Legal
+Railway,Tamil Nadu,Chennai,381.68,1283,Not Started,363,Yes,Partial,74,4,45,Yes,Legal
+Irrigation,Karnataka,Chennai,406.37,1345,In Progress,59,Yes,Full,88,5,58,Yes,Legal
+Irrigation,Tamil Nadu,Coimbatore,172.57,42,Not Started,249,No,Not Taken,89,5,74,Yes,Approval
+Power,Kerala,Madurai,218.26,664,In Progress,47,No,Full,57,3,6,No,Compensation
+Railway,Kerala,Bengaluru,424.61,1565,In Progress,116,Yes,Not Taken,99,4,65,Yes,Legal
+Railway,Kerala,Salem,183.22,1414,Paid,226,Yes,Partial,41,4,14,No,Legal
+Highway,Tamil Nadu,Kochi,397.48,1661,Not Started,361,No,Not Taken,34,3,71,Yes,Approval
+Power,Kerala,Kochi,470.64,932,Paid,32,Yes,Full,37,1,46,Yes,Legal
+Highway,Tamil Nadu,Kochi,312.55,1054,Paid,43,Yes,Full,66,4,89,No,Legal
+Railway,Karnataka,Salem,371.46,458,In Progress,164,Yes,Partial,40,1,39,Yes,Legal
+Power,Tamil Nadu,Madurai,403.04,1709,Not Started,344,Yes,Full,98,1,41,Yes,Legal
+Irrigation,Karnataka,Chennai,422.91,1351,In Progress,291,Yes,Full,49,5,50,Yes,Legal
+Power,Tamil Nadu,Coimbatore,199.04,741,In Progress,336,Yes,Partial,85,5,34,Yes,Legal
+Irrigation,Karnataka,Coimbatore,28.0,1541,In Progress,343,No,Partial,71,2,40,No,Approval
+Irrigation,Kerala,Salem,202.43,823,Not Started,286,No,Not Taken,78,5,84,Yes,Approval
+Power,Karnataka,Coimbatore,337.69,777,Not Started,363,No,Partial,44,4,56,Yes,Approval
+Irrigation,Kerala,Kochi,226.55,17,In Progress,224,No,Full,70,4,37,No,Approval
+Highway,Kerala,Tirunelveli,375.11,919,Not Started,285,Yes,Partial,18,1,71,Yes,Legal
+Railway,Karnataka,Madurai,180.1,1936,In Progress,203,No,Full,16,4,95,Yes,Approval
+Irrigation,Tamil Nadu,Chennai,318.29,1588,Not Started,171,No,Not Taken,64,5,7,Yes,Approval
+Highway,Tamil Nadu,Tirunelveli,95.24,925,Not Started,11,No,Partial,92,5,73,No,Compensation
+Irrigation,Andhra Pradesh,Madurai,375.31,829,Paid,306,Yes,Full,76,5,62,Yes,Legal
+Railway,Tamil Nadu,Trichy,273.98,375,In Progress,120,No,Partial,55,3,86,No,Compensation
+Highway,Andhra Pradesh,Bengaluru,104.02,1319,Paid,243,Yes,Partial,92,4,3,Yes,Legal
+Railway,Tamil Nadu,Salem,147.73,336,Paid,151,No,Partial,40,2,47,Yes,Approval
+Railway,Tamil Nadu,Kochi,374.93,1634,In Progress,151,No,Partial,41,4,51,No,Approval
+Highway,Kerala,Coimbatore,242.59,265,In Progress,187,No,Not Taken,5,4,37,No,Approval
+Highway,Andhra Pradesh,Trichy,109.98,1818,Not Started,12,No,Full,68,3,93,No,Compensation
+Highway,Tamil Nadu,Coimbatore,483.72,1899,In Progress,90,No,Partial,97,4,86,Yes,Compensation
+Power,Andhra Pradesh,Tirunelveli,358.27,1233,Paid,199,No,Full,74,1,4,No,Approval
+Highway,Kerala,Chennai,478.67,701,Paid,73,Yes,Not Taken,72,5,84,Yes,Legal
+Highway,Kerala,Chennai,214.98,691,In Progress,255,No,Full,39,5,69,No,Approval
+Highway,Andhra Pradesh,Chennai,238.86,954,Paid,275,Yes,Full,40,3,80,No,Legal
+Highway,Kerala,Kochi,449.23,391,Not Started,327,No,Not Taken,8,5,88,Yes,Approval
+Irrigation,Karnataka,Coimbatore,263.71,1920,Paid,328,Yes,Partial,7,1,23,Yes,Legal
+Power,Karnataka,Trichy,354.37,825,Not Started,70,No,Full,43,3,85,No,Compensation
+Railway,Kerala,Chennai,127.96,472,Paid,77,No,Full,57,2,76,No,Planning
+Highway,Karnataka,Trichy,224.75,1443,Not Started,283,No,Partial,66,5,16,No,Approval
+Irrigation,Tamil Nadu,Coimbatore,63.92,73,Not Started,129,No,Partial,12,4,77,Yes,Approval
+Irrigation,Andhra Pradesh,Kochi,104.98,1500,In Progress,42,Yes,Full,18,1,97,Yes,Legal
+Irrigation,Tamil Nadu,Tirunelveli,2.97,1132,Not Started,7,No,Not Taken,97,1,89,Yes,Compensation
+Railway,Andhra Pradesh,Kochi,22.03,1786,In Progress,12,Yes,Partial,95,5,82,Yes,Legal
+Highway,Kerala,Trichy,488.7,1189,Paid,212,No,Partial,48,2,25,Yes,Approval
+Power,Tamil Nadu,Kochi,123.07,204,Paid,110,No,Not Taken,79,4,2,No,Possession
+Power,Kerala,Kochi,332.5,220,Paid,290,No,Full,99,2,1,Yes,Approval
+Irrigation,Kerala,Tirunelveli,419.95,1974,Not Started,22,No,Partial,81,2,91,Yes,Compensation
+Railway,Andhra Pradesh,Coimbatore,276.45,216,Paid,301,Yes,Full,77,5,1,Yes,Legal
+Railway,Andhra Pradesh,Coimbatore,78.69,512,Paid,253,No,Full,29,4,21,Yes,Approval
+Railway,Andhra Pradesh,Salem,364.74,20,In Progress,14,No,Full,65,5,70,No,Compensation
+Power,Tamil Nadu,Kochi,301.13,1526,In Progress,129,No,Not Taken,76,5,3,Yes,Approval
+Irrigation,Karnataka,Coimbatore,366.3,888,Paid,60,Yes,Full,90,1,37,Yes,Legal
+Highway,Andhra Pradesh,Coimbatore,385.45,336,Paid,114,No,Full,58,5,83,No,Planning
+Power,Andhra Pradesh,Madurai,487.77,721,Not Started,319,Yes,Partial,52,3,69,Yes,Legal
+Irrigation,Tamil Nadu,Chennai,287.85,1905,Not Started,307,No,Partial,51,4,72,Yes,Approval
+Irrigation,Andhra Pradesh,Salem,172.47,555,Paid,324,Yes,Not Taken,80,1,51,Yes,Legal
+Highway,Tamil Nadu,Bengaluru,325.11,1629,In Progress,66,No,Not Taken,30,4,30,Yes,Compensation
+Highway,Kerala,Salem,36.55,946,Paid,248,Yes,Partial,14,1,25,Yes,Legal
+Highway,Andhra Pradesh,Salem,448.96,260,Not Started,174,No,Partial,19,3,35,Yes,Approval
+Railway,Andhra Pradesh,Bengaluru,61.89,996,In Progress,338,Yes,Not Taken,4,5,25,No,Legal
+Highway,Kerala,Madurai,165.6,1794,In Progress,1,No,Full,6,1,27,Yes,Compensation
+Irrigation,Kerala,Kochi,408.33,732,Not Started,171,No,Not Taken,17,1,4,Yes,Approval
+Highway,Kerala,Tirunelveli,299.66,884,Paid,333,No,Full,55,1,73,Yes,Approval

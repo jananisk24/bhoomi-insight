@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE_URL } from '../api';
 import { 
   Sparkles, 
   LandPlot, 
@@ -59,63 +60,192 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
     'Udupi'
   ];
 
-  const handlePredictSubmit = (e: React.FormEvent) => {
+  const handlePredictSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!projectName.trim()) {
       setFormError('Please enter the project name.');
       return;
     }
-    if (landArea <= 0) {
-      setFormError('Please enter a valid land area (acres).');
+
+    if (landArea <= 0 || affectedFamilies < 1 || budgetCr <= 0) {
+      setFormError(
+        'Please enter a valid land area, affected family count, and budget.'
+      );
+      return;
+    }
+
+    const token = sessionStorage.getItem('access_token');
+
+    if (!token) {
+      setFormError('Your session has expired. Please log in again.');
       return;
     }
 
     setFormError('');
     setIsPredicting(true);
 
-    // Call prediction algorithm
-    const prediction = calculateDelayRisk({
-      landArea: Number(landArea),
-      affectedFamilies: Number(affectedFamilies),
-      compensationStatus,
-      legalDispute,
-      approvalStatus,
-      rehabilitationStatus
-    });
+    try {
+      // Convert the form values to the backend's expected format.
+      const projectPayload = {
+        project_name: projectName.trim(),
+        state: 'Karnataka',
+        district,
+        land_required: Number(landArea) * 0.404686,
+        affected_families: Number(affectedFamilies),
+        estimated_cost: Number(budgetCr) * 10_000_000,
 
-    const newProject: Project = {
-      id: `PRJ-${Math.floor(100 + Math.random() * 900)}`,
-      name: projectName.trim(),
-      district,
-      state: 'Karnataka',
-      landArea: Number(landArea),
-      affectedFamilies: Number(affectedFamilies),
-      compensationStatus,
-      legalDispute,
-      approvalStatus,
-      rehabilitationStatus,
-      riskScore: prediction.riskScore,
-      riskCategory: prediction.riskCategory,
-      status: prediction.riskCategory === 'High' 
-        ? 'Severely Delayed' 
-        : prediction.riskCategory === 'Medium' 
-        ? 'Moderate Delay' 
-        : 'On Track',
-      coordinates: [13.0 + Math.random() * 2.5, 75.0 + Math.random() * 2.5],
-      projectType,
-      delayFactors: prediction.delayFactors,
-      recommendedActions: prediction.recommendedActions,
-      createdDate: new Date().toISOString().split('T')[0],
-      estimatedDelayMonths: prediction.estimatedDelayMonths,
-      budgetCr: Number(budgetCr)
-    };
+        project_type:
+          projectType === 'Highway / Expressway'
+            ? 'Highway'
+            : projectType === 'Railway Corridor'
+              ? 'Railway'
+              : projectType === 'Industrial Park'
+                ? 'Industrial Park'
+                : projectType === 'Airport Expansion'
+                  ? 'Airport'
+                  : projectType === 'Solar Power Plant'
+                    ? 'Solar'
+                    : 'Irrigation',
 
-    setTimeout(() => {
-      setIsPredicting(false);
+        compensation_status:
+          compensationStatus === 'Disbursed (100%)'
+            ? 'Paid'
+            : compensationStatus === 'Partially Disbursed (50-75%)'
+              ? 'In Progress'
+              : compensationStatus === 'Pending (<25%)'
+                ? 'Pending'
+                : 'Disputed',
+
+        approval_days_pending:
+          approvalStatus === 'Cleared / Approved'
+            ? 0
+            : approvalStatus === 'In Administrative Review'
+              ? 30
+              : approvalStatus === 'Environmental Clearance Pending'
+                ? 90
+                : 120,
+
+        legal_dispute: legalDispute ? 'Yes' : 'No',
+
+        possession_status:
+          rehabilitationStatus === 'Completed'
+            ? 'Taken'
+            : rehabilitationStatus === 'Not Started'
+              ? 'Not Taken'
+              : 'Partial',
+
+        rehabilitation_progress:
+          rehabilitationStatus === 'Completed'
+            ? 100
+            : rehabilitationStatus === 'In Progress'
+              ? 50
+              : rehabilitationStatus === 'Land Allocated'
+                ? 25
+                : 0,
+
+        stakeholder_score: 5,
+        district_historical_delay: 0,
+      };
+
+    // 1. Save the project to the backend database.
+      const createResponse = await fetch(`${API_BASE_URL}/projects`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(projectPayload),
+      });
+
+      if (!createResponse.ok) {
+        const message = await createResponse.text();
+        throw new Error(`Could not save project: ${message}`);
+      }
+
+      const savedProject = await createResponse.json();
+
+    // 2. Ask the actual ML model to predict the saved project.
+      const predictionResponse = await fetch(`${API_BASE_URL}/predict`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          project_id: savedProject.id,
+        }),
+      });
+
+      if (!predictionResponse.ok) {
+        const message = await predictionResponse.text();
+
+        throw new Error(
+          `Project saved, but ML prediction failed: ${message}`
+        );
+      }
+
+      const mlPrediction = await predictionResponse.json();
+
+    // Keep the existing local calculator for its supporting
+    // explanation fields, but use the backend ML model's risk result.
+      const supportingDetails = calculateDelayRisk({
+        landArea: Number(landArea),
+        affectedFamilies: Number(affectedFamilies),
+        compensationStatus,
+        legalDispute,
+        approvalStatus,
+        rehabilitationStatus,
+      });
+
+      const newProject: Project = {
+        id: String(savedProject.id),
+        name: savedProject.project_name,
+        district: savedProject.district,
+        state: savedProject.state,
+        landArea: Number(landArea),
+        affectedFamilies: Number(affectedFamilies),
+        compensationStatus,
+        legalDispute,
+        approvalStatus,
+        rehabilitationStatus,
+
+        riskScore: mlPrediction.risk_score,
+        riskCategory: mlPrediction.risk_level,
+
+        status:
+          mlPrediction.risk_level === 'High'
+            ? 'Severely Delayed'
+            : mlPrediction.risk_level === 'Medium'
+              ? 'Moderate Delay'
+              : 'On Track',
+
+        coordinates: [12.9716, 77.5946],
+        projectType,
+        delayFactors: supportingDetails.delayFactors,
+        recommendedActions: supportingDetails.recommendedActions,
+        createdDate: new Date().toISOString().split('T')[0],
+
+      // The backend model does not currently provide an estimated
+      // number of delay months.
+        estimatedDelayMonths: supportingDetails.estimatedDelayMonths,
+
+        budgetCr: Number(budgetCr),
+      };
+
       onAddProject(newProject);
-      // Automatically navigate to prediction results page
       onNavigate('prediction-result');
-    }, 450);
+    } catch (error) {
+      console.error('Project submission failed:', error);
+
+      setFormError(
+        error instanceof Error
+          ? error.message
+          : 'Something went wrong while saving the project.'
+      );
+    } finally {
+      setIsPredicting(false);
+    }
   };
 
   const handleLoadSample = (type: 'high' | 'low') => {

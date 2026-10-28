@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { initialProjects } from './data/sampleProjects';
 import { Project, ActivePage, User } from './types';
 import { Sidebar } from './components/Sidebar';
@@ -13,6 +12,7 @@ import { AnalyticsPage } from './pages/AnalyticsPage';
 import { GisMapPage } from './pages/GisMapPage';
 import { AlertsPage } from './pages/AlertsPage';
 import { X, ShieldCheck } from 'lucide-react';
+import { useState } from 'react';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState<User>({

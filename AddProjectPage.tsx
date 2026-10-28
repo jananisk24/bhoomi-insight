@@ -16,8 +16,8 @@ import {
   ApprovalStatus, 
   RehabilitationStatus 
 } from '../types';
-import { calculateDelayRisk } from '../utils/predictionEngine';
-import { ALL_STATES, getDistrictsForState, getStateCoordinates } from '../data/geoData';
+import { calculateDelayRisk } from './predictionEngine';
+import { ALL_STATES, getDistrictsForState, getStateCoordinates } from './geoData';
 
 interface AddProjectPageProps {
   onAddProject: (project: Project) => void;
@@ -57,69 +57,125 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
     }
   };
 
-  const handlePredictSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!projectName.trim()) {
-      setFormError('Please enter the project name.');
-      return;
-    }
-    if (landArea <= 0) {
-      setFormError('Please enter a valid land area (acres).');
-      return;
+  const handlePredictSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (!projectName.trim()) {
+    setFormError('Please enter the project name.');
+    return;
+  }
+
+  if (landArea <= 0) {
+    setFormError('Please enter a valid land area (acres).');
+    return;
+  }
+
+  setFormError('');
+  setIsPredicting(true);
+
+  try {
+    const token = localStorage.getItem('access_token');
+
+    if (!token) {
+      throw new Error('Please login again.');
     }
 
-    setFormError('');
-    setIsPredicting(true);
-
-    // Call prediction algorithm
-    const prediction = calculateDelayRisk({
-      landArea: Number(landArea),
-      affectedFamilies: Number(affectedFamilies),
-      compensationStatus,
-      legalDispute,
-      approvalStatus,
-      rehabilitationStatus
+    // 1. Create the project in M3 backend
+    const projectResponse = await fetch('http://127.0.0.1:8000/projects', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        project_name: projectName.trim(),
+        state,
+        district,
+        land_required: Number(landArea),
+        affected_families: Number(affectedFamilies),
+        estimated_cost: Number(budgetCr) * 10000000,
+        project_type: projectType,
+        compensation_status: compensationStatus,
+        approval_days_pending:
+          approvalStatus === 'Environmental Clearance Pending' ? 150 : 0,
+        legal_dispute: legalDispute ? 'Yes' : 'No',
+        possession_status: 'Not Taken',
+        rehabilitation_progress:
+          rehabilitationStatus === 'Not Started' ? 0 : 50,
+        stakeholder_score: 5,
+        district_historical_delay: 0,
+      }),
     });
 
+    const projectData = await projectResponse.json();
+
+    if (!projectResponse.ok) {
+      throw new Error(projectData.detail || 'Failed to create project.');
+    }
+
+    // 2. Send the created project to the real M2 model through M3
+    const predictionResponse = await fetch('http://127.0.0.1:8000/predict', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        project_id: projectData.id,
+      }),
+    });
+
+    const prediction = await predictionResponse.json();
+
+    if (!predictionResponse.ok) {
+      throw new Error(prediction.detail || 'Prediction failed.');
+    }
+
+    // 3. Convert the real backend result to the frontend Project format
     const stateBaseCoords = getStateCoordinates(state) || [14.0, 76.0];
-    const randomizedCoords: [number, number] = [
-      stateBaseCoords[0] + (Math.random() - 0.5) * 1.5,
-      stateBaseCoords[1] + (Math.random() - 0.5) * 1.5
-    ];
 
     const newProject: Project = {
-      id: `PRJ-${Math.floor(100 + Math.random() * 900)}`,
-      name: projectName.trim(),
-      district,
-      state,
+      id: String(projectData.id),
+      name: projectData.project_name,
+      district: projectData.district,
+      state: projectData.state,
       landArea: Number(landArea),
       affectedFamilies: Number(affectedFamilies),
       compensationStatus,
       legalDispute,
       approvalStatus,
       rehabilitationStatus,
-      riskScore: prediction.riskScore,
-      riskCategory: prediction.riskCategory,
-      status: prediction.riskCategory === 'High' 
-        ? 'Severely Delayed' 
-        : prediction.riskCategory === 'Medium' 
-        ? 'Moderate Delay' 
-        : 'On Track',
-      coordinates: randomizedCoords,
+      riskScore: prediction.risk_score,
+      riskCategory: prediction.risk_level,
+      status:
+        prediction.risk_level === 'High'
+          ? 'Severely Delayed'
+          : prediction.risk_level === 'Medium'
+          ? 'Moderate Delay'
+          : 'On Track',
+      coordinates: stateBaseCoords,
       projectType,
-      delayFactors: prediction.delayFactors,
-      recommendedActions: prediction.recommendedActions,
+      delayFactors: [],
+      recommendedActions: [],
       createdDate: new Date().toISOString().split('T')[0],
-      estimatedDelayMonths: prediction.estimatedDelayMonths,
-      budgetCr: Number(budgetCr)
+      estimatedDelayMonths: 0,
+      budgetCr: Number(budgetCr),
+      backendPrediction: prediction,
     };
 
-    setTimeout(() => {
-      setIsPredicting(false);
-      onAddProject(newProject);
-      onNavigate('prediction-result');
-    }, 450);
-  };
+    setIsPredicting(false);
+    onAddProject(newProject);
+    onNavigate('prediction-result');
+
+  } catch (error) {
+    setIsPredicting(false);
+    setFormError(
+      error instanceof Error
+        ? error.message
+        : 'Something went wrong while creating the project.'
+    );
+  }
+};
 
   const handleLoadSample = (type: 'high' | 'low') => {
     if (type === 'high') {

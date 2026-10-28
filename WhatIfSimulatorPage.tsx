@@ -16,9 +16,9 @@ import {
   CompensationStatus, 
   ApprovalStatus, 
   RehabilitationStatus 
-} from '../types';
-import { calculateDelayRisk } from '../utils/predictionEngine';
-import { RiskBadge } from '../components/RiskBadge';
+} from './types';
+import { calculateDelayRisk } from './predictionEngine';
+import { RiskBadge } from './RiskBadge';
 
 interface WhatIfSimulatorPageProps {
   initialProject: Project | null;
@@ -76,8 +76,19 @@ export const WhatIfSimulatorPage: React.FC<WhatIfSimulatorPageProps> = ({
     });
   }, [baseProject, simCompensation, simLegalDispute, simApproval, simRehabilitation]);
 
-  const scoreDiff = simulatedResult && baseProject 
-    ? simulatedResult.riskScore - baseProject.riskScore 
+  const baselineResult = baseProject
+    ? calculateDelayRisk({
+        landArea: baseProject.landArea,
+        affectedFamilies: baseProject.affectedFamilies,
+        compensationStatus: baseProject.compensationStatus,
+        legalDispute: baseProject.legalDispute,
+        approvalStatus: baseProject.approvalStatus,
+        rehabilitationStatus: baseProject.rehabilitationStatus
+     })
+    : null;
+
+  const scoreDiff = simulatedResult && baselineResult
+    ? simulatedResult.riskScore - baselineResult.riskScore
     : 0;
 
   // Preset Scenario Handlers
@@ -147,10 +158,10 @@ export const WhatIfSimulatorPage: React.FC<WhatIfSimulatorPageProps> = ({
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">Current Baseline Risk</div>
             <div className="my-3 flex items-center justify-center">
               <span className={`text-3xl font-black font-mono ${
-                baseProject.riskScore >= 70 ? 'text-rose-600' :
-                baseProject.riskScore >= 40 ? 'text-amber-600' : 'text-emerald-600'
+                (baselineResult?.riskScore ?? baseProject.riskScore) >= 70 ? 'text-rose-600' :
+                (baselineResult?.riskScore ?? baseProject.riskScore) >= 40 ? 'text-amber-600' : 'text-emerald-600'
               }`}>
-                {baseProject.riskScore}%
+                {baselineResult?.riskScore ?? baseProject.riskScore}%
               </span>
             </div>
             <RiskBadge category={baseProject.riskCategory} size="sm" />

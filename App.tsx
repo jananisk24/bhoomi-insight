@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { initialProjects } from './data/sampleProjects';
-import { Project, ActivePage, User } from './types';
-import { Sidebar } from './components/Sidebar';
-import { Header } from './components/Header';
-import { LoginPage } from './pages/LoginPage';
-import { DashboardPage } from './pages/DashboardPage';
-import { ProjectListPage } from './pages/ProjectListPage';
-import { AddProjectPage } from './pages/AddProjectPage';
-import { PredictionResultsPage } from './pages/PredictionResultsPage';
-import { WhatIfSimulatorPage } from './pages/WhatIfSimulatorPage';
-import { AnalyticsPage } from './pages/AnalyticsPage';
-import { GisMapPage } from './pages/GisMapPage';
-import { AlertsPage } from './pages/AlertsPage';
+import { useEffect, useState } from 'react';
+import { ActivePage, BackendPrediction, BackendPredictionRecord, Project, ProjectStatus, User } from './types';
+import { initialProjects } from './sampleProjects';
+import { Sidebar } from './Sidebar';
+import { Header } from './Header';
+import { LoginPage } from './LoginPage';
+import { DashboardPage } from './DashboardPage';
+import { ProjectListPage } from './ProjectListPage';
+import { AddProjectPage } from './AddProjectPage';
+import { PredictionResultsPage } from './PredictionResultsPage';
+import { WhatIfSimulatorPage } from './WhatIfSimulatorPage';
+import { AnalyticsPage } from './AnalyticsPage';
+import { GisMapPage } from './GisMapPage';
+import { AlertsPage } from './AlertsPage';
 import { 
   X, 
   ShieldCheck, 
@@ -34,8 +34,181 @@ export default function App() {
 
   const [activePage, setActivePage] = useState<ActivePage>('login');
   const [projects, setProjects] = useState<Project[]>(initialProjects);
+  const [backendProjectsLoaded, setBackendProjectsLoaded] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(initialProjects[0]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const loginResponse = await fetch('http://127.0.0.1:8000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            username: 'janani',
+            password: 'janani123',
+          }),
+        });
+
+        if (!loginResponse.ok) {
+          throw new Error('Backend login failed');
+        }
+
+        const loginData = await loginResponse.json();
+
+        const projectsResponse = await fetch(
+          'http://127.0.0.1:8000/projects',
+          {
+            headers: {
+              Authorization: `Bearer ${loginData.access_token}`,
+              Accept: 'application/json',
+            },
+          }
+        );
+
+        if (!projectsResponse.ok) {
+          throw new Error(
+            `Failed to fetch projects: ${projectsResponse.status}`
+          );
+        }
+
+        const data = await projectsResponse.json();
+        const predictionResults = await Promise.all(
+          data.map(async (item: any) => {
+            try {
+              const predictionResponse = await fetch(
+                `http://127.0.0.1:8000/predictions/${item.id}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${loginData.access_token}`,
+                    Accept: 'application/json',
+                  },
+                }
+              );
+
+              if (!predictionResponse.ok) {
+                console.warn(
+                  `Prediction unavailable for project ${item.id}`
+                );
+                return { projectId: item.id, prediction: null };
+              }
+
+              const records: BackendPredictionRecord[] =
+                await predictionResponse.json();
+
+              const latestPrediction =
+                records.length > 0
+                  ? [...records].sort(
+                      (a, b) =>
+                        new Date(b.created_at).getTime() -
+                        new Date(a.created_at).getTime()
+                    )[0]
+                  : null;
+
+              return {
+                projectId: item.id,
+                prediction: latestPrediction,
+              };
+            } catch (error) {
+              console.warn(
+                `Could not fetch prediction for project ${item.id}`,
+                error
+              );
+              return { projectId: item.id, prediction: null };
+            }
+          })
+        );
+
+        const predictionsByProjectId = new Map(
+          predictionResults.map((result) => [
+            result.projectId,
+            result.prediction,
+          ])
+        );        
+
+        const backendProjects: Project[] = data.map((item: any) => ({
+          id: `BACKEND-${item.id}`,
+          name: item.project_name,
+          district: item.district,
+          state: item.state,
+          landArea: Number(item.land_required) || 0,
+          affectedFamilies: Number(item.affected_families) || 0,
+          compensationStatus: item.compensation_status || 'Pending',
+          legalDispute:
+            item.legal_dispute === true || item.legal_dispute === 'Yes',
+          approvalStatus:
+            Number(item.approval_days_pending) > 0
+              ? 'Environmental Clearance Pending'
+              : 'Approved',
+          rehabilitationStatus:
+            Number(item.rehabilitation_progress) >= 100
+              ? 'Completed'
+              : Number(item.rehabilitation_progress) > 0
+                ? 'In Progress'
+                : 'Not Started',
+          riskScore:
+            predictionsByProjectId.get(item.id)?.delay_probability != null
+              ? predictionsByProjectId.get(item.id)!.delay_probability * 100
+              : -1,
+
+          riskCategory:
+            predictionsByProjectId.get(item.id)?.risk_level ?? 'Not Predicted',
+          status:
+            (predictionsByProjectId.get(item.id)?.risk_level === 'High'
+              ? 'Severely Delayed'
+              : predictionsByProjectId.get(item.id)?.risk_level === 'Medium'
+                ? 'Moderate Delay'
+                : predictionsByProjectId.get(item.id)?.risk_level === 'Low'
+                  ? 'On Track'
+                  : item.status || 'Pending') as ProjectStatus,
+          coordinates: [13.0827, 80.2707],
+          projectType: item.project_type || 'Other',
+          delayFactors: {
+            compensationPending:
+              item.compensation_status === 'Paid' ? 0 : 50,
+            legalDispute:
+              item.legal_dispute === true || item.legal_dispute === 'Yes'
+                ? 100
+                : 0,
+            approvalDelay: Math.min(
+              100,
+              Number(item.approval_days_pending) / 2
+            ),
+            rehabilitationGap: 100 - Math.min(
+              100,
+              Number(item.rehabilitation_progress) || 0
+            ),
+          },
+          recommendedActions: [
+            'Review pending approvals and compensation.',
+            'Update rehabilitation and possession progress.',
+          ],
+          createdDate: item.created_at
+            ? String(item.created_at).slice(0, 10)
+            : new Date().toISOString().slice(0, 10),
+          estimatedDelayMonths: 0,
+          budgetCr: (Number(item.estimated_cost) || 0) / 10000000,
+        }));
+
+        setProjects((previousProjects) => {
+          const sampleProjects = previousProjects.filter(
+            (project) => !project.id.startsWith('BACKEND-')
+          );
+
+          return [...sampleProjects, ...backendProjects];
+        });
+
+        console.log('Backend projects added:', backendProjects.length);
+      } catch (error) {
+        console.error('Backend connection error:', error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+  
 
   // Compute alert count for high risk projects
   const highRiskCount = projects.filter((p) => p.riskCategory === 'High').length;

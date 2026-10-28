@@ -12,9 +12,9 @@ import {
   Filter,
   RotateCcw
 } from 'lucide-react';
-import { Project, ActivePage, RiskCategory } from '../types';
-import { RiskBadge } from '../components/RiskBadge';
-import { ALL_STATES, getDistrictsForState, getStateCoordinates } from '../data/geoData';
+import { Project, ActivePage, RiskCategory } from './types';
+import { RiskBadge } from './RiskBadge';
+import { ALL_STATES, getDistrictsForState, getStateCoordinates } from './geoData';
 
 interface GisMapPageProps {
   projects: Project[];

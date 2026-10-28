@@ -23,9 +23,9 @@ import {
   FileText,
   Filter
 } from 'lucide-react';
-import { Project } from '../types';
-import { ALL_STATES, getDistrictsForState } from '../data/geoData';
-import { exportProjectsCSV, exportExecutiveAssessment } from '../utils/exportReport';
+import { Project } from './types';
+import { ALL_STATES, getDistrictsForState } from './geoData';
+import { exportProjectsCSV, exportExecutiveAssessment } from './exportReport';
 
 interface AnalyticsPageProps {
   projects: Project[];
@@ -219,7 +219,8 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
                   outerRadius={85}
                   paddingAngle={4}
                   dataKey="value"
-                  label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+                  label={({ name, percent }) => 
+                    `${name} (${((percent?? 0) * 100).toFixed(0)}%)`}
                 >
                   {riskDistributionData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />

@@ -1,4 +1,4 @@
-export type RiskCategory = 'Low' | 'Medium' | 'High';
+export type RiskCategory = 'Low' | 'Medium' | 'High' | 'Not Predicted';
 
 export type ProjectStatus = 'On Track' | 'In Progress' | 'Moderate Delay' | 'Severely Delayed' | 'Cleared';
 
@@ -48,6 +48,40 @@ export interface Project {
   createdDate: string;
   estimatedDelayMonths: number;
   budgetCr: number;
+  backendPrediction?: BackendPrediction;
+}
+export interface BackendPrediction {
+  prediction_id: number;
+  project_id: number;
+  project_name: string;
+  delayed: boolean;
+  delay_probability: number;
+  risk_score: number;
+  risk_level: RiskCategory;
+  stage_risk: {
+    Planning: {
+      score: number;
+      category: RiskCategory;
+    };
+    Approval: {
+      score: number;
+      category: RiskCategory;
+    };
+    Compensation: {
+      score: number;
+      category: RiskCategory;
+    };
+    Rehabilitation: {
+      score: number;
+      category: RiskCategory;
+    };
+    Possession: {
+      score: number;
+      category: RiskCategory;
+    };
+  };
+  highest_risk_stage: string;
+  status: string;
 }
 
 export interface User {
@@ -56,6 +90,13 @@ export interface User {
   role: string;
   department: string;
   isAuthenticated: boolean;
+}
+export interface BackendPredictionRecord {
+  id: number;
+  project_id: number;
+  delay_probability: number;
+  risk_level: RiskCategory;
+  created_at: string;
 }
 
 export type ActivePage = 

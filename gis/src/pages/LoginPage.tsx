@@ -1,28 +1,36 @@
 import React, { useState } from 'react';
-import { 
-  LandPlot, 
-  Lock, 
-  User as UserIcon, 
-  ArrowRight, 
-  GraduationCap, 
+import {
+  LandPlot,
+  Lock,
+  User as UserIcon,
+  ArrowRight,
   Info,
   CheckCircle2,
   Sparkles
 } from 'lucide-react';
 import { User } from '../types';
+import { API_BASE_URL } from '../api';
 
 interface LoginPageProps {
   onLoginSuccess: (user: User) => void;
 }
 
+interface LoginResponse {
+  access_token: string;
+  token_type: string;
+}
+
 export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
-  const [username, setUsername] = useState('officer.revenue');
-  const [password, setPassword] = useState('demo1234');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (
+    e: React.SyntheticEvent<HTMLFormElement>
+  ) => { 
     e.preventDefault();
+
     if (!username.trim() || !password.trim()) {
       setError('Please enter both username and password.');
       return;
@@ -31,22 +39,56 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
     setIsLoading(true);
     setError('');
 
-    // Simulate quick authentication
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const response = await fetch(`${API_BASE_URL}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username.trim(),
+          password,
+        }),
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('Invalid username or password.');
+        }
+
+        throw new Error(`Login failed (${response.status}).`);
+      }
+
+      const data: LoginResponse = await response.json();
+      if (!data.access_token) {
+        throw new Error('The server did not return an access token.');
+      }
+      sessionStorage.setItem('access_token', data.access_token);
+      sessionStorage.setItem('token_type', data.token_type || 'bearer');
+
       onLoginSuccess({
         username: username.trim(),
-        fullName: 'Dr. Ramesh K. (Project Officer)',
-        role: 'Assistant Commissioner (Revenue)',
-        department: 'Dept. of Land Resources & Public Works',
-        isAuthenticated: true
+        fullName: username.trim(),
+        role: 'Officer',
+        department: 'Land Resources',
+        isAuthenticated: true,
       });
-    }, 400);
+    } catch (err) {
+      if (err instanceof TypeError) {
+        setError('Cannot connect to the backend. Check that the server is running.');
+      } else {
+        setError(
+          err instanceof Error ? err.message : 'An unexpected error occurred.'
+        );
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleDemoFill = () => {
-    setUsername('officer.revenue');
-    setPassword('demo1234');
+    setUsername('');
+    setPassword('');
     setError('');
   };
 
@@ -121,6 +163,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
               <input
                 id="password-input"
                 type="password"
+                autoComplete="off"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
@@ -175,7 +218,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
           <button
             id="btn-quick-demo-login"
             type="button"
-            onClick={handleLogin}
+            onClick={() => {
+              const form = document.querySelector('form');
+              form?.requestSubmit();
+            }}
             className="w-full py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors shadow-xs"
           >
             <CheckCircle2 className="w-3.5 h-3.5" />

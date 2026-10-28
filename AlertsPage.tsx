@@ -13,7 +13,7 @@ import {
   Filter
 } from 'lucide-react';
 import { Project, ActivePage } from '../types';
-import { RiskBadge } from '../components/RiskBadge';
+import { RiskBadge } from './RiskBadge';
 
 interface AlertsPageProps {
   projects: Project[];

@@ -203,7 +203,9 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
                             style={{ width: `${project.riskScore}%` }}
                           />
                         </div>
-                        <span className="font-mono font-bold text-slate-800">{project.riskScore}%</span>
+                        <span className="font-mono font-bold text-slate-800">
+                          {project.riskScore.toFixed(2)}%
+                        </span>
                       </div>
                       {project.estimatedDelayMonths > 0 && (
                         <div className="text-[10px] text-rose-600 font-medium mt-0.5">

@@ -18,9 +18,9 @@ import {
   Check
 } from 'lucide-react';
 import { Project, ActivePage } from '../types';
-import { RiskBadge } from '../components/RiskBadge';
-import { ALL_STATES, getDistrictsForState } from '../data/geoData';
-import { exportProjectsCSV, exportExecutiveAssessment } from '../utils/exportReport';
+import { RiskBadge } from './RiskBadge';
+import { ALL_STATES, getDistrictsForState } from './geoData';
+import { exportProjectsCSV, exportExecutiveAssessment } from './exportReport';
 
 interface DashboardPageProps {
   projects: Project[];

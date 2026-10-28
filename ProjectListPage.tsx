@@ -18,10 +18,10 @@ import {
   AlertTriangle,
   Clock
 } from 'lucide-react';
-import { Project, ActivePage, RiskCategory } from '../types';
-import { RiskBadge } from '../components/RiskBadge';
-import { ALL_STATES, getDistrictsForState } from '../data/geoData';
-import { exportProjectsCSV, exportExecutiveAssessment } from '../utils/exportReport';
+import { Project, ActivePage, RiskCategory } from './types';
+import { RiskBadge } from './RiskBadge';
+import { ALL_STATES, getDistrictsForState } from './geoData';
+import { exportProjectsCSV, exportExecutiveAssessment } from './exportReport';
 
 interface ProjectListPageProps {
   projects: Project[];
@@ -334,23 +334,23 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
       {viewMode === 'table' ? (
         <div className="bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full min-w-[1100px] text-left text-xs table-fixed">
               <thead className="bg-slate-50 text-slate-600 uppercase tracking-wider font-semibold border-b border-slate-200">
                 <tr>
-                  <th className="px-4 py-3.5 cursor-pointer hover:bg-slate-100" onClick={() => toggleSort('name')}>
+                  <th className="w-[25%] px-4 py-3.5 cursor-pointer hover:bg-slate-100" onClick={() => toggleSort('name')}>
                     <div className="flex items-center gap-1.5">
                       <span>Project Name</span>
                       <ArrowUpDown className="w-3 h-3 text-slate-400" />
                     </div>
                   </th>
-                  <th className="px-4 py-3.5">State &amp; District</th>
+                  <th className="w-[17%] px-4 py-3.5">State &amp; District</th>
                   <th className="px-4 py-3.5 cursor-pointer hover:bg-slate-100" onClick={() => toggleSort('landArea')}>
                     <div className="flex items-center gap-1.5">
                       <span>Land Area</span>
                       <ArrowUpDown className="w-3 h-3 text-slate-400" />
                     </div>
                   </th>
-                  <th className="px-4 py-3.5 cursor-pointer hover:bg-slate-100" onClick={() => toggleSort('riskScore')}>
+                  <th className="w-[13%] px-4 py-3.5 cursor-pointer hover:bg-slate-100" onClick={() => toggleSort('riskScore')}>
                     <div className="flex items-center gap-1.5">
                       <span>Risk Score</span>
                       <ArrowUpDown className="w-3 h-3 text-slate-400" />
@@ -358,7 +358,7 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
                   </th>
                   <th className="px-4 py-3.5">Risk Category</th>
                   <th className="px-4 py-3.5">Current Status</th>
-                  <th className="px-4 py-3.5 text-right">Quick Actions</th>
+                  <th className="w-[23%] px-4 py-3.5 text-right">Quick Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -402,26 +402,40 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
                         <div className="text-[10px] text-slate-400">{project.affectedFamilies} PAFs</div>
                       </td>
                       <td className="px-4 py-3.5">
-                        <div className="flex items-center gap-2">
-                          <div className="w-12 bg-slate-200 rounded-full h-2 overflow-hidden">
-                            <div
-                              className={`h-full rounded-full ${
-                                project.riskScore >= 70
-                                  ? 'bg-rose-500'
-                                  : project.riskScore >= 40
-                                  ? 'bg-amber-500'
-                                  : 'bg-emerald-500'
-                              }`}
-                              style={{ width: `${project.riskScore}%` }}
-                            />
-                          </div>
-                          <span className="font-mono font-bold text-slate-800">{project.riskScore}%</span>
-                        </div>
-                        {project.estimatedDelayMonths > 0 && (
-                          <div className="text-[10px] text-rose-600 font-medium mt-0.5">
-                            ~{project.estimatedDelayMonths} mos delay
+                        {project.riskScore < 0 ||
+                        project.riskCategory === 'Not Predicted' ? (
+                          <span className="text-slate-500 font-semibold">
+                            Not Predicted
+                          </span>
+                        ) : (
+                          <div className="flex items-center gap-2">
+                            <div className="w-12 bg-slate-200 rounded-full h-2 overflow-hidden">
+                              <div
+                                className={`h-full rounded-full ${
+                                  project.riskScore >= 70
+                                    ? 'bg-rose-500'
+                                    : project.riskScore >= 40
+                                      ? 'bg-amber-500'
+                                      : 'bg-emerald-500'
+                                }`}
+                                style={{
+                                  width: `${project.riskScore}%`,
+                                }}
+                              />
+                            </div>
+
+                            <span className="font-mono font-bold text-slate-800">
+                              {project.riskScore.toFixed(2)}%
+                            </span>
                           </div>
                         )}
+
+                        {project.riskScore >= 0 &&
+                          project.estimatedDelayMonths > 0 && (
+                            <div className="text-[10px] text-rose-600 font-medium mt-0.5">
+                              ~{project.estimatedDelayMonths} mos delay
+                            </div>
+                          )}
                       </td>
                       <td className="px-4 py-3.5">
                         <RiskBadge category={project.riskCategory} size="sm" />

@@ -1,4 +1,4 @@
-import { Project } from '../types';
+import { Project } from './types';
 
 /**
  * Exports a list of projects as a structured, RFC-4180 compliant CSV file.

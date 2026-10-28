@@ -14,9 +14,9 @@ import {
   FileText,
   Download
 } from 'lucide-react';
-import { Project, ActivePage } from '../types';
-import { RiskBadge } from '../components/RiskBadge';
-import { printProjectAudit, exportSingleProjectReportText } from '../utils/exportReport';
+import { Project, ActivePage, BackendPrediction } from './types';
+import { RiskBadge } from './RiskBadge';
+import { printProjectAudit, exportSingleProjectReportText } from './exportReport';
 
 interface PredictionResultsPageProps {
   project: Project | null;
@@ -34,6 +34,10 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
   onSimulate
 }) => {
   const currentProject = project || allProjects[0];
+  const [backendPrediction, setBackendPrediction] = React.useState<BackendPrediction | null>(null);
+  React.useEffect(() => {
+  setBackendPrediction(currentProject?.backendPrediction || null);
+}, [currentProject]);
 
   if (!currentProject) {
     return (
@@ -129,7 +133,7 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
                 }`}
               >
                 <span className="text-3xl font-black font-mono tracking-tight leading-none">
-                  {currentProject.riskScore}%
+                  {backendPrediction?.risk_score ?? currentProject.riskScore}%
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-wide mt-1">
                   Delay Risk
@@ -138,7 +142,10 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
             </div>
 
             <div className="mt-3">
-              <RiskBadge category={currentProject.riskCategory} size="lg" />
+              <RiskBadge
+                category={backendPrediction?.risk_level ?? currentProject.riskCategory}
+                size="lg"
+              />
             </div>
           </div>
 
@@ -154,11 +161,13 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
                 {currentProject.riskCategory === 'Low' && 'On-Schedule Acquisition with Minimal Obstruction'}
               </h2>
               <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                {currentProject.status === 'Severely Delayed'
-                  ? 'Based on active judicial disputes and incomplete compensation disbursements, this parcel is forecasted to experience a critical delay exceeding statutory milestones.'
-                  : currentProject.status === 'Moderate Delay'
-                  ? 'Procedural clearances and partial compensation disbursement require close departmental coordination to prevent timeline slippage.'
-                  : 'All key statutory parameters and beneficiary disbursements are aligned with the RFCTLARR statutory timeline.'}
+                {backendPrediction
+                  ? backendPrediction.risk_level === 'High'
+                    ? `The M2 machine learning model predicts a high delay risk of ${backendPrediction.risk_score}%. The highest-risk stage is ${backendPrediction.highest_risk_stage}.`
+                    : backendPrediction.risk_level === 'Medium'
+                      ? `The M2 machine learning model predicts a moderate delay risk of ${backendPrediction.risk_score}%. Monitor the stage-wise risks and address potential bottlenecks early.`
+                      : `The M2 machine learning model predicts a low delay risk of ${backendPrediction.risk_score}%. Continue monitoring the acquisition stages.`
+                  : 'No M2 prediction is available for this project yet.'}
               </p>
             </div>
 
@@ -232,111 +241,99 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
       </div>
 
       {/* Delay Factors Breakdown with Progress Bars */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-xs p-6">
-        <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
-          <div>
-            <h2 className="text-sm font-bold text-slate-800">Delay Factors Breakdown</h2>
-            <p className="text-xs text-slate-500">Individual contribution of critical statutory bottlenecks</p>
+<div className="bg-white rounded-xl border border-slate-200 shadow-xs p-6">
+  <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+    <div>
+      <h2 className="text-sm font-bold text-slate-800">Stage Risk Breakdown</h2>
+      <p className="text-xs text-slate-500">
+        Risk calculated by the integrated M2 machine learning model
+      </p>
+    </div>
+
+    <span className="text-xs font-mono font-medium text-slate-400">
+      M2 ML MODEL
+    </span>
+  </div>
+
+  {backendPrediction ? (
+    <div className="space-y-4">
+
+      {/* Planning */}
+      {[
+        ['Planning', backendPrediction.stage_risk.Planning],
+        ['Approval', backendPrediction.stage_risk.Approval],
+        ['Compensation', backendPrediction.stage_risk.Compensation],
+        ['Rehabilitation', backendPrediction.stage_risk.Rehabilitation],
+        ['Possession', backendPrediction.stage_risk.Possession],
+      ].map(([stage, risk]) => {
+        const stageRisk = risk as {
+          score: number;
+          category: 'Low' | 'Medium' | 'High';
+        };
+
+        return (
+          <div key={stage as string}>
+            <div className="flex justify-between items-center text-xs mb-1.5">
+              <span className="font-semibold text-slate-700">
+                {stage as string}
+              </span>
+
+              <div className="flex items-center gap-2 font-mono font-bold">
+                <span
+                  className={`text-xs ${
+                    stageRisk.category === 'High'
+                      ? 'text-rose-600'
+                      : stageRisk.category === 'Medium'
+                      ? 'text-amber-600'
+                      : 'text-emerald-600'
+                  }`}
+                >
+                  {stageRisk.score}%
+                </span>
+
+                <span className="text-[10px] uppercase text-slate-400">
+                  {stageRisk.category}
+                </span>
+              </div>
+            </div>
+
+            <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+              <div
+                className={`h-full rounded-full transition-all duration-500 ${
+                  stageRisk.category === 'High'
+                    ? 'bg-rose-500'
+                    : stageRisk.category === 'Medium'
+                    ? 'bg-amber-500'
+                    : 'bg-emerald-500'
+                }`}
+                style={{
+                  width: `${Math.min(Math.max(stageRisk.score, 0), 100)}%`,
+                }}
+              />
+            </div>
           </div>
-          <span className="text-xs font-mono font-medium text-slate-400">Model Weights Applied</span>
+        );
+      })}
+
+      {/* Highest Risk Stage */}
+      <div className="mt-5 p-3 rounded-lg bg-rose-50 border border-rose-100">
+        <div className="text-[10px] font-bold uppercase tracking-wider text-rose-500">
+          Highest Risk Stage
         </div>
 
-        <div className="space-y-4">
-          {/* Factor 1: Compensation Pending */}
-          <div>
-            <div className="flex justify-between items-center text-xs mb-1.5">
-              <span className="font-semibold text-slate-700 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-blue-500" />
-                Compensation Disbursement Pending
-                <span className="text-[10px] text-slate-400 font-normal">(Weight: 30%)</span>
-              </span>
-              <div className="flex items-center gap-2 font-mono font-bold">
-                <span className="text-xs text-slate-500">{currentProject.compensationStatus}</span>
-                <span className={`text-xs ${getTextColor(delayFactors.compensationPending)}`}>
-                  {delayFactors.compensationPending}%
-                </span>
-              </div>
-            </div>
-            <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-              <div
-                className={`h-full rounded-full transition-all duration-500 ${getBarColor(delayFactors.compensationPending)}`}
-                style={{ width: `${delayFactors.compensationPending}%` }}
-              />
-            </div>
-          </div>
-
-          {/* Factor 2: Legal Dispute */}
-          <div>
-            <div className="flex justify-between items-center text-xs mb-1.5">
-              <span className="font-semibold text-slate-700 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-rose-500" />
-                Legal Dispute &amp; Court Litigation
-                <span className="text-[10px] text-slate-400 font-normal">(Weight: 30%)</span>
-              </span>
-              <div className="flex items-center gap-2 font-mono font-bold">
-                <span className="text-xs text-slate-500">
-                  {currentProject.legalDispute ? 'Active Court Injunction' : 'Litigation Free'}
-                </span>
-                <span className={`text-xs ${getTextColor(delayFactors.legalDispute)}`}>
-                  {delayFactors.legalDispute}%
-                </span>
-              </div>
-            </div>
-            <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-              <div
-                className={`h-full rounded-full transition-all duration-500 ${getBarColor(delayFactors.legalDispute)}`}
-                style={{ width: `${delayFactors.legalDispute}%` }}
-              />
-            </div>
-          </div>
-
-          {/* Factor 3: Approval Delay */}
-          <div>
-            <div className="flex justify-between items-center text-xs mb-1.5">
-              <span className="font-semibold text-slate-700 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-amber-500" />
-                Statutory &amp; Environmental Approval Delay
-                <span className="text-[10px] text-slate-400 font-normal">(Weight: 25%)</span>
-              </span>
-              <div className="flex items-center gap-2 font-mono font-bold">
-                <span className="text-xs text-slate-500">{currentProject.approvalStatus}</span>
-                <span className={`text-xs ${getTextColor(delayFactors.approvalDelay)}`}>
-                  {delayFactors.approvalDelay}%
-                </span>
-              </div>
-            </div>
-            <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-              <div
-                className={`h-full rounded-full transition-all duration-500 ${getBarColor(delayFactors.approvalDelay)}`}
-                style={{ width: `${delayFactors.approvalDelay}%` }}
-              />
-            </div>
-          </div>
-
-          {/* Factor 4: Rehabilitation Gap */}
-          <div>
-            <div className="flex justify-between items-center text-xs mb-1.5">
-              <span className="font-semibold text-slate-700 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                Rehabilitation &amp; Resettlement (R&amp;R) Pendency
-                <span className="text-[10px] text-slate-400 font-normal">(Weight: 15%)</span>
-              </span>
-              <div className="flex items-center gap-2 font-mono font-bold">
-                <span className="text-xs text-slate-500">{currentProject.rehabilitationStatus}</span>
-                <span className={`text-xs ${getTextColor(delayFactors.rehabilitationGap)}`}>
-                  {delayFactors.rehabilitationGap}%
-                </span>
-              </div>
-            </div>
-            <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-              <div
-                className={`h-full rounded-full transition-all duration-500 ${getBarColor(delayFactors.rehabilitationGap)}`}
-                style={{ width: `${delayFactors.rehabilitationGap}%` }}
-              />
-            </div>
-          </div>
+        <div className="text-sm font-bold text-rose-700 mt-1">
+          {backendPrediction.highest_risk_stage}
         </div>
       </div>
+
+    </div>
+  ) : (
+    <div className="py-8 text-center text-xs text-slate-500">
+      M2 prediction data is not available yet.
+    </div>
+  )}
+</div>
+
 
       {/* Recommended Actions */}
       <div className="bg-white rounded-xl border border-slate-200 shadow-xs p-6">

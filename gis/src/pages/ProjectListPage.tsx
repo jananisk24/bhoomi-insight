@@ -46,11 +46,22 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
       })
       .sort((a, b) => {
         let comp = 0;
-        if (sortBy === 'riskScore') comp = a.riskScore - b.riskScore;
-        else if (sortBy === 'landArea') comp = a.landArea - b.landArea;
-        else comp = a.name.localeCompare(b.name);
+
+        if (sortBy === 'riskScore') {
+          if (a.riskScore === null && b.riskScore === null) return 0;
+          if (a.riskScore === null) return 1;
+          if (b.riskScore === null) return -1;
+
+          comp = a.riskScore - b.riskScore;
+        } else if (sortBy === 'landArea') {
+          comp = a.landArea - b.landArea;
+        } else {
+          comp = a.name.localeCompare(b.name);
+        }
+
         return sortOrder === 'desc' ? -comp : comp;
       });
+
   }, [projects, searchTerm, selectedCategory, sortBy, sortOrder]);
 
   const toggleSort = (field: 'riskScore' | 'landArea' | 'name') => {
@@ -191,21 +202,29 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
                     </td>
                     <td className="px-4 py-3.5">
                       <div className="flex items-center gap-2">
-                        <div className="w-12 bg-slate-200 rounded-full h-2 overflow-hidden">
-                          <div
-                            className={`h-full rounded-full ${
-                              project.riskScore >= 70
-                                ? 'bg-rose-500'
-                                : project.riskScore >= 40
-                                ? 'bg-amber-500'
-                                : 'bg-emerald-500'
-                            }`}
-                            style={{ width: `${project.riskScore}%` }}
-                          />
-                        </div>
-                        <span className="font-mono font-bold text-slate-800">
-                          {project.riskScore.toFixed(2)}%
-                        </span>
+                        {project.riskScore === null ? (
+                          <span className="text-xs font-semibold text-slate-500">
+                            Not Predicted
+                          </span>
+                        ) : (
+                          <>
+                            <div className="w-12 bg-slate-200 rounded-full h-2 overflow-hidden">
+                              <div
+                                className={`h-full rounded-full ${
+                                  project.riskScore >= 70
+                                    ? 'bg-rose-500'
+                                    : project.riskScore >= 40
+                                    ? 'bg-amber-500'
+                                    : 'bg-emerald-500'
+                                }`}
+                                style={{ width: `${project.riskScore}%` }}
+                              />
+                            </div>
+                            <span className="font-mono font-bold text-slate-800">
+                              {project.riskScore.toFixed(2)}%
+                            </span>
+                          </>
+                        )}
                       </div>
                       {project.estimatedDelayMonths > 0 && (
                         <div className="text-[10px] text-rose-600 font-medium mt-0.5">

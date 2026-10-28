@@ -117,19 +117,27 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
             <div className="relative flex items-center justify-center my-2">
               <div
                 className={`w-32 h-32 rounded-full border-8 flex flex-col items-center justify-center ${
-                  currentProject.riskScore >= 70
+                  currentProject.riskScore === null
+                    ? 'border-slate-300 text-slate-500 bg-slate-50'
+                    : currentProject.riskScore >= 70
                     ? 'border-rose-500 text-rose-600 bg-rose-50/50'
                     : currentProject.riskScore >= 40
                     ? 'border-amber-500 text-amber-600 bg-amber-50/50'
                     : 'border-emerald-500 text-emerald-600 bg-emerald-50/50'
                 }`}
               >
+
                 <span className="text-3xl font-black font-mono tracking-tight leading-none">
-                  {currentProject.riskScore}%
+                  {currentProject.riskScore === null
+                    ? 'N/A'
+                    : `${currentProject.riskScore.toFixed(2)}%`}
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-wide mt-1">
-                  Delay Risk
+                  {currentProject.riskScore === null
+                    ? 'Not Predicted'
+                    : 'Delay Risk'}
                 </span>
+
               </div>
             </div>
 
@@ -145,12 +153,19 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
                 Predicted Acquisition Status
               </span>
               <h2 className="text-lg font-bold text-slate-900 mt-1">
-                {currentProject.riskCategory === 'High' && 'High Risk of Prolonged Acquisition Bottleneck'}
-                {currentProject.riskCategory === 'Medium' && 'Moderate Acquisition Delay Risk Detected'}
-                {currentProject.riskCategory === 'Low' && 'On-Schedule Acquisition with Minimal Obstruction'}
+                {currentProject.riskCategory === 'Not Predicted'
+                  ? 'Prediction Not Available'
+                  : currentProject.riskCategory === 'High'
+                  ? 'High Risk of Prolonged Acquisition Bottleneck'
+                  : currentProject.riskCategory === 'Medium'
+                  ? 'Moderate Acquisition Delay Risk Detected'
+                  : 'On-Schedule Acquisition with Minimal Obstruction'}
               </h2>
+
               <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                {currentProject.status === 'Severely Delayed'
+                {currentProject.riskCategory === 'Not Predicted'
+                  ? 'No prediction has been saved for this project yet. Run a prediction to assess its delay risk.'
+                  : currentProject.status === 'Severely Delayed'
                   ? 'Based on active judicial disputes and incomplete compensation disbursements, this parcel is forecasted to experience a critical delay exceeding statutory milestones.'
                   : currentProject.status === 'Moderate Delay'
                   ? 'Procedural clearances and partial compensation disbursement require close departmental coordination to prevent timeline slippage.'

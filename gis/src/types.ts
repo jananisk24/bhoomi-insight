@@ -1,4 +1,4 @@
-export type RiskCategory = 'Low' | 'Medium' | 'High';
+export type RiskCategory = 'Low' | 'Medium' | 'High' | 'Not Predicted';
 
 export type ProjectStatus = 'On Track' | 'In Progress' | 'Moderate Delay' | 'Severely Delayed' | 'Cleared';
 
@@ -38,7 +38,7 @@ export interface Project {
   legalDispute: boolean;
   approvalStatus: ApprovalStatus;
   rehabilitationStatus: RehabilitationStatus;
-  riskScore: number; // 0 to 100%
+  riskScore: number | null; // 0 to 100%
   riskCategory: RiskCategory;
   status: ProjectStatus;
   coordinates: [number, number]; // [lat, lng]

@@ -63,8 +63,8 @@ export default function App() {
       const savedProjects = await response.json();
       const mappedProjects: Project[] = await Promise.all(
         savedProjects.map(async (item: any): Promise<Project> => {
-            let riskScore = 0;
-            let riskCategory: Project['riskCategory'] = 'Low';
+            let riskScore: number | null = null;
+            let riskCategory: Project['riskCategory'] = 'Not Predicted';
 
     // Get the latest saved ML prediction for this project.
             try {

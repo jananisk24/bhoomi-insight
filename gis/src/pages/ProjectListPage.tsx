@@ -226,7 +226,7 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
                           </>
                         )}
                       </div>
-                      {project.estimatedDelayMonths > 0 && (
+                      {project.estimatedDelayMonths != null && project.estimatedDelayMonths > 0 && (
                         <div className="text-[10px] text-rose-600 font-medium mt-0.5">
                           ~{project.estimatedDelayMonths} mos delay
                         </div>

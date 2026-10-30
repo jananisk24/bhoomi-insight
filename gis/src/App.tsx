@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { API_BASE_URL } from './api';
 import { initialProjects } from './data/sampleProjects';
+import { calculateDelayRisk } from './utils/predictionEngine';
 import { Project, ActivePage, User } from './types';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
@@ -126,6 +127,15 @@ export default function App() {
                 sample.district === item.district
             );
 
+            const ruleBasedDetails = calculateDelayRisk({
+              landArea: Number(item.land_required) / 0.404686,
+              affectedFamilies: Number(item.affected_families),
+              compensationStatus,
+              legalDispute: item.legal_dispute === 'Yes',
+              approvalStatus,
+              rehabilitationStatus,
+            });
+
             return {
               id: String(item.id),
               name: item.project_name,
@@ -147,15 +157,12 @@ export default function App() {
                     : 'On Track',
               coordinates: matchingSample?.coordinates ?? [12.9716, 77.5946],
               projectType: item.project_type,
-              delayFactors: {
-                compensationPending: 0,
-                legalDispute: item.legal_dispute === 'Yes' ? 1 : 0,
-                approvalDelay: Number(item.approval_days_pending),
-                rehabilitationGap: 100 - Number(item.rehabilitation_progress),
-              },
-              recommendedActions: [],
+              // These are transparent rule-based factor severity scores, not ML feature attributions.
+              delayFactors: ruleBasedDetails.delayFactors,
+              recommendedActions: ruleBasedDetails.recommendedActions,
               createdDate: String(item.created_at ?? '').slice(0, 10),
-              estimatedDelayMonths: 0,
+              // The trained ML API returns a delay probability, not a validated duration in months.
+              estimatedDelayMonths: null,
               budgetCr: Number(item.estimated_cost) / 10_000_000,
             };
           })

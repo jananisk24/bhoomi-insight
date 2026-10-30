@@ -161,7 +161,7 @@ export const AlertsPage: React.FC<AlertsPageProps> = ({
                   <h3 className="text-sm font-bold text-slate-900">{p.name}</h3>
 
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    Forecasted Delay: <strong className="text-rose-600">~{p.estimatedDelayMonths} months</strong>. 
+                    Delay duration: <strong className="text-rose-600">{p.estimatedDelayMonths == null ? 'not estimated by the ML model' : `~${p.estimatedDelayMonths} months (rule-based estimate)`}</strong>. 
                     {p.legalDispute && ' High Court litigation stay on land award.'} Compensation status: {p.compensationStatus}.
                   </p>
 

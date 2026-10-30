@@ -17,13 +17,15 @@ export const RiskBadge: React.FC<RiskBadgeProps> = ({ category, score, size = 'm
   const colors = {
     Low: 'bg-emerald-50 text-emerald-700 border border-emerald-200 ring-1 ring-emerald-500/20',
     Medium: 'bg-amber-50 text-amber-700 border border-amber-200 ring-1 ring-amber-500/20',
-    High: 'bg-rose-50 text-rose-700 border border-rose-200 ring-1 ring-rose-500/20'
+    High: 'bg-rose-50 text-rose-700 border border-rose-200 ring-1 ring-rose-500/20',
+    'Not Predicted': 'bg-slate-50 text-slate-600 border border-slate-200'
   };
 
   const dots = {
     Low: 'bg-emerald-500',
     Medium: 'bg-amber-500',
-    High: 'bg-rose-500'
+    High: 'bg-rose-500',
+    'Not Predicted': 'bg-slate-400'
   };
 
   return (
@@ -32,7 +34,7 @@ export const RiskBadge: React.FC<RiskBadgeProps> = ({ category, score, size = 'm
       className={`inline-flex items-center gap-1.5 rounded-full ${sizeClasses[size]} ${colors[category]}`}
     >
       <span className={`w-1.5 h-1.5 rounded-full ${dots[category]} animate-pulse`} />
-      <span>{category} Risk</span>
+      <span>{category === 'Not Predicted' ? 'Not Predicted' : `${category} Risk`}</span>
       {score !== undefined && (
         <span className="font-mono ml-0.5 opacity-85">({score}%)</span>
       )}

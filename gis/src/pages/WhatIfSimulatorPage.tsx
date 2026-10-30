@@ -76,8 +76,22 @@ export const WhatIfSimulatorPage: React.FC<WhatIfSimulatorPageProps> = ({
     });
   }, [baseProject, simCompensation, simLegalDispute, simApproval, simRehabilitation]);
 
-  const scoreDiff = simulatedResult && baseProject 
-    ? simulatedResult.riskScore - baseProject.riskScore 
+  // Compare like with like: both baseline and scenario use this rule-based engine.
+  // The saved ML probability is shown separately because this sandbox does not rerun the ML model.
+  const baselineRuleResult = useMemo(() => {
+    if (!baseProject) return null;
+    return calculateDelayRisk({
+      landArea: baseProject.landArea,
+      affectedFamilies: baseProject.affectedFamilies,
+      compensationStatus: baseProject.compensationStatus,
+      legalDispute: baseProject.legalDispute,
+      approvalStatus: baseProject.approvalStatus,
+      rehabilitationStatus: baseProject.rehabilitationStatus,
+    });
+  }, [baseProject]);
+
+  const scoreDiff = simulatedResult && baselineRuleResult
+    ? Number((simulatedResult.riskScore - baselineRuleResult.riskScore).toFixed(2))
     : 0;
 
   // Preset Scenario Handlers
@@ -103,7 +117,7 @@ export const WhatIfSimulatorPage: React.FC<WhatIfSimulatorPageProps> = ({
     setSimRehabilitation(baseProject.rehabilitationStatus);
   };
 
-  if (!baseProject || !simulatedResult) {
+  if (!baseProject || !simulatedResult || !baselineRuleResult) {
     return <div className="p-8 text-center text-slate-500">No project available for simulation.</div>;
   }
 
@@ -132,11 +146,15 @@ export const WhatIfSimulatorPage: React.FC<WhatIfSimulatorPageProps> = ({
           >
             {allProjects.map((p) => (
               <option key={p.id} value={p.id}>
-                {p.id}: {p.name.substring(0, 30)}... ({p.riskScore}%)
+                {p.id}: {p.name.substring(0, 30)}... ({p.riskScore == null ? 'Not predicted' : `${p.riskScore.toFixed(2)}% ML`})
               </option>
             ))}
           </select>
         </div>
+      </div>
+
+      <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-900">
+        The sandbox uses a transparent rule-based score and does not rerun the trained ML model. Compare the baseline and simulated scores here only. Delay-month values are heuristic estimates, not outputs from the ML model.
       </div>
 
       {/* Before vs After Impact Scoreboard */}
@@ -144,19 +162,22 @@ export const WhatIfSimulatorPage: React.FC<WhatIfSimulatorPageProps> = ({
         {/* Baseline Card */}
         <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs text-center flex flex-col justify-between">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">Current Baseline Risk</div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">Rule-Based Baseline Risk</div>
             <div className="my-3 flex items-center justify-center">
               <span className={`text-3xl font-black font-mono ${
-                baseProject.riskScore >= 70 ? 'text-rose-600' :
-                baseProject.riskScore >= 40 ? 'text-amber-600' : 'text-emerald-600'
+                baselineRuleResult.riskScore >= 70 ? 'text-rose-600' :
+                baselineRuleResult.riskScore >= 40 ? 'text-amber-600' : 'text-emerald-600'
               }`}>
-                {baseProject.riskScore}%
+                {baselineRuleResult.riskScore}%
               </span>
             </div>
-            <RiskBadge category={baseProject.riskCategory} size="sm" />
+            <RiskBadge category={baselineRuleResult.riskCategory} size="sm" />
+            {baseProject.riskScore != null && (
+              <div className="mt-2 text-[10px] text-slate-500">Saved ML model risk: {baseProject.riskScore.toFixed(2)}%</div>
+            )}
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-400">
-            Est. Delay: ~{baseProject.estimatedDelayMonths} months
+            Rule-based estimate: ~{baselineRuleResult.estimatedDelayMonths} months
           </div>
         </div>
 
@@ -197,7 +218,7 @@ export const WhatIfSimulatorPage: React.FC<WhatIfSimulatorPageProps> = ({
             <RiskBadge category={simulatedResult.riskCategory} size="sm" />
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-400">
-            Est. Delay: ~{simulatedResult.estimatedDelayMonths} months
+            Rule-based estimate: ~{simulatedResult.estimatedDelayMonths} months
           </div>
         </div>
       </div>

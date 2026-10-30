@@ -46,7 +46,7 @@ export interface Project {
   delayFactors: DelayFactors;
   recommendedActions: string[];
   createdDate: string;
-  estimatedDelayMonths: number;
+  estimatedDelayMonths: number | null;
   budgetCr: number;
 }
 

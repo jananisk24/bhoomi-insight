@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Project, ActivePage } from '../types';
 import { RiskBadge } from '../components/RiskBadge';
+import { calculateDelayRisk } from '../utils/predictionEngine';
 
 interface PredictionResultsPageProps {
   project: Project | null;
@@ -47,7 +48,14 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
     );
   }
 
-  const { delayFactors } = currentProject;
+  const { delayFactors } = calculateDelayRisk({
+    landArea: currentProject.landArea,
+    affectedFamilies: currentProject.affectedFamilies,
+    compensationStatus: currentProject.compensationStatus,
+    legalDispute: currentProject.legalDispute,
+    approvalStatus: currentProject.approvalStatus,
+    rehabilitationStatus: currentProject.rehabilitationStatus,
+  });
 
   const getBarColor = (val: number) => {
     if (val >= 75) return 'bg-rose-500';
@@ -178,7 +186,11 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
                 <div className="text-[10px] font-semibold text-slate-400 uppercase">Estimated Delay</div>
                 <div className="text-base font-bold text-rose-600 font-mono mt-0.5">
-                  {currentProject.estimatedDelayMonths > 0 ? `+${currentProject.estimatedDelayMonths} Months` : '0 Days'}
+                  {currentProject.estimatedDelayMonths == null
+                    ? 'Not estimated'
+                    : currentProject.estimatedDelayMonths > 0
+                      ? `+${currentProject.estimatedDelayMonths} Months`
+                      : '0 Months'}
                 </div>
               </div>
 
@@ -226,9 +238,9 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
         <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
           <div>
             <h2 className="text-sm font-bold text-slate-800">Delay Factors Breakdown</h2>
-            <p className="text-xs text-slate-500">Individual contribution of critical statutory bottlenecks</p>
+            <p className="text-xs text-slate-500">Rule-based factor severity scores (not ML feature attribution)</p>
           </div>
-          <span className="text-xs font-mono font-medium text-slate-400">Model Weights Applied</span>
+          <span className="text-xs font-mono font-medium text-slate-400">Rule-based weights</span>
         </div>
 
         <div className="space-y-4">

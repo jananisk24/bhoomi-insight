@@ -3,7 +3,6 @@ import { API_BASE_URL } from '../api';
 import { 
   Sparkles, 
   LandPlot, 
-  MapPin, 
   Users, 
   FileText, 
   AlertCircle, 
@@ -15,50 +14,80 @@ import {
   ActivePage, 
   CompensationStatus, 
   ApprovalStatus, 
+  PossessionStatus,
   RehabilitationStatus 
 } from '../types';
 import { calculateDelayRisk } from '../utils/predictionEngine';
+import { acresToHectares, croresToRupees } from '../utils/units';
 
 interface AddProjectPageProps {
+  initialProject?: Project | null;
   onAddProject: (project: Project) => void;
+  onUpdateProject?: (project: Project) => void;
   onNavigate: (page: ActivePage) => void;
 }
 
 export const AddProjectPage: React.FC<AddProjectPageProps> = ({
+  initialProject = null,
   onAddProject,
+  onUpdateProject,
   onNavigate
 }) => {
   // Form State
-  const [projectName, setProjectName] = useState('');
-  const [district, setDistrict] = useState('Bengaluru Rural');
-  const [projectType, setProjectType] = useState('Highway / Expressway');
-  const [landArea, setLandArea] = useState<number>(180);
-  const [affectedFamilies, setAffectedFamilies] = useState<number>(240);
-  const [compensationStatus, setCompensationStatus] = useState<CompensationStatus>('Pending (<25%)');
-  const [legalDispute, setLegalDispute] = useState<boolean>(true);
-  const [approvalStatus, setApprovalStatus] = useState<ApprovalStatus>('Environmental Clearance Pending');
-  const [rehabilitationStatus, setRehabilitationStatus] = useState<RehabilitationStatus>('Not Started');
-  const [budgetCr, setBudgetCr] = useState<number>(320);
+  const [projectName, setProjectName] = useState(initialProject?.name ?? '');
+  const [state, setState] = useState(initialProject?.state ?? 'Tamil Nadu');
+  const [district, setDistrict] = useState(initialProject?.district ?? '');
+  const [projectType, setProjectType] = useState(
+    initialProject?.projectType === 'Railway'
+      ? 'Railway Corridor'
+      : initialProject?.projectType === 'Irrigation'
+        ? 'Irrigation Canal'
+        : initialProject?.projectType === 'Power'
+          ? 'Power / Solar Park'
+          : 'Highway / Expressway'
+  );
+  const [landArea, setLandArea] = useState<number>(initialProject?.landArea ?? 0);
+  const [affectedFamilies, setAffectedFamilies] = useState<number>(initialProject?.affectedFamilies ?? 0);
+  const [compensationStatus, setCompensationStatus] = useState<CompensationStatus>(
+    initialProject?.compensationStatus ?? 'Pending (<25%)'
+  );
+  const [legalDispute, setLegalDispute] = useState<boolean>(initialProject?.legalDispute ?? false);
+  const [approvalStatus, setApprovalStatus] = useState<ApprovalStatus>(
+    initialProject?.approvalStatus ?? 'In Administrative Review'
+  );
+  const [approvalDaysPending, setApprovalDaysPending] = useState<number>(
+    initialProject?.approvalDaysPending ?? 0
+  );
+  const [rehabilitationStatus, setRehabilitationStatus] = useState<RehabilitationStatus>(
+    initialProject?.rehabilitationStatus ?? 'Not Started'
+  );
+  const [possessionStatus, setPossessionStatus] = useState<PossessionStatus>(
+    initialProject?.possessionStatus ?? 'Not Taken'
+  );
+  const [stakeholderScore, setStakeholderScore] = useState<number>(
+    initialProject?.stakeholderScore ?? 5
+  );
+  const [districtHistoricalDelay, setDistrictHistoricalDelay] = useState<number>(
+    initialProject?.districtHistoricalDelay ?? 0
+  );
+  const [budgetCr, setBudgetCr] = useState<number>(initialProject?.budgetCr ?? 0);
+  const [latitude, setLatitude] = useState(
+    initialProject?.coordinates?.[0]?.toString() ?? ''
+  );
+  const [longitude, setLongitude] = useState(
+    initialProject?.coordinates?.[1]?.toString() ?? ''
+  );
 
   const [formError, setFormError] = useState('');
   const [isPredicting, setIsPredicting] = useState(false);
 
-  const districts = [
-    'Bengaluru Urban',
-    'Bengaluru Rural',
-    'Tumakuru',
-    'Belagavi',
-    'Ballari',
-    'Vijayapura',
-    'Mysuru',
-    'Shivamogga',
-    'Dakshina Kannada',
-    'Kalaburagi',
-    'Dharwad',
-    'Mandya',
-    'Hassan',
-    'Udupi'
-  ];
+  const states = [...new Set([
+    'Tamil Nadu',
+    'Karnataka',
+    'Andhra Pradesh',
+    'Kerala',
+    state,
+  ])];
 
   const handlePredictSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,9 +97,23 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
       return;
     }
 
-    if (landArea <= 0 || affectedFamilies < 1 || budgetCr <= 0) {
+    if (
+      !state ||
+      !district ||
+      !Number.isFinite(landArea) || landArea <= 0 ||
+      !Number.isInteger(affectedFamilies) || affectedFamilies < 0 ||
+      !Number.isFinite(budgetCr) || budgetCr <= 0 ||
+      !Number.isInteger(approvalDaysPending) || approvalDaysPending < 0 || approvalDaysPending > 365 ||
+      !Number.isInteger(stakeholderScore) || stakeholderScore < 1 || stakeholderScore > 5 ||
+      !Number.isFinite(districtHistoricalDelay) || districtHistoricalDelay < 0 || districtHistoricalDelay > 100 ||
+      (latitude.trim() !== '' && !Number.isFinite(Number(latitude))) ||
+      (longitude.trim() !== '' && !Number.isFinite(Number(longitude))) ||
+      (latitude.trim() === '') !== (longitude.trim() === '') ||
+      (latitude.trim() !== '' && (Number(latitude) < -90 || Number(latitude) > 90)) ||
+      (longitude.trim() !== '' && (Number(longitude) < -180 || Number(longitude) > 180))
+    ) {
       setFormError(
-        'Please enter a valid land area, affected family count, and budget.'
+        'Enter valid project details. Approval days must be 0–365, stakeholder score 1–5, historical delay index 0–100, and provide both valid coordinates or neither.'
       );
       return;
     }
@@ -89,51 +132,36 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
       // Convert the form values to the backend's expected format.
       const projectPayload = {
         project_name: projectName.trim(),
-        state: 'Karnataka',
+        state,
         district,
-        land_required: Number(landArea) * 0.404686,
+        land_required: acresToHectares(Number(landArea)),
         affected_families: Number(affectedFamilies),
-        estimated_cost: Number(budgetCr) * 10_000_000,
+        estimated_cost: croresToRupees(Number(budgetCr)),
+        latitude: latitude.trim() ? Number(latitude) : null,
+        longitude: longitude.trim() ? Number(longitude) : null,
 
+        // These four values match the Project_Type categories used to train
+        // the deployed model. Do not send UI labels or unsupported categories.
         project_type:
           projectType === 'Highway / Expressway'
             ? 'Highway'
             : projectType === 'Railway Corridor'
               ? 'Railway'
-              : projectType === 'Industrial Park'
-                ? 'Industrial Park'
-                : projectType === 'Airport Expansion'
-                  ? 'Airport'
-                  : projectType === 'Solar Power Plant'
-                    ? 'Solar'
-                    : 'Irrigation',
+              : projectType === 'Power / Solar Park'
+                ? 'Power'
+                : 'Irrigation',
 
-        compensation_status:
-          compensationStatus === 'Disbursed (100%)'
-            ? 'Paid'
-            : compensationStatus === 'Partially Disbursed (50-75%)'
-              ? 'In Progress'
-              : compensationStatus === 'Pending (<25%)'
-                ? 'Pending'
-                : 'Disputed',
+        // Keep the recorded status; the backend maps it to the model categories.
+        compensation_status: compensationStatus,
 
-        approval_days_pending:
-          approvalStatus === 'Cleared / Approved'
-            ? 0
-            : approvalStatus === 'In Administrative Review'
-              ? 30
-              : approvalStatus === 'Environmental Clearance Pending'
-                ? 90
-                : 120,
+        // Use the user's actual pending-day input instead of fixed 0/30/90/120
+        // guesses based only on the approval-status label.
+        approval_days_pending: Number(approvalDaysPending),
+        approval_status: approvalStatus,
 
         legal_dispute: legalDispute ? 'Yes' : 'No',
 
-        possession_status:
-          rehabilitationStatus === 'Completed'
-            ? 'Taken'
-            : rehabilitationStatus === 'Not Started'
-              ? 'Not Taken'
-              : 'Partial',
+        possession_status: possessionStatus,
 
         rehabilitation_progress:
           rehabilitationStatus === 'Completed'
@@ -144,13 +172,16 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
                 ? 25
                 : 0,
 
-        stakeholder_score: 5,
-        district_historical_delay: 0,
+        stakeholder_score: Number(stakeholderScore),
+        district_historical_delay: Number(districtHistoricalDelay),
       };
 
-    // 1. Save the project to the backend database.
-      const createResponse = await fetch(`${API_BASE_URL}/projects`, {
-        method: 'POST',
+      // Save the project and its first prediction as one backend transaction.
+      const projectUrl = initialProject
+        ? `${API_BASE_URL}/projects/${encodeURIComponent(initialProject.id)}/predict`
+        : `${API_BASE_URL}/projects/predict`;
+      const createResponse = await fetch(projectUrl, {
+        method: initialProject ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -160,32 +191,14 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
 
       if (!createResponse.ok) {
         const message = await createResponse.text();
-        throw new Error(`Could not save project: ${message}`);
-      }
-
-      const savedProject = await createResponse.json();
-
-    // 2. Ask the actual ML model to predict the saved project.
-      const predictionResponse = await fetch(`${API_BASE_URL}/predict`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          project_id: savedProject.id,
-        }),
-      });
-
-      if (!predictionResponse.ok) {
-        const message = await predictionResponse.text();
-
         throw new Error(
-          `Project saved, but ML prediction failed: ${message}`
+          `Could not ${initialProject ? 'update' : 'save'} project: ${message}`
         );
       }
 
-      const mlPrediction = await predictionResponse.json();
+      const result = await createResponse.json();
+      const savedProject = result.project;
+      const mlPrediction = result.prediction;
 
     // Keep the existing local calculator for its supporting
     // explanation fields, but use the backend ML model's risk result.
@@ -220,20 +233,43 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
               ? 'Moderate Delay'
               : 'On Track',
 
-        coordinates: [12.9716, 77.5946],
+        // Never place every new project in Bengaluru. [0, 0] means the
+        // district is not in this lookup and the GIS page must skip that marker.
+        coordinates:
+          savedProject.latitude == null || savedProject.longitude == null
+            ? null
+            : [Number(savedProject.latitude), Number(savedProject.longitude)],
         projectType,
+        approvalDaysPending: Number(approvalDaysPending),
+        possessionStatus,
+        rehabilitationProgress:
+          rehabilitationStatus === 'Completed'
+            ? 100
+            : rehabilitationStatus === 'In Progress'
+              ? 50
+              : rehabilitationStatus === 'Land Allocated'
+                ? 25
+                : 0,
+        stakeholderScore: Number(stakeholderScore),
+        districtHistoricalDelay: Number(districtHistoricalDelay),
+        stageRisk: mlPrediction.stage_risk,
+        highestRiskStage: mlPrediction.highest_risk_stage,
         delayFactors: supportingDetails.delayFactors,
         recommendedActions: supportingDetails.recommendedActions,
-        createdDate: new Date().toISOString().split('T')[0],
+        createdDate: String(savedProject.created_at ?? '').slice(0, 10),
 
       // The backend model does not currently provide an estimated
       // number of delay months.
-        estimatedDelayMonths: supportingDetails.estimatedDelayMonths,
+        estimatedDelayMonths: null,
 
         budgetCr: Number(budgetCr),
       };
 
-      onAddProject(newProject);
+      if (initialProject) {
+        onUpdateProject?.(newProject);
+      } else {
+        onAddProject(newProject);
+      }
       onNavigate('prediction-result');
     } catch (error) {
       console.error('Project submission failed:', error);
@@ -248,65 +284,22 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
     }
   };
 
-  const handleLoadSample = (type: 'high' | 'low') => {
-    if (type === 'high') {
-      setProjectName('Western Ring Peripheral Expressway Phase 1');
-      setDistrict('Tumakuru');
-      setProjectType('Highway / Expressway');
-      setLandArea(410);
-      setAffectedFamilies(550);
-      setCompensationStatus('Under Dispute');
-      setLegalDispute(true);
-      setApprovalStatus('Environmental Clearance Pending');
-      setRehabilitationStatus('Not Started');
-      setBudgetCr(650);
-    } else {
-      setProjectName('Clean Energy Green Hydrogen Park');
-      setDistrict('Ballari');
-      setProjectType('Solar Power Plant');
-      setLandArea(120);
-      setAffectedFamilies(40);
-      setCompensationStatus('Disbursed (100%)');
-      setLegalDispute(false);
-      setApprovalStatus('Cleared / Approved');
-      setRehabilitationStatus('Completed');
-      setBudgetCr(180);
-    }
-    setFormError('');
-  };
-
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      {/* Title & Presets Bar */}
+      {/* Title */}
       <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
             <LandPlot className="w-5 h-5 text-blue-600" />
-            <h1 className="text-lg font-bold text-slate-800">Add Project & Predict Delay Risk</h1>
+            <h1 className="text-lg font-bold text-slate-800">
+              {initialProject ? 'Edit Project & Refresh Prediction' : 'Add Project & Predict Delay Risk'}
+            </h1>
           </div>
           <p className="text-xs text-slate-500 mt-0.5">
-            Provide acquisition parcel attributes for automatic calculation of delay probability & bottleneck analysis
+            Save project details and calculate delay probability using the trained model
           </p>
         </div>
 
-        {/* Quick Demo Pre-fills */}
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-400 font-medium">Quick Presets:</span>
-          <button
-            type="button"
-            onClick={() => handleLoadSample('high')}
-            className="px-2.5 py-1 text-[11px] font-semibold bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-lg border border-rose-200 transition-colors"
-          >
-            High Risk Sample
-          </button>
-          <button
-            type="button"
-            onClick={() => handleLoadSample('low')}
-            className="px-2.5 py-1 text-[11px] font-semibold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-lg border border-emerald-200 transition-colors"
-          >
-            Low Risk Sample
-          </button>
-        </div>
       </div>
 
       {formError && (
@@ -342,19 +335,36 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
             </div>
 
             <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1" htmlFor="state-select">
+                State <span className="text-rose-500">*</span>
+              </label>
+              <select
+                id="state-select"
+                value={state}
+                onChange={(e) => {
+                  setState(e.target.value);
+                }}
+                className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+              >
+                {states.map((stateName) => (
+                  <option key={stateName} value={stateName}>{stateName}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1" htmlFor="district-select">
                 District / Jurisdiction <span className="text-rose-500">*</span>
               </label>
-              <select
+              <input
                 id="district-select"
+                type="text"
+                required
                 value={district}
                 onChange={(e) => setDistrict(e.target.value)}
+                placeholder="Enter project district"
                 className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
-              >
-                {districts.map((d) => (
-                  <option key={d} value={d}>{d}</option>
-                ))}
-              </select>
+              />
             </div>
 
             <div>
@@ -369,12 +379,47 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
               >
                 <option value="Highway / Expressway">Highway / Expressway</option>
                 <option value="Railway Corridor">Railway Freight Corridor</option>
-                <option value="Industrial Park">Industrial Estate / SEZ</option>
-                <option value="Airport Expansion">Airport Expansion</option>
-                <option value="Solar Power Plant">Solar Power Park</option>
+                <option value="Power / Solar Park">Power / Solar Park</option>
                 <option value="Irrigation Canal">Irrigation Canal Network</option>
               </select>
             </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1" htmlFor="latitude-input">
+                Project Latitude (optional)
+              </label>
+              <input
+                id="latitude-input"
+                type="number"
+                min="-90"
+                max="90"
+                step="any"
+                value={latitude}
+                onChange={(e) => setLatitude(e.target.value)}
+                placeholder="Enter verified site latitude"
+                className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg font-mono"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1" htmlFor="longitude-input">
+                Project Longitude (optional)
+              </label>
+              <input
+                id="longitude-input"
+                type="number"
+                min="-180"
+                max="180"
+                step="any"
+                value={longitude}
+                onChange={(e) => setLongitude(e.target.value)}
+                placeholder="Enter verified site longitude"
+                className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg font-mono"
+              />
+            </div>
+            <p className="sm:col-span-2 text-[11px] text-slate-400">
+              Map markers are only shown when exact project-site coordinates are provided.
+            </p>
           </div>
         </div>
 
@@ -418,7 +463,7 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
 
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1" htmlFor="budget-input">
-                Project Budget (₹ Crores)
+                Project Budget (₹ Crores) <span className="text-rose-500">*</span>
               </label>
               <input
                 id="budget-input"
@@ -440,6 +485,59 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1" htmlFor="approval-days-input">
+                Approval Days Pending (0–365) <span className="text-rose-500">*</span>
+              </label>
+              <input
+                id="approval-days-input"
+                type="number"
+                min="0"
+                max="365"
+                step="1"
+                required
+                value={approvalDaysPending}
+                onChange={(e) => setApprovalDaysPending(Number(e.target.value))}
+                className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg font-mono"
+              />
+              <p className="text-[11px] text-slate-400 mt-1">Enter the actual number of days the pending approval has been delayed.</p>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1" htmlFor="stakeholder-score-input">
+                Stakeholder Coordination Score (1–5) <span className="text-rose-500">*</span>
+              </label>
+              <input
+                id="stakeholder-score-input"
+                type="number"
+                min="1"
+                max="5"
+                step="1"
+                required
+                value={stakeholderScore}
+                onChange={(e) => setStakeholderScore(Number(e.target.value))}
+                className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg font-mono"
+              />
+              <p className="text-[11px] text-slate-400 mt-1">Use the project's documented stakeholder assessment.</p>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1" htmlFor="historical-delay-input">
+                District Historical Delay Index (0–100)
+              </label>
+              <input
+                id="historical-delay-input"
+                type="number"
+                min="0"
+                max="100"
+                step="1"
+                value={districtHistoricalDelay}
+                onChange={(e) => setDistrictHistoricalDelay(Number(e.target.value))}
+                className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg font-mono"
+              />
+              <p className="text-[11px] text-slate-400 mt-1">Enter a value only when supported by historical district records; otherwise leave 0.</p>
+            </div>
+
             {/* Compensation Status */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1" htmlFor="compensation-status-select">
@@ -456,7 +554,7 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
                 <option value="Pending (<25%)">Pending (&lt;25%) - Escrow Unreleased</option>
                 <option value="Under Dispute">Under Dispute / Compensation Injunction</option>
               </select>
-              <p className="text-[11px] text-slate-400 mt-1">Weight: 30% towards overall delay probability</p>
+              <p className="text-[11px] text-slate-400 mt-1">The trained model determines this input's contribution to delay probability.</p>
             </div>
 
             {/* Legal Dispute (Yes/No) */}
@@ -486,7 +584,7 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
                   <span className="font-semibold text-emerald-700">No (Litigation Free)</span>
                 </label>
               </div>
-              <p className="text-[11px] text-slate-400 mt-1">Weight: 30% towards overall delay probability</p>
+              <p className="text-[11px] text-slate-400 mt-1">The trained model determines this input's contribution to delay probability.</p>
             </div>
 
             {/* Approval Status */}
@@ -505,7 +603,7 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
                 <option value="Environmental Clearance Pending">Environmental Clearance Pending (MoEFCC)</option>
                 <option value="Incomplete Documentation">Incomplete Documentation (Cadastral Mismatch)</option>
               </select>
-              <p className="text-[11px] text-slate-400 mt-1">Weight: 25% towards overall delay probability</p>
+              <p className="text-[11px] text-slate-400 mt-1">Approval status and pending days are sent to the trained model.</p>
             </div>
 
             {/* Rehabilitation Status */}
@@ -524,7 +622,23 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
                 <option value="Land Allocated">Land Allocated - Construction Pending</option>
                 <option value="Not Started">Not Started - Eviction Notice Not Issued</option>
               </select>
-              <p className="text-[11px] text-slate-400 mt-1">Weight: 15% towards overall delay probability</p>
+              <p className="text-[11px] text-slate-400 mt-1">The trained model uses the recorded rehabilitation progress.</p>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1" htmlFor="possession-status-select">
+                Land Possession Status <span className="text-rose-500">*</span>
+              </label>
+              <select
+                id="possession-status-select"
+                value={possessionStatus}
+                onChange={(e) => setPossessionStatus(e.target.value as PossessionStatus)}
+                className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
+              >
+                <option value="Not Taken">Not Taken</option>
+                <option value="Partial">Partial</option>
+                <option value="Full">Full</option>
+              </select>
             </div>
           </div>
         </div>
@@ -541,8 +655,23 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
               type="button"
               onClick={() => {
                 setProjectName('');
+                setState('Tamil Nadu');
+                setDistrict('Chennai');
+                setProjectType('Highway / Expressway');
                 setLandArea(100);
                 setAffectedFamilies(100);
+                setCompensationStatus('Pending (<25%)');
+                setLegalDispute(false);
+                setApprovalStatus('Environmental Clearance Pending');
+                setApprovalDaysPending(90);
+                setRehabilitationStatus('Not Started');
+                setPossessionStatus('Not Taken');
+                setStakeholderScore(3);
+                setDistrictHistoricalDelay(0);
+                setBudgetCr(320);
+                setLatitude('');
+                setLongitude('');
+                setFormError('');
               }}
               className="px-3 py-2 text-xs text-slate-600 hover:bg-slate-100 rounded-lg border border-slate-200 transition-colors cursor-pointer flex items-center gap-1"
             >
@@ -559,7 +688,7 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
               {isPredicting ? (
                 <>
                   <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Computing Weighted Delay Risk...</span>
+                  <span>Saving project and running ML prediction...</span>
                 </>
               ) : (
                 <>

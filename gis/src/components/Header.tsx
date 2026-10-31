@@ -13,6 +13,7 @@ interface HeaderProps {
   user: User;
   alertCount: number;
   onNavigate: (page: ActivePage) => void;
+  onLogout: () => void;
   onToggleMobileMenu?: () => void;
 }
 
@@ -28,6 +29,10 @@ const pageTitles: Record<ActivePage, { title: string; subtitle: string }> = {
   'add-project': {
     title: 'Register New Land Acquisition Project',
     subtitle: 'Enter parcel parameters to generate an automated delay risk score'
+  },
+  'edit-project': {
+    title: 'Edit Land Acquisition Project',
+    subtitle: 'Update project details and recalculate its delay risk score'
   },
   'prediction-result': {
     title: 'Predictive Delay Analysis Report',
@@ -60,6 +65,7 @@ export const Header: React.FC<HeaderProps> = ({
   user,
   alertCount,
   onNavigate,
+  onLogout,
   onToggleMobileMenu
 }) => {
   const currentMeta = pageTitles[activePage] || {
@@ -131,7 +137,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
           <button
             id="btn-header-view-login"
-            onClick={() => onNavigate('login')}
+            onClick={onLogout}
             className="ml-2 px-2.5 py-1 text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-rose-50 rounded-lg border border-slate-200 hover:border-rose-200 transition-colors"
             title="Switch to Login Page / Log Out"
           >

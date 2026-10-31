@@ -1,23 +1,7 @@
-import React, { useState, useMemo } from 'react';
-import { 
-  SlidersHorizontal, 
-  Sparkles, 
-  ArrowRight, 
-  RotateCcw, 
-  TrendingDown, 
-  CheckCircle2, 
-  AlertTriangle,
-  Lightbulb,
-  Zap,
-  Info
-} from 'lucide-react';
-import { 
-  Project, 
-  CompensationStatus, 
-  ApprovalStatus, 
-  RehabilitationStatus 
-} from '../types';
-import { calculateDelayRisk } from '../utils/predictionEngine';
+import React, { useState } from 'react';
+import { AlertCircle, Cpu, SlidersHorizontal } from 'lucide-react';
+import { API_BASE_URL } from '../api';
+import { Project, StageRisk } from '../types';
 import { RiskBadge } from '../components/RiskBadge';
 
 interface WhatIfSimulatorPageProps {
@@ -25,376 +9,362 @@ interface WhatIfSimulatorPageProps {
   allProjects: Project[];
 }
 
+interface SimulationResponse {
+  project_id: number;
+  project_name: string;
+  baseline_delay_probability: number;
+  delay_probability: number;
+  risk_score: number;
+  risk_level: 'Low' | 'Medium' | 'High';
+  stage_risk: Record<string, StageRisk>;
+  highest_risk_stage: string;
+}
+
+type ModelCompensationStatus = 'Paid' | 'In Progress' | 'Not Started' | '';
+
+const modelCompensationStatus = (
+  status: Project['compensationStatus']
+): ModelCompensationStatus => {
+  if (status === 'Paid' || status === 'Disbursed (100%)') return 'Paid';
+  if (status === 'Not Started' || status === 'Pending' || status === 'Pending (<25%)') {
+    return 'Not Started';
+  }
+  if (
+    status === 'In Progress' ||
+    status === 'Under Dispute' ||
+    status === 'Partially Disbursed (50-75%)'
+  ) {
+    return 'In Progress';
+  }
+  return '';
+};
+
+const scenarioValues = (project: Project) => ({
+  affectedFamilies: project.affectedFamilies,
+  compensationStatus: modelCompensationStatus(project.compensationStatus),
+  approvalDaysPending: project.approvalDaysPending ?? 0,
+  legalDispute: project.legalDispute,
+  possessionStatus:
+    project.possessionStatus === 'Full' ||
+    project.possessionStatus === 'Partial' ||
+    project.possessionStatus === 'Not Taken'
+      ? project.possessionStatus
+      : '',
+  rehabilitationProgress: project.rehabilitationProgress ?? 0,
+  stakeholderScore: project.stakeholderScore ?? 5,
+  districtHistoricalDelay: project.districtHistoricalDelay ?? 0,
+});
+
 export const WhatIfSimulatorPage: React.FC<WhatIfSimulatorPageProps> = ({
   initialProject,
-  allProjects
+  allProjects,
 }) => {
-  const [selectedProjectId, setSelectedProjectId] = useState<string>(
-    initialProject ? initialProject.id : allProjects[0]?.id || ''
+  const [selectedProjectId, setSelectedProjectId] = useState(
+    initialProject?.id ?? allProjects[0]?.id ?? ''
   );
+  const baseProject =
+    allProjects.find((project) => project.id === selectedProjectId) ??
+    allProjects[0];
+  const [scenario, setScenario] = useState(() =>
+    baseProject ? scenarioValues(baseProject) : null
+  );
+  const [result, setResult] = useState<SimulationResponse | null>(null);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const baseProject = useMemo(() => {
-    return allProjects.find((p) => p.id === selectedProjectId) || allProjects[0];
-  }, [allProjects, selectedProjectId]);
-
-  // Simulation Controls
-  const [simCompensation, setSimCompensation] = useState<CompensationStatus>(
-    baseProject?.compensationStatus || 'Disbursed (100%)'
-  );
-  const [simLegalDispute, setSimLegalDispute] = useState<boolean>(
-    baseProject ? baseProject.legalDispute : false
-  );
-  const [simApproval, setSimApproval] = useState<ApprovalStatus>(
-    baseProject?.approvalStatus || 'Cleared / Approved'
-  );
-  const [simRehabilitation, setSimRehabilitation] = useState<RehabilitationStatus>(
-    baseProject?.rehabilitationStatus || 'Completed'
-  );
-
-  // Sync controls when base project changes
-  const handleSelectProject = (projectId: string) => {
+  const selectProject = (projectId: string) => {
     setSelectedProjectId(projectId);
-    const proj = allProjects.find((p) => p.id === projectId);
-    if (proj) {
-      setSimCompensation(proj.compensationStatus);
-      setSimLegalDispute(proj.legalDispute);
-      setSimApproval(proj.approvalStatus);
-      setSimRehabilitation(proj.rehabilitationStatus);
+    const project = allProjects.find((item) => item.id === projectId);
+    setScenario(project ? scenarioValues(project) : null);
+    setResult(null);
+    setError('');
+  };
+
+  const updateScenario = <K extends keyof NonNullable<typeof scenario>>(
+    key: K,
+    value: NonNullable<typeof scenario>[K]
+  ) => {
+    setScenario((current) => current ? { ...current, [key]: value } : current);
+    setResult(null);
+  };
+
+  const runSimulation = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!baseProject || !scenario) return;
+
+    const projectId = Number(baseProject.id);
+    const token = sessionStorage.getItem('access_token');
+    if (!Number.isInteger(projectId) || projectId <= 0) {
+      setError('This project has an invalid backend ID.');
+      return;
+    }
+    if (!token) {
+      setError('Your login session is missing. Please log in again.');
+      return;
+    }
+    if (!scenario.compensationStatus || !scenario.possessionStatus) {
+      setError('Choose valid compensation and possession statuses before simulating.');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+    setResult(null);
+    try {
+      const response = await fetch(`${API_BASE_URL}/simulate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          project_id: projectId,
+          affected_families: scenario.affectedFamilies,
+          compensation_status: scenario.compensationStatus,
+          approval_days_pending: scenario.approvalDaysPending,
+          legal_dispute: scenario.legalDispute ? 'Yes' : 'No',
+          possession_status: scenario.possessionStatus,
+          rehabilitation_progress: scenario.rehabilitationProgress,
+          stakeholder_score: scenario.stakeholderScore,
+          district_historical_delay: scenario.districtHistoricalDelay,
+        }),
+      });
+      if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(`Simulation failed (HTTP ${response.status}): ${detail}`);
+      }
+
+      const simulation: SimulationResponse = await response.json();
+      if (
+        !Number.isFinite(simulation.delay_probability) ||
+        simulation.delay_probability < 0 ||
+        simulation.delay_probability > 1
+      ) {
+        throw new Error('The backend returned an invalid model probability.');
+      }
+      setResult(simulation);
+    } catch (simulationError) {
+      setError(
+        simulationError instanceof Error
+          ? simulationError.message
+          : 'The model simulation failed.'
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Calculate live simulation results
-  const simulatedResult = useMemo(() => {
-    if (!baseProject) return null;
-    return calculateDelayRisk({
-      landArea: baseProject.landArea,
-      affectedFamilies: baseProject.affectedFamilies,
-      compensationStatus: simCompensation,
-      legalDispute: simLegalDispute,
-      approvalStatus: simApproval,
-      rehabilitationStatus: simRehabilitation
-    });
-  }, [baseProject, simCompensation, simLegalDispute, simApproval, simRehabilitation]);
-
-  // Compare like with like: both baseline and scenario use this rule-based engine.
-  // The saved ML probability is shown separately because this sandbox does not rerun the ML model.
-  const baselineRuleResult = useMemo(() => {
-    if (!baseProject) return null;
-    return calculateDelayRisk({
-      landArea: baseProject.landArea,
-      affectedFamilies: baseProject.affectedFamilies,
-      compensationStatus: baseProject.compensationStatus,
-      legalDispute: baseProject.legalDispute,
-      approvalStatus: baseProject.approvalStatus,
-      rehabilitationStatus: baseProject.rehabilitationStatus,
-    });
-  }, [baseProject]);
-
-  const scoreDiff = simulatedResult && baselineRuleResult
-    ? Number((simulatedResult.riskScore - baselineRuleResult.riskScore).toFixed(2))
-    : 0;
-
-  // Preset Scenario Handlers
-  const applyPreset = (type: 'best' | 'settle-court' | 'clear-funds') => {
-    if (!baseProject) return;
-    if (type === 'best') {
-      setSimCompensation('Disbursed (100%)');
-      setSimLegalDispute(false);
-      setSimApproval('Cleared / Approved');
-      setSimRehabilitation('Completed');
-    } else if (type === 'settle-court') {
-      setSimLegalDispute(false);
-    } else if (type === 'clear-funds') {
-      setSimCompensation('Disbursed (100%)');
-    }
-  };
-
-  const resetToOriginal = () => {
-    if (!baseProject) return;
-    setSimCompensation(baseProject.compensationStatus);
-    setSimLegalDispute(baseProject.legalDispute);
-    setSimApproval(baseProject.approvalStatus);
-    setSimRehabilitation(baseProject.rehabilitationStatus);
-  };
-
-  if (!baseProject || !simulatedResult || !baselineRuleResult) {
-    return <div className="p-8 text-center text-slate-500">No project available for simulation.</div>;
+  if (!baseProject || !scenario) {
+    return (
+      <div className="rounded-xl border border-slate-200 bg-white p-8 text-center text-slate-500">
+        No saved project is available for simulation.
+      </div>
+    );
   }
 
+  const percentDelta = result
+    ? (result.delay_probability - result.baseline_delay_probability) * 100
+    : null;
+
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
-      {/* Header Banner */}
-      <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-          <div className="flex items-center gap-2">
-            <SlidersHorizontal className="w-5 h-5 text-blue-600" />
-            <h1 className="text-lg font-bold text-slate-800">What-If Delay Risk Simulator</h1>
-          </div>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Test policy interventions, funding tranches, and legal resolutions to quantify delay reduction in real-time
-          </p>
-        </div>
-
-        {/* Project Selector Dropdown */}
+    <div className="mx-auto max-w-5xl space-y-6">
+      <header className="rounded-xl border border-slate-200 bg-white p-5">
         <div className="flex items-center gap-2">
-          <label className="text-xs font-semibold text-slate-600 shrink-0">Select Project:</label>
-          <select
-            id="what-if-project-picker"
-            value={selectedProjectId}
-            onChange={(e) => handleSelectProject(e.target.value)}
-            className="text-xs px-3 py-1.5 border border-slate-300 rounded-lg bg-slate-50 font-medium text-slate-800 focus:ring-2 focus:ring-blue-500 max-w-xs"
-          >
-            {allProjects.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.id}: {p.name.substring(0, 30)}... ({p.riskScore == null ? 'Not predicted' : `${p.riskScore.toFixed(2)}% ML`})
-              </option>
-            ))}
-          </select>
+          <SlidersHorizontal className="h-5 w-5 text-blue-600" />
+          <h1 className="text-lg font-bold text-slate-800">
+            Model-Based What-If Simulator
+          </h1>
         </div>
-      </div>
+        <p className="mt-1 text-xs text-slate-500">
+          Scenario inputs are sent through the same trained Random Forest pipeline as saved predictions.
+        </p>
+        <label className="mt-4 block text-xs font-semibold text-slate-700" htmlFor="what-if-project-picker">
+          Project
+        </label>
+        <select
+          id="what-if-project-picker"
+          value={baseProject.id}
+          onChange={(event) => selectProject(event.target.value)}
+          className="mt-1 w-full max-w-xl rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
+        >
+          {allProjects.map((project) => (
+            <option key={project.id} value={project.id}>
+              {project.id}: {project.name}
+            </option>
+          ))}
+        </select>
+      </header>
 
-      <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-900">
-        The sandbox uses a transparent rule-based score and does not rerun the trained ML model. Compare the baseline and simulated scores here only. Delay-month values are heuristic estimates, not outputs from the ML model.
-      </div>
-
-      {/* Before vs After Impact Scoreboard */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Baseline Card */}
-        <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs text-center flex flex-col justify-between">
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">Rule-Based Baseline Risk</div>
-            <div className="my-3 flex items-center justify-center">
-              <span className={`text-3xl font-black font-mono ${
-                baselineRuleResult.riskScore >= 70 ? 'text-rose-600' :
-                baselineRuleResult.riskScore >= 40 ? 'text-amber-600' : 'text-emerald-600'
-              }`}>
-                {baselineRuleResult.riskScore}%
-              </span>
-            </div>
-            <RiskBadge category={baselineRuleResult.riskCategory} size="sm" />
-            {baseProject.riskScore != null && (
-              <div className="mt-2 text-[10px] text-slate-500">Saved ML model risk: {baseProject.riskScore.toFixed(2)}%</div>
-            )}
-          </div>
-          <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-400">
-            Rule-based estimate: ~{baselineRuleResult.estimatedDelayMonths} months
-          </div>
+      {error && (
+        <div role="alert" className="flex items-start gap-2 rounded-lg border border-rose-200 bg-rose-50 p-3 text-sm text-rose-800">
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <span>{error}</span>
         </div>
+      )}
 
-        {/* Dynamic Delta Arrow Card */}
-        <div className="bg-gradient-to-br from-blue-700 to-indigo-800 text-white p-5 rounded-xl shadow-xs text-center flex flex-col items-center justify-center relative overflow-hidden">
-          <div className="text-[11px] uppercase tracking-wider font-semibold text-blue-200">
-            Predicted Risk Shift
-          </div>
-          <div className="my-3 flex items-center gap-1 text-2xl font-black font-mono">
-            {scoreDiff < 0 ? (
-              <span className="text-emerald-300 flex items-center gap-1">
-                <TrendingDown className="w-6 h-6" />
-                {scoreDiff}%
-              </span>
-            ) : scoreDiff > 0 ? (
-              <span className="text-rose-300">+{scoreDiff}%</span>
-            ) : (
-              <span className="text-slate-200">0%</span>
-            )}
-          </div>
-          <div className="text-xs font-semibold px-2.5 py-1 rounded-full bg-white/15 text-white">
-            {scoreDiff < 0 ? 'Risk Reduced (Mitigation Effective)' : scoreDiff > 0 ? 'Risk Escalated' : 'Unchanged'}
-          </div>
-        </div>
-
-        {/* Simulated Outcome Card */}
-        <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs text-center flex flex-col justify-between">
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-emerald-700">Simulated Outcome Risk</div>
-            <div className="my-3 flex items-center justify-center">
-              <span className={`text-3xl font-black font-mono ${
-                simulatedResult.riskScore >= 70 ? 'text-rose-600' :
-                simulatedResult.riskScore >= 40 ? 'text-amber-600' : 'text-emerald-600'
-              }`}>
-                {simulatedResult.riskScore}%
-              </span>
-            </div>
-            <RiskBadge category={simulatedResult.riskCategory} size="sm" />
-          </div>
-          <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-400">
-            Rule-based estimate: ~{simulatedResult.estimatedDelayMonths} months
-          </div>
-        </div>
-      </div>
-
-      {/* Simulator Control Sliders & Radios */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-xs p-6 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
-          <div>
-            <h2 className="text-sm font-bold text-slate-800">Interactive Parameter Controls</h2>
-            <p className="text-xs text-slate-500">Toggle values below to witness how risk score updates automatically</p>
-          </div>
-
-          {/* Preset Buttons */}
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-slate-400 font-medium">Quick Scenarios:</span>
-            <button
-              id="btn-preset-settle-court"
-              type="button"
-              onClick={() => applyPreset('settle-court')}
-              className="px-2.5 py-1 text-[11px] font-semibold bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg border border-blue-200 transition-colors"
-            >
-              Resolve Court Stay
-            </button>
-            <button
-              id="btn-preset-clear-funds"
-              type="button"
-              onClick={() => applyPreset('clear-funds')}
-              className="px-2.5 py-1 text-[11px] font-semibold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-lg border border-emerald-200 transition-colors"
-            >
-              Release 100% Funds
-            </button>
-            <button
-              id="btn-preset-best"
-              type="button"
-              onClick={() => applyPreset('best')}
-              className="px-2.5 py-1 text-[11px] font-semibold bg-emerald-600 text-white hover:bg-emerald-700 rounded-lg transition-colors flex items-center gap-1"
-            >
-              <Zap className="w-3 h-3" />
-              <span>Best Case</span>
-            </button>
-            <button
-              type="button"
-              onClick={resetToOriginal}
-              className="p-1 text-slate-400 hover:text-slate-700"
-              title="Reset to Original Values"
-            >
-              <RotateCcw className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Control 1: Compensation Status */}
-          <div className="space-y-2 p-4 rounded-xl bg-slate-50 border border-slate-200/80">
-            <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-slate-700" htmlFor="sim-comp-select">
-                1. Compensation Disbursement Status
-              </label>
-              <span className="text-[10px] font-mono text-blue-600 bg-blue-50 px-2 py-0.5 rounded font-semibold">
-                Weight: 30%
-              </span>
-            </div>
+      <form onSubmit={runSimulation} className="space-y-5 rounded-xl border border-slate-200 bg-white p-5">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="text-xs font-semibold text-slate-700">
+            Affected families
+            <input
+              type="number"
+              min="0"
+              step="1"
+              required
+              value={scenario.affectedFamilies}
+              onChange={(event) => updateScenario('affectedFamilies', Number(event.target.value))}
+              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
+            />
+          </label>
+          <label className="text-xs font-semibold text-slate-700">
+            Compensation status
             <select
-              id="sim-comp-select"
-              value={simCompensation}
-              onChange={(e) => setSimCompensation(e.target.value as CompensationStatus)}
-              className="w-full text-xs px-3 py-2 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 font-medium"
+              required
+              value={scenario.compensationStatus}
+              onChange={(event) => updateScenario('compensationStatus', event.target.value as ModelCompensationStatus)}
+              className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 font-normal"
             >
-              <option value="Disbursed (100%)">Disbursed (100%) - (Minimal Risk Contribution)</option>
-              <option value="Partially Disbursed (50-75%)">Partially Disbursed (50-75%)</option>
-              <option value="Pending (<25%)">Pending (&lt;25%) - Escrow Unreleased</option>
-              <option value="Under Dispute">Under Dispute - (Max Delay Impact)</option>
-            </select>
-            <div className="text-[11px] text-slate-500 flex items-center gap-1">
-              <Info className="w-3.5 h-3.5 text-slate-400" />
-              <span>Full DBT disbursement slashes compensation factor to 10%.</span>
-            </div>
-          </div>
-
-          {/* Control 2: Legal Dispute (Yes/No) */}
-          <div className="space-y-2 p-4 rounded-xl bg-slate-50 border border-slate-200/80">
-            <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-slate-700">
-                2. Legal Litigation / High Court Stay
-              </label>
-              <span className="text-[10px] font-mono text-rose-600 bg-rose-50 px-2 py-0.5 rounded font-semibold">
-                Weight: 30%
-              </span>
-            </div>
-            <div className="grid grid-cols-2 gap-3 pt-1">
-              <button
-                type="button"
-                id="btn-sim-legal-no"
-                onClick={() => setSimLegalDispute(false)}
-                className={`py-2 px-3 rounded-lg text-xs font-bold border transition-all cursor-pointer ${
-                  !simLegalDispute
-                    ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
-                    : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100'
-                }`}
-              >
-                No Dispute (Clear)
-              </button>
-              <button
-                type="button"
-                id="btn-sim-legal-yes"
-                onClick={() => setSimLegalDispute(true)}
-                className={`py-2 px-3 rounded-lg text-xs font-bold border transition-all cursor-pointer ${
-                  simLegalDispute
-                    ? 'bg-rose-600 text-white border-rose-600 shadow-xs'
-                    : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100'
-                }`}
-              >
-                Yes (Active Stay)
-              </button>
-            </div>
-            <div className="text-[11px] text-slate-500 flex items-center gap-1">
-              <Info className="w-3.5 h-3.5 text-slate-400" />
-              <span>Vacating stay drops legal risk score from 90% down to 15%.</span>
-            </div>
-          </div>
-
-          {/* Control 3: Statutory & Environmental Approval */}
-          <div className="space-y-2 p-4 rounded-xl bg-slate-50 border border-slate-200/80">
-            <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-slate-700" htmlFor="sim-appr-select">
-                3. Statutory Clearance Status
-              </label>
-              <span className="text-[10px] font-mono text-amber-600 bg-amber-50 px-2 py-0.5 rounded font-semibold">
-                Weight: 25%
-              </span>
-            </div>
-            <select
-              id="sim-appr-select"
-              value={simApproval}
-              onChange={(e) => setSimApproval(e.target.value as ApprovalStatus)}
-              className="w-full text-xs px-3 py-2 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 font-medium"
-            >
-              <option value="Cleared / Approved">Cleared / Approved</option>
-              <option value="In Administrative Review">In Administrative Review</option>
-              <option value="Environmental Clearance Pending">Environmental Clearance Pending</option>
-              <option value="Incomplete Documentation">Incomplete Documentation</option>
-            </select>
-            <div className="text-[11px] text-slate-500 flex items-center gap-1">
-              <Info className="w-3.5 h-3.5 text-slate-400" />
-              <span>Receiving State Environment NOC reduces delay by up to 5 months.</span>
-            </div>
-          </div>
-
-          {/* Control 4: Rehabilitation Status */}
-          <div className="space-y-2 p-4 rounded-xl bg-slate-50 border border-slate-200/80">
-            <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-slate-700" htmlFor="sim-rehab-select">
-                4. R&amp;R Resettlement Progress
-              </label>
-              <span className="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-semibold">
-                Weight: 15%
-              </span>
-            </div>
-            <select
-              id="sim-rehab-select"
-              value={simRehabilitation}
-              onChange={(e) => setSimRehabilitation(e.target.value as RehabilitationStatus)}
-              className="w-full text-xs px-3 py-2 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 font-medium"
-            >
-              <option value="Completed">Completed - Fully Settled</option>
-              <option value="In Progress">In Progress - Civil Works</option>
-              <option value="Land Allocated">Land Allocated Only</option>
+              <option value="">Select status</option>
               <option value="Not Started">Not Started</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Paid">Paid</option>
             </select>
-            <div className="text-[11px] text-slate-500 flex items-center gap-1">
-              <Info className="w-3.5 h-3.5 text-slate-400" />
-              <span>Completing PAF rehabilitation colony clears physical possession hurdles.</span>
+          </label>
+          <label className="text-xs font-semibold text-slate-700">
+            Approval days pending
+            <input
+              type="number"
+              min="0"
+              step="1"
+              required
+              value={scenario.approvalDaysPending}
+              onChange={(event) => updateScenario('approvalDaysPending', Number(event.target.value))}
+              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
+            />
+          </label>
+          <label className="text-xs font-semibold text-slate-700">
+            Legal dispute
+            <select
+              value={scenario.legalDispute ? 'Yes' : 'No'}
+              onChange={(event) => updateScenario('legalDispute', event.target.value === 'Yes')}
+              className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 font-normal"
+            >
+              <option value="No">No</option>
+              <option value="Yes">Yes</option>
+            </select>
+          </label>
+          <label className="text-xs font-semibold text-slate-700">
+            Possession status
+            <select
+              required
+              value={scenario.possessionStatus}
+              onChange={(event) => updateScenario('possessionStatus', event.target.value)}
+              className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 font-normal"
+            >
+              <option value="">Select status</option>
+              <option value="Not Taken">Not Taken</option>
+              <option value="Partial">Partial</option>
+              <option value="Full">Full</option>
+            </select>
+          </label>
+          <label className="text-xs font-semibold text-slate-700">
+            Rehabilitation progress (%)
+            <input
+              type="number"
+              min="0"
+              max="100"
+              step="1"
+              required
+              value={scenario.rehabilitationProgress}
+              onChange={(event) => updateScenario('rehabilitationProgress', Number(event.target.value))}
+              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
+            />
+          </label>
+          <label className="text-xs font-semibold text-slate-700">
+            Stakeholder score (1–5)
+            <input
+              type="number"
+              min="1"
+              max="5"
+              step="1"
+              required
+              value={scenario.stakeholderScore}
+              onChange={(event) => updateScenario('stakeholderScore', Number(event.target.value))}
+              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
+            />
+          </label>
+          <label className="text-xs font-semibold text-slate-700">
+            District historical delay (0–100)
+            <input
+              type="number"
+              min="0"
+              max="100"
+              step="any"
+              required
+              value={scenario.districtHistoricalDelay}
+              onChange={(event) => updateScenario('districtHistoricalDelay', Number(event.target.value))}
+              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
+            />
+          </label>
+        </div>
+        <button
+          type="submit"
+          disabled={loading}
+          className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:cursor-wait disabled:opacity-60"
+        >
+          <Cpu className="h-4 w-4" />
+          {loading ? 'Running trained model…' : 'Run model simulation'}
+        </button>
+      </form>
+
+      {result && (
+        <section className="space-y-4 rounded-xl border border-slate-200 bg-white p-5">
+          <div className="grid gap-4 sm:grid-cols-3">
+            <div className="rounded-lg bg-slate-50 p-4">
+              <div className="text-xs text-slate-500">Saved model baseline</div>
+              <div className="mt-1 text-2xl font-bold">
+                {(result.baseline_delay_probability * 100).toFixed(2)}%
+              </div>
+            </div>
+            <div className="rounded-lg bg-blue-50 p-4">
+              <div className="text-xs text-slate-500">Scenario model probability</div>
+              <div className="mt-1 text-2xl font-bold text-blue-700">
+                {result.risk_score.toFixed(2)}%
+              </div>
+              <RiskBadge category={result.risk_level} />
+            </div>
+            <div className="rounded-lg bg-slate-50 p-4">
+              <div className="text-xs text-slate-500">Change from baseline</div>
+              <div className={`mt-1 text-2xl font-bold ${
+                percentDelta !== null && percentDelta < 0
+                  ? 'text-emerald-700'
+                  : percentDelta !== null && percentDelta > 0
+                    ? 'text-rose-700'
+                    : 'text-slate-700'
+              }`}>
+                {percentDelta === null ? 'N/A' : `${percentDelta > 0 ? '+' : ''}${percentDelta.toFixed(2)} percentage points`}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+          <div>
+            <h2 className="mb-2 text-sm font-bold text-slate-800">
+              Scenario stage-risk scores
+            </h2>
+            <p className="mb-3 text-xs text-slate-500">
+              Highest-risk stage: <strong>{result.highest_risk_stage}</strong>
+            </p>
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
+              {Object.entries<StageRisk>(result.stage_risk).map(([stage, risk]) => (
+                <div key={stage} className="rounded-lg border border-slate-200 p-3">
+                  <div className="text-xs font-semibold text-slate-700">{stage}</div>
+                  <div className="my-1 text-lg font-bold">{risk.score.toFixed(2)}%</div>
+                  <RiskBadge category={risk.category} size="sm" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

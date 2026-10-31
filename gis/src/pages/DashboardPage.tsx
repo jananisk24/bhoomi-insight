@@ -35,9 +35,22 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   const totalAcres = projects.reduce((acc, p) => acc + p.landArea, 0);
   const totalFamilies = projects.reduce((acc, p) => acc + p.affectedFamilies, 0);
   const disputeCount = projects.filter((p) => p.legalDispute).length;
-  const avgRiskScore = Math.round(
-    projects.reduce((acc, p) => acc + p.riskScore, 0) / (projects.length || 1)
+  const latestRiskByProject = new Map<string, number | null>(
+    projects.map(
+      (project): [string, number | null] => [project.id, project.riskScore]
+    )
   );
+  const validRiskScores = Array.from(latestRiskByProject.values()).filter(
+    (score): score is number =>
+      score !== null && Number.isFinite(score) && score >= 0 && score <= 100
+  );
+  const avgRiskScore =
+    validRiskScores.length > 0
+      ? Math.round(
+          validRiskScores.reduce((total, score) => total + score, 0) /
+            validRiskScores.length
+        )
+      : null;
 
   const recentProjects = [...projects].slice(0, 5);
 
@@ -189,7 +202,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </div>
           <div>
             <div className="text-[11px] text-slate-500 font-medium">Avg Delay Risk</div>
-            <div className="text-base font-bold text-slate-800 font-mono">{avgRiskScore}%</div>
+            <div className="text-base font-bold text-slate-800 font-mono">
+              {avgRiskScore === null ? 'N/A' : `${avgRiskScore}%`}
+            </div>
           </div>
         </div>
 
@@ -265,10 +280,15 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   <td className="px-4 py-3 text-slate-600 font-mono">{project.landArea} ac</td>
                   <td className="px-4 py-3 font-mono font-bold">
                     <span className={
-                      project.riskScore >= 70 ? 'text-rose-600' :
-                      project.riskScore >= 40 ? 'text-amber-600' : 'text-emerald-600'
+                      project.riskScore == null
+                        ? 'text-slate-500'
+                        : project.riskScore >= 70
+                          ? 'text-rose-600'
+                          : project.riskScore >= 40
+                            ? 'text-amber-600'
+                            : 'text-emerald-600'
                     }>
-                      {project.riskScore}%
+                      {project.riskScore == null ? 'N/A' : `${project.riskScore.toFixed(2)}%`}
                     </span>
                   </td>
                   <td className="px-4 py-3">

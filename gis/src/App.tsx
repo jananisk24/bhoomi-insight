@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { API_BASE_URL } from './api';
-import { initialProjects } from './data/sampleProjects';
 import { calculateDelayRisk } from './utils/predictionEngine';
 import { Project, ActivePage, User } from './types';
 import { Sidebar } from './components/Sidebar';
@@ -15,7 +14,224 @@ import { AnalyticsPage } from './pages/AnalyticsPage';
 import { GisMapPage } from './pages/GisMapPage';
 import { AlertsPage } from './pages/AlertsPage';
 import { X, ShieldCheck } from 'lucide-react';
-import { useState } from 'react';
+import {
+  hectaresToAcres,
+  probabilityToPercent,
+  rupeesToCrores,
+} from './utils/units';
+
+type BackendProject = {
+  id: number | string;
+  project_name: string;
+  state: string;
+  district: string;
+  land_required: number | string;
+  affected_families: number | string;
+  compensation_status?: string | null;
+  approval_status?: string | null;
+  legal_dispute?: string | null;
+  approval_days_pending?: number | string | null;
+  rehabilitation_progress?: number | string | null;
+  possession_status?: string | null;
+  stakeholder_score?: number | string | null;
+  district_historical_delay?: number | string | null;
+  latitude?: number | string | null;
+  longitude?: number | string | null;
+  project_type?: string | null;
+  created_at?: string | null;
+  estimated_cost?: number | string | null;
+};
+
+type BackendPrediction = {
+  id?: number | string;
+  delay_probability?: number | string | null;
+  risk_level?: string | null;
+  stage_risk?: Project['stageRisk'];
+  highest_risk_stage?: Project['highestRiskStage'];
+  created_at?: string | null;
+};
+
+const toNumber = (value: unknown, fallback = 0): number => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+};
+
+const mapRiskCategory = (value: unknown): Project['riskCategory'] => {
+  if (typeof value !== 'string') return 'Not Predicted';
+  const normalized = value.trim().toLowerCase();
+  if (normalized === 'high') return 'High';
+  if (normalized === 'medium') return 'Medium';
+  if (normalized === 'low') return 'Low';
+  return 'Not Predicted';
+};
+
+const mapProbabilityToPercent = (value: unknown): number | null => {
+  if (value === null || value === undefined || value === '') return null;
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return null;
+  const percentage =
+    parsed >= 0 && parsed <= 1 ? probabilityToPercent(parsed) : parsed;
+  if (percentage === null) return null;
+  return percentage >= 0 && percentage <= 100 ? percentage : null;
+};
+
+const getLatestPrediction = (
+  predictions: BackendPrediction[]
+): BackendPrediction | null => {
+  if (!Array.isArray(predictions) || predictions.length === 0) return null;
+
+  // Prefer timestamps; use the prediction ID as a fallback.
+  return [...predictions].sort((a, b) => {
+    const timeA = a.created_at ? Date.parse(a.created_at) : Number.NaN;
+    const timeB = b.created_at ? Date.parse(b.created_at) : Number.NaN;
+    if (Number.isFinite(timeA) && Number.isFinite(timeB) && timeA !== timeB) {
+      return timeB - timeA;
+    }
+    return toNumber(b.id, -1) - toNumber(a.id, -1);
+  })[0];
+};
+
+const mapBackendProject = async (
+  item: BackendProject,
+  token: string
+): Promise<Project> => {
+  let riskScore: number | null = null;
+  let riskCategory: Project['riskCategory'] = 'Not Predicted';
+  let latestPrediction: BackendPrediction | null = null;
+
+  try {
+    const predictionResponse = await fetch(
+      `${API_BASE_URL}/predictions/${encodeURIComponent(String(item.id))}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (predictionResponse.ok) {
+      const predictions: BackendPrediction[] = await predictionResponse.json();
+      latestPrediction = getLatestPrediction(predictions);
+
+      if (latestPrediction) {
+        riskScore = mapProbabilityToPercent(latestPrediction.delay_probability);
+        riskCategory = mapRiskCategory(latestPrediction.risk_level);
+        if (riskScore === null) riskCategory = 'Not Predicted';
+      }
+    } else if (predictionResponse.status !== 404) {
+      console.warn(
+        `Could not load prediction for project ${item.id} (HTTP ${predictionResponse.status}).`
+      );
+    }
+  } catch (error) {
+    console.error(`Could not load prediction for project ${item.id}:`, error);
+  }
+
+  const backendCompensationStatus = String(item.compensation_status ?? '');
+  const compensationStatus: Project['compensationStatus'] =
+    backendCompensationStatus === 'Paid' ||
+    backendCompensationStatus === 'Disbursed (100%)'
+      ? 'Disbursed (100%)'
+      : backendCompensationStatus === 'Pending' ||
+          backendCompensationStatus === 'Not Started' ||
+          backendCompensationStatus === 'Pending (<25%)'
+        ? 'Pending (<25%)'
+        : backendCompensationStatus === 'Under Dispute'
+          ? 'Under Dispute'
+          : backendCompensationStatus === 'In Progress' ||
+              backendCompensationStatus === 'Partially Disbursed (50-75%)'
+            ? 'In Progress'
+            : 'Unknown';
+
+  const knownApprovalStatuses: Project['approvalStatus'][] = [
+    'Cleared / Approved',
+    'In Administrative Review',
+    'Environmental Clearance Pending',
+    'Incomplete Documentation',
+  ];
+  const approvalStatus = knownApprovalStatuses.includes(
+    item.approval_status as Project['approvalStatus']
+  )
+    ? (item.approval_status as Project['approvalStatus'])
+    : 'Unknown';
+
+  const rehabilitationProgress = Math.min(
+    100,
+    Math.max(0, toNumber(item.rehabilitation_progress))
+  );
+  const rehabilitationStatus: Project['rehabilitationStatus'] =
+    rehabilitationProgress >= 100
+      ? 'Completed'
+      : rehabilitationProgress >= 50
+        ? 'In Progress'
+        : rehabilitationProgress > 0
+          ? 'Land Allocated'
+          : 'Not Started';
+
+  const landAreaAcres = hectaresToAcres(toNumber(item.land_required));
+  const affectedFamilies = toNumber(item.affected_families);
+  const legalDispute = String(item.legal_dispute ?? '').toLowerCase() === 'yes';
+  const latitude = item.latitude == null ? Number.NaN : Number(item.latitude);
+  const longitude = item.longitude == null ? Number.NaN : Number(item.longitude);
+  const coordinates =
+    Number.isFinite(latitude) &&
+    Number.isFinite(longitude) &&
+    latitude >= -90 &&
+    latitude <= 90 &&
+    longitude >= -180 &&
+    longitude <= 180
+      ? ([latitude, longitude] as [number, number])
+      : null;
+
+  const ruleBasedDetails = calculateDelayRisk({
+    landArea: landAreaAcres,
+    affectedFamilies,
+    compensationStatus,
+    legalDispute,
+    approvalStatus,
+    rehabilitationStatus,
+  });
+
+  return {
+    id: String(item.id),
+    name: item.project_name,
+    state: item.state,
+    district: item.district,
+    landArea: landAreaAcres,
+    affectedFamilies,
+    compensationStatus,
+    legalDispute,
+    approvalStatus,
+    rehabilitationStatus,
+    riskScore,
+    riskCategory,
+    status:
+      riskCategory === 'High'
+        ? 'Severely Delayed'
+        : riskCategory === 'Medium'
+          ? 'Moderate Delay'
+          : riskCategory === 'Low'
+            ? 'On Track'
+            : 'Not Predicted',
+    coordinates,
+    projectType: item.project_type ?? 'Unknown',
+    // These are rule-based factor severities, not ML feature attributions.
+    delayFactors: ruleBasedDetails.delayFactors,
+    recommendedActions: ruleBasedDetails.recommendedActions,
+    approvalDaysPending: toNumber(item.approval_days_pending),
+    possessionStatus:
+      item.possession_status === 'Full' ||
+      item.possession_status === 'Partial' ||
+      item.possession_status === 'Not Taken'
+        ? item.possession_status
+        : 'Unknown',
+    rehabilitationProgress,
+    stakeholderScore: toNumber(item.stakeholder_score, 5),
+    districtHistoricalDelay: toNumber(item.district_historical_delay),
+    stageRisk: latestPrediction?.stage_risk ?? null,
+    highestRiskStage: latestPrediction?.highest_risk_stage ?? null,
+    createdDate: String(item.created_at ?? '').slice(0, 10),
+    // The ML endpoint predicts probability, not validated delay duration.
+    estimatedDelayMonths: null,
+    budgetCr: rupeesToCrores(toNumber(item.estimated_cost)),
+  };
+};
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState<User>({
@@ -23,9 +239,8 @@ export default function App() {
     fullName: '',
     role: '',
     department: '',
-    isAuthenticated: false // Starts on Login Page by default so user sees Page 1 immediately
+    isAuthenticated: false,
   });
-
   const [activePage, setActivePage] = useState<ActivePage>('login');
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -33,148 +248,52 @@ export default function App() {
   const [projectsError, setProjectsError] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Compute alert count for high risk projects
-  const highRiskCount = projects.filter((p) => p.riskCategory === 'High').length;
+  const highRiskCount = projects.filter(
+    (project) => project.riskCategory === 'High'
+  ).length;
 
   const handleLoginSuccess = async (user: User) => {
+    const token = sessionStorage.getItem('access_token');
+
+    if (!token) {
+      setCurrentUser({
+        username: '',
+        fullName: '',
+        role: '',
+        department: '',
+        isAuthenticated: false,
+      });
+      setActivePage('login');
+      setProjectsError('Your login token is missing. Please log in again.');
+      return;
+    }
+
     setCurrentUser(user);
     setActivePage('dashboard');
     setProjectsLoading(true);
     setProjectsError('');
 
-    const token = sessionStorage.getItem('access_token');
-
-    if (!token) {
-      setProjectsError('Your login token is missing. Please log in again.');
-      setProjectsLoading(false);
-      return;
-    }
-
     try {
       const response = await fetch(`${API_BASE_URL}/projects`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
-
       if (!response.ok) {
         throw new Error(`Failed to load projects (HTTP ${response.status}).`);
       }
 
-      const savedProjects = await response.json();
-      const mappedProjects: Project[] = await Promise.all(
-        savedProjects.map(async (item: any): Promise<Project> => {
-            let riskScore: number | null = null;
-            let riskCategory: Project['riskCategory'] = 'Not Predicted';
+      const savedProjects: BackendProject[] = await response.json();
+      if (!Array.isArray(savedProjects)) {
+        throw new Error('The backend returned an invalid projects response.');
+      }
 
-    // Get the latest saved ML prediction for this project.
-            try {
-              const predictionResponse = await fetch(
-                `${API_BASE_URL}/predictions/${item.id}`,
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
-                }
-              );
-
-              if (predictionResponse.ok) {
-                const predictions = await predictionResponse.json();
-
-                if (Array.isArray(predictions) && predictions.length > 0) {
-                  const latestPrediction = predictions[0];
-                  riskScore = Number(latestPrediction.delay_probability) * 100;
-                  riskCategory = latestPrediction.risk_level;
-                }
-              }
-            } catch (error) {
-              console.error(
-                `Could not load prediction for project ${item.id}:`,
-                error
-              );
-            }
-
-            const compensationStatus: Project['compensationStatus'] =
-              item.compensation_status === 'Paid'
-                ? 'Disbursed (100%)'
-                : item.compensation_status === 'Pending'
-                  ? 'Pending (<25%)'
-                  : item.compensation_status === 'Disputed'
-                    ? 'Under Dispute'
-                    : 'Partially Disbursed (50-75%)';
-
-            const approvalStatus: Project['approvalStatus'] =
-              item.approval_days_pending === 0
-                ? 'Cleared / Approved'
-                : item.approval_days_pending <= 30
-                  ? 'In Administrative Review'
-                  : item.approval_days_pending <= 90
-                    ? 'Environmental Clearance Pending'
-                    : 'Incomplete Documentation';
-
-            const rehabilitationStatus: Project['rehabilitationStatus'] =
-              item.rehabilitation_progress >= 100
-                ? 'Completed'
-                : item.rehabilitation_progress >= 50
-                  ? 'In Progress'
-                  : item.rehabilitation_progress > 0
-                    ? 'Land Allocated'
-                    : 'Not Started';
-
-            const matchingSample = initialProjects.find(
-              (sample) =>
-                sample.state === item.state &&
-                sample.district === item.district
-            );
-
-            const ruleBasedDetails = calculateDelayRisk({
-              landArea: Number(item.land_required) / 0.404686,
-              affectedFamilies: Number(item.affected_families),
-              compensationStatus,
-              legalDispute: item.legal_dispute === 'Yes',
-              approvalStatus,
-              rehabilitationStatus,
-            });
-
-            return {
-              id: String(item.id),
-              name: item.project_name,
-              state: item.state,
-              district: item.district,
-              landArea: Number(item.land_required) / 0.404686,
-              affectedFamilies: Number(item.affected_families),
-              compensationStatus,
-              legalDispute: item.legal_dispute === 'Yes',
-              approvalStatus,
-              rehabilitationStatus,
-              riskScore,
-              riskCategory,
-              status:
-                riskCategory === 'High'
-                  ? 'Severely Delayed'
-                  : riskCategory === 'Medium'
-                    ? 'Moderate Delay'
-                    : 'On Track',
-              coordinates: matchingSample?.coordinates ?? [12.9716, 77.5946],
-              projectType: item.project_type,
-              // These are transparent rule-based factor severity scores, not ML feature attributions.
-              delayFactors: ruleBasedDetails.delayFactors,
-              recommendedActions: ruleBasedDetails.recommendedActions,
-              createdDate: String(item.created_at ?? '').slice(0, 10),
-              // The trained ML API returns a delay probability, not a validated duration in months.
-              estimatedDelayMonths: null,
-              budgetCr: Number(item.estimated_cost) / 10_000_000,
-            };
-          })
-        );
-
-        setProjects(mappedProjects);
-        setSelectedProject(mappedProjects[0] ?? null);
-
-        console.log('Projects loaded from backend:', mappedProjects);
+      const mappedProjects = await Promise.all(
+        savedProjects.map((item) => mapBackendProject(item, token))
+      );
+      setProjects(mappedProjects);
+      setSelectedProject(mappedProjects[0] ?? null);
+      console.log('Projects loaded from backend:', mappedProjects);
     } catch (error) {
       console.error('Failed to load projects:', error);
-
       setProjectsError(
         error instanceof Error
           ? error.message
@@ -186,19 +305,32 @@ export default function App() {
   };
 
   const handleLogout = () => {
+    sessionStorage.removeItem('access_token');
     setCurrentUser({
       username: '',
       fullName: '',
       role: '',
       department: '',
-      isAuthenticated: false
+      isAuthenticated: false,
     });
+    setProjects([]);
+    setSelectedProject(null);
+    setProjectsError('');
     setActivePage('login');
   };
 
   const handleAddProject = (newProject: Project) => {
-    setProjects((prev) => [newProject, ...prev]);
+    setProjects((previousProjects) => [newProject, ...previousProjects]);
     setSelectedProject(newProject);
+  };
+
+  const handleUpdateProject = (updatedProject: Project) => {
+    setProjects((previousProjects) =>
+      previousProjects.map((project) =>
+        project.id === updatedProject.id ? updatedProject : project
+      )
+    );
+    setSelectedProject(updatedProject);
   };
 
   const handleNavigate = (page: ActivePage) => {
@@ -207,14 +339,12 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // If user requested Login page or is unauthenticated
   if (activePage === 'login' || !currentUser.isAuthenticated) {
     return <LoginPage onLoginSuccess={handleLoginSuccess} />;
   }
 
   return (
     <div className="flex h-screen bg-slate-100 text-slate-900 font-sans overflow-hidden">
-      {/* Desktop Sidebar */}
       <div className="hidden md:flex h-full">
         <Sidebar
           activePage={activePage}
@@ -224,18 +354,18 @@ export default function App() {
         />
       </div>
 
-      {/* Mobile Drawer Sidebar */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 flex md:hidden">
-          <div 
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs" 
-            onClick={() => setMobileMenuOpen(false)} 
+          <div
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs"
+            onClick={() => setMobileMenuOpen(false)}
           />
           <div className="relative flex flex-col w-72 bg-slate-900 h-full shadow-2xl z-50">
             <div className="flex items-center justify-end p-3 border-b border-slate-800">
               <button
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+                aria-label="Close navigation menu"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -250,95 +380,97 @@ export default function App() {
         </div>
       )}
 
-      {/* Main Content Area */}
       <div className="flex-1 flex flex-col h-full overflow-hidden min-w-0">
         <Header
           activePage={activePage}
           user={currentUser}
           alertCount={highRiskCount}
           onNavigate={handleNavigate}
+          onLogout={handleLogout}
           onToggleMobileMenu={() => setMobileMenuOpen(true)}
         />
 
-        {/* Scrollable Viewport */}
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
           {projectsLoading && (
-            <p className="p-4 text-center text-blue-600">
-              Loading projects...
-            </p>
-        )}
-
+            <p className="p-4 text-center text-blue-600">Loading projects...</p>
+          )}
           {projectsError && (
             <div className="m-4 rounded-lg border border-red-300 bg-red-50 p-4 text-red-700">
               {projectsError}
             </div>
           )}
+
           {activePage === 'dashboard' && (
             <DashboardPage
               projects={projects}
               onNavigate={handleNavigate}
-              onSelectProjectForPrediction={(p) => setSelectedProject(p)}
+              onSelectProjectForPrediction={setSelectedProject}
             />
           )}
-
           {activePage === 'projects' && (
             <ProjectListPage
               projects={projects}
               onNavigate={handleNavigate}
-              onSelectProjectForPrediction={(p) => setSelectedProject(p)}
-              onSelectProjectForSimulation={(p) => setSelectedProject(p)}
+              onSelectProjectForPrediction={setSelectedProject}
+              onSelectProjectForSimulation={setSelectedProject}
+              onSelectProjectForEdit={(project) => {
+                setSelectedProject(project);
+                handleNavigate('edit-project');
+              }}
             />
           )}
-
           {activePage === 'add-project' && (
             <AddProjectPage
               onAddProject={handleAddProject}
               onNavigate={handleNavigate}
             />
           )}
-
+          {activePage === 'edit-project' && selectedProject && (
+            <AddProjectPage
+              initialProject={selectedProject}
+              onAddProject={handleAddProject}
+              onUpdateProject={handleUpdateProject}
+              onNavigate={handleNavigate}
+            />
+          )}
           {activePage === 'prediction-result' && (
             <PredictionResultsPage
               project={selectedProject}
               allProjects={projects}
-              onSelectProject={(p) => setSelectedProject(p)}
+              onSelectProject={setSelectedProject}
               onNavigate={handleNavigate}
-              onSimulate={(p) => setSelectedProject(p)}
+              onSimulate={setSelectedProject}
             />
           )}
-
           {activePage === 'what-if' && (
             <WhatIfSimulatorPage
               initialProject={selectedProject}
               allProjects={projects}
             />
           )}
-
-          {activePage === 'analytics' && (
-            <AnalyticsPage projects={projects} />
-          )}
-
+          {activePage === 'analytics' && <AnalyticsPage projects={projects} />}
           {activePage === 'gis-map' && (
             <GisMapPage
               projects={projects}
-              onSelectProject={(p) => setSelectedProject(p)}
+              onSelectProject={setSelectedProject}
               onNavigate={handleNavigate}
             />
           )}
-
           {activePage === 'alerts' && (
             <AlertsPage
               projects={projects}
-              onSelectProject={(p) => setSelectedProject(p)}
+              onSelectProject={setSelectedProject}
               onNavigate={handleNavigate}
             />
           )}
 
-          {/* Footer */}
           <footer className="pt-6 pb-2 text-center text-xs text-slate-400 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-2">
             <div className="flex items-center gap-1.5 font-medium text-slate-500">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              <span>Predictive Analytics System for Early Detection of Land Acquisition Delays</span>
+              <span>
+                Predictive Analytics System for Early Detection of Land
+                Acquisition Delays
+              </span>
             </div>
             <div className="text-[11px] text-slate-400">
               Government Infrastructure &amp; Land Resources Monitoring Portal

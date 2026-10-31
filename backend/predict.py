@@ -1,5 +1,6 @@
 import argparse
 import json
+import math
 from pathlib import Path
 
 import joblib
@@ -7,7 +8,45 @@ import pandas as pd
 
 from stage_risk import stage_risk, risk_category
 
-MODEL_PATH = Path("models/model.pkl")
+MODEL_PATH = Path(__file__).parent / "models" / "model.pkl"
+
+COMPENSATION_TO_MODEL = {
+    "Disbursed (100%)": "Paid",
+    "Paid": "Paid",
+    "Pending (<25%)": "Not Started",
+    "Pending": "Not Started",
+    "Not Started": "Not Started",
+    "Partially Disbursed (50-75%)": "In Progress",
+    "Under Dispute": "In Progress",
+    "In Progress": "In Progress",
+}
+
+
+def model_compensation_status(status: str) -> str:
+    try:
+        return COMPENSATION_TO_MODEL[status]
+    except KeyError as exc:
+        raise ValueError(f"Unsupported compensation status: {status!r}") from exc
+
+
+def project_features_from_record(project) -> dict:
+    """Map persisted project fields to the trained model's feature schema."""
+    return {
+        "Project_Type": project.project_type,
+        "State": project.state,
+        "District": project.district,
+        "Land_Area_Hectares": project.land_required,
+        "Affected_Families": project.affected_families,
+        "Compensation_Status": model_compensation_status(
+            project.compensation_status
+        ),
+        "Approval_Days_Pending": project.approval_days_pending,
+        "Legal_Dispute": project.legal_dispute,
+        "Possession_Status": project.possession_status,
+        "Rehabilitation_Progress": project.rehabilitation_progress,
+        "Stakeholder_Score": project.stakeholder_score,
+        "District_Historical_Delay": project.district_historical_delay,
+    }
 
 SAMPLE_PROJECT = {
     "Project_Type": "Highway",
@@ -30,8 +69,19 @@ def predict_project(model, project: dict) -> dict:
     contract documented in MODEL_HANDOFF.md, ready to hand to the backend."""
     X_new = pd.DataFrame([project])
 
-    delayed = bool(model.predict(X_new)[0])
-    delay_probability = float(model.predict_proba(X_new)[0, 1])
+    classes = list(model.named_steps["classifier"].classes_)
+    try:
+        delayed_class_index = classes.index(1)
+    except ValueError as exc:
+        raise ValueError("The trained model has no delayed class (1).") from exc
+
+    delayed = bool(model.predict(X_new)[0] == 1)
+    delay_probability = float(
+        model.predict_proba(X_new)[0, delayed_class_index]
+    )
+    if not math.isfinite(delay_probability) or not 0 <= delay_probability <= 1:
+        raise ValueError("The model returned an invalid delay probability.")
+
     risk_score = round(delay_probability * 100, 2)
 
     stages = stage_risk(project)

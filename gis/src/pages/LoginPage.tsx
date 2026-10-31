@@ -5,8 +5,6 @@ import {
   User as UserIcon,
   ArrowRight,
   Info,
-  CheckCircle2,
-  Sparkles
 } from 'lucide-react';
 import { User } from '../types';
 import { API_BASE_URL } from '../api';
@@ -18,12 +16,17 @@ interface LoginPageProps {
 interface LoginResponse {
   access_token: string;
   token_type: string;
+  username: string;
+  role: User['role'];
 }
+
 
 export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const [isRegistering, setIsRegistering] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (
@@ -38,9 +41,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
 
     setIsLoading(true);
     setError('');
+    setMessage('');
 
     try {
-      const response = await fetch(`${API_BASE_URL}/login`, {
+      const response = await fetch(`${API_BASE_URL}${isRegistering ? '/register' : '/login'}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,11 +56,24 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
       });
 
       if (!response.ok) {
-        if (response.status === 401) {
+        const body = await response.json().catch(() => null);
+        const detail =
+          typeof body?.detail === 'string' ? body.detail : null;
+        if (!isRegistering && response.status === 401) {
           throw new Error('Invalid username or password.');
         }
 
-        throw new Error(`Login failed (${response.status}).`);
+        throw new Error(
+          detail ??
+            `${isRegistering ? 'Registration' : 'Login'} failed (${response.status}).`
+        );
+      }
+
+      if (isRegistering) {
+        setIsRegistering(false);
+        setPassword('');
+        setMessage('Account created. Sign in with your new credentials.');
+        return;
       }
 
       const data: LoginResponse = await response.json();
@@ -67,9 +84,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
       sessionStorage.setItem('token_type', data.token_type || 'bearer');
 
       onLoginSuccess({
-        username: username.trim(),
-        fullName: username.trim(),
-        role: 'Officer',
+        username: data.username,
+        fullName: data.username,
+        role: data.role,
         department: 'Land Resources',
         isAuthenticated: true,
       });
@@ -84,12 +101,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleDemoFill = () => {
-    setUsername('');
-    setPassword('');
-    setError('');
   };
 
   return (
@@ -119,7 +130,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
       {/* Main Login Card */}
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200/80 p-8">
         <div className="mb-6">
-          <h2 className="text-lg font-bold text-slate-800">Officer Sign In</h2>
+          <h2 className="text-lg font-bold text-slate-800">
+            {isRegistering ? 'Create Officer Account' : 'Officer Sign In'}
+          </h2>
           <p className="text-xs text-slate-500 mt-1">
             Access the predictive early-warning portal to monitor land delays
           </p>
@@ -129,6 +142,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
           <div className="mb-4 p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
             <Info className="w-4 h-4 shrink-0" />
             <span>{error}</span>
+          </div>
+        )}
+        {message && (
+          <div className="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-800">
+            {message}
           </div>
         )}
 
@@ -163,27 +181,15 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
               <input
                 id="password-input"
                 type="password"
-                autoComplete="off"
+                autoComplete={isRegistering ? 'new-password' : 'current-password'}
+                minLength={isRegistering ? 8 : undefined}
+                required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 className="w-full pl-9 pr-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-800 transition-all bg-slate-50/50"
               />
             </div>
-          </div>
-
-          <div className="flex items-center justify-between text-xs pt-1">
-            <label className="flex items-center gap-2 text-slate-600 cursor-pointer">
-              <input type="checkbox" defaultChecked className="rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
-              <span>Remember session</span>
-            </label>
-            <button
-              type="button"
-              onClick={handleDemoFill}
-              className="text-xs font-semibold text-blue-600 hover:text-blue-800"
-            >
-              Reset to Demo
-            </button>
           </div>
 
           <button
@@ -196,38 +202,23 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
               <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
               <>
-                <span>Sign In to Dashboard</span>
+                <span>{isRegistering ? 'Create Officer Account' : 'Sign In to Dashboard'}</span>
                 <ArrowRight className="w-4 h-4" />
               </>
             )}
           </button>
         </form>
-
-        {/* Quick Demo Access banner for student presentation convenience */}
-        <div className="mt-6 p-3 rounded-xl bg-slate-50 border border-slate-200">
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-              Quick Examiner / Demo Login
-            </span>
-            <span className="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-medium">Ready</span>
-          </div>
-          <p className="text-[11px] text-slate-500 mb-2">
-            No signup required. Click below to explore all 9 project modules immediately.
-          </p>
-          <button
-            id="btn-quick-demo-login"
-            type="button"
-            onClick={() => {
-              const form = document.querySelector('form');
-              form?.requestSubmit();
-            }}
-            className="w-full py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors shadow-xs"
-          >
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>Launch Demo Dashboard Directly</span>
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() => {
+            setIsRegistering((registering) => !registering);
+            setError('');
+            setMessage('');
+          }}
+          className="mt-4 w-full text-center text-xs font-semibold text-blue-700 hover:text-blue-900"
+        >
+          {isRegistering ? 'Already registered? Sign in' : 'Need an account? Register as an officer'}
+        </button>
       </div>
 
       {/* Footer Info */}

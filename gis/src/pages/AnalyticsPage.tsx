@@ -10,11 +10,7 @@ import {
   PieChart, 
   Pie, 
   Cell, 
-  LineChart, 
-  Line, 
-  Legend,
-  AreaChart,
-  Area
+  Legend
 } from 'recharts';
 import { 
   BarChart3, 
@@ -35,11 +31,28 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
   const highCount = projects.filter((p) => p.riskCategory === 'High').length;
   const medCount = projects.filter((p) => p.riskCategory === 'Medium').length;
   const lowCount = projects.filter((p) => p.riskCategory === 'Low').length;
+  const unpredictedCount = projects.filter(
+    (project) => project.riskScore === null
+  ).length;
+  const uniqueRiskScores = new Map<string, number | null>(
+    projects.map(
+      (project): [string, number | null] => [project.id, project.riskScore]
+    )
+  );
+  const validRiskScores = [...uniqueRiskScores.values()].filter(
+    (score): score is number =>
+      score !== null && Number.isFinite(score) && score >= 0 && score <= 100
+  );
+  const averageRisk = validRiskScores.length
+    ? validRiskScores.reduce((total, score) => total + score, 0) /
+      validRiskScores.length
+    : null;
 
   const riskDistributionData = [
     { name: 'High Risk', value: highCount, color: '#f43f5e' },
     { name: 'Medium Risk', value: medCount, color: '#f59e0b' },
-    { name: 'Low Risk', value: lowCount, color: '#10b981' }
+    { name: 'Low Risk', value: lowCount, color: '#10b981' },
+    { name: 'Not Predicted', value: unpredictedCount, color: '#64748b' }
   ];
 
   // 2. District-wise Projects Data
@@ -60,15 +73,39 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
     acres: data.acres
   }));
 
-  // 3. Delay Trend Chart Data (Quarterly Historical vs Forecasted Delays in months)
-  const delayTrendData = [
-    { quarter: 'Q1 2025', avgDelayMonths: 2.1, resolvedCases: 12, forecastedDelay: 2.4 },
-    { quarter: 'Q2 2025', avgDelayMonths: 3.5, resolvedCases: 15, forecastedDelay: 3.8 },
-    { quarter: 'Q3 2025', avgDelayMonths: 5.2, resolvedCases: 9, forecastedDelay: 5.0 },
-    { quarter: 'Q4 2025', avgDelayMonths: 6.8, resolvedCases: 7, forecastedDelay: 6.5 },
-    { quarter: 'Q1 2026', avgDelayMonths: 8.4, resolvedCases: 6, forecastedDelay: 7.9 },
-    { quarter: 'Q2 2026 (Pred)', avgDelayMonths: 9.1, resolvedCases: 14, forecastedDelay: 8.8 }
-  ];
+  const stageNames = [
+    'Planning',
+    'Approval',
+    'Compensation',
+    'Rehabilitation',
+    'Possession',
+  ] as const;
+  const stageRiskData = stageNames.flatMap((stage) => {
+    const scores = projects
+      .map((project) => project.stageRisk?.[stage]?.score)
+      .filter(
+        (score): score is number =>
+          score !== undefined &&
+          Number.isFinite(score) &&
+          score >= 0 &&
+          score <= 100
+      );
+    return scores.length
+      ? [{ stage, averageScore: scores.reduce((sum, score) => sum + score, 0) / scores.length }]
+      : [];
+  });
+  const highestRiskStageCounts = new Map<string, number>();
+  projects.forEach((project) => {
+    if (project.highestRiskStage) {
+      highestRiskStageCounts.set(
+        project.highestRiskStage,
+        (highestRiskStageCounts.get(project.highestRiskStage) ?? 0) + 1
+      );
+    }
+  });
+  const primaryBottleneck = [...highestRiskStageCounts.entries()].sort(
+    (left, right) => right[1] - left[1]
+  )[0];
 
   const totalAcresAtRisk = projects
     .filter((p) => p.riskCategory === 'High')
@@ -116,9 +153,13 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
             <Clock className="w-6 h-6" />
           </div>
           <div>
-            <div className="text-xs font-semibold text-slate-500">Average Forecasted Overrun</div>
-            <div className="text-xl font-bold text-amber-600 font-mono">5.8 Months</div>
-            <div className="text-[11px] text-slate-400 mt-0.5">Without proactive administrative intervention</div>
+            <div className="text-xs font-semibold text-slate-500">Average Saved Delay Risk</div>
+            <div className="text-xl font-bold text-amber-600 font-mono">
+              {averageRisk === null ? 'N/A' : `${averageRisk.toFixed(2)}%`}
+            </div>
+            <div className="text-[11px] text-slate-400 mt-0.5">
+              Mean saved model probability across {validRiskScores.length} predicted projects
+            </div>
           </div>
         </div>
 
@@ -128,8 +169,14 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
           </div>
           <div>
             <div className="text-xs font-semibold text-slate-500">Primary Bottleneck Driver</div>
-            <div className="text-sm font-bold text-slate-800">Compensation Injunctions</div>
-            <div className="text-[11px] text-slate-400 mt-0.5">Accounts for 42% of total delay weight</div>
+            <div className="text-sm font-bold text-slate-800">
+              {primaryBottleneck?.[0] ?? 'Not available'}
+            </div>
+            <div className="text-[11px] text-slate-400 mt-0.5">
+              {primaryBottleneck
+                ? `Highest-risk stage for ${primaryBottleneck[1]} projects`
+                : 'No saved stage-risk predictions'}
+            </div>
           </div>
         </div>
       </div>
@@ -218,10 +265,10 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
         <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
           <div>
             <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-              Quarterly Delay Duration Trend &amp; Forecast (Months)
+              Average Operational Risk by Acquisition Stage
             </h2>
             <p className="text-[11px] text-slate-500">
-              Observed escalation in average acquisition delay over successive project monitoring cycles
+              Mean of saved stage-risk scores; unmeasured stages are omitted
             </p>
           </div>
           <TrendingUp className="w-4 h-4 text-blue-600" />
@@ -229,42 +276,16 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
 
         <div className="h-64 w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={delayTrendData} margin={{ top: 10, right: 20, left: -10, bottom: 0 }}>
-              <defs>
-                <linearGradient id="colorDelay" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.25}/>
-                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
-                </linearGradient>
-                <linearGradient id="colorForecast" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.2}/>
-                  <stop offset="95%" stopColor="#f59e0b" stopOpacity={0}/>
-                </linearGradient>
-              </defs>
+            <BarChart data={stageRiskData} margin={{ top: 10, right: 20, left: -10, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-              <XAxis dataKey="quarter" tick={{ fontSize: 11, fill: '#64748b' }} />
-              <YAxis tick={{ fontSize: 11, fill: '#64748b' }} />
+              <XAxis dataKey="stage" tick={{ fontSize: 11, fill: '#64748b' }} />
+              <YAxis domain={[0, 100]} tick={{ fontSize: 11, fill: '#64748b' }} />
               <Tooltip 
                 contentStyle={{ fontSize: '11px', borderRadius: '8px', border: '1px solid #e2e8f0' }}
               />
               <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '8px' }} />
-              <Area 
-                type="monotone" 
-                dataKey="avgDelayMonths" 
-                name="Average Actual Delay (Months)" 
-                stroke="#2563eb" 
-                strokeWidth={2}
-                fillOpacity={1} 
-                fill="url(#colorDelay)" 
-              />
-              <Line 
-                type="monotone" 
-                dataKey="forecastedDelay" 
-                name="Predictive Forecast (Months)" 
-                stroke="#d97706" 
-                strokeWidth={2} 
-                strokeDasharray="4 4" 
-              />
-            </AreaChart>
+              <Bar dataKey="averageScore" name="Average risk score" fill="#d97706" radius={[4, 4, 0, 0]} />
+            </BarChart>
           </ResponsiveContainer>
         </div>
       </div>

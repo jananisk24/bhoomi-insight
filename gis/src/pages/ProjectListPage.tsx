@@ -7,7 +7,8 @@ import {
   Cpu, 
   SlidersHorizontal, 
   LandPlot,
-  ArrowUpDown
+  ArrowUpDown,
+  Pencil,
 } from 'lucide-react';
 import { Project, ActivePage, RiskCategory } from '../types';
 import { RiskBadge } from '../components/RiskBadge';
@@ -17,13 +18,15 @@ interface ProjectListPageProps {
   onNavigate: (page: ActivePage) => void;
   onSelectProjectForPrediction: (project: Project) => void;
   onSelectProjectForSimulation: (project: Project) => void;
+  onSelectProjectForEdit: (project: Project) => void;
 }
 
 export const ProjectListPage: React.FC<ProjectListPageProps> = ({
   projects,
   onNavigate,
   onSelectProjectForPrediction,
-  onSelectProjectForSimulation
+  onSelectProjectForSimulation,
+  onSelectProjectForEdit,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -252,6 +255,14 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
                     </td>
                     <td className="px-4 py-3.5 text-right">
                       <div className="flex items-center justify-end gap-1.5">
+                        <button
+                          id={`btn-edit-project-${project.id}`}
+                          title="Edit project and refresh its model prediction"
+                          onClick={() => onSelectProjectForEdit(project)}
+                          className="p-1.5 rounded-lg bg-slate-100 text-slate-600 transition-colors hover:bg-blue-600 hover:text-white"
+                        >
+                          <Pencil className="h-3.5 w-3.5" />
+                        </button>
                         <button
                           id={`btn-view-pred-${project.id}`}
                           title="View Predictive Delay Report"

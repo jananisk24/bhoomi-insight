@@ -4,10 +4,9 @@ from datetime import datetime, timedelta, timezone
 import bcrypt
 import jwt
 
-# NEVER hardcode secrets in source. Set this in a .env file / environment
-# variable in real deployment. The fallback here is only so the app still
-# runs out-of-the-box for local hackathon dev.
-SECRET_KEY = os.getenv("JWT_SECRET_KEY", "dev-only-change-me")
+SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+if SECRET_KEY is None or len(SECRET_KEY.encode("utf-8")) < 32:
+    raise RuntimeError("JWT_SECRET_KEY must contain at least 32 bytes.")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 8  # 8 hours
 
@@ -26,10 +25,17 @@ def verify_password(password: str, hashed_password: str) -> bool:
     )
 
 
-def create_token(username: str) -> str:
-    expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+def create_token(username: str, role: str = "Officer") -> str:
+    expire = datetime.now(timezone.utc) + timedelta(
+        minutes=ACCESS_TOKEN_EXPIRE_MINUTES
+    )
+
     return jwt.encode(
-        {"sub": username, "exp": expire},
+        {
+            "sub": username,
+            "role": role,
+            "exp": expire
+        },
         SECRET_KEY,
         algorithm=ALGORITHM
     )

@@ -11,7 +11,7 @@ import {
   Calendar,
   Layers
 } from 'lucide-react';
-import { Project, ActivePage } from '../types';
+import { Project, ActivePage, StageRisk } from '../types';
 import { RiskBadge } from '../components/RiskBadge';
 import { calculateDelayRisk } from '../utils/predictionEngine';
 
@@ -48,6 +48,10 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
     );
   }
 
+  const isPredicted =
+    currentProject.riskScore != null &&
+    currentProject.riskCategory !== 'Not Predicted';
+
   const { delayFactors } = calculateDelayRisk({
     landArea: currentProject.landArea,
     affectedFamilies: currentProject.affectedFamilies,
@@ -57,16 +61,15 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
     rehabilitationStatus: currentProject.rehabilitationStatus,
   });
 
-  const getBarColor = (val: number) => {
-    if (val >= 75) return 'bg-rose-500';
-    if (val >= 45) return 'bg-amber-500';
-    return 'bg-emerald-500';
-  };
-
   const getTextColor = (val: number) => {
-    if (val >= 75) return 'text-rose-600';
-    if (val >= 45) return 'text-amber-600';
+    if (val >= 70) return 'text-rose-600';
+    if (val >= 40) return 'text-amber-600';
     return 'text-emerald-600';
+  };
+  const getBarColor = (val: number) => {
+    if (val >= 70) return 'bg-rose-500';
+    if (val >= 40) return 'bg-amber-500';
+    return 'bg-emerald-500';
   };
 
   return (
@@ -125,7 +128,7 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
             <div className="relative flex items-center justify-center my-2">
               <div
                 className={`w-32 h-32 rounded-full border-8 flex flex-col items-center justify-center ${
-                  currentProject.riskScore === null
+                  currentProject.riskScore == null
                     ? 'border-slate-300 text-slate-500 bg-slate-50'
                     : currentProject.riskScore >= 70
                     ? 'border-rose-500 text-rose-600 bg-rose-50/50'
@@ -136,12 +139,12 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
               >
 
                 <span className="text-3xl font-black font-mono tracking-tight leading-none">
-                  {currentProject.riskScore === null
+                  {currentProject.riskScore == null
                     ? 'N/A'
                     : `${currentProject.riskScore.toFixed(2)}%`}
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-wide mt-1">
-                  {currentProject.riskScore === null
+                  {currentProject.riskScore == null
                     ? 'Not Predicted'
                     : 'Delay Risk'}
                 </span>
@@ -184,7 +187,7 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
             {/* Quick Metrics Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
-                <div className="text-[10px] font-semibold text-slate-400 uppercase">Estimated Delay</div>
+                <div className="text-[10px] font-semibold text-slate-400 uppercase">Rule-Based Estimated Delay</div>
                 <div className="text-base font-bold text-rose-600 font-mono mt-0.5">
                   {currentProject.estimatedDelayMonths == null
                     ? 'Not estimated'
@@ -197,7 +200,7 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
                 <div className="text-[10px] font-semibold text-slate-400 uppercase">Land & Families</div>
                 <div className="text-xs font-bold text-slate-800 font-mono mt-0.5">
-                  {currentProject.landArea} ac • {currentProject.affectedFamilies} PAFs
+                  {Number(currentProject.landArea).toFixed(2)} acres • {currentProject.affectedFamilies} PAFs
                 </div>
               </div>
 
@@ -233,14 +236,47 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
         </div>
       </div>
 
-      {/* Delay Factors Breakdown with Progress Bars */}
+      {/* Persisted five-stage operational risk */}
+      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-xs">
+        <div className="mb-4 border-b border-slate-100 pb-3">
+          <h2 className="text-sm font-bold text-slate-800">
+            Five-Stage Risk Assessment
+          </h2>
+          <p className="mt-1 text-xs text-slate-500">
+            Scores calculated with the same project fields and thresholds used by the backend.
+          </p>
+        </div>
+        {currentProject.stageRisk ? (
+          <>
+            <p className="mb-3 text-xs text-slate-600">
+              Highest-risk stage:{' '}
+              <strong>{currentProject.highestRiskStage ?? 'Not available'}</strong>
+            </p>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              {Object.entries<StageRisk>(currentProject.stageRisk).map(([stage, risk]) => (
+                <div key={stage} className="rounded-lg border border-slate-200 p-3">
+                  <div className="text-xs font-semibold text-slate-700">{stage}</div>
+                  <div className="my-1 text-lg font-bold">{risk.score.toFixed(2)}%</div>
+                  <RiskBadge category={risk.category} size="sm" />
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <p className="text-xs text-slate-500">
+            No saved stage-risk assessment is available for this prediction.
+          </p>
+        )}
+      </div>
+
+      {/* Rule-based signals are shown separately from the trained model output. */}
       <div className="bg-white rounded-xl border border-slate-200 shadow-xs p-6">
         <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
           <div>
             <h2 className="text-sm font-bold text-slate-800">Delay Factors Breakdown</h2>
             <p className="text-xs text-slate-500">Rule-based factor severity scores (not ML feature attribution)</p>
           </div>
-          <span className="text-xs font-mono font-medium text-slate-400">Rule-based weights</span>
+          <span className="text-xs font-mono font-medium text-slate-400">Heuristic indicators</span>
         </div>
 
         <div className="space-y-4">
@@ -346,12 +382,15 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
           <Lightbulb className="w-5 h-5 text-amber-500" />
           <div>
             <h2 className="text-sm font-bold text-slate-800">Prescriptive Administrative Actions</h2>
-            <p className="text-xs text-slate-500">Actionable steps recommended by the predictive rule engine to avoid project stagnation</p>
+            <p className="text-xs text-slate-500">Administrative actions generated using project conditions and predefined rules. These are not ML-generated recommendations.</p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {currentProject.recommendedActions.map((action, idx) => (
+          {(Array.isArray(currentProject.recommendedActions)
+            ? currentProject.recommendedActions
+            : []
+          ).map((action, idx) => (
             <div key={idx} className="p-3 rounded-lg bg-blue-50/60 border border-blue-100 text-xs text-slate-800 flex items-start gap-2.5">
               <div className="w-5 h-5 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center shrink-0 text-[10px] mt-0.5">
                 {idx + 1}

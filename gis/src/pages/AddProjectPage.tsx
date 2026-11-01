@@ -21,6 +21,7 @@ import { calculateDelayRisk } from '../utils/predictionEngine';
 import {
   acresToHectares,
   croresToRupees,
+  formatAcres,
   probabilityToPercent,
 } from '../utils/units';
 
@@ -51,6 +52,9 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
           : 'Highway / Expressway'
   );
   const [landArea, setLandArea] = useState<number>(initialProject?.landArea ?? 0);
+  const [landAreaInput, setLandAreaInput] = useState<string>(
+    initialProject?.landArea != null ? formatAcres(initialProject.landArea) : '0'
+  );
   const [affectedFamilies, setAffectedFamilies] = useState<number>(initialProject?.affectedFamilies ?? 0);
   const [compensationStatus, setCompensationStatus] = useState<CompensationStatus>(
     initialProject?.compensationStatus ?? 'Pending (<25%)'
@@ -443,9 +447,14 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
                 id="land-area-input"
                 type="number"
                 min="1"
+                step="any"
                 required
-                value={landArea}
-                onChange={(e) => setLandArea(Number(e.target.value))}
+                value={landAreaInput}
+                onChange={(e) => {
+                  const nextInput = e.target.value;
+                  setLandAreaInput(nextInput);
+                  setLandArea(nextInput === '' ? Number.NaN : Number(nextInput));
+                }}
                 className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono"
               />
             </div>
@@ -663,6 +672,7 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
                 setDistrict('Chennai');
                 setProjectType('Highway / Expressway');
                 setLandArea(100);
+                setLandAreaInput('100');
                 setAffectedFamilies(100);
                 setCompensationStatus('Pending (<25%)');
                 setLegalDispute(false);

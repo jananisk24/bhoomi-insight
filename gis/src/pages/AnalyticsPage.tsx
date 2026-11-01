@@ -21,6 +21,7 @@ import {
   Clock 
 } from 'lucide-react';
 import { Project } from '../types';
+import { formatAcresLabel } from '../utils/units';
 
 interface AnalyticsPageProps {
   projects: Project[];
@@ -129,7 +130,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
           <div className="text-right">
             <span className="text-[11px] text-slate-400 font-semibold block">Total Land Tracked</span>
             <span className="text-sm font-bold text-slate-800 font-mono">
-              {projects.reduce((a, b) => a + b.landArea, 0).toLocaleString()} Acres
+              {formatAcresLabel(projects.reduce((a, b) => a + b.landArea, 0))}
             </span>
           </div>
         </div>
@@ -143,7 +144,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
           </div>
           <div>
             <div className="text-xs font-semibold text-slate-500">High Risk Land In Jeopardy</div>
-            <div className="text-xl font-bold text-rose-600 font-mono">{totalAcresAtRisk.toLocaleString()} Acres</div>
+            <div className="text-xl font-bold text-rose-600 font-mono">{formatAcresLabel(totalAcresAtRisk)}</div>
             <div className="text-[11px] text-slate-400 mt-0.5">Across {highCount} critical stalled projects</div>
           </div>
         </div>

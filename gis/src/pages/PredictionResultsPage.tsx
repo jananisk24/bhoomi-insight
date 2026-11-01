@@ -14,6 +14,7 @@ import {
 import { Project, ActivePage, StageRisk } from '../types';
 import { RiskBadge } from '../components/RiskBadge';
 import { calculateDelayRisk } from '../utils/predictionEngine';
+import { formatAcresLabel } from '../utils/units';
 
 interface PredictionResultsPageProps {
   project: Project | null;
@@ -200,7 +201,7 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
                 <div className="text-[10px] font-semibold text-slate-400 uppercase">Land & Families</div>
                 <div className="text-xs font-bold text-slate-800 font-mono mt-0.5">
-                  {Number(currentProject.landArea).toFixed(2)} acres • {currentProject.affectedFamilies} PAFs
+                  {formatAcresLabel(currentProject.landArea)} • {currentProject.affectedFamilies} PAFs
                 </div>
               </div>
 

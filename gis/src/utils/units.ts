@@ -1,6 +1,29 @@
 export const HECTARES_PER_ACRE = 0.40468564224;
 export const RUPEES_PER_CRORE = 10_000_000;
 
+const acreValueFormatter = new Intl.NumberFormat('en-US', {
+  maximumFractionDigits: 2,
+  minimumFractionDigits: 0,
+  useGrouping: false,
+});
+
+const acreLabelFormatter = new Intl.NumberFormat('en-US', {
+  maximumFractionDigits: 2,
+  minimumFractionDigits: 0,
+});
+
+/** Format an acre value for display only: at most 2 decimals, no trailing zeros. */
+export const formatAcres = (acres: number | null | undefined): string =>
+  typeof acres === 'number' && Number.isFinite(acres)
+    ? acreValueFormatter.format(acres)
+    : 'N/A';
+
+/** Format an acre value with its unit for display only. */
+export const formatAcresLabel = (acres: number | null | undefined): string =>
+  typeof acres === 'number' && Number.isFinite(acres)
+    ? `${acreLabelFormatter.format(acres)} Acres`
+    : 'N/A';
+
 export const acresToHectares = (acres: number): number =>
   acres * HECTARES_PER_ACRE;
 

@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { Project, ActivePage, RiskCategory } from '../types';
 import { RiskBadge } from '../components/RiskBadge';
+import { formatAcresLabel } from '../utils/units';
 
 interface ProjectListPageProps {
   projects: Project[];
@@ -200,7 +201,7 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
                       <div className="text-[11px] text-slate-400">{project.state}</div>
                     </td>
                     <td className="px-4 py-3.5 font-mono text-slate-700">
-                      <div className="font-semibold">{project.landArea} Acres</div>
+                      <div className="font-semibold">{formatAcresLabel(project.landArea)}</div>
                       <div className="text-[10px] text-slate-400">{project.affectedFamilies} PAFs</div>
                     </td>
                     <td className="px-4 py-3.5">

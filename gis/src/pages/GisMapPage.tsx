@@ -3,6 +3,7 @@ import L from 'leaflet';
 import { Compass, Cpu } from 'lucide-react';
 import { Project, ActivePage } from '../types';
 import { RiskBadge } from '../components/RiskBadge';
+import { formatAcresLabel } from '../utils/units';
 
 interface GisMapPageProps {
   projects: Project[];
@@ -54,7 +55,7 @@ const createPopupContent = (
     'font-size: 11px; font-weight: 700; color: #1e293b; margin-bottom: 2px;';
 
   const location = document.createElement('div');
-  location.textContent = `${project.district} • ${Number(project.landArea).toFixed(2)} Acres`;
+  location.textContent = `${project.district} • ${formatAcresLabel(project.landArea)}`;
   location.style.cssText =
     'font-size: 10px; color: #64748b; margin-bottom: 6px;';
 
@@ -406,7 +407,7 @@ export const GisMapPage: React.FC<GisMapPageProps> = ({
                 {activeProject.name}
               </div>
               <div className="text-[11px] text-slate-500 mt-0.5">
-                {Number(activeProject.landArea).toFixed(2)} Acres •{' '}
+                {formatAcresLabel(activeProject.landArea)} •{' '}
                 {activeProject.status}
                 {!hasValidCoordinates(activeProject.coordinates) &&
                   ' • No verified map coordinates'}

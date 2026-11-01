@@ -13,6 +13,7 @@ import {
 import { API_BASE_URL } from '../api';
 import { Project, ActivePage } from '../types';
 import { RiskBadge } from '../components/RiskBadge';
+import { formatAcresLabel } from '../utils/units';
 
 interface AlertsPageProps {
   projects: Project[];
@@ -307,7 +308,7 @@ export const AlertsPage: React.FC<AlertsPageProps> = ({
                     </p>
                     <div className="flex items-center gap-2 pt-1">
                       <RiskBadge category={p.riskCategory} score={p.riskScore ?? undefined} size="sm" />
-                      <span className="text-[11px] text-slate-400">{p.landArea} Acres affected</span>
+                      <span className="text-[11px] text-slate-400">{formatAcresLabel(p.landArea)} affected</span>
                     </div>
                   </div>
                   <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 self-start md:self-auto shrink-0">

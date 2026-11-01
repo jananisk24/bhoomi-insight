@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Project, ActivePage } from '../types';
 import { RiskBadge } from '../components/RiskBadge';
+import { formatAcresLabel } from '../utils/units';
 
 interface DashboardPageProps {
   projects: Project[];
@@ -214,7 +215,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </div>
           <div>
             <div className="text-[11px] text-slate-500 font-medium">Total Land Tracked</div>
-            <div className="text-base font-bold text-slate-800 font-mono">{totalAcres.toLocaleString()} Acres</div>
+            <div className="text-base font-bold text-slate-800 font-mono">{formatAcresLabel(totalAcres)}</div>
           </div>
         </div>
 
@@ -277,7 +278,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <div className="text-[10px] text-slate-400 font-mono">{project.id} • {project.projectType}</div>
                   </td>
                   <td className="px-4 py-3 text-slate-600">{project.district}</td>
-                  <td className="px-4 py-3 text-slate-600 font-mono">{project.landArea} ac</td>
+                  <td className="px-4 py-3 text-slate-600 font-mono">{formatAcresLabel(project.landArea)}</td>
                   <td className="px-4 py-3 font-mono font-bold">
                     <span className={
                       project.riskScore == null

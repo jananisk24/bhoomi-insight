@@ -384,6 +384,176 @@ def test_legal_dispute_simulation_changes_ml_probability_not_stage_scores(
         ).count() == 1
 
 
+def test_prediction_alert_threshold_deduplication_and_resolution(
+    api_client, monkeypatch
+):
+    client, session_factory = api_client
+    create_user(session_factory)
+    headers = {
+        "Authorization": f"Bearer {create_token('officer', 'Officer')}"
+    }
+    score = {"value": 69.99}
+
+    def fixed_prediction(_project):
+        value = score["value"]
+        category = "High" if value >= 70 else "Medium" if value >= 40 else "Low"
+        return {
+            "delay_probability": value / 100,
+            "risk_score": value,
+            "risk_category": category,
+            "delayed": value >= 50,
+            "stage_risk": {},
+            "highest_risk_stage": None,
+        }
+
+    monkeypatch.setattr(main, "_predict_project_data", fixed_prediction)
+    created = client.post(
+        "/projects/predict",
+        headers=headers,
+        json={
+            "project_name": "Automatic alert boundary",
+            "state": "Tamil Nadu",
+            "district": "Chennai",
+            "land_required": 10,
+            "affected_families": 5,
+            "estimated_cost": 1_000_000,
+        },
+    )
+    assert created.status_code == 201
+    project_id = created.json()["project"]["id"]
+    assert client.get("/alerts", headers=headers).json() == []
+
+    score["value"] = 70
+    threshold_prediction = client.put(
+        f"/projects/{project_id}/predict",
+        headers=headers,
+        json={},
+    )
+    assert threshold_prediction.status_code == 200
+    alerts = client.get("/alerts", headers=headers).json()
+    assert len(alerts) == 1
+    first_alert = alerts[0]
+    assert first_alert["project_id"] == project_id
+    assert first_alert["project_name"] == "Automatic alert boundary"
+    assert first_alert["risk_score"] == 70
+    assert first_alert["risk_level"] == "High"
+    assert first_alert["event_type"] == "high_risk"
+    assert first_alert["reason"]
+    assert first_alert["created_at"]
+    assert first_alert["is_resolved"] is False
+    assert first_alert["resolved_at"] is None
+
+    score["value"] = 82.5
+    repeated_prediction = client.post(
+        "/predict",
+        headers=headers,
+        json={"project_id": project_id},
+    )
+    assert repeated_prediction.status_code == 200
+    alerts = client.get("/alerts", headers=headers).json()
+    assert len(alerts) == 1
+    assert alerts[0]["id"] == first_alert["id"]
+    assert alerts[0]["risk_score"] == 82.5
+    assert alerts[0]["created_at"] == first_alert["created_at"]
+
+    score["value"] = 69.99
+    lower_risk_prediction = client.put(
+        f"/projects/{project_id}/predict",
+        headers=headers,
+        json={},
+    )
+    assert lower_risk_prediction.status_code == 200
+    resolved = client.get("/alerts", headers=headers).json()[0]
+    assert resolved["id"] == first_alert["id"]
+    assert resolved["is_resolved"] is True
+    assert resolved["resolved_at"]
+
+    score["value"] = 70
+    recross_prediction = client.post(
+        "/predict",
+        headers=headers,
+        json={"project_id": project_id},
+    )
+    assert recross_prediction.status_code == 200
+    alerts = client.get("/alerts", headers=headers).json()
+    assert len(alerts) == 2
+    assert sum(not alert["is_resolved"] for alert in alerts) == 1
+
+
+def test_project_coordinates_are_paired_bounded_and_persisted(api_client):
+    client, session_factory = api_client
+    create_user(session_factory)
+    headers = {
+        "Authorization": f"Bearer {create_token('officer', 'Officer')}"
+    }
+    project_payload = {
+        "project_name": "Coordinate validation test",
+        "state": "Tamil Nadu",
+        "district": "Chennai",
+        "land_required": 10,
+        "affected_families": 5,
+        "estimated_cost": 1_000_000,
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+    }
+
+    created = client.post(
+        "/projects",
+        headers=headers,
+        json=project_payload,
+    )
+    assert created.status_code == 200
+    project_id = created.json()["id"]
+    assert created.json()["latitude"] == 13.0827
+    assert created.json()["longitude"] == 80.2707
+
+    one_coordinate = client.post(
+        "/projects",
+        headers=headers,
+        json={**project_payload, "project_name": "Unpaired", "longitude": None},
+    )
+    invalid_range = client.post(
+        "/projects",
+        headers=headers,
+        json={**project_payload, "project_name": "Out of range", "latitude": 90.1},
+    )
+    unpaired_update = client.put(
+        f"/projects/{project_id}",
+        headers=headers,
+        json={"latitude": None},
+    )
+    invalid_update = client.put(
+        f"/projects/{project_id}",
+        headers=headers,
+        json={"longitude": 180.1},
+    )
+    assert one_coordinate.status_code == 422
+    assert invalid_range.status_code == 422
+    assert unpaired_update.status_code == 422
+    assert invalid_update.status_code == 422
+
+    no_coordinates = client.post(
+        "/projects",
+        headers=headers,
+        json={
+            **project_payload,
+            "project_name": "No coordinates supplied",
+            "latitude": None,
+            "longitude": None,
+        },
+    )
+    assert no_coordinates.status_code == 200
+    assert no_coordinates.json()["latitude"] is None
+    assert no_coordinates.json()["longitude"] is None
+
+    retrieved = client.get(f"/projects/{project_id}", headers=headers)
+    assert retrieved.status_code == 200
+    assert retrieved.json()["latitude"] == 13.0827
+    assert retrieved.json()["longitude"] == 80.2707
+    with session_factory() as db:
+        assert db.query(models.Project).count() == 2
+
+
 def test_project_edit_alerts_and_analytics_use_latest_prediction(api_client):
     client, session_factory = api_client
     create_user(session_factory)

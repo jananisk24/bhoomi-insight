@@ -25,6 +25,8 @@ import {
   probabilityToPercent,
 } from '../utils/units';
 import { parseProjectNumericInputs } from '../utils/projectForm';
+import { CoordinatePicker } from '../components/CoordinatePicker';
+import { isValidCoordinatePair } from '../utils/coordinates';
 
 interface AddProjectPageProps {
   initialProject?: Project | null;
@@ -186,11 +188,7 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
       !state ||
       !district ||
       !numericValues ||
-      (latitude.trim() !== '' && !Number.isFinite(Number(latitude))) ||
-      (longitude.trim() !== '' && !Number.isFinite(Number(longitude))) ||
-      (latitude.trim() === '') !== (longitude.trim() === '') ||
-      (latitude.trim() !== '' && (Number(latitude) < -90 || Number(latitude) > 90)) ||
-      (longitude.trim() !== '' && (Number(longitude) < -180 || Number(longitude) > 180))
+      !isValidCoordinatePair(latitude, longitude)
     ) {
       setFormError(
         'Enter a land area and budget greater than 0, whole affected-family and risk-indicator values within their displayed ranges, and both valid coordinates or neither.'
@@ -537,8 +535,23 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
               />
             </div>
             <p className="sm:col-span-2 text-[11px] text-slate-400">
-              Map markers are shown for projects with coordinates.
+              Coordinates are optional. Provide both valid coordinates or
+              select a precise location on the map below.
             </p>
+            <div className="sm:col-span-2">
+              <CoordinatePicker
+                coordinates={
+                  isValidCoordinatePair(latitude, longitude) &&
+                  latitude.trim() !== ''
+                    ? [Number(latitude), Number(longitude)]
+                    : null
+                }
+                onSelect={([selectedLatitude, selectedLongitude]) => {
+                  setLatitude(String(selectedLatitude));
+                  setLongitude(String(selectedLongitude));
+                }}
+              />
+            </div>
           </div>
         </div>
 

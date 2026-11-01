@@ -42,6 +42,21 @@ interface AdministrativeAction {
   created_at: string;
 }
 
+interface StoredRiskAlert {
+  id: number;
+  project_id: number;
+  project_name: string | null;
+  message: string;
+  risk_level: string;
+  risk_score: number | null;
+  reason: string | null;
+  event_type: string | null;
+  is_read: boolean;
+  is_resolved: boolean;
+  created_at: string;
+  resolved_at: string | null;
+}
+
 const actionLabels: Record<AdministrativeActionType, string> = {
   COLLECTOR_NOTIFICATION: 'Collector notification request',
   FAST_TRACK_NOC: 'Fast-track NOC request',
@@ -67,6 +82,9 @@ export const AlertsPage: React.FC<AlertsPageProps> = ({
   const [actionErrorMessage, setActionErrorMessage] = useState<string | null>(null);
   const [actions, setActions] = useState<AdministrativeAction[]>([]);
   const [actionsLoading, setActionsLoading] = useState(true);
+  const [riskAlerts, setRiskAlerts] = useState<StoredRiskAlert[]>([]);
+  const [riskAlertsLoading, setRiskAlertsLoading] = useState(true);
+  const [riskAlertsError, setRiskAlertsError] = useState<string | null>(null);
   const [submittingProjectId, setSubmittingProjectId] = useState<number | null>(null);
 
   const getToken = () => sessionStorage.getItem('access_token');
@@ -104,10 +122,47 @@ export const AlertsPage: React.FC<AlertsPageProps> = ({
     }
   }, []);
 
+  const loadRiskAlerts = useCallback(async () => {
+    const token = getToken();
+    if (!token) {
+      setRiskAlertsError('Your login session is missing. Please log in again.');
+      setRiskAlertsLoading(false);
+      return;
+    }
+
+    setRiskAlertsLoading(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/alerts`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!response.ok) {
+        throw new Error(`Could not load saved risk alerts (HTTP ${response.status}).`);
+      }
+      const data: StoredRiskAlert[] = await response.json();
+      if (!Array.isArray(data)) {
+        throw new Error('The backend returned an invalid risk-alert response.');
+      }
+      setRiskAlerts(
+        data.filter((alert) => alert.event_type === 'high_risk')
+      );
+      setRiskAlertsError(null);
+    } catch (error) {
+      setRiskAlertsError(
+        error instanceof Error ? error.message : 'Could not load saved risk alerts.'
+      );
+    } finally {
+      setRiskAlertsLoading(false);
+    }
+  }, []);
+
   // Keep the saved-request list synchronized with the backend.
   useEffect(() => {
     void loadActions();
   }, [loadActions]);
+
+  useEffect(() => {
+    void loadRiskAlerts();
+  }, [loadRiskAlerts]);
 
 
   const submitAdministrativeAction = async (
@@ -334,6 +389,67 @@ export const AlertsPage: React.FC<AlertsPageProps> = ({
           )}
         </section>
       )}
+
+      <section className="bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
+        <div className="p-4 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h2 className="text-sm font-bold text-slate-800">Saved Model Risk Alerts</h2>
+            <p className="text-xs text-slate-500 mt-1">
+              High-risk events are saved from predictions and resolved when a later saved prediction falls below 70%.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => void loadRiskAlerts()}
+            disabled={riskAlertsLoading}
+            className="px-3 py-1.5 border border-slate-200 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-50 disabled:opacity-50 flex items-center gap-1.5"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${riskAlertsLoading ? 'animate-spin' : ''}`} />
+            Refresh alerts
+          </button>
+        </div>
+        {riskAlertsError ? (
+          <p role="alert" className="p-4 text-xs text-rose-700">{riskAlertsError}</p>
+        ) : riskAlertsLoading ? (
+          <p className="p-4 text-xs text-slate-500">Loading saved risk alerts...</p>
+        ) : riskAlerts.length === 0 ? (
+          <p className="p-4 text-xs text-slate-500">No prediction-triggered risk alerts have been saved.</p>
+        ) : (
+          <div className="divide-y divide-slate-100">
+            {riskAlerts.map((alert) => (
+              <div key={alert.id} className="p-4 flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-slate-800">
+                    {alert.project_name ?? projectNames.get(alert.project_id) ?? `Project #${alert.project_id}`}
+                    <span className="ml-2 font-normal text-slate-500">
+                      Project #{alert.project_id} · {alert.risk_level} risk
+                    </span>
+                  </p>
+                  <p className="text-[11px] text-slate-600 mt-1">
+                    Risk score: {alert.risk_score == null ? 'not recorded' : `${alert.risk_score.toFixed(2)}%`}
+                    {' · '}Detected: {formatDate(alert.created_at)}
+                  </p>
+                  <p className="text-[11px] text-slate-600 mt-1">
+                    {alert.reason ?? alert.message}
+                  </p>
+                  {alert.resolved_at && (
+                    <p className="text-[11px] text-emerald-700 mt-1">
+                      Resolved: {formatDate(alert.resolved_at)}
+                    </p>
+                  )}
+                </div>
+                <span className={`self-start px-2.5 py-1 rounded-full text-[10px] font-bold ${
+                  alert.is_resolved
+                    ? 'bg-emerald-100 text-emerald-800'
+                    : 'bg-rose-100 text-rose-800'
+                }`}>
+                  {alert.is_resolved ? 'Resolved' : 'Active'}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
 
       {(activeTab === 'all' || activeTab === 'pending-approvals') && (
         <section className="space-y-3 pt-2">

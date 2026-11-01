@@ -73,6 +73,9 @@ python -m migrations && uvicorn main:app --host 0.0.0.0 --port $PORT
 Set all backend variables listed above in Render. Ensure that
 `DATABASE_URL_UNPOOLED` is the Neon direct URL, not a hostname containing the
 `-pooler` endpoint label. The migration runner refuses a pooled URL.
+The startup migration additively adds automatic risk-alert metadata and a
+uniqueness constraint for each active high-risk event; it preserves existing
+projects and alerts.
 `GET /health` checks database connectivity; a healthy response does not by
 itself verify frontend access or prediction quality.
 

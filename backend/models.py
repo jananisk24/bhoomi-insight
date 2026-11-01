@@ -10,6 +10,8 @@ from sqlalchemy import (
     Boolean,
     Text,
     JSON,
+    Index,
+    text,
 )
 from sqlalchemy.orm import relationship
 
@@ -98,6 +100,20 @@ class User(Base):
 
 class Alert(Base):
     __tablename__ = "alerts"
+    __table_args__ = (
+        Index(
+            "uq_active_auto_alert_project_event",
+            "project_id",
+            "event_type",
+            unique=True,
+            sqlite_where=text(
+                "event_type IS NOT NULL AND is_resolved = 0"
+            ),
+            postgresql_where=text(
+                "event_type IS NOT NULL AND is_resolved = false"
+            ),
+        ),
+    )
 
     id = Column(Integer, primary_key=True, index=True)
     project_id = Column(
@@ -109,7 +125,13 @@ class Alert(Base):
     message = Column(String)
     risk_level = Column(String)
     is_read = Column(Boolean, default=False)
+    event_type = Column(String, nullable=True)
+    project_name = Column(String, nullable=True)
+    risk_score = Column(Float, nullable=True)
+    reason = Column(Text, nullable=True)
+    is_resolved = Column(Boolean, default=False, nullable=False)
     created_at = Column(DateTime, default=utc_now_naive)
+    resolved_at = Column(DateTime, nullable=True)
 
     project = relationship("Project", back_populates="alerts")
 

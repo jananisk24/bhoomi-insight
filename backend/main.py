@@ -144,6 +144,87 @@ def _predict_project_data(project_data):
     return _predict_features(project_features_from_record(project_data))
 
 
+def _sync_automatic_risk_alert(
+    db: Session,
+    project: models.Project,
+    risk_score: float,
+) -> None:
+    active_alert = (
+        db.query(models.Alert)
+        .filter(
+            models.Alert.project_id == project.id,
+            models.Alert.event_type == "high_risk",
+            models.Alert.is_resolved.is_(False),
+        )
+        .with_for_update()
+        .first()
+    )
+
+    if risk_score >= 70:
+        reason = "The saved model delay-risk score reached the high-risk threshold of 70%."
+        message = (
+            f"Project {project.id} ({project.project_name}) has a saved "
+            f"delay-risk score of {risk_score:.2f}%, meeting the high-risk "
+            "threshold (>=70%)."
+        )
+        if active_alert is None:
+            db.add(
+                models.Alert(
+                    project_id=project.id,
+                    message=message,
+                    risk_level="High",
+                    event_type="high_risk",
+                    project_name=project.project_name,
+                    risk_score=risk_score,
+                    reason=reason,
+                )
+            )
+        else:
+            active_alert.message = message
+            active_alert.project_name = project.project_name
+            active_alert.risk_score = risk_score
+            active_alert.reason = reason
+        return
+
+    if active_alert is not None:
+        active_alert.is_resolved = True
+        active_alert.resolved_at = models.utc_now_naive()
+
+
+def _persist_prediction(
+    db: Session,
+    project: models.Project,
+    prediction_result: dict,
+) -> models.Prediction:
+    prediction = models.Prediction(
+        project_id=project.id,
+        delay_probability=prediction_result["delay_probability"],
+        risk_level=prediction_result["risk_category"],
+        stage_risk=prediction_result["stage_risk"],
+        highest_risk_stage=prediction_result["highest_risk_stage"],
+    )
+    try:
+        db.add(prediction)
+        db.flush()
+        db.query(models.Project).filter(
+            models.Project.id == project.id
+        ).with_for_update().first()
+        _sync_automatic_risk_alert(
+            db,
+            project,
+            float(prediction_result["risk_score"]),
+        )
+        db.commit()
+    except SQLAlchemyError as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=503,
+            detail="Prediction and risk alert could not be saved.",
+        ) from exc
+    db.refresh(prediction)
+    return prediction
+
+
 def _save_project_with_prediction(db: Session, payload, project=None):
     is_update = project is not None
     fields = payload.model_dump(exclude_unset=is_update)
@@ -190,6 +271,15 @@ def _save_project_with_prediction(db: Session, payload, project=None):
             highest_risk_stage=prediction_result["highest_risk_stage"],
         )
         db.add(prediction)
+        db.flush()
+        db.query(models.Project).filter(
+            models.Project.id == project.id
+        ).with_for_update().first()
+        _sync_automatic_risk_alert(
+            db,
+            project,
+            float(prediction_result["risk_score"]),
+        )
         db.commit()
     except SQLAlchemyError as exc:
         db.rollback()
@@ -413,14 +503,7 @@ def predict(
 
     result = _predict_project_data(project)
 
-    new_prediction = crud.create_prediction(
-        db,
-        project.id,
-        result["delay_probability"],
-        result["risk_category"],
-        result["stage_risk"],
-        result["highest_risk_stage"],
-    )
+    new_prediction = _persist_prediction(db, project, result)
 
     return {
         "message": "Prediction saved successfully",

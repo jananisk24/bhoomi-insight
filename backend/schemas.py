@@ -288,7 +288,13 @@ class AlertResponse(BaseModel):
     message: str
     risk_level: str
     is_read: bool
+    event_type: str | None = None
+    project_name: str | None = None
+    risk_score: float | None = None
+    reason: str | None = None
+    is_resolved: bool
     created_at: datetime
+    resolved_at: datetime | None = None
 
 
 # ---------- Administrative Actions ----------

@@ -26,6 +26,17 @@ _MIGRATIONS = (
         "highest_risk_stage",
         "VARCHAR",
     ),
+    ("0004_automatic_risk_alerts", "alerts", "event_type", "VARCHAR"),
+    ("0004_automatic_risk_alerts", "alerts", "project_name", "VARCHAR"),
+    ("0004_automatic_risk_alerts", "alerts", "risk_score", "FLOAT"),
+    ("0004_automatic_risk_alerts", "alerts", "reason", "TEXT"),
+    (
+        "0004_automatic_risk_alerts",
+        "alerts",
+        "is_resolved",
+        "BOOLEAN NOT NULL DEFAULT FALSE",
+    ),
+    ("0004_automatic_risk_alerts", "alerts", "resolved_at", "TIMESTAMP"),
 )
 
 
@@ -74,6 +85,37 @@ def upgrade_schema(database_engine: Engine = engine) -> None:
                     ),
                     {"version": version},
                 )
+
+    inspector = inspect(database_engine)
+    existing_indexes = {
+        index["name"] for index in inspector.get_indexes("alerts")
+    }
+    if "uq_active_auto_alert_project_event" not in existing_indexes:
+        predicate = (
+            "event_type IS NOT NULL AND is_resolved = 0"
+            if database_engine.dialect.name == "sqlite"
+            else "event_type IS NOT NULL AND is_resolved = false"
+        )
+        with database_engine.begin() as connection:
+            connection.execute(
+                text(
+                    "CREATE UNIQUE INDEX uq_active_auto_alert_project_event "
+                    "ON alerts (project_id, event_type) WHERE " + predicate
+                )
+            )
+
+    with database_engine.begin() as connection:
+        already_applied = connection.execute(
+            text("SELECT 1 FROM schema_migrations WHERE version = :version"),
+            {"version": "0004_automatic_risk_alerts"},
+        ).first()
+        if already_applied is None:
+            connection.execute(
+                text(
+                    "INSERT INTO schema_migrations (version) VALUES "
+                    "('0004_automatic_risk_alerts')"
+                )
+            )
 
 
 def _migration_engine() -> tuple[Engine, bool]:

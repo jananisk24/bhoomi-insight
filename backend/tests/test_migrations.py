@@ -16,6 +16,16 @@ def test_upgrade_adds_columns_and_preserves_existing_project(tmp_path):
     raw_connection.execute(
         "INSERT INTO projects (id, project_name) VALUES (17, 'Existing project')"
     )
+    raw_connection.execute(
+        "CREATE TABLE alerts ("
+        "id INTEGER PRIMARY KEY, project_id INTEGER NOT NULL, "
+        "message VARCHAR, risk_level VARCHAR, is_read BOOLEAN, "
+        "created_at TIMESTAMP)"
+    )
+    raw_connection.execute(
+        "INSERT INTO alerts (id, project_id, message, risk_level, is_read) "
+        "VALUES (9, 17, 'Existing alert', 'High', 0)"
+    )
     raw_connection.commit()
     raw_connection.close()
 
@@ -34,6 +44,13 @@ def test_upgrade_adds_columns_and_preserves_existing_project(tmp_path):
             versions = connection.execute(
                 text("SELECT version FROM schema_migrations ORDER BY version")
             ).scalars().all()
+            alert = connection.execute(
+                text(
+                    "SELECT id, message, risk_level, event_type, project_name, "
+                    "risk_score, reason, is_resolved, resolved_at "
+                    "FROM alerts WHERE id = 9"
+                )
+            ).one()
 
         assert project == (
             17,
@@ -46,10 +63,36 @@ def test_upgrade_adds_columns_and_preserves_existing_project(tmp_path):
             "0001_project_approval_status",
             "0002_project_coordinates",
             "0003_prediction_stage_risk",
+            "0004_automatic_risk_alerts",
         ]
+        assert alert == (
+            9,
+            "Existing alert",
+            "High",
+            None,
+            None,
+            None,
+            None,
+            False,
+            None,
+        )
         assert {"stage_risk", "highest_risk_stage"} <= {
             column["name"]
             for column in inspect(database_engine).get_columns("predictions")
+        }
+        assert {
+            "event_type",
+            "project_name",
+            "risk_score",
+            "reason",
+            "is_resolved",
+            "resolved_at",
+        } <= {
+            column["name"]
+            for column in inspect(database_engine).get_columns("alerts")
+        }
+        assert "uq_active_auto_alert_project_event" in {
+            index["name"] for index in inspect(database_engine).get_indexes("alerts")
         }
     finally:
         database_engine.dispose()

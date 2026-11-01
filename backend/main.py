@@ -232,7 +232,10 @@ def register(
     user: UserCreate,
     db: Session = Depends(get_db),
 ):
-    if os.getenv("ALLOW_USER_REGISTRATION", "").strip().lower() != "true":
+    if (
+        is_production
+        or os.getenv("ALLOW_USER_REGISTRATION", "").strip().lower() != "true"
+    ):
         raise HTTPException(
             status_code=403,
             detail="Account registration is disabled. Contact an administrator.",

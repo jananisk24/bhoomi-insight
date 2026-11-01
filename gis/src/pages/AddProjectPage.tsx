@@ -18,7 +18,11 @@ import {
   RehabilitationStatus 
 } from '../types';
 import { calculateDelayRisk } from '../utils/predictionEngine';
-import { acresToHectares, croresToRupees } from '../utils/units';
+import {
+  acresToHectares,
+  croresToRupees,
+  probabilityToPercent,
+} from '../utils/units';
 
 interface AddProjectPageProps {
   initialProject?: Project | null;
@@ -223,7 +227,7 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
         approvalStatus,
         rehabilitationStatus,
 
-        riskScore: mlPrediction.risk_score,
+        riskScore: probabilityToPercent(mlPrediction.delay_probability),
         riskCategory: mlPrediction.risk_level,
 
         status:

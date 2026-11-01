@@ -46,8 +46,19 @@ Configure these values in the hosting provider; never commit real values:
 | `DATABASE_URL` | Neon PostgreSQL URL for API traffic; use the pooled URL for web requests. |
 | `DATABASE_URL_UNPOOLED` | Neon direct (non-pooled) URL used by the migration command. |
 | `CORS_ORIGINS` | Comma-separated exact HTTPS frontend origins, without paths. |
-| `ALLOW_USER_REGISTRATION` | Optional; registration is disabled unless explicitly set to `true`. |
+| `ALLOW_USER_REGISTRATION` | Optional for non-production only; production registration is always disabled. |
 | `VITE_API_URL` | Frontend build-time variable set to the HTTPS backend origin. |
+
+Production registration is always disabled. To provision the initial Admin,
+run `python -m admin_bootstrap` from `backend/` in a trusted operator
+environment configured with the production `DATABASE_URL`,
+`ENVIRONMENT=production`, and the required `JWT_SECRET_KEY`. The command
+requires a Neon endpoint and confirms its host/database, prompts for a
+username, and reads the password without echoing it. It only creates an Admin
+if the `users` table is empty;
+PostgreSQL transaction locking prevents concurrent/repeated bootstrap runs.
+Never pass the password as a command-line argument or enable public
+registration to create the first Admin.
 
 ### Render backend
 
@@ -73,9 +84,9 @@ deployed Vercel origin in Render's `CORS_ORIGINS` value. Production builds
 fail if `VITE_API_URL` is missing, invalid, HTTP, or a loopback host.
 
 The configured service references are [Render backend](https://bhoomi-insight-backend.onrender.com)
-and [Vercel project](https://vercel.com/janani-a6e7/bhoomi-insight). Their
-current live health and frontend/API integration have not been verified from
-this repository checkout.
+and [Vercel project](https://vercel.com/janani-a6e7/bhoomi-insight). Production
+uses the Neon PostgreSQL database described above; after each deployment,
+verify `GET /health` and the Vercel login/project flow.
 
 ## API overview
 

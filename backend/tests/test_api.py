@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 import models
 import main
 from auth import create_token, hash_password
+from admin_bootstrap import provision_first_admin
 from database import Base, get_db
 from main import app
 
@@ -59,6 +60,19 @@ def test_registration_is_disabled_by_default(api_client):
     assert response.status_code == 403
 
 
+def test_registration_remains_disabled_in_production(api_client, monkeypatch):
+    client, _ = api_client
+    monkeypatch.setattr(main, "is_production", True)
+    monkeypatch.setenv("ALLOW_USER_REGISTRATION", "true")
+
+    response = client.post(
+        "/register",
+        json={"username": "not-allowed", "password": "valid-password"},
+    )
+
+    assert response.status_code == 403
+
+
 def test_registration_and_login_succeed_when_enabled(api_client, monkeypatch):
     client, _ = api_client
     monkeypatch.setenv("ALLOW_USER_REGISTRATION", "true")
@@ -81,6 +95,48 @@ def test_registration_and_login_succeed_when_enabled(api_client, monkeypatch):
         headers={"Authorization": f"Bearer {login.json()['access_token']}"},
     )
     assert projects.status_code == 200
+
+
+def test_bootstrapped_admin_can_login_and_project_persists(api_client):
+    client, session_factory = api_client
+    password = "secure-test-password"
+    with session_factory() as db:
+        admin = provision_first_admin(db, "  first-admin  ", password)
+        assert admin.role == "Admin"
+        assert admin.username == "first-admin"
+        assert admin.password != password
+
+    login = client.post(
+        "/login",
+        json={"username": "first-admin", "password": password},
+    )
+    assert login.status_code == 200
+    assert login.json()["role"] == "Admin"
+    headers = {"Authorization": f"Bearer {login.json()['access_token']}"}
+
+    created = client.post(
+        "/projects",
+        headers=headers,
+        json={
+            "project_name": "Admin persistence verification",
+            "state": "Tamil Nadu",
+            "district": "Chennai",
+            "land_required": 10,
+            "affected_families": 100,
+            "estimated_cost": 10_000_000,
+        },
+    )
+    assert created.status_code == 200
+    project_id = created.json()["id"]
+
+    retrieved = client.get(f"/projects/{project_id}", headers=headers)
+    assert retrieved.status_code == 200
+    assert retrieved.json()["project_name"] == "Admin persistence verification"
+
+    with session_factory() as db:
+        stored_project = db.get(models.Project, project_id)
+        assert stored_project is not None
+        assert stored_project.project_name == "Admin persistence verification"
 
 
 def test_saved_project_prediction_and_simulation_share_model_probability(api_client):

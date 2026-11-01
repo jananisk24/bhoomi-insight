@@ -19,7 +19,9 @@ test('converts rupees and crores using the specified factor', () => {
   assert.equal(rupeesToCrores(20_000_000), 2);
 });
 
-test('converts a delay probability to a percentage', () => {
+test('calculates the risk score percentage from model probability', () => {
   assert.ok(Math.abs((probabilityToPercent(0.4574) ?? 0) - 45.74) < 1e-10);
+  assert.equal(probabilityToPercent(0), 0);
+  assert.equal(probabilityToPercent(1), 100);
   assert.equal(probabilityToPercent(1.01), null);
 });

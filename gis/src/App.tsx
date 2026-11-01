@@ -261,13 +261,17 @@ export default function App() {
   const [projectsLoading, setProjectsLoading] = useState(false);
   const [projectsError, setProjectsError] = useState('');
   const [sessionMessage, setSessionMessage] = useState('');
+  const [accountCreatedMessage, setAccountCreatedMessage] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const highRiskCount = projects.filter(
     (project) => project.riskCategory === 'High'
   ).length;
 
-  const handleLoginSuccess = useCallback(async (user: User) => {
+  const handleLoginSuccess = useCallback(async (
+    user: User,
+    accountCreated = false
+  ) => {
     const token = sessionStorage.getItem('access_token');
 
     if (!token) {
@@ -284,6 +288,11 @@ export default function App() {
     }
 
     setSessionMessage('');
+    setAccountCreatedMessage(
+      accountCreated
+        ? `Officer account created successfully. Signed in as ${user.username}.`
+        : ''
+    );
     setCurrentUser(user);
     setActivePage('dashboard');
     setProjectsLoading(true);
@@ -395,6 +404,7 @@ export default function App() {
     setSelectedProject(null);
     setProjectsError('');
     setSessionMessage('');
+    setAccountCreatedMessage('');
     setActivePage('login');
   };
 
@@ -475,6 +485,14 @@ export default function App() {
         />
 
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
+          {accountCreatedMessage && (
+            <div
+              role="status"
+              className="rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-800"
+            >
+              {accountCreatedMessage}
+            </div>
+          )}
           {projectsLoading && (
             <p className="p-4 text-center text-blue-600">Loading projects...</p>
           )}

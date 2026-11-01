@@ -8,19 +8,12 @@ import {
 } from 'lucide-react';
 import { User } from '../types';
 import { API_BASE_URL } from '../api';
+import { AuthResponse, registerOfficerAndLogin } from '../utils/auth';
 
 interface LoginPageProps {
-  onLoginSuccess: (user: User) => void;
+  onLoginSuccess: (user: User, accountCreated?: boolean) => void;
   sessionMessage?: string;
 }
-
-interface LoginResponse {
-  access_token: string;
-  token_type: string;
-  username: string;
-  role: User['role'];
-}
-
 
 export const LoginPage: React.FC<LoginPageProps> = ({
   onLoginSuccess,
@@ -52,39 +45,37 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     setMessage('');
 
     try {
-      const response = await fetch(`${API_BASE_URL}${isRegistering ? '/register' : '/login'}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: username.trim(),
+      let data: AuthResponse;
+      if (isRegistering) {
+        data = await registerOfficerAndLogin(
+          username.trim(),
           password,
-        }),
-      });
+          API_BASE_URL
+        );
+      } else {
+        const response = await fetch(`${API_BASE_URL}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: username.trim(),
+            password,
+          }),
+        });
 
-      if (!response.ok) {
-        const body = await response.json().catch(() => null);
-        const detail =
-          typeof body?.detail === 'string' ? body.detail : null;
-        if (!isRegistering && response.status === 401) {
-          throw new Error('Invalid username or password.');
+        if (!response.ok) {
+          const body = await response.json().catch(() => null);
+          const detail =
+            typeof body?.detail === 'string' ? body.detail : null;
+          if (response.status === 401) {
+            throw new Error('Invalid username or password.');
+          }
+
+          throw new Error(detail ?? `Login failed (${response.status}).`);
         }
 
-        throw new Error(
-          detail ??
-            `${isRegistering ? 'Registration' : 'Login'} failed (${response.status}).`
-        );
+        data = await response.json();
       }
 
-      if (isRegistering) {
-        setIsRegistering(false);
-        setPassword('');
-        setMessage('Account created. Sign in with your new credentials.');
-        return;
-      }
-
-      const data: LoginResponse = await response.json();
       if (!data.access_token) {
         throw new Error('The server did not return an access token.');
       }
@@ -97,7 +88,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         role: data.role,
         department: 'Land Resources',
         isAuthenticated: true,
-      });
+      }, isRegistering);
     } catch (err) {
       if (err instanceof TypeError) {
         setError('Cannot connect to the backend. Check that the server is running.');
@@ -170,6 +161,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({
               <input
                 id="username-input"
                 type="text"
+                minLength={isRegistering ? 3 : undefined}
+                maxLength={isRegistering ? 64 : undefined}
+                required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="e.g. officer.revenue"

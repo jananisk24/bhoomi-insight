@@ -32,8 +32,10 @@ $env:VITE_API_URL = "http://127.0.0.1:8000"
 npm run dev
 ```
 
-The Vite development server runs on port 3000. `VITE_API_URL` must be set
-explicitly; the frontend does not silently fall back to a localhost API.
+The Vite development server runs on port 3000. If `VITE_API_URL` is omitted
+in development, the frontend uses `http://127.0.0.1:8000`. Configure it
+explicitly when the backend runs at a different origin. Production builds
+still require an explicit HTTPS `VITE_API_URL`.
 
 ## Production environment
 
@@ -46,19 +48,18 @@ Configure these values in the hosting provider; never commit real values:
 | `DATABASE_URL` | Neon PostgreSQL URL for API traffic; use the pooled URL for web requests. |
 | `DATABASE_URL_UNPOOLED` | Neon direct (non-pooled) URL used by the migration command. |
 | `CORS_ORIGINS` | Comma-separated exact HTTPS frontend origins, without paths. |
-| `ALLOW_USER_REGISTRATION` | Optional for non-production only; production registration is always disabled. |
 | `VITE_API_URL` | Frontend build-time variable set to the HTTPS backend origin. |
 
-Production registration is always disabled. To provision the initial Admin,
-run `python -m admin_bootstrap` from `backend/` in a trusted operator
-environment configured with the production `DATABASE_URL`,
-`ENVIRONMENT=production`, and the required `JWT_SECRET_KEY`. The command
-requires a Neon endpoint and confirms its host/database, prompts for a
-username, and reads the password without echoing it. It only creates an Admin
-if the `users` table is empty;
-PostgreSQL transaction locking prevents concurrent/repeated bootstrap runs.
-Never pass the password as a command-line argument or enable public
-registration to create the first Admin.
+Public registration is enabled and creates Officer accounts only. Passwords
+are hashed before storage; Admin accounts must still be provisioned separately.
+To provision an initial Admin, run `python -m admin_bootstrap` from `backend/`
+in a trusted operator environment configured with the production
+`DATABASE_URL`, `ENVIRONMENT=production`, and the required `JWT_SECRET_KEY`.
+The command requires a Neon endpoint and confirms its host/database, prompts
+for a username, and reads the password without echoing it. It only creates an
+Admin if the `users` table is empty; PostgreSQL transaction locking prevents
+concurrent/repeated bootstrap runs. Never pass the password as a command-line
+argument.
 
 ### Render backend
 
@@ -105,6 +106,11 @@ Protected API operations use a bearer token from `/login`. Main routes include
 - Risk bands: below 40 is Low, 40 to below 70 is Medium, and 70 or above is
   High.
 
+The checked-in model was fitted for Highway, Irrigation, Power, and Railway
+project types. `Highway / Expressway` is normalized to the trained Highway
+category for prediction. `Airport Expansion` remains storable as a project,
+but prediction is rejected until the model is trained for that category.
+
 Conversion constants and helpers are in `gis/src/utils/units.ts`; form and
 API conversions are used in `gis/src/pages/AddProjectPage.tsx` and
 `gis/src/App.tsx`. Model probability and stage scoring are in
@@ -119,7 +125,7 @@ current model does not predict duration.
 
 ```powershell
 Set-Location backend
-.\venv\Scripts\python.exe -m pytest tests -q
+.\.venv\Scripts\python.exe -m pytest tests -q
 Set-Location ..\gis
 $env:VITE_API_URL = "https://bhoomi-insight-backend.onrender.com"
 npm run test

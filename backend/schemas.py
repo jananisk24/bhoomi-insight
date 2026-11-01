@@ -1,4 +1,5 @@
 from datetime import datetime
+import re
 from typing import Any, Literal
 
 from pydantic import (
@@ -154,7 +155,7 @@ class ProjectResponse(BaseModel):
 # ---------- Users / Auth ----------
 
 class UserCreate(BaseModel):
-    username: str = Field(min_length=3)
+    username: str = Field(min_length=3, max_length=64)
     password: str = Field(min_length=8)
     role: Literal["Officer"] = "Officer"
 
@@ -164,6 +165,11 @@ class UserCreate(BaseModel):
         normalized = value.strip()
         if len(normalized) < 3 or len(normalized) > 64:
             raise ValueError("username must be between 3 and 64 characters")
+        if re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{2,63}", normalized) is None:
+            raise ValueError(
+                "username must start with a letter or number and contain only "
+                "letters, numbers, periods, underscores, or hyphens"
+            )
         return normalized
 
     @field_validator("password")

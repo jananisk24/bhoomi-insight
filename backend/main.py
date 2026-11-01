@@ -3,7 +3,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy import text
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -233,26 +233,25 @@ def register(
     user: UserCreate,
     db: Session = Depends(get_db),
 ):
-    if (
-        is_production
-        or os.getenv("ALLOW_USER_REGISTRATION", "").strip().lower() != "true"
-    ):
-        raise HTTPException(
-            status_code=403,
-            detail="Account registration is disabled. Contact an administrator.",
-        )
-
     if crud.get_user_by_username(db, user.username):
         raise HTTPException(
-            status_code=400,
+            status_code=409,
             detail="Username already exists",
         )
 
-    new_user = crud.create_user(db, user)
+    try:
+        new_user = crud.create_user(db, user)
+    except IntegrityError as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=409,
+            detail="Username already exists",
+        ) from exc
 
     return {
         "message": "User registered successfully",
         "username": new_user.username,
+        "role": "Officer",
     }
 
 

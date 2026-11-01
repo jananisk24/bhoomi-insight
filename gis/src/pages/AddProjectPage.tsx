@@ -24,6 +24,7 @@ import {
   formatAcres,
   probabilityToPercent,
 } from '../utils/units';
+import { parseProjectNumericInputs } from '../utils/projectForm';
 
 interface AddProjectPageProps {
   initialProject?: Project | null;
@@ -51,11 +52,12 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
           ? 'Power / Solar Park'
           : 'Highway / Expressway'
   );
-  const [landArea, setLandArea] = useState<number>(initialProject?.landArea ?? 0);
   const [landAreaInput, setLandAreaInput] = useState<string>(
     initialProject?.landArea != null ? formatAcres(initialProject.landArea) : '0'
   );
-  const [affectedFamilies, setAffectedFamilies] = useState<number>(initialProject?.affectedFamilies ?? 0);
+  const [affectedFamiliesInput, setAffectedFamiliesInput] = useState<string>(
+    String(initialProject?.affectedFamilies ?? 0)
+  );
   const [compensationStatus, setCompensationStatus] = useState<CompensationStatus>(
     initialProject?.compensationStatus ?? 'Pending (<25%)'
   );
@@ -63,8 +65,8 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
   const [approvalStatus, setApprovalStatus] = useState<ApprovalStatus>(
     initialProject?.approvalStatus ?? 'In Administrative Review'
   );
-  const [approvalDaysPending, setApprovalDaysPending] = useState<number>(
-    initialProject?.approvalDaysPending ?? 0
+  const [approvalDaysPendingInput, setApprovalDaysPendingInput] = useState<string>(
+    String(initialProject?.approvalDaysPending ?? 0)
   );
   const [rehabilitationStatus, setRehabilitationStatus] = useState<RehabilitationStatus>(
     initialProject?.rehabilitationStatus ?? 'Not Started'
@@ -72,13 +74,15 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
   const [possessionStatus, setPossessionStatus] = useState<PossessionStatus>(
     initialProject?.possessionStatus ?? 'Not Taken'
   );
-  const [stakeholderScore, setStakeholderScore] = useState<number>(
-    initialProject?.stakeholderScore ?? 5
+  const [stakeholderScoreInput, setStakeholderScoreInput] = useState<string>(
+    String(initialProject?.stakeholderScore ?? 5)
   );
-  const [districtHistoricalDelay, setDistrictHistoricalDelay] = useState<number>(
-    initialProject?.districtHistoricalDelay ?? 0
+  const [districtHistoricalDelayInput, setDistrictHistoricalDelayInput] = useState<string>(
+    String(initialProject?.districtHistoricalDelay ?? 0)
   );
-  const [budgetCr, setBudgetCr] = useState<number>(initialProject?.budgetCr ?? 0);
+  const [budgetCrInput, setBudgetCrInput] = useState<string>(
+    String(initialProject?.budgetCr ?? 0)
+  );
   const [latitude, setLatitude] = useState(
     initialProject?.coordinates?.[0]?.toString() ?? ''
   );
@@ -139,17 +143,16 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
     setState(sample.state);
     setDistrict(sample.district);
     setProjectType(sample.projectType);
-    setLandArea(sample.landArea);
     setLandAreaInput(String(sample.landArea));
-    setAffectedFamilies(sample.affectedFamilies);
+    setAffectedFamiliesInput(String(sample.affectedFamilies));
     setCompensationStatus(sample.compensationStatus);
     setLegalDispute(sample.legalDispute);
     setApprovalStatus(sample.approvalStatus);
     setRehabilitationStatus(sample.rehabilitationStatus);
-    setBudgetCr(sample.budgetCr);
-    setApprovalDaysPending(sample.approvalDaysPending);
-    setStakeholderScore(sample.stakeholderScore);
-    setDistrictHistoricalDelay(sample.districtHistoricalDelay);
+    setBudgetCrInput(String(sample.budgetCr));
+    setApprovalDaysPendingInput(String(sample.approvalDaysPending));
+    setStakeholderScoreInput(String(sample.stakeholderScore));
+    setDistrictHistoricalDelayInput(String(sample.districtHistoricalDelay));
     setLatitude('');
     setLongitude('');
     setFormError('');
@@ -170,15 +173,19 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
       return;
     }
 
+    const numericValues = parseProjectNumericInputs({
+      landArea: landAreaInput,
+      affectedFamilies: affectedFamiliesInput,
+      budgetCr: budgetCrInput,
+      approvalDaysPending: approvalDaysPendingInput,
+      stakeholderScore: stakeholderScoreInput,
+      districtHistoricalDelay: districtHistoricalDelayInput,
+    });
+
     if (
       !state ||
       !district ||
-      !Number.isFinite(landArea) || landArea <= 0 ||
-      !Number.isInteger(affectedFamilies) || affectedFamilies < 0 ||
-      !Number.isFinite(budgetCr) || budgetCr <= 0 ||
-      !Number.isInteger(approvalDaysPending) || approvalDaysPending < 0 || approvalDaysPending > 365 ||
-      !Number.isInteger(stakeholderScore) || stakeholderScore < 1 || stakeholderScore > 5 ||
-      !Number.isFinite(districtHistoricalDelay) || districtHistoricalDelay < 0 || districtHistoricalDelay > 100 ||
+      !numericValues ||
       (latitude.trim() !== '' && !Number.isFinite(Number(latitude))) ||
       (longitude.trim() !== '' && !Number.isFinite(Number(longitude))) ||
       (latitude.trim() === '') !== (longitude.trim() === '') ||
@@ -186,10 +193,18 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
       (longitude.trim() !== '' && (Number(longitude) < -180 || Number(longitude) > 180))
     ) {
       setFormError(
-        'Enter valid project details. Approval days must be 0–365, stakeholder score 1–5, historical delay index 0–100, and provide both valid coordinates or neither.'
+        'Enter a land area and budget greater than 0, whole affected-family and risk-indicator values within their displayed ranges, and both valid coordinates or neither.'
       );
       return;
     }
+    const {
+      landArea,
+      affectedFamilies,
+      budgetCr,
+      approvalDaysPending,
+      stakeholderScore,
+      districtHistoricalDelay,
+    } = numericValues;
 
     const token = sessionStorage.getItem('access_token');
 
@@ -541,16 +556,10 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
               </label>
               <input
                 id="land-area-input"
-                type="number"
-                min="1"
-                step="any"
-                required
+                type="text"
+                inputMode="decimal"
                 value={landAreaInput}
-                onChange={(e) => {
-                  const nextInput = e.target.value;
-                  setLandAreaInput(nextInput);
-                  setLandArea(nextInput === '' ? Number.NaN : Number(nextInput));
-                }}
+                onChange={(e) => setLandAreaInput(e.target.value)}
                 className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono"
               />
             </div>
@@ -561,11 +570,10 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
               </label>
               <input
                 id="families-input"
-                type="number"
-                min="0"
-                required
-                value={affectedFamilies}
-                onChange={(e) => setAffectedFamilies(Number(e.target.value))}
+                type="text"
+                inputMode="numeric"
+                value={affectedFamiliesInput}
+                onChange={(e) => setAffectedFamiliesInput(e.target.value)}
                 className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono"
               />
             </div>
@@ -576,10 +584,10 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
               </label>
               <input
                 id="budget-input"
-                type="number"
-                min="1"
-                value={budgetCr}
-                onChange={(e) => setBudgetCr(Number(e.target.value))}
+                type="text"
+                inputMode="decimal"
+                value={budgetCrInput}
+                onChange={(e) => setBudgetCrInput(e.target.value)}
                 className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono"
               />
             </div>
@@ -600,13 +608,10 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
               </label>
               <input
                 id="approval-days-input"
-                type="number"
-                min="0"
-                max="365"
-                step="1"
-                required
-                value={approvalDaysPending}
-                onChange={(e) => setApprovalDaysPending(Number(e.target.value))}
+                type="text"
+                inputMode="numeric"
+                value={approvalDaysPendingInput}
+                onChange={(e) => setApprovalDaysPendingInput(e.target.value)}
                 className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg font-mono"
               />
               <p className="text-[11px] text-slate-400 mt-1">Enter the actual number of days the pending approval has been delayed.</p>
@@ -618,13 +623,10 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
               </label>
               <input
                 id="stakeholder-score-input"
-                type="number"
-                min="1"
-                max="5"
-                step="1"
-                required
-                value={stakeholderScore}
-                onChange={(e) => setStakeholderScore(Number(e.target.value))}
+                type="text"
+                inputMode="numeric"
+                value={stakeholderScoreInput}
+                onChange={(e) => setStakeholderScoreInput(e.target.value)}
                 className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg font-mono"
               />
               <p className="text-[11px] text-slate-400 mt-1">Use the project's documented stakeholder assessment.</p>
@@ -636,12 +638,10 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
               </label>
               <input
                 id="historical-delay-input"
-                type="number"
-                min="0"
-                max="100"
-                step="1"
-                value={districtHistoricalDelay}
-                onChange={(e) => setDistrictHistoricalDelay(Number(e.target.value))}
+                type="text"
+                inputMode="numeric"
+                value={districtHistoricalDelayInput}
+                onChange={(e) => setDistrictHistoricalDelayInput(e.target.value)}
                 className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg font-mono"
               />
               <p className="text-[11px] text-slate-400 mt-1">Enter a value only when supported by historical district records; otherwise leave 0.</p>
@@ -767,18 +767,17 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
                 setState('Tamil Nadu');
                 setDistrict('Chennai');
                 setProjectType('Highway / Expressway');
-                setLandArea(100);
                 setLandAreaInput('100');
-                setAffectedFamilies(100);
+                setAffectedFamiliesInput('100');
                 setCompensationStatus('Pending (<25%)');
                 setLegalDispute(false);
                 setApprovalStatus('Environmental Clearance Pending');
-                setApprovalDaysPending(90);
+                setApprovalDaysPendingInput('90');
                 setRehabilitationStatus('Not Started');
                 setPossessionStatus('Not Taken');
-                setStakeholderScore(3);
-                setDistrictHistoricalDelay(0);
-                setBudgetCr(320);
+                setStakeholderScoreInput('3');
+                setDistrictHistoricalDelayInput('0');
+                setBudgetCrInput('320');
                 setLatitude('');
                 setLongitude('');
                 setFormError('');

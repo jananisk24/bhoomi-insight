@@ -1,7 +1,6 @@
-const configuredApiUrl = import.meta.env.VITE_API_URL?.trim();
+import { resolveApiBaseUrl } from './apiConfig';
 
-if (!configuredApiUrl) {
-  throw new Error('VITE_API_URL must be configured before starting the frontend.');
-}
-
-export const API_BASE_URL = configuredApiUrl.replace(/\/+$/, '');
+export const API_BASE_URL = resolveApiBaseUrl(
+  import.meta.env.VITE_API_URL,
+  import.meta.env.DEV
+);

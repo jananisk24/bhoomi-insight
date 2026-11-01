@@ -29,7 +29,6 @@ def api_client(tmp_path, monkeypatch):
         finally:
             db.close()
 
-    monkeypatch.delenv("ALLOW_USER_REGISTRATION", raising=False)
     app.dependency_overrides[get_db] = override_get_db
     try:
         with TestClient(app) as client:
@@ -51,57 +50,125 @@ def create_user(session_factory, username="officer", role="Officer"):
         return user.id
 
 
-def test_registration_is_disabled_by_default(api_client):
-    client, _ = api_client
-
-    response = client.post(
-        "/register",
-        json={"username": "new-officer", "password": "valid-password"},
-    )
-
-    assert response.status_code == 403
-
-
-def test_registration_remains_disabled_in_production(api_client, monkeypatch):
-    client, _ = api_client
+def test_registration_works_in_production_and_logs_in_as_officer(
+    api_client, monkeypatch
+):
+    client, session_factory = api_client
     monkeypatch.setattr(main, "is_production", True)
-    monkeypatch.setenv("ALLOW_USER_REGISTRATION", "true")
-
-    response = client.post(
-        "/register",
-        json={"username": "not-allowed", "password": "valid-password"},
-    )
-
-    assert response.status_code == 403
-
-
-def test_registration_and_login_succeed_when_enabled(api_client, monkeypatch):
-    client, _ = api_client
-    monkeypatch.setenv("ALLOW_USER_REGISTRATION", "true")
 
     registered = client.post(
         "/register",
-        json={"username": "new-officer", "password": "valid-password"},
+        json={"username": "  officer.id-1  ", "password": "valid-password"},
     )
     assert registered.status_code == 200
+    assert registered.json() == {
+        "message": "User registered successfully",
+        "username": "officer.id-1",
+        "role": "Officer",
+    }
+
+    with session_factory() as db:
+        user = db.query(models.User).filter_by(username="officer.id-1").one()
+        assert user.role == "Officer"
+        assert user.password != "valid-password"
+        assert user.password.startswith("$2")
 
     login = client.post(
         "/login",
-        json={"username": "new-officer", "password": "valid-password"},
+        json={"username": "officer.id-1", "password": "valid-password"},
     )
     assert login.status_code == 200
     assert login.json()["role"] == "Officer"
+    assert login.json()["access_token"]
 
-    headers = {"Authorization": f"Bearer {login.json()['access_token']}"}
-    profile = client.get("/me", headers=headers)
-    assert profile.status_code == 200
-    assert profile.json() == {"username": "new-officer", "role": "Officer"}
 
-    projects = client.get(
+def test_registration_rejects_duplicate_username(api_client):
+    client, session_factory = api_client
+    create_user(session_factory, username="existing-officer")
+
+    response = client.post(
+        "/register",
+        json={"username": "existing-officer", "password": "valid-password"},
+    )
+
+    assert response.status_code == 409
+    assert response.json()["detail"] == "Username already exists"
+
+
+@pytest.mark.parametrize(
+    ("username", "password", "role"),
+    [
+        ("bad username", "valid-password", "Officer"),
+        ("short", "short", "Officer"),
+        ("valid-officer", "x" * 73, "Officer"),
+        ("valid-officer", "valid-password", "Admin"),
+    ],
+)
+def test_registration_rejects_invalid_or_elevated_credentials(
+    api_client, username, password, role
+):
+    client, session_factory = api_client
+
+    response = client.post(
+        "/register",
+        json={"username": username, "password": password, "role": role},
+    )
+
+    assert response.status_code == 422
+    with session_factory() as db:
+        assert db.query(models.User).count() == 0
+
+
+def test_registration_handles_duplicate_race_as_conflict(api_client, monkeypatch):
+    client, _ = api_client
+    from sqlalchemy.exc import IntegrityError
+
+    def create_duplicate(*_args, **_kwargs):
+        raise IntegrityError("insert", {}, Exception("duplicate"))
+
+    monkeypatch.setattr(main.crud, "create_user", create_duplicate)
+    response = client.post(
+        "/register",
+        json={"username": "race-officer", "password": "valid-password"},
+    )
+
+    assert response.status_code == 409
+    assert response.json()["detail"] == "Username already exists"
+
+
+def test_project_numeric_values_are_stored_without_truncation(api_client):
+    client, session_factory = api_client
+    create_user(session_factory)
+    headers = {
+        "Authorization": f"Bearer {create_token('officer', 'Officer')}"
+    }
+
+    response = client.post(
         "/projects",
         headers=headers,
+        json={
+            "project_name": "Decimal numeric fields test",
+            "state": "Tamil Nadu",
+            "district": "Chennai",
+            "land_required": 5.159,
+            "affected_families": 12,
+            "estimated_cost": 12_500_000.75,
+            "approval_days_pending": 32,
+            "stakeholder_score": 3,
+            "district_historical_delay": 17,
+        },
     )
-    assert projects.status_code == 200
+
+    assert response.status_code == 200
+    project_id = response.json()["id"]
+    with session_factory() as db:
+        project = db.get(models.Project, project_id)
+        assert project.land_required == pytest.approx(5.159)
+        assert project.affected_families == 12
+        assert project.estimated_cost == pytest.approx(12_500_000.75)
+        assert project.approval_days_pending == 32
+        assert project.stakeholder_score == pytest.approx(3)
+        assert project.district_historical_delay == pytest.approx(17)
 
 
 def test_current_user_profile_rejects_missing_or_invalid_token(api_client):

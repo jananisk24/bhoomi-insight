@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
-    "test": "tsx --test src/utils/units.test.ts src/utils/exportReport.test.ts src/utils/projectFilters.test.ts"
+    "test": "tsx --test src/api.test.ts src/utils/units.test.ts src/utils/exportReport.test.ts src/utils/projectFilters.test.ts src/utils/projectForm.test.ts src/utils/auth.test.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

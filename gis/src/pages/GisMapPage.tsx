@@ -244,7 +244,7 @@ export const GisMapPage: React.FC<GisMapPageProps> = ({
             </h1>
           </div>
           <p className="text-xs text-slate-500 mt-0.5">
-            Geographic view of projects with verified coordinates and risk categories
+            Geographic view of projects with provided coordinates and risk categories
           </p>
         </div>
 
@@ -311,8 +311,7 @@ export const GisMapPage: React.FC<GisMapPageProps> = ({
 
           {filteredProjects.length > 0 && mappedProjects.length === 0 && (
             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 rounded-lg border border-amber-200 bg-white/95 px-4 py-2 text-xs text-amber-800 shadow">
-              No verified project coordinates available. Projects are listed
-              without placing inaccurate markers.
+              No project coordinates are available for the selected projects. Projects are listed without map markers.
             </div>
           )}
 
@@ -352,7 +351,7 @@ export const GisMapPage: React.FC<GisMapPageProps> = ({
             </h2>
             <p className="text-[11px] text-slate-500">
               {filteredProjects.length - mappedProjects.length} project(s)
-              without verified coordinates are listed but not pinned.
+              without coordinates are listed but not pinned.
             </p>
           </div>
 
@@ -410,7 +409,7 @@ export const GisMapPage: React.FC<GisMapPageProps> = ({
                 {formatAcresLabel(activeProject.landArea)} •{' '}
                 {activeProject.status}
                 {!hasValidCoordinates(activeProject.coordinates) &&
-                  ' • No verified map coordinates'}
+                  ' • No coordinates provided'}
               </div>
               <button
                 id="btn-gis-inspect-active"

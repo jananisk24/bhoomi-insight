@@ -9,12 +9,18 @@ import {
   ArrowLeft, 
   LandPlot, 
   Calendar,
-  Layers
+  Layers,
+  Download,
+  Printer,
 } from 'lucide-react';
 import { Project, ActivePage, StageRisk } from '../types';
 import { RiskBadge } from '../components/RiskBadge';
 import { calculateDelayRisk } from '../utils/predictionEngine';
 import { formatAcresLabel } from '../utils/units';
+import {
+  exportSingleProjectReportText,
+  printProjectAudit,
+} from '../utils/exportReport';
 
 interface PredictionResultsPageProps {
   project: Project | null;
@@ -175,13 +181,11 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
               </h2>
 
               <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                {currentProject.riskCategory === 'Not Predicted'
-                  ? 'No prediction has been saved for this project yet. Run a prediction to assess its delay risk.'
-                  : currentProject.status === 'Severely Delayed'
-                  ? 'Based on active judicial disputes and incomplete compensation disbursements, this parcel is forecasted to experience a critical delay exceeding statutory milestones.'
-                  : currentProject.status === 'Moderate Delay'
-                  ? 'Procedural clearances and partial compensation disbursement require close departmental coordination to prevent timeline slippage.'
-                  : 'All key statutory parameters and beneficiary disbursements are aligned with the RFCTLARR statutory timeline.'}
+                {currentProject.predictionLoadError
+                  ? currentProject.predictionLoadError
+                  : currentProject.riskCategory === 'Not Predicted'
+                    ? 'No saved prediction is available for this project.'
+                    : `The saved model result classifies this project as ${currentProject.riskCategory.toLowerCase()} risk. This screening result does not establish a cause or confirm a delay.`}
               </p>
             </div>
 
@@ -206,7 +210,7 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
               </div>
 
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
-                <div className="text-[10px] font-semibold text-slate-400 uppercase">Est. Budget Impact</div>
+                <div className="text-[10px] font-semibold text-slate-400 uppercase">Project Budget</div>
                 <div className="text-xs font-bold text-slate-800 font-mono mt-0.5">
                   ₹{currentProject.budgetCr} Crores
                 </div>
@@ -215,6 +219,22 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
 
             {/* Simulator Action Button */}
             <div className="pt-2 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => printProjectAudit(currentProject)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                <Printer className="h-3.5 w-3.5" />
+                Print report
+              </button>
+              <button
+                type="button"
+                onClick={() => exportSingleProjectReportText(currentProject)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                <Download className="h-3.5 w-3.5" />
+                Download report
+              </button>
               <button
                 id="btn-open-whatif-for-project"
                 onClick={() => {

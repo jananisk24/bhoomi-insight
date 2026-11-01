@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   LandPlot,
   Lock,
@@ -11,6 +11,7 @@ import { API_BASE_URL } from '../api';
 
 interface LoginPageProps {
   onLoginSuccess: (user: User) => void;
+  sessionMessage?: string;
 }
 
 interface LoginResponse {
@@ -21,13 +22,20 @@ interface LoginResponse {
 }
 
 
-export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
+export const LoginPage: React.FC<LoginPageProps> = ({
+  onLoginSuccess,
+  sessionMessage,
+}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (sessionMessage) setMessage(sessionMessage);
+  }, [sessionMessage]);
 
   const handleLogin = async (
     e: React.SyntheticEvent<HTMLFormElement>

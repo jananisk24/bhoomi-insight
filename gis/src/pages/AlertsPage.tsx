@@ -171,6 +171,7 @@ export const AlertsPage: React.FC<AlertsPageProps> = ({
 
   const pendingApprovalProjects = projects.filter(
     (p) =>
+      p.approvalStatus === 'In Administrative Review' ||
       p.approvalStatus === 'Environmental Clearance Pending' ||
       p.approvalStatus === 'Incomplete Documentation'
   );
@@ -245,7 +246,10 @@ export const AlertsPage: React.FC<AlertsPageProps> = ({
               : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
           }`}
         >
-          All Alerts ({highRiskProjects.length + pendingApprovalProjects.length + compensationDelayProjects.length})
+          All Alerts ({new Set(
+            [...highRiskProjects, ...pendingApprovalProjects, ...compensationDelayProjects]
+              .map((project) => project.id)
+          ).size})
         </button>
         <button
           onClick={() => setActiveTab('high-risk')}

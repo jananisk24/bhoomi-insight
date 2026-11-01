@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Layers, 
   AlertTriangle, 
@@ -11,11 +11,22 @@ import {
   TrendingUp,
   LandPlot,
   Users,
-  Scale
+  Scale,
+  Download,
+  FileText,
 } from 'lucide-react';
 import { Project, ActivePage } from '../types';
 import { RiskBadge } from '../components/RiskBadge';
 import { formatAcresLabel } from '../utils/units';
+import {
+  exportExecutiveAssessment,
+  exportProjectsCSV,
+} from '../utils/exportReport';
+import {
+  filterProjectsByJurisdiction,
+  getProjectDistricts,
+  getProjectStates,
+} from '../utils/projectFilters';
 
 interface DashboardPageProps {
   projects: Project[];
@@ -28,16 +39,26 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   onNavigate,
   onSelectProjectForPrediction
 }) => {
-  const totalProjects = projects.length;
-  const highRiskProjects = projects.filter((p) => p.riskCategory === 'High').length;
-  const mediumRiskProjects = projects.filter((p) => p.riskCategory === 'Medium').length;
-  const lowRiskProjects = projects.filter((p) => p.riskCategory === 'Low').length;
+  const [selectedState, setSelectedState] = useState('All States');
+  const [selectedDistrict, setSelectedDistrict] = useState('All Districts');
+  const [exportNotice, setExportNotice] = useState('');
+  const stateOptions = getProjectStates(projects);
+  const districtOptions = getProjectDistricts(projects, selectedState);
+  const scopedProjects = filterProjectsByJurisdiction(
+    projects,
+    selectedState,
+    selectedDistrict
+  );
+  const totalProjects = scopedProjects.length;
+  const highRiskProjects = scopedProjects.filter((p) => p.riskCategory === 'High').length;
+  const mediumRiskProjects = scopedProjects.filter((p) => p.riskCategory === 'Medium').length;
+  const lowRiskProjects = scopedProjects.filter((p) => p.riskCategory === 'Low').length;
 
-  const totalAcres = projects.reduce((acc, p) => acc + p.landArea, 0);
-  const totalFamilies = projects.reduce((acc, p) => acc + p.affectedFamilies, 0);
-  const disputeCount = projects.filter((p) => p.legalDispute).length;
+  const totalAcres = scopedProjects.reduce((acc, p) => acc + p.landArea, 0);
+  const totalFamilies = scopedProjects.reduce((acc, p) => acc + p.affectedFamilies, 0);
+  const disputeCount = scopedProjects.filter((p) => p.legalDispute).length;
   const latestRiskByProject = new Map<string, number | null>(
-    projects.map(
+    scopedProjects.map(
       (project): [string, number | null] => [project.id, project.riskScore]
     )
   );
@@ -53,7 +74,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         )
       : null;
 
-  const recentProjects = [...projects].slice(0, 5);
+  const recentProjects = sortProjectsNewestFirst(scopedProjects).slice(0, 5);
 
   return (
     <div className="space-y-6">
@@ -103,6 +124,83 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </div>
         </div>
       </div>
+
+      <section className="flex flex-col gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-xs lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-wrap items-end gap-3">
+          <label className="text-xs font-semibold text-slate-600">
+            State
+            <select
+              value={selectedState}
+              onChange={(event) => {
+                setSelectedState(event.target.value);
+                setSelectedDistrict('All Districts');
+              }}
+              className="mt-1 block min-w-40 rounded-lg border border-slate-300 bg-white px-2.5 py-2 font-normal"
+            >
+              <option value="All States">All states</option>
+              {stateOptions.map((state) => (
+                <option key={state} value={state}>{state}</option>
+              ))}
+            </select>
+          </label>
+          <label className="text-xs font-semibold text-slate-600">
+            District
+            <select
+              value={selectedDistrict}
+              onChange={(event) => setSelectedDistrict(event.target.value)}
+              className="mt-1 block min-w-40 rounded-lg border border-slate-300 bg-white px-2.5 py-2 font-normal"
+            >
+              <option value="All Districts">All districts</option>
+              {districtOptions.map((district) => (
+                <option key={district} value={district}>{district}</option>
+              ))}
+            </select>
+          </label>
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedState('All States');
+              setSelectedDistrict('All Districts');
+            }}
+            className="rounded-lg px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100"
+          >
+            Clear filters
+          </button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              exportProjectsCSV(scopedProjects, 'executive_dashboard.csv');
+              setExportNotice(`Exported ${scopedProjects.length} projects to CSV.`);
+            }}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Export CSV
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              exportExecutiveAssessment(
+                scopedProjects,
+                selectedState,
+                selectedDistrict
+              );
+              setExportNotice('Executive audit report downloaded.');
+            }}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            <FileText className="h-3.5 w-3.5" />
+            Export Report
+          </button>
+        </div>
+        {exportNotice && (
+          <p role="status" className="text-xs text-emerald-700 lg:basis-full">
+            {exportNotice}
+          </p>
+        )}
+      </section>
 
       {/* 4 Primary Summary Cards Requested */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -325,3 +423,4 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     </div>
   );
 };
+import { sortProjectsNewestFirst } from '../utils/projects';

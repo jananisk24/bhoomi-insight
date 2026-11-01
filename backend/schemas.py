@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import (
     BaseModel,
@@ -10,7 +10,16 @@ from pydantic import (
 )
 
 
-ProjectType = Literal["Highway", "Railway", "Irrigation", "Power"]
+ProjectType = Literal[
+    "Highway",
+    "Railway",
+    "Irrigation",
+    "Power",
+    # Values already present in production data. The trained encoder ignores
+    # categories it was not trained on, but the API must preserve them exactly.
+    "Airport Expansion",
+    "Highway / Expressway",
+]
 CompensationStatus = Literal[
     "Disbursed (100%)",
     "Paid",
@@ -61,6 +70,35 @@ class ProjectCreate(BaseModel):
 
 
 class ProjectUpdate(BaseModel):
+    @model_validator(mode="before")
+    @classmethod
+    def reject_explicit_nulls(cls, data: Any) -> Any:
+        if not isinstance(data, dict):
+            return data
+
+        non_coordinate_fields = {
+            "project_name", "state", "district", "land_required",
+            "affected_families", "estimated_cost", "project_type",
+            "compensation_status", "approval_days_pending", "approval_status",
+            "legal_dispute", "possession_status", "rehabilitation_progress",
+            "stakeholder_score", "district_historical_delay",
+        }
+        null_fields = sorted(
+            field for field in non_coordinate_fields
+            if field in data and data[field] is None
+        )
+        if null_fields:
+            raise ValueError(
+                f"Fields cannot be null: {', '.join(null_fields)}"
+            )
+
+        latitude_is_null = "latitude" in data and data["latitude"] is None
+        longitude_is_null = "longitude" in data and data["longitude"] is None
+        if latitude_is_null != longitude_is_null:
+            raise ValueError("latitude and longitude must be cleared together")
+
+        return data
+
     model_config = ConfigDict(allow_inf_nan=False)
 
     project_name: str | None = Field(default=None, min_length=1)
@@ -230,6 +268,10 @@ class AlertCreate(BaseModel):
     message: str = Field(min_length=1)
     risk_level: Literal["High", "Medium", "Low"]
     is_read: bool = False
+
+
+class AlertUpdate(BaseModel):
+    is_read: bool
 
 
 class AlertResponse(BaseModel):

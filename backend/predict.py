@@ -67,6 +67,21 @@ SAMPLE_PROJECT = {
 def predict_project(model, project: dict) -> dict:
     """Run one project through the pipeline and return the full response
     contract documented in MODEL_HANDOFF.md, ready to hand to the backend."""
+    encoder = (
+        model.named_steps["preprocessor"]
+        .named_transformers_["categorical"]
+        .named_steps["encoder"]
+    )
+    known_types = set(encoder.categories_[0])
+    project_type = project["Project_Type"]
+
+    if project_type == "Highway / Expressway" and "Highway" in known_types:
+        project = {**project, "Project_Type": "Highway"}
+    elif project_type not in known_types:
+        raise ValueError(
+            f"Unsupported project type for prediction: {project_type!r}"
+        )
+
     X_new = pd.DataFrame([project])
 
     classes = list(model.named_steps["classifier"].classes_)

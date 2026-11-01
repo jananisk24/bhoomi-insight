@@ -34,6 +34,7 @@ from schemas import (
     PredictionResponse,
     AlertCreate,
     AlertResponse,
+    AlertUpdate,
     AnalyticsResponse,
     SimulationRequest,
     SimulationResponse,
@@ -282,6 +283,18 @@ def login(
         username=authenticated.username,
         role=authenticated.role,
     )
+
+
+@app.get("/me")
+def current_user_profile(
+    current_user: str = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    user = crud.get_user_by_username(db, current_user)
+    if user is None:
+        raise HTTPException(status_code=401, detail="Invalid or expired token")
+
+    return {"username": user.username, "role": user.role}
 
 
 # ========================= PROJECTS =========================
@@ -543,6 +556,24 @@ def get_alerts(
 ):
 
     return crud.get_alerts(db)
+
+
+@app.patch("/alerts/{alert_id}", response_model=AlertResponse)
+def update_alert(
+    alert_id: int,
+    update: AlertUpdate,
+    db: Session = Depends(get_db),
+    current_user: str = Depends(get_current_user),
+):
+    alert = crud.get_alert(db, alert_id)
+
+    if alert is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Alert not found",
+        )
+
+    return crud.update_alert_read_status(db, alert, update.is_read)
 
 
 # ========================= ADMINISTRATIVE ACTIONS =========================

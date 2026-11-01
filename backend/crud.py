@@ -58,6 +58,7 @@ def get_projects(
 ) -> list[models.Project]:
     return (
         db.query(models.Project)
+        .order_by(models.Project.created_at.asc(), models.Project.id.asc())
         .offset(skip)
         .limit(limit)
         .all()
@@ -115,20 +116,43 @@ def get_predictions_for_project(
     return (
         db.query(models.Prediction)
         .filter(models.Prediction.project_id == project_id)
-        .order_by(models.Prediction.created_at.desc())
+        .order_by(
+            models.Prediction.created_at.desc(),
+            models.Prediction.id.desc(),
+        )
         .all()
     )
 
 
 def get_latest_predictions(db: Session) -> list[models.Prediction]:
-    latest_ids = (
-        db.query(func.max(models.Prediction.id).label("id"))
-        .group_by(models.Prediction.project_id)
+    """Return the newest saved prediction for each project.
+
+    Prediction IDs are usually insertion-ordered, but a backfilled row can
+    have a later ID and an older timestamp. Rank by time and use the ID only
+    to break ties so analytics and the UI agree on "latest".
+    """
+    ranked_predictions = (
+        db.query(
+            models.Prediction.id.label("prediction_id"),
+            func.row_number()
+            .over(
+                partition_by=models.Prediction.project_id,
+                order_by=(
+                    models.Prediction.created_at.desc(),
+                    models.Prediction.id.desc(),
+                ),
+            )
+            .label("prediction_rank"),
+        )
         .subquery()
     )
     return (
         db.query(models.Prediction)
-        .join(latest_ids, models.Prediction.id == latest_ids.c.id)
+        .join(
+            ranked_predictions,
+            models.Prediction.id == ranked_predictions.c.prediction_id,
+        )
+        .filter(ranked_predictions.c.prediction_rank == 1)
         .order_by(models.Prediction.project_id)
         .all()
     )
@@ -151,9 +175,28 @@ def create_alert(
 def get_alerts(db: Session) -> list[models.Alert]:
     return (
         db.query(models.Alert)
-        .order_by(models.Alert.created_at.desc())
+        .order_by(models.Alert.created_at.desc(), models.Alert.id.desc())
         .all()
     )
+
+
+def get_alert(db: Session, alert_id: int) -> models.Alert | None:
+    return (
+        db.query(models.Alert)
+        .filter(models.Alert.id == alert_id)
+        .first()
+    )
+
+
+def update_alert_read_status(
+    db: Session,
+    alert: models.Alert,
+    is_read: bool,
+) -> models.Alert:
+    alert.is_read = is_read
+    db.commit()
+    db.refresh(alert)
+    return alert
 
 
 # ---------- Administrative Actions ----------

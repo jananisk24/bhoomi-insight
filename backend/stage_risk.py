@@ -11,6 +11,8 @@ def risk_category(score: float) -> str:
     that's how thresholds drift out of sync between files over time.
     """
     # Explicit inclusive boundaries: 0-39 Low, 40-69 Medium, 70-100 High.
+    if not math.isfinite(score):
+        raise ValueError("Risk score must be a finite number.")
     if score < 40:
         return "Low"
     if score < 70:

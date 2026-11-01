@@ -40,3 +40,11 @@ export const probabilityToPercent = (probability: number): number | null =>
   Number.isFinite(probability) && probability >= 0 && probability <= 1
     ? probability * 100
     : null;
+
+/** Format an already-normalized risk percentage for display. */
+export const formatRiskPercent = (
+  percentage: number | null | undefined
+): string =>
+  typeof percentage === 'number' && Number.isFinite(percentage)
+    ? `${percentage.toFixed(2)}%`
+    : 'N/A';

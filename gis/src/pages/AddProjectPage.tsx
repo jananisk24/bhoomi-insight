@@ -88,6 +88,8 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
 
   const [formError, setFormError] = useState('');
   const [isPredicting, setIsPredicting] = useState(false);
+  const [isSamplePreview, setIsSamplePreview] = useState(false);
+  const [confirmSampleSubmission, setConfirmSampleSubmission] = useState(false);
 
   const states = [...new Set([
     'Tamil Nadu',
@@ -97,8 +99,71 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
     state,
   ])];
 
+  const handleLoadSample = (type: 'high' | 'low') => {
+    const sample =
+      type === 'high'
+        ? {
+            projectName: 'Sample High-Risk Highway Project',
+            state: 'Maharashtra',
+            district: 'Pune',
+            projectType: 'Highway / Expressway',
+            landArea: 410,
+            affectedFamilies: 550,
+            compensationStatus: 'Under Dispute' as const,
+            legalDispute: true,
+            approvalStatus: 'Environmental Clearance Pending' as const,
+            rehabilitationStatus: 'Not Started' as const,
+            budgetCr: 650,
+            approvalDaysPending: 120,
+            stakeholderScore: 2,
+            districtHistoricalDelay: 65,
+          }
+        : {
+            projectName: 'Sample Low-Risk Renewable Energy Project',
+            state: 'Karnataka',
+            district: 'Ballari',
+            projectType: 'Power / Solar Park',
+            landArea: 120,
+            affectedFamilies: 40,
+            compensationStatus: 'Disbursed (100%)' as const,
+            legalDispute: false,
+            approvalStatus: 'Cleared / Approved' as const,
+            rehabilitationStatus: 'Completed' as const,
+            budgetCr: 240,
+            approvalDaysPending: 0,
+            stakeholderScore: 5,
+            districtHistoricalDelay: 15,
+          };
+
+    setProjectName(sample.projectName);
+    setState(sample.state);
+    setDistrict(sample.district);
+    setProjectType(sample.projectType);
+    setLandArea(sample.landArea);
+    setLandAreaInput(String(sample.landArea));
+    setAffectedFamilies(sample.affectedFamilies);
+    setCompensationStatus(sample.compensationStatus);
+    setLegalDispute(sample.legalDispute);
+    setApprovalStatus(sample.approvalStatus);
+    setRehabilitationStatus(sample.rehabilitationStatus);
+    setBudgetCr(sample.budgetCr);
+    setApprovalDaysPending(sample.approvalDaysPending);
+    setStakeholderScore(sample.stakeholderScore);
+    setDistrictHistoricalDelay(sample.districtHistoricalDelay);
+    setLatitude('');
+    setLongitude('');
+    setFormError('');
+    setIsSamplePreview(true);
+    setConfirmSampleSubmission(false);
+  };
+
   const handlePredictSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isSamplePreview && !confirmSampleSubmission) {
+      setFormError('Example values are for preview. Confirm before saving them as a real project.');
+      return;
+    }
 
     if (!projectName.trim()) {
       setFormError('Please enter the project name.');
@@ -306,6 +371,37 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
           <p className="text-xs text-slate-500 mt-0.5">
             Save project details and calculate delay probability using the trained model
           </p>
+          {!initialProject && (
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <span className="text-xs text-slate-500">
+                Example values only; review before saving:
+              </span>
+              <button
+                type="button"
+                onClick={() => handleLoadSample('high')}
+                className="rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1 text-[11px] font-semibold text-rose-700 hover:bg-rose-100"
+              >
+                Fill high-risk example
+              </button>
+              <button
+                type="button"
+                onClick={() => handleLoadSample('low')}
+                className="rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 hover:bg-emerald-100"
+              >
+                Fill low-risk example
+              </button>
+              {isSamplePreview && (
+                <label className="flex items-center gap-2 text-xs text-rose-700">
+                  <input
+                    type="checkbox"
+                    checked={confirmSampleSubmission}
+                    onChange={(event) => setConfirmSampleSubmission(event.target.checked)}
+                  />
+                  I confirm these example values should be saved as a real project.
+                </label>
+              )}
+            </div>
+          )}
         </div>
 
       </div>
@@ -405,7 +501,7 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
                 step="any"
                 value={latitude}
                 onChange={(e) => setLatitude(e.target.value)}
-                placeholder="Enter verified site latitude"
+                placeholder="Enter project latitude"
                 className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg font-mono"
               />
             </div>
@@ -421,12 +517,12 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
                 step="any"
                 value={longitude}
                 onChange={(e) => setLongitude(e.target.value)}
-                placeholder="Enter verified site longitude"
+                placeholder="Enter project longitude"
                 className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg font-mono"
               />
             </div>
             <p className="sm:col-span-2 text-[11px] text-slate-400">
-              Map markers are only shown when exact project-site coordinates are provided.
+              Map markers are shown for projects with coordinates.
             </p>
           </div>
         </div>
@@ -686,6 +782,8 @@ export const AddProjectPage: React.FC<AddProjectPageProps> = ({
                 setLatitude('');
                 setLongitude('');
                 setFormError('');
+                setIsSamplePreview(false);
+                setConfirmSampleSubmission(false);
               }}
               className="px-3 py-2 text-xs text-slate-600 hover:bg-slate-100 rounded-lg border border-slate-200 transition-colors cursor-pointer flex items-center gap-1"
             >

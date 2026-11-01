@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { API_BASE_URL } from './api';
 import { calculateDelayRisk } from './utils/predictionEngine';
 import { Project, ActivePage, User } from './types';
@@ -52,6 +52,13 @@ type BackendPrediction = {
 };
 
 const toNumber = (value: unknown, fallback = 0): number => {
+  if (
+    value === null ||
+    value === undefined ||
+    (typeof value === 'string' && value.trim() === '')
+  ) {
+    return fallback;
+  }
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : fallback;
 };
@@ -98,6 +105,7 @@ const mapBackendProject = async (
   let riskScore: number | null = null;
   let riskCategory: Project['riskCategory'] = 'Not Predicted';
   let latestPrediction: BackendPrediction | null = null;
+  let predictionLoadError: string | null = null;
 
   try {
     const predictionResponse = await fetch(
@@ -115,11 +123,15 @@ const mapBackendProject = async (
         if (riskScore === null) riskCategory = 'Not Predicted';
       }
     } else if (predictionResponse.status !== 404) {
+      predictionLoadError =
+        `Could not load saved prediction (HTTP ${predictionResponse.status}).`;
       console.warn(
         `Could not load prediction for project ${item.id} (HTTP ${predictionResponse.status}).`
       );
     }
   } catch (error) {
+    predictionLoadError =
+      'Could not load saved prediction due to a network or response error.';
     console.error(`Could not load prediction for project ${item.id}:`, error);
   }
 
@@ -134,10 +146,11 @@ const mapBackendProject = async (
         ? 'Pending (<25%)'
         : backendCompensationStatus === 'Under Dispute'
           ? 'Under Dispute'
-          : backendCompensationStatus === 'In Progress' ||
-              backendCompensationStatus === 'Partially Disbursed (50-75%)'
-            ? 'In Progress'
-            : 'Unknown';
+          :               backendCompensationStatus === 'Partially Disbursed (50-75%)'
+            ? 'Partially Disbursed (50-75%)'
+            : backendCompensationStatus === 'In Progress'
+              ? 'In Progress'
+              : 'Unknown';
 
   const knownApprovalStatuses: Project['approvalStatus'][] = [
     'Cleared / Approved',
@@ -201,6 +214,7 @@ const mapBackendProject = async (
     rehabilitationStatus,
     riskScore,
     riskCategory,
+    predictionLoadError,
     status:
       riskCategory === 'High'
         ? 'Severely Delayed'
@@ -246,13 +260,14 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [projectsLoading, setProjectsLoading] = useState(false);
   const [projectsError, setProjectsError] = useState('');
+  const [sessionMessage, setSessionMessage] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const highRiskCount = projects.filter(
     (project) => project.riskCategory === 'High'
   ).length;
 
-  const handleLoginSuccess = async (user: User) => {
+  const handleLoginSuccess = useCallback(async (user: User) => {
     const token = sessionStorage.getItem('access_token');
 
     if (!token) {
@@ -268,6 +283,7 @@ export default function App() {
       return;
     }
 
+    setSessionMessage('');
     setCurrentUser(user);
     setActivePage('dashboard');
     setProjectsLoading(true);
@@ -302,10 +318,72 @@ export default function App() {
     } finally {
       setProjectsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const token = sessionStorage.getItem('access_token');
+    if (!token) return;
+
+    let cancelled = false;
+
+    const restoreSession = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (response.status === 401 || response.status === 403) {
+          sessionStorage.removeItem('access_token');
+          sessionStorage.removeItem('token_type');
+          setSessionMessage('Your session expired. Please sign in again.');
+          return;
+        }
+        if (!response.ok) {
+          throw new Error(`Could not restore your session (HTTP ${response.status}).`);
+        }
+
+        const profile: unknown = await response.json();
+        if (
+          typeof profile !== 'object' ||
+          profile === null ||
+          !('username' in profile) ||
+          !('role' in profile) ||
+          typeof profile.username !== 'string' ||
+          typeof profile.role !== 'string' ||
+          !profile.username.trim() ||
+          !profile.role.trim()
+        ) {
+          throw new Error('The backend returned an invalid user profile.');
+        }
+
+        if (!cancelled) {
+          await handleLoginSuccess({
+            username: profile.username,
+            fullName: profile.username,
+            role: profile.role,
+            department: 'Land Resources',
+            isAuthenticated: true,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to restore session:', error);
+        if (!cancelled) {
+          setSessionMessage(
+            'Could not restore your previous session. Please sign in again.'
+          );
+        }
+      }
+    };
+
+    void restoreSession();
+    return () => {
+      cancelled = true;
+    };
+  }, [handleLoginSuccess]);
 
   const handleLogout = () => {
     sessionStorage.removeItem('access_token');
+    sessionStorage.removeItem('token_type');
     setCurrentUser({
       username: '',
       fullName: '',
@@ -316,6 +394,7 @@ export default function App() {
     setProjects([]);
     setSelectedProject(null);
     setProjectsError('');
+    setSessionMessage('');
     setActivePage('login');
   };
 
@@ -340,7 +419,12 @@ export default function App() {
   };
 
   if (activePage === 'login' || !currentUser.isAuthenticated) {
-    return <LoginPage onLoginSuccess={handleLoginSuccess} />;
+    return (
+      <LoginPage
+        onLoginSuccess={handleLoginSuccess}
+        sessionMessage={sessionMessage}
+      />
+    );
   }
 
   return (

@@ -9,10 +9,21 @@ import {
   LandPlot,
   ArrowUpDown,
   Pencil,
+  Download,
+  FileText,
 } from 'lucide-react';
 import { Project, ActivePage, RiskCategory } from '../types';
 import { RiskBadge } from '../components/RiskBadge';
 import { formatAcresLabel } from '../utils/units';
+import {
+  exportExecutiveAssessment,
+  exportProjectsCSV,
+} from '../utils/exportReport';
+import {
+  filterProjectsByJurisdiction,
+  getProjectDistricts,
+  getProjectStates,
+} from '../utils/projectFilters';
 
 interface ProjectListPageProps {
   projects: Project[];
@@ -31,15 +42,25 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedState, setSelectedState] = useState('All States');
+  const [selectedDistrict, setSelectedDistrict] = useState('All Districts');
   const [sortBy, setSortBy] = useState<'riskScore' | 'landArea' | 'name'>('riskScore');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+  const [exportNotice, setExportNotice] = useState('');
+  const stateOptions = getProjectStates(projects);
+  const districtOptions = getProjectDistricts(projects, selectedState);
 
   const filteredProjects = useMemo(() => {
-    return projects
+    return filterProjectsByJurisdiction(
+      projects,
+      selectedState,
+      selectedDistrict
+    )
       .filter((p) => {
         const matchesSearch = 
           p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           p.district.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          p.state.toLowerCase().includes(searchTerm.toLowerCase()) ||
           p.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
           p.projectType.toLowerCase().includes(searchTerm.toLowerCase());
 
@@ -66,7 +87,22 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
         return sortOrder === 'desc' ? -comp : comp;
       });
 
-  }, [projects, searchTerm, selectedCategory, sortBy, sortOrder]);
+  }, [
+    projects,
+    searchTerm,
+    selectedCategory,
+    selectedState,
+    selectedDistrict,
+    sortBy,
+    sortOrder,
+  ]);
+
+  const clearFilters = () => {
+    setSearchTerm('');
+    setSelectedCategory('All');
+    setSelectedState('All States');
+    setSelectedDistrict('All Districts');
+  };
 
   const toggleSort = (field: 'riskScore' | 'landArea' | 'name') => {
     if (sortBy === field) {
@@ -90,15 +126,48 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
             Monitor clearance milestones, legal disputes, and predicted delay probabilities for {projects.length} parcels
           </p>
         </div>
-        <button
-          id="btn-list-add-new"
-          onClick={() => onNavigate('add-project')}
-          className="self-start sm:self-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
-        >
-          <Plus className="w-4 h-4" />
-          <span>Register New Project</span>
-        </button>
+        <div className="self-start sm:self-auto flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              exportProjectsCSV(filteredProjects, 'land_acquisition_projects.csv');
+              setExportNotice(`Exported ${filteredProjects.length} projects to CSV.`);
+            }}
+            className="px-3 py-2 border border-slate-300 text-slate-700 hover:bg-slate-50 rounded-lg text-xs font-semibold flex items-center gap-1.5"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Export CSV</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              exportExecutiveAssessment(
+                filteredProjects,
+                selectedState,
+                selectedDistrict
+              );
+              setExportNotice('Executive audit report downloaded.');
+            }}
+            className="px-3 py-2 border border-slate-300 text-slate-700 hover:bg-slate-50 rounded-lg text-xs font-semibold flex items-center gap-1.5"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span>Export Report</span>
+          </button>
+          <button
+            id="btn-list-add-new"
+            onClick={() => onNavigate('add-project')}
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Register New Project</span>
+          </button>
+        </div>
       </div>
+      {exportNotice && (
+        <p role="status" className="text-xs text-emerald-700">
+          {exportNotice}
+        </p>
+      )}
 
       {/* Filter and Search Bar */}
       <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex flex-col md:flex-row gap-3 items-center justify-between">
@@ -117,14 +186,45 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
 
         {/* Filter Badges */}
         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+          <label className="sr-only" htmlFor="project-state-filter">
+            Filter by state
+          </label>
+          <select
+            id="project-state-filter"
+            value={selectedState}
+            onChange={(event) => {
+              setSelectedState(event.target.value);
+              setSelectedDistrict('All Districts');
+            }}
+            className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs"
+          >
+            <option value="All States">All states</option>
+            {stateOptions.map((state) => (
+              <option key={state} value={state}>{state}</option>
+            ))}
+          </select>
+          <label className="sr-only" htmlFor="project-district-filter">
+            Filter by district
+          </label>
+          <select
+            id="project-district-filter"
+            value={selectedDistrict}
+            onChange={(event) => setSelectedDistrict(event.target.value)}
+            className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs"
+          >
+            <option value="All Districts">All districts</option>
+            {districtOptions.map((district) => (
+              <option key={district} value={district}>{district}</option>
+            ))}
+          </select>
           <div className="text-xs font-semibold text-slate-500 flex items-center gap-1 mr-1">
             <Filter className="w-3.5 h-3.5" />
             <span>Filter Risk:</span>
           </div>
-          {(['All', 'High', 'Medium', 'Low'] as const).map((cat) => (
+          {(['All', 'High', 'Medium', 'Low', 'Not Predicted'] as const).map((cat) => (
             <button
               key={cat}
-              id={`filter-btn-${cat.toLowerCase()}`}
+              id={`filter-btn-${cat.toLowerCase().replace(/ /g, '-')}`}
               onClick={() => setSelectedCategory(cat)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 selectedCategory === cat
@@ -134,13 +234,22 @@ export const ProjectListPage: React.FC<ProjectListPageProps> = ({
                     ? 'bg-amber-600 text-white shadow-xs'
                     : cat === 'Low'
                     ? 'bg-emerald-600 text-white shadow-xs'
+                    : cat === 'Not Predicted'
+                    ? 'bg-slate-600 text-white shadow-xs'
                     : 'bg-blue-600 text-white shadow-xs'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
-              {cat} {cat !== 'All' && `(${projects.filter((p) => p.riskCategory === cat).length})`}
+              {cat} {cat !== 'All' && `(${filterProjectsByJurisdiction(projects, selectedState, selectedDistrict).filter((p) => p.riskCategory === cat).length})`}
             </button>
           ))}
+          <button
+            type="button"
+            onClick={clearFilters}
+            className="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100"
+          >
+            Clear filters
+          </button>
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   BarChart, 
   Bar, 
@@ -18,25 +18,47 @@ import {
   TrendingUp, 
   LandPlot, 
   ShieldAlert, 
-  Clock 
+  Clock,
+  Download,
+  FileText,
 } from 'lucide-react';
 import { Project } from '../types';
 import { formatAcresLabel } from '../utils/units';
+import {
+  exportExecutiveAssessment,
+  exportProjectsCSV,
+} from '../utils/exportReport';
+import {
+  filterProjectsByJurisdiction,
+  getProjectDistricts,
+  getProjectStates,
+} from '../utils/projectFilters';
 
 interface AnalyticsPageProps {
   projects: Project[];
 }
 
 export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
+  const [selectedState, setSelectedState] = useState('All States');
+  const [selectedDistrict, setSelectedDistrict] = useState('All Districts');
+  const [exportNotice, setExportNotice] = useState('');
+  const stateOptions = getProjectStates(projects);
+  const districtOptions = getProjectDistricts(projects, selectedState);
+  const scopedProjects = filterProjectsByJurisdiction(
+    projects,
+    selectedState,
+    selectedDistrict
+  );
+
   // 1. Risk Category Distribution Data
-  const highCount = projects.filter((p) => p.riskCategory === 'High').length;
-  const medCount = projects.filter((p) => p.riskCategory === 'Medium').length;
-  const lowCount = projects.filter((p) => p.riskCategory === 'Low').length;
-  const unpredictedCount = projects.filter(
+  const highCount = scopedProjects.filter((p) => p.riskCategory === 'High').length;
+  const medCount = scopedProjects.filter((p) => p.riskCategory === 'Medium').length;
+  const lowCount = scopedProjects.filter((p) => p.riskCategory === 'Low').length;
+  const unpredictedCount = scopedProjects.filter(
     (project) => project.riskScore === null
   ).length;
   const uniqueRiskScores = new Map<string, number | null>(
-    projects.map(
+    scopedProjects.map(
       (project): [string, number | null] => [project.id, project.riskScore]
     )
   );
@@ -58,7 +80,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
 
   // 2. District-wise Projects Data
   const districtMap: Record<string, { total: number; highRisk: number; acres: number }> = {};
-  projects.forEach((p) => {
+  scopedProjects.forEach((p) => {
     if (!districtMap[p.district]) {
       districtMap[p.district] = { total: 0, highRisk: 0, acres: 0 };
     }
@@ -82,7 +104,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
     'Possession',
   ] as const;
   const stageRiskData = stageNames.flatMap((stage) => {
-    const scores = projects
+    const scores = scopedProjects
       .map((project) => project.stageRisk?.[stage]?.score)
       .filter(
         (score): score is number =>
@@ -96,7 +118,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
       : [];
   });
   const highestRiskStageCounts = new Map<string, number>();
-  projects.forEach((project) => {
+  scopedProjects.forEach((project) => {
     if (project.highestRiskStage) {
       highestRiskStageCounts.set(
         project.highestRiskStage,
@@ -108,7 +130,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
     (left, right) => right[1] - left[1]
   )[0];
 
-  const totalAcresAtRisk = projects
+  const totalAcresAtRisk = scopedProjects
     .filter((p) => p.riskCategory === 'High')
     .reduce((acc, p) => acc + p.landArea, 0);
 
@@ -122,7 +144,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
             <h1 className="text-lg font-bold text-slate-800">State Acquisition Analytics & Trends</h1>
           </div>
           <p className="text-xs text-slate-500 mt-0.5">
-            Macro statistical overview of delay concentrations across districts, risk profiles, and quarterly timelines
+            Overview of saved risk categories, district project counts, and stage-risk scores
           </p>
         </div>
 
@@ -130,11 +152,88 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ projects }) => {
           <div className="text-right">
             <span className="text-[11px] text-slate-400 font-semibold block">Total Land Tracked</span>
             <span className="text-sm font-bold text-slate-800 font-mono">
-              {formatAcresLabel(projects.reduce((a, b) => a + b.landArea, 0))}
+              {formatAcresLabel(scopedProjects.reduce((a, b) => a + b.landArea, 0))}
             </span>
           </div>
         </div>
       </div>
+
+      <section className="flex flex-col gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-xs lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-wrap items-end gap-3">
+          <label className="text-xs font-semibold text-slate-600">
+            State
+            <select
+              value={selectedState}
+              onChange={(event) => {
+                setSelectedState(event.target.value);
+                setSelectedDistrict('All Districts');
+              }}
+              className="mt-1 block min-w-40 rounded-lg border border-slate-300 bg-white px-2.5 py-2 font-normal"
+            >
+              <option value="All States">All states</option>
+              {stateOptions.map((state) => (
+                <option key={state} value={state}>{state}</option>
+              ))}
+            </select>
+          </label>
+          <label className="text-xs font-semibold text-slate-600">
+            District
+            <select
+              value={selectedDistrict}
+              onChange={(event) => setSelectedDistrict(event.target.value)}
+              className="mt-1 block min-w-40 rounded-lg border border-slate-300 bg-white px-2.5 py-2 font-normal"
+            >
+              <option value="All Districts">All districts</option>
+              {districtOptions.map((district) => (
+                <option key={district} value={district}>{district}</option>
+              ))}
+            </select>
+          </label>
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedState('All States');
+              setSelectedDistrict('All Districts');
+            }}
+            className="rounded-lg px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100"
+          >
+            Clear filters
+          </button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              exportProjectsCSV(scopedProjects, 'analytics_projects.csv');
+              setExportNotice(`Exported ${scopedProjects.length} projects to CSV.`);
+            }}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Export CSV
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              exportExecutiveAssessment(
+                scopedProjects,
+                selectedState,
+                selectedDistrict
+              );
+              setExportNotice('Executive audit report downloaded.');
+            }}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            <FileText className="h-3.5 w-3.5" />
+            Export Report
+          </button>
+        </div>
+        {exportNotice && (
+          <p role="status" className="text-xs text-emerald-700 lg:basis-full">
+            {exportNotice}
+          </p>
+        )}
+      </section>
 
       {/* Top 3 Metric Summary Blocks */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

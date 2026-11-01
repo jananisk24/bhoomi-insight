@@ -36,7 +36,9 @@ export const RiskBadge: React.FC<RiskBadgeProps> = ({ category, score, size = 'm
       <span className={`w-1.5 h-1.5 rounded-full ${dots[category]} animate-pulse`} />
       <span>{category === 'Not Predicted' ? 'Not Predicted' : `${category} Risk`}</span>
       {score !== undefined && (
-        <span className="font-mono ml-0.5 opacity-85">({score}%)</span>
+        <span className="font-mono ml-0.5 opacity-85">
+          ({Number.isFinite(score) ? `${score.toFixed(2)}%` : 'N/A'})
+        </span>
       )}
     </span>
   );

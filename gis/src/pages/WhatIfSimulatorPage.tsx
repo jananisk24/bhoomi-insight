@@ -88,6 +88,36 @@ export const WhatIfSimulatorPage: React.FC<WhatIfSimulatorPageProps> = ({
     setResult(null);
   };
 
+  const applyPreset = (preset: 'best' | 'settle-court' | 'clear-funds') => {
+    setScenario((current) => {
+      if (!current) return current;
+      if (preset === 'settle-court') {
+        return { ...current, legalDispute: false };
+      }
+      if (preset === 'clear-funds') {
+        return { ...current, compensationStatus: 'Paid' };
+      }
+      return {
+        ...current,
+        compensationStatus: 'Paid',
+        approvalDaysPending: 0,
+        legalDispute: false,
+        possessionStatus: 'Full',
+        rehabilitationProgress: 100,
+        stakeholderScore: 5,
+        districtHistoricalDelay: 0,
+      };
+    });
+    setResult(null);
+    setError('');
+  };
+
+  const resetScenario = () => {
+    setScenario(scenarioValues(baseProject));
+    setResult(null);
+    setError('');
+  };
+
   const runSimulation = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!baseProject || !scenario) return;
@@ -201,6 +231,47 @@ export const WhatIfSimulatorPage: React.FC<WhatIfSimulatorPageProps> = ({
           <span>{error}</span>
         </div>
       )}
+
+      <div className="flex flex-wrap items-center gap-2 rounded-xl border border-slate-200 bg-white p-4">
+        <span className="mr-1 text-xs font-semibold text-slate-600">
+          Fill a scenario:
+        </span>
+        <button
+          type="button"
+          disabled={loading}
+          onClick={() => applyPreset('settle-court')}
+          className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50"
+        >
+          Resolve court stay
+        </button>
+        <button
+          type="button"
+          disabled={loading}
+          onClick={() => applyPreset('clear-funds')}
+          className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50"
+        >
+          Release compensation funds
+        </button>
+        <button
+          type="button"
+          disabled={loading}
+          onClick={() => applyPreset('best')}
+          className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-800 hover:bg-emerald-100 disabled:opacity-50"
+        >
+          Best-case scenario
+        </button>
+        <button
+          type="button"
+          disabled={loading}
+          onClick={resetScenario}
+          className="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 disabled:opacity-50"
+        >
+          Reset to saved project
+        </button>
+        <span className="basis-full text-[11px] text-slate-500">
+          These buttons only change the form. Run the model simulation to see results.
+        </span>
+      </div>
 
       <form onSubmit={runSimulation} className="space-y-5 rounded-xl border border-slate-200 bg-white p-5">
         <div className="grid gap-4 sm:grid-cols-2">

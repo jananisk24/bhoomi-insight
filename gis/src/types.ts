@@ -93,6 +93,8 @@ createdDate: string;
 estimatedDelayMonths: number | null;
 
 budgetCr: number;
+/** Non-null when loading the saved prediction failed. */
+predictionLoadError?: string | null;
 }
 
 export interface User {

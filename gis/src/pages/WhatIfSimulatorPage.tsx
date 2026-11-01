@@ -424,6 +424,11 @@ export const WhatIfSimulatorPage: React.FC<WhatIfSimulatorPageProps> = ({
             <p className="mb-3 text-xs text-slate-500">
               Highest-risk stage: <strong>{result.highest_risk_stage}</strong>
             </p>
+            <p className="mb-3 text-xs text-slate-500">
+              These five operational-stage scores do not include legal disputes.
+              A legal-dispute scenario can change overall model probability while
+              leaving the stage scores unchanged.
+            </p>
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
               {Object.entries<StageRisk>(result.stage_risk).map(([stage, risk]) => (
                 <div key={stage} className="rounded-lg border border-slate-200 p-3">

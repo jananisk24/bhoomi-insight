@@ -272,6 +272,118 @@ def test_saved_project_prediction_and_simulation_share_model_probability(api_cli
     assert any(item["id"] == project_id for item in listed.json())
 
 
+def test_approval_days_limit_is_enforced_for_create_update_and_simulation(
+    api_client,
+):
+    client, session_factory = api_client
+    create_user(session_factory)
+    headers = {
+        "Authorization": f"Bearer {create_token('officer', 'Officer')}"
+    }
+    project_payload = {
+        "project_name": "Approval-day boundary test",
+        "state": "Tamil Nadu",
+        "district": "Chennai",
+        "land_required": 10,
+        "affected_families": 100,
+        "estimated_cost": 10_000_000,
+        "approval_days_pending": 365,
+    }
+
+    created = client.post(
+        "/projects",
+        headers=headers,
+        json=project_payload,
+    )
+    assert created.status_code == 200
+    project_id = created.json()["id"]
+
+    rejected_create = client.post(
+        "/projects",
+        headers=headers,
+        json={**project_payload, "approval_days_pending": 366},
+    )
+    rejected_update = client.put(
+        f"/projects/{project_id}",
+        headers=headers,
+        json={"approval_days_pending": 366},
+    )
+    rejected_simulation = client.post(
+        "/simulate",
+        headers=headers,
+        json={"project_id": project_id, "approval_days_pending": 366},
+    )
+
+    assert rejected_create.status_code == 422
+    assert rejected_update.status_code == 422
+    assert rejected_simulation.status_code == 422
+    retrieved = client.get(f"/projects/{project_id}", headers=headers)
+    assert retrieved.status_code == 200
+    assert retrieved.json()["approval_days_pending"] == 365
+    with session_factory() as db:
+        assert db.query(models.Project).count() == 1
+
+
+def test_legal_dispute_simulation_changes_ml_probability_not_stage_scores(
+    api_client,
+):
+    client, session_factory = api_client
+    create_user(session_factory)
+    headers = {
+        "Authorization": f"Bearer {create_token('officer', 'Officer')}"
+    }
+    created = client.post(
+        "/projects/predict",
+        headers=headers,
+        json={
+            "project_name": "Court-stay scenario test",
+            "state": "Tamil Nadu",
+            "district": "Chennai",
+            "land_required": 10,
+            "affected_families": 100,
+            "estimated_cost": 10_000_000,
+            "compensation_status": "Pending (<25%)",
+            "approval_days_pending": 90,
+            "legal_dispute": "Yes",
+            "possession_status": "Not Taken",
+            "rehabilitation_progress": 0,
+            "stakeholder_score": 3,
+            "district_historical_delay": 25,
+        },
+    )
+    assert created.status_code == 201
+    saved = created.json()
+    project_id = saved["project"]["id"]
+
+    scenario = client.post(
+        "/simulate",
+        headers=headers,
+        json={"project_id": project_id, "legal_dispute": "No"},
+    )
+    assert scenario.status_code == 200
+    result = scenario.json()
+    assert result["baseline_delay_probability"] == pytest.approx(
+        saved["prediction"]["delay_probability"]
+    )
+    assert result["delay_probability"] < result["baseline_delay_probability"]
+    assert result["risk_score"] == round(result["delay_probability"] * 100, 2)
+    expected_risk_level = (
+        "High"
+        if result["risk_score"] >= 70
+        else "Medium"
+        if result["risk_score"] >= 40
+        else "Low"
+    )
+    assert result["risk_level"] == expected_risk_level
+    assert result["stage_risk"] == saved["prediction"]["stage_risk"]
+    with session_factory() as db:
+        project = db.get(models.Project, project_id)
+        assert project.legal_dispute == "Yes"
+        assert db.query(models.Prediction).filter_by(
+            project_id=project_id
+        ).count() == 1
+
+
 def test_project_edit_alerts_and_analytics_use_latest_prediction(api_client):
     client, session_factory = api_client
     create_user(session_factory)

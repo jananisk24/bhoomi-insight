@@ -53,7 +53,7 @@ class ProjectCreate(BaseModel):
     estimated_cost: float = Field(gt=0)
     project_type: ProjectType = "Highway"
     compensation_status: CompensationStatus = "In Progress"
-    approval_days_pending: int = Field(default=0, ge=0)
+    approval_days_pending: int = Field(default=0, ge=0, le=365)
     approval_status: ApprovalStatus = "In Administrative Review"
     legal_dispute: Literal["Yes", "No"] = "No"
     possession_status: PossessionStatus = "Not Taken"
@@ -110,7 +110,7 @@ class ProjectUpdate(BaseModel):
     estimated_cost: float | None = Field(default=None, gt=0)
     project_type: ProjectType | None = None
     compensation_status: CompensationStatus | None = None
-    approval_days_pending: int | None = Field(default=None, ge=0)
+    approval_days_pending: int | None = Field(default=None, ge=0, le=365)
     approval_status: ApprovalStatus | None = None
     legal_dispute: Literal["Yes", "No"] | None = None
     possession_status: PossessionStatus | None = None
@@ -230,7 +230,7 @@ class SimulationRequest(BaseModel):
     project_id: int
     affected_families: int | None = Field(default=None, ge=0)
     compensation_status: Literal["Paid", "In Progress", "Not Started"] | None = None
-    approval_days_pending: int | None = Field(default=None, ge=0)
+    approval_days_pending: int | None = Field(default=None, ge=0, le=365)
     legal_dispute: Literal["Yes", "No"] | None = None
     possession_status: PossessionStatus | None = None
     rehabilitation_progress: float | None = Field(default=None, ge=0, le=100)

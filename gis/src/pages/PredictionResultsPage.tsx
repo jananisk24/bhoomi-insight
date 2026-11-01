@@ -192,14 +192,19 @@ export const PredictionResultsPage: React.FC<PredictionResultsPageProps> = ({
             {/* Quick Metrics Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
-                <div className="text-[10px] font-semibold text-slate-400 uppercase">Rule-Based Estimated Delay</div>
+                <div className="text-[10px] font-semibold text-slate-400 uppercase">Estimated Delay Duration</div>
                 <div className="text-base font-bold text-rose-600 font-mono mt-0.5">
                   {currentProject.estimatedDelayMonths == null
-                    ? 'Not estimated'
+                    ? 'Not available'
                     : currentProject.estimatedDelayMonths > 0
                       ? `+${currentProject.estimatedDelayMonths} Months`
                       : '0 Months'}
                 </div>
+                {currentProject.estimatedDelayMonths == null && (
+                  <p className="mt-1 text-[10px] leading-relaxed text-slate-500">
+                    No validated duration model is configured; the risk score is not a forecast of months.
+                  </p>
+                )}
               </div>
 
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
